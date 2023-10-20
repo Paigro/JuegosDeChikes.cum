@@ -1,9 +1,14 @@
 
 .column {
     float: left;
-    width: 33.33%;
-    padding: 10px;
-    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  .game{
+    width: 70%;
+  }
+
+  .anuncio{
+    width: 15%;
+    background-color: green;
   }
   
   /* Clear floats after the columns */
@@ -16,5 +21,7 @@
   body {
     text-align: center;
     color: red;
+    background-color: orange;
   }
   
+ 
