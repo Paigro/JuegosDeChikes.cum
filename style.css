@@ -11,6 +11,15 @@
     background-color: green;
   }
   
+.flechas{
+  
+  width: 5%;
+}
+.comentario{
+  width: 90%;
+
+}
+
   /* Clear floats after the columns */
   .row:after {
     content: "";
@@ -21,7 +30,11 @@
   body {
     text-align: center;
     color: red;
-    background-color: orange;
+    background-color: #ff9933;
+  }
+
+  footer{
+    background-color: aliceblue;
   }
   
  

@@ -3,18 +3,30 @@
 
 <head>
     <link rel = "stylesheet" href = "style.css">
-    <script src="./phaser.min.js"></script>
+    <script src="./assets/scripts/game.js" type="script"></script>
+    <script src="./assets/scripts/page.js" type="script"></script>
     <title> JuegosDeChikes.cum</title>
 </head>
 <body>
-    <div> <img src="./assets/pagina/banner.jpg" width="50%" height="auto"></div>
-    <script src="./src/game.js" type="module"></script>
+    <div> <img src="./assets/pagina/images/banner.jpg" width="50%" height="auto"></div>
 
-
-<div class = "column anuncio"> <button type="button"><img width= "100%", height= "auto" src="https://th.bing.com/th/id/R.08e7057f666472e80ef5169b5dc0407d?rik=TZl35p4EAKkmmQ&riu=http%3a%2f%2fstatic.boredpanda.com%2fblog%2fwp-content%2fuploads%2f2014%2f06%2ffunny-ads-with-animals-42.jpg&ehk=ZMo5%2fTnq7D6it3bO1YGlONcX5mnREm7MwPrTa9x6hc0%3d&risl=&pid=ImgRaw&r=0"></button> </div>
-<div class = "column game"> <p style = "font-size: 120px;"> EL JUEGO VA AQUI</p></div>
-<div class = "column anuncio"> <button type="button"> <img src="https://th.bing.com/th/id/R.51ae20abbc978995cb1e87c381c3c853?rik=R%2fFhBHQxbIkpQw&pid=ImgRaw&r=0" width="100%" height="auto"></button></div>
-
+<div class="row">
+    <div class = "column anuncio"> <button type="button"><img width= "100%", height= "auto" src="https://th.bing.com/th/id/R.08e7057f666472e80ef5169b5dc0407d?rik=TZl35p4EAKkmmQ&riu=http%3a%2f%2fstatic.boredpanda.com%2fblog%2fwp-content%2fuploads%2f2014%2f06%2ffunny-ads-with-animals-42.jpg&ehk=ZMo5%2fTnq7D6it3bO1YGlONcX5mnREm7MwPrTa9x6hc0%3d&risl=&pid=ImgRaw&r=0"></button> </div>
+    <div class = "column game"> <p style = "font-size: 120px;"> EL JUEGO VA AQUI</p></div>
+    <div class = "column anuncio"> <button type="button"> <img src="https://th.bing.com/th/id/R.51ae20abbc978995cb1e87c381c3c853?rik=R%2fFhBHQxbIkpQw&pid=ImgRaw&r=0" width="100%" height="auto"></button></div>
+</div>
+<div class="row"> 
+    <div class="column flechas">
+        <button type="button" onclick="changeCommentLeft(3)"> <p><-</p> </button>
+    </div>
+    <div class="column comentario">
+        <img class="mySlides" src="./assets/pagina/images/comentarios/comentario1.png">
+        <img class="mySlides" src="./assets/pagina/images/comentarios/comentario2.png" style="display: none">
+        <img class="mySlides" src="./assets/pagina/images/comentarios/comentario3.png" style="display: none">
+    </div>
+    <button type="button" onclick="changeCommentRight(3)"> <p>-></p> </button>
+    <div class="column flechas"></div>
+</div>
 
     <footer>
         <p> jijiji jujuju segenos en instagram</p>
