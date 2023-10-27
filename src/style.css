@@ -1,0 +1,40 @@
+
+.column {
+    float: left;
+  }
+  .game{
+    width: 70%;
+  }
+
+  .anuncio{
+    width: 15%;
+    background-color: purple;
+  }
+  
+.flechas{
+  
+  width: 5%;
+}
+.comentario{
+  width: 90%;
+
+}
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  body {
+    text-align: center;
+    color: red;
+    background-color: #ff9933;
+  }
+
+  footer{
+    background-color: #ce792497;
+  }
+  
+ 
