@@ -29,12 +29,18 @@
 
   body {
     text-align: center;
-    color: red;
+    color: black;
     background-color: #ff9933;
   }
 
   footer{
     background-color: #ce792497;
+  }
+
+  header{
+    position: sticky;
+    top: 0;
+    background-color: aliceblue;
   }
   
  
