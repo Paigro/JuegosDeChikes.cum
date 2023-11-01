@@ -1,20 +1,16 @@
-const sceneConfigA = {
-    key: 'hub',
-    create: createA,
-    parent: document.getElementById('game'),
-    pack: {
-        files: [
-            { type: 'image', key: 'juan', url: 'https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2023/05/illojuan-3035606.jpg?tf=3840x' }
-        ]
+export default class Hub extends Phaser.Scene {
+
+    constructor() {
+      // Nombre de la escena para el SceneManager
+      super({ key: 'hub' }); 
     }
-};
-function createA ()
-{
-    this.add.image(400, 300, 'juan');
-
-    //this.input.on('pointerdown', () =>
-    //{
-
-    //})
-};
-var game = new Phaser.Game(sceneConfigA);
+  
+    // Métodos init, preload, create, update
+    preload(){        
+		this.load.image('banner', 'assets/pagina/images/banner.jpg');
+    }    
+    create(){               
+		this.add.image(0, 0, 'banner').setOrigin(0, 0);
+    }
+    
+  } 
