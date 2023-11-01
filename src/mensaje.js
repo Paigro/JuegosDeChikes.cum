@@ -1,11 +1,11 @@
-class Mensaje extends Phaser.GameObjects.Sprite
+class Message extends Phaser.GameObjects.Sprite
 {
-constructor(scene, x, y, image)
-{
-super(scene, x, y, 'Mensaje',image)
-}
-preupdate()
-{
+    constructor(scene, x, y)
+    {
+        super(scene, x, y, 'Mensaje');
+    }
+    preupdate()
+    {
 
-}
+    }
 }

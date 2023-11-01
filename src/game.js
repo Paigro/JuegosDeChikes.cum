@@ -3,7 +3,7 @@ const config = {
   height: 720,            
   parent: "game",
   type: Phaser.AUTO,      
-  scene: [Hub]
+  scene: [truthOrDare]
 }
 
 var game = new Phaser.Game(config);

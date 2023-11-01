@@ -1,8 +1,9 @@
-class LLamada extends Phaser.GameObjects.Sprite
+class PhoneCall extends Phaser.GameObjects.Sprite
 {
-    constructor()
+    constructor(scene, x, y)
     {
-
+        super(scene, x, y, 'llamada')
+ 
     }
     preupdate()
     {
