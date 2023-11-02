@@ -43,12 +43,14 @@ create()
 }
 init()
 {
-    //this.time = 0; // Duracion del minijuego.
+    this.realTime = 0; // Tiempo real ya se cambiara en un futuro que haya dos tiempos. Esto es para probar.
+    this.finalTime = 100000; // Duracion del minijuego.
     this.score = 0; // Puntuacion del juego.
     this.limitTime = 20000; // Timpo que tiene el jugador para responder a una llamada o a un mensaje.
 }
 update(time, dt)
 {
+    this.time += dt;
     this.time += dt;
     // De momento esto es lo que hace la escena, esta en proceso: (no funciona y solo hace el else, AHORA SI OLE OLE TRAS UNA HORA FUNCIONA)
     if(this.time < this.limitTime)
@@ -56,28 +58,16 @@ update(time, dt)
         //console.log("MENOR");
         //this.time += dt;
     }
-    else
+    else if(this.time > this.limitTime)
     {
         alert("Ya no puedes responder")
         console.log("MAYOR");
         this.time = 0;
         this.score++;
-    }
-    // console.log(dt);
-    // console.log(this.limitTime);
-    // console.log(this.time);
-    // console.log(this.time<this.limitTime);
-    // this.scene.pause(this.scene.key);
-}
-onObjectClicked(pointer, gameObject)
-{ 
-    if(pointer == 'mensaje')
+    }else if(this.realTime>=finalTime)
     {
-        alert("RESPONDER MENSAJE");
-    }
-    else if(pointer == 'llamada1'|| pointer == 'llamada2')
-    {
-        alert("RESPONDER LLAMADA");
+        //final del juego.
+        this.scene.pause(this.scene.key);
     }
 }
 }
