@@ -11,16 +11,18 @@ constructor()
 
 preload()
 {
+    this.load.image('atras', '/assets/juego/TruthOrDare//imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
     this.load.image('telefono', '/assets/juego/TruthOrDare//imagenes/Telefono.png'); // Cargamos la imagen de un movil (provisional).
     this.load.image('calle', '/assets/juego/TruthOrDare//imagenes/Calle.jpg'); // Cargamos la imagen de una calle para el fondo (provisional).
     this.load.image('mensaje', '/assets/juego/TruthOrDare//imagenes/Beluga2.png'); // Cargamos la imagen del mensaje, de momento un Beluga.
-    this.load.image('llamada1', 'assets/juego/TruthOrDare/imagenes/Llamada.png'); // Cargamos la imagen de la llamada, de momento un A380.
-    this.load.image('llamada2', 'assets/juego/TruthOrDare/imagenes/Llamada2.png'); // Cargamos la imagen de la llamada, de momento un A380.
+    this.load.image('llamada1', 'assets/juego/TruthOrDare/imagenes/Llamada.png'); // Cargamos la imagen de la llamada verde.
+    this.load.image('llamada2', 'assets/juego/TruthOrDare/imagenes/Llamada2.png'); // Cargamos la imagen de la llamada de colgar.
 }
 create()
 {
     this.add.image(0, 0, 'calle').setOrigin(0, 0).setScale(0.3, 0.3); // Añadimos la imagen del fondo.
     this.add.image(170, 170, 'telefono').setOrigin(0, 0).setScale(1.5, 1.5); // Añadimos la imagen del telefono.
+    this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
     this.mensaje = this.add.image(395, 200, 'mensaje').setOrigin(0, 0).setScale(0.4, 0.2).setInteractive();; // Añadimos la imagen del mensaje y lo hacemos interactuable.
     this.llamada1 = this.add.image(400, 560, 'llamada1').setOrigin(0, 0).setScale(0.2, 0.2).setInteractive(); // Añadimos la imagen de la llamada y lo hacemos interactuable.
     this.llamada2 = this.add.image(500, 560, 'llamada2').setOrigin(0, 0).setScale(0.3, 0.3).setInteractive(); // Añadimos la imagen de la llamada y lo hacemos interactuable.
@@ -35,6 +37,9 @@ create()
     });
     this.llamada2.on('pointerdown', (pointer) => {
         alert("HAS COLGAD0 A TU ABUELA :(");
+    });
+    this.atras.on('pointerdown', (pointer) => {
+        this.finalDelJuego();
     });
     
 
@@ -61,7 +66,7 @@ update(time, dt)
     }
     else if(this.time > this.limitTime)
     {
-        alert("Ya no puedes responder")
+        alert("Ya no puedes responder");
         console.log("MAYOR");
         this.time = 0;
         this.score++;
