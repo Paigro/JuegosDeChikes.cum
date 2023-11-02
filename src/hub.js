@@ -1,4 +1,4 @@
-class Hub extends Phaser.Scene{
+export default class Hub extends Phaser.Scene{
 
     constructor() {
       // Nombre de la escena para el SceneManager
@@ -9,4 +9,7 @@ class Hub extends Phaser.Scene{
         alert("aaaa");
     }
     
+    changeScene(key) {
+      
+    }
   } 
