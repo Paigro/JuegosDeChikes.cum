@@ -52,7 +52,7 @@ init()
 update(time, dt)
 {
     this.time += dt;
-    this.time += dt;
+    this.realTime += dt;
     // De momento esto es lo que hace la escena, esta en proceso: (no funciona y solo hace el else, AHORA SI OLE OLE TRAS UNA HORA FUNCIONA)
     if(this.time < this.limitTime)
     {
@@ -65,14 +65,17 @@ update(time, dt)
         console.log("MAYOR");
         this.time = 0;
         this.score++;
-    }else if(this.realTime>=this.finalTime)
+    }
+    else if(this.realTime >= this.finalTime)
     {
-        //final del juego.
-        this.scene.pause(this.scene.key);
+        // Final del juego.
+        this.finalDelJuego();
     }
 }
 
-finalDelJuego(){    
+finalDelJuego()
+{    
     this.scene.start("Hub");
 }
 }
+        //this.scene.pause(this.scene.key);
