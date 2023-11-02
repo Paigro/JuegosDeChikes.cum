@@ -1,4 +1,6 @@
-class Hub extends Phaser.Scene{
+import Metro from "./Metro.js";
+
+export default class Hub extends Phaser.Scene{
 
     constructor() {
       // Nombre de la escena para el SceneManager
@@ -6,7 +8,10 @@ class Hub extends Phaser.Scene{
     }
   
     create(){               
-        alert("aaaa");
+      alert("aaaa");
+      this.scene.add('Metro', Metro);
+      this.scene.start("Metro");
+
     }
     
   } 
