@@ -65,7 +65,7 @@ update(time, dt)
         console.log("MAYOR");
         this.time = 0;
         this.score++;
-    }else if(this.realTime>=finalTime)
+    }else if(this.realTime>=this.finalTime)
     {
         //final del juego.
         this.scene.pause(this.scene.key);
