@@ -1,11 +1,12 @@
 //import mensaje from './src/Mensaje.js';
 //import llamada from './src/LLamada.js';
+import Hub from './hub.js';
 
 export default class TruthOrDare extends Phaser.Scene
 {
 constructor()
 {
-    super({key: 'VerdadOReto'});
+    super({key: 'VerdadOReto', active: false});
 }
 
 preload()
@@ -69,5 +70,9 @@ update(time, dt)
         //final del juego.
         this.scene.pause(this.scene.key);
     }
+}
+
+finalDelJuego(){    
+    this.scene.start("Hub");
 }
 }

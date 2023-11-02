@@ -4,7 +4,7 @@ export default class Metro extends Phaser.Scene {
 
     constructor() {
         // Nombre de la escena para el SceneManager
-        super({ key: 'Metro' }); 
+        super({ key: 'Metro', active: false }); 
     }
   
     // Métodos init, preload, create, update
