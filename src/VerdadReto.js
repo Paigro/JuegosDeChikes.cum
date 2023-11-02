@@ -1,7 +1,7 @@
 //import mensaje from './src/Mensaje.js';
 //import llamada from './src/LLamada.js';
 
-class TruthOrDare extends Phaser.Scene
+export default class TruthOrDare extends Phaser.Scene
 {
 constructor()
 {
