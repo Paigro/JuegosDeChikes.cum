@@ -1,3 +1,5 @@
+import Metro from "./Metro.js";
+
 export default class Hub extends Phaser.Scene{
 
     constructor() {
@@ -6,10 +8,10 @@ export default class Hub extends Phaser.Scene{
     }
   
     create(){               
-        alert("aaaa");
+      alert("aaaa");
+      this.scene.add('Metro', Metro);
+      this.scene.start("Metro");
+
     }
     
-    changeScene(key) {
-      
-    }
   } 

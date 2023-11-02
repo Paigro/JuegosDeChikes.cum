@@ -6,7 +6,7 @@ const config = {
   height: 720,            
   parent: "game",
   type: Phaser.AUTO,      
-  scene: [Metro]
+  scene: [Hub]
 }
 
 var game = new Phaser.Game(config);
