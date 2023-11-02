@@ -1,5 +1,6 @@
 import Hub from "./hub.js";
 import Metro from "./Metro.js";
+import TruthOrDare from "./VerdadReto.js";
 
 const config = {
   width: 1080,              
