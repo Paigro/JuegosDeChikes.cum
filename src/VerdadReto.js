@@ -17,6 +17,7 @@ preload()
     this.load.image('mensaje', '/assets/juego/TruthOrDare//imagenes/Beluga2.png'); // Cargamos la imagen del mensaje, de momento un Beluga.
     this.load.image('llamada1', 'assets/juego/TruthOrDare/imagenes/Llamada.png'); // Cargamos la imagen de la llamada verde.
     this.load.image('llamada2', 'assets/juego/TruthOrDare/imagenes/Llamada2.png'); // Cargamos la imagen de la llamada de colgar.
+    this.load.image('score', 'assets/juego/TruthOrDare/imagenes/score.jpg'); // Cargamos la imagen del score.
 }
 create()
 {
@@ -26,20 +27,30 @@ create()
     this.mensaje = this.add.image(395, 200, 'mensaje').setOrigin(0, 0).setScale(0.4, 0.2).setInteractive();; // Añadimos la imagen del mensaje y lo hacemos interactuable.
     this.llamada1 = this.add.image(400, 560, 'llamada1').setOrigin(0, 0).setScale(0.2, 0.2).setInteractive(); // Añadimos la imagen de la llamada y lo hacemos interactuable.
     this.llamada2 = this.add.image(500, 560, 'llamada2').setOrigin(0, 0).setScale(0.3, 0.3).setInteractive(); // Añadimos la imagen de la llamada y lo hacemos interactuable.
+    this.puntuacion = this.add.image(800, 0, 'score').setOrigin(0, 0).setScale(0.2, 0.2).setInteractive(); // Añadimos la imagen del fondo.
 
-    //this.add.text(0, 0, this.score).setOrigin(0, 0).setScale(3, 3);
+    //this.add.text(0, 200, this.ExtInt,{fill: '#FFA500'}).setOrigin(0, 0).setScale(3, 3);
     
     this.mensaje.on('pointerdown', (pointer) => {
         alert("AAMAMA: TIENES QUE COMPRAR HUEVOS, LECHE, HARINA, AZUCAR Y COMIDA PARA EL GATO.");
+        this.ExtInt++; // Ganas puntuacion de introvertido (positivo) cuando contestas a un mensaje.
+        if(this.ExtInt == 0){this.ExtInt++;}
     });
     this.llamada1.on('pointerdown', (pointer) => {
         alert("HAS COGIDO LA LLAMADA DEL TU TIO MANOLO");
+        this.ExtInt--; // Ganas puntuacion extrovertido (negativo) cuando contestas una llamada.
+        if(this.ExtInt == 0){this.ExtInt--}
     });
     this.llamada2.on('pointerdown', (pointer) => {
         alert("HAS COLGAD0 A TU ABUELA :(");
+        this.ExtInt++ // Tecnicamente no puedes colgar en el juego final pero ahora si puedes. Ganas puntuacion introveritdo.
+        if(this.ExtInt == 0){this.ExtInt++;}
     });
     this.atras.on('pointerdown', (pointer) => {
         this.finalDelJuego();
+    });
+    this.puntuacion.on('pointerdown', (pointer) => {
+        alert("ExtInt: " + this.ExtInt);
     });
     
 
@@ -49,10 +60,11 @@ create()
 }
 init()
 {
-    this.realTime = 0; // Tiempo real ya se cambiara en un futuro que haya dos tiempos. Esto es para probar.
+    this.realTime = 0; // Tiempo real, ya se cambiara en un futuro que haya dos tiempos. Esto es para probar.
     this.finalTime = 100000; // Duracion del minijuego.
-    this.score = 0; // Puntuacion del juego.
+    this.score = 0; // Puntuacion ficticia mostrada al jugador.
     this.limitTime = 20000; // Timpo que tiene el jugador para responder a una llamada o a un mensaje.
+    this.ExtInt = 0; // Puntuacion de extroversion (negativo) e introversion (positivo).
 }
 update(time, dt)
 {
@@ -62,14 +74,19 @@ update(time, dt)
     if(this.time < this.limitTime)
     {
         //console.log("MENOR");
-        //this.time += dt;
     }
-    else if(this.time > this.limitTime)
+    else if(this.time > this.limitTime) // Tiempo que va a tener el jugador para responder al mensaje o a la llamada. De momento hace otra cosa.
     {
         alert("Ya no puedes responder");
         console.log("MAYOR");
         this.time = 0;
-        this.score++;
+        this.score--
+        // if(no respondido nada)
+        // {
+        //     desapareceMensaje();
+        //     desapareceLlamada();
+        //     score--;
+        // }
     }
     else if(this.realTime >= this.finalTime)
     {
@@ -77,7 +94,14 @@ update(time, dt)
         this.finalDelJuego();
     }
 }
+desapareceMensaje()
+{
 
+}
+desapareceLlamada()
+{
+
+}
 finalDelJuego()
 {    
     this.scene.start("Hub");
