@@ -20,12 +20,22 @@ create()
 {
     this.add.image(0, 0, 'calle').setOrigin(0, 0).setScale(0.3, 0.3); // Añadimos la imagen del fondo.
     this.add.image(170, 170, 'telefono').setOrigin(0, 0).setScale(1.5, 1.5); // Añadimos la imagen del telefono.
-    this.add.image(395, 200, 'mensaje').setOrigin(0, 0).setScale(0.4, 0.2).setInteractive(); // Añadimos la imagen del mensaje.
-    this.add.image(400, 560, 'llamada1').setOrigin(0, 0).setScale(0.2, 0.2).setInteractive(); // Añadimos la imagen de la llamada.
-    this.add.image(500, 560, 'llamada2').setOrigin(0, 0).setScale(0.3, 0.3).setInteractive(); // Añadimos la imagen de la llamada.
+    this.mensaje = this.add.image(395, 200, 'mensaje').setOrigin(0, 0).setScale(0.4, 0.2).setInteractive();; // Añadimos la imagen del mensaje y lo hacemos interactuable.
+    this.llamada1 = this.add.image(400, 560, 'llamada1').setOrigin(0, 0).setScale(0.2, 0.2).setInteractive(); // Añadimos la imagen de la llamada y lo hacemos interactuable.
+    this.llamada2 = this.add.image(500, 560, 'llamada2').setOrigin(0, 0).setScale(0.3, 0.3).setInteractive(); // Añadimos la imagen de la llamada y lo hacemos interactuable.
 
-    this.add.text(0, 0, this.score).setOrigin(0, 0).setScale(3, 3);
-    this.input.on('mensaje',this.onObjectClicked);
+    //this.add.text(0, 0, this.score).setOrigin(0, 0).setScale(3, 3);
+    
+    this.mensaje.on('pointerdown', (pointer) => {
+        alert("AAMAMA: TIENES QUE COMPRAR HUEVOS, LECHE, HARINA, AZUCAR Y COMIDA PARA EL GATO.");
+    });
+    this.llamada1.on('pointerdown', (pointer) => {
+        alert("HAS COGIDO LA LLAMADA DEL TU TIO MANOLO");
+    });
+    this.llamada2.on('pointerdown', (pointer) => {
+        alert("HAS COLGAD0 A TU ABUELA :(");
+    });
+    
 
 
     //let msg = new Message(this, 0, 0);
