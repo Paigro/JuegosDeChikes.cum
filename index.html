@@ -9,32 +9,60 @@
 </head>
 <body>
     <script src="./libs/phaser.js"></script>
-    <header>
-        <img src="./assets/pagina/images/bannerNoFondo.png" width="10%">
-        <div></div>
-        <p>AQUI VAN LOS BOTONES PARA CAMBIAR DE PESTAÑA ☺</p>
-    </header>
-    <div> <img src="./assets/pagina/images/bannerNoFondo.png" width="50%" height="auto"></div>
-    <div style="background-color: rgba(165, 42, 42, 0.459);"> 
-        <h1>Descripción:</h1>
-        <h3>Tode chike se ha preguntado en algún momento de su vida qué clase de persona es. Desde Capynew studios sabemos lo estresante que puede ser esa desconexión con tu identidad. Por eso, hemos hecho el primer (y único) juego que sirve como herramienta de diagnostico de ser un abogado.
-            En nuestros juegos, no siempre puedes hacerlo todo. De hecho, casi nunca puedes hacerlo todo. Nunca puedes hacerlo todo esa es la gracia vale. Ten cuidado con la toma de tus decisiones... (literalmente tienen apenas consecuencias pero aún asi)
-            </h3>
-    </div>
     <div class="row" >
         <marquee class = "column anuncio" direction="down">
             <div> <button type="button" onclick="ad()"> <img src="https://th.bing.com/th/id/R.51ae20abbc978995cb1e87c381c3c853?rik=R%2fFhBHQxbIkpQw&pid=ImgRaw&r=0" width="100%" height="auto"></button></div>
             <div> <button type="button" onclick="ad()"><img width= "100%", height= "auto" src="https://th.bing.com/th/id/R.08e7057f666472e80ef5169b5dc0407d?rik=TZl35p4EAKkmmQ&riu=http%3a%2f%2fstatic.boredpanda.com%2fblog%2fwp-content%2fuploads%2f2014%2f06%2ffunny-ads-with-animals-42.jpg&ehk=ZMo5%2fTnq7D6it3bO1YGlONcX5mnREm7MwPrTa9x6hc0%3d&risl=&pid=ImgRaw&r=0"></button> </div>
         </marquee>
         <div class = "column game">
+            <header style="background-color: rgb(255, 81, 0)">
+                <div>
+                    <img src="./assets/pagina/images/bannerNoFondo.png" width="20%" style="float: left;">
+                </div>
+                <div style="display: inline;" >
+                    
+                    <hover >
+                        <a class="paginaActiva">JuegosDeChikes</a>
+                    </hover>
+                    <hover>
+                        <a href="Descripción.html" style="font-size: x-large">Descripción</a>
+                    </hover>
+                    <hover>
+                        <a href="Credits.html" style="font-size: x-large">Créditos</a>
+                    </hover>
+                </div>
+            </header>
             <div id="game">
-                <!-- <script src="./src/hub.js"></script>
-                <script src="./src/Metro.js"></script>
-                <script src="./src/VerdadReto.js"></script>
-                <script src="./src/bumKlak.js"></script>
-                <script src="./src/Papas.js"></script> -->
                 <script src="./src/game.js" type="module"></script>
             </div>
+            <br>
+        <hr>
+        <div class="row"> 
+            <div class="column flechas">
+                <button type="button" onclick="changeCommentLeft(3)" style="height: 100%" style="width: 100%"> <p><-</p> </button>
+            </div>
+            <div class="column comentario">
+                <img class="mySlides" src="./assets/pagina/images/comentarios/comentario1.png">
+                <img class="mySlides" src="./assets/pagina/images/comentarios/comentario2.png" style="display: none">
+                <img class="mySlides" src="./assets/pagina/images/comentarios/comentario3.png" style="display: none">
+            </div>
+            <button type="button" onclick="changeCommentRight(3)" style="height: 100%" style="width: 100%"> <p>-></p> </button>
+            <div class="column flechas"></div>
+        </div>
+        
+            <footer>
+                <p> jijiji jujuju follow the leader (nosotros) en instagram</p>
+                <div>
+                    <div style="display: inline;">
+                        <a href="https://www.instagram.com/capypoomstudios__/">instagram1|</a>
+                        <a href="https://www.instagram.com/capypoomstudios__/">instagram2|</a>
+                        <a href="https://www.instagram.com/capypoomstudios__/">instagram3</a>
+                    </div>
+                    <div>
+                        <a href="https://x.com/CapyPoomStudios?t=ggAxNXAOB-D8-apKgvDhrg&s=09">twitter</a>
+                    </div>
+                </div>
+            </footer>
         </div>
         
         <marquee class = "column anuncio" direction="down">
@@ -42,31 +70,6 @@
             <div> <button type="button" onclick="ad()"><img width= "100%", height= "auto" src="https://th.bing.com/th/id/R.08e7057f666472e80ef5169b5dc0407d?rik=TZl35p4EAKkmmQ&riu=http%3a%2f%2fstatic.boredpanda.com%2fblog%2fwp-content%2fuploads%2f2014%2f06%2ffunny-ads-with-animals-42.jpg&ehk=ZMo5%2fTnq7D6it3bO1YGlONcX5mnREm7MwPrTa9x6hc0%3d&risl=&pid=ImgRaw&r=0"></button> </div>
         </marquee>
     </div>
-    <br>
-    <h2>Instrucciones:</h2>
-    <h3>La mayoría de juegos, menos metro skaters high rush flight edition (tm) (c) (r), se juegan con ratón. Diviértete, explora, aprende a jugar, y déjanos a nosotros desvelarte tu identidad. ¿Se puede pedir más de una pagina de juegos? Also no creas a Sandra, no está a 50 metros de ti te lo prometo</h3>
-<h2>Comentarios:</h2>
-<hr>
-<div class="row"> 
-    <div class="column flechas">
-        <button type="button" onclick="changeCommentLeft(3)" style="height: 100%" style="width: 100%"> <p><-</p> </button>
-    </div>
-    <div class="column comentario">
-        <img class="mySlides" src="./assets/pagina/images/comentarios/comentario1.png">
-        <img class="mySlides" src="./assets/pagina/images/comentarios/comentario2.png" style="display: none">
-        <img class="mySlides" src="./assets/pagina/images/comentarios/comentario3.png" style="display: none">
-    </div>
-    <button type="button" onclick="changeCommentRight(3)" style="height: 100%" style="width: 100%"> <p>-></p> </button>
-    <div class="column flechas"></div>
-</div>
-
-    <footer>
-        <p> jijiji jujuju follow the leader (nosotros) en instagram</p>
-        <div>
-            <p>capypoomstudios | capypoomstudios__ | capy.poom.studios</p>
-            <a href="https://x.com/CapyPoomStudios?t=ggAxNXAOB-D8-apKgvDhrg&s=09">twitter</a>
-        </div>
-    </footer>
 
 
 </body>

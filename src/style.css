@@ -1,9 +1,11 @@
 
 .column {
     float: left;
+    min-height:0%
   }
   .game{
     width: 70%;
+    align-self: center;
   }
 
   .anuncio{
@@ -20,6 +22,11 @@
 
 }
 
+.paginaActiva{
+  background-color: brown;
+  font-size: xx-large;
+}
+
   /* Clear floats after the columns */
   .row:after {
     content: "";
@@ -33,14 +40,13 @@
     background-color: #ff9933;
   }
 
-  footer{
-    background-color: #ce792497;
-  }
-
   header{
     position: sticky;
     top: 0;
     background-color: aliceblue;
   }
-  
+  a:hover {
+    background-color: orange;
+    width: 80%;
+  }
  
