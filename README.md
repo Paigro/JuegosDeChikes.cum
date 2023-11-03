@@ -10,4 +10,4 @@
 ![BumBumKlak](assets/Bocetos/BumBumKlak.PNG)
 ![PappasGalleteria](assets/Bocetos/PappasGalleteria.PNG)
 ![MetroSkaters](assets/Bocetos/MetroSkaters.PNG)
-## *Enlace a la página web: [JUegosDeChikes.cum]()
+## *Enlace a la página web: [JuegosDeChikes.cum]()
