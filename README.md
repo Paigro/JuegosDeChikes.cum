@@ -10,5 +10,5 @@
 ![BumBumKlak](assets/Bocetos/BumBumKlak.PNG)
 ![PappasGalleteria](assets/Bocetos/PappasGalleteria.PNG)
 ![MetroSkaters](assets/Bocetos/MetroSkaters.PNG)
-## *Enlace a la página web: [JuegosDeChikes.cum]()
+## *Enlace a la página web: [JuegosDeChikes.cum](https://paigro.github.io/JuegosDeChikes.cum/index.html)
 ## Assets: los que tenemos hasta el momento son provionales pero tenemos pensado hacer nsootros todos los que usemos.
