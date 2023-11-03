@@ -11,10 +11,10 @@ constructor()
 
 preload()
 {
-    this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
-    this.load.image('telefono', '/assets/juego/TruthOrDare/imagenes/Telefono.png'); // Cargamos la imagen de un movil (provisional).
-    this.load.image('calle', '/assets/juego/TruthOrDare/imagenes/Calle.jpg'); // Cargamos la imagen de una calle para el fondo (provisional).
-    this.load.image('mensaje', '/assets/juego/TruthOrDare/imagenes/Beluga2.png'); // Cargamos la imagen del mensaje, de momento un Beluga.
+    this.load.image('atras', 'assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
+    this.load.image('telefono', 'assets/juego/TruthOrDare/imagenes/Telefono.png'); // Cargamos la imagen de un movil (provisional).
+    this.load.image('calle', 'assets/juego/TruthOrDare/imagenes/Calle.jpg'); // Cargamos la imagen de una calle para el fondo (provisional).
+    this.load.image('mensaje', 'assets/juego/TruthOrDare/imagenes/Beluga2.png'); // Cargamos la imagen del mensaje, de momento un Beluga.
     this.load.image('llamada1', 'assets/juego/TruthOrDare/imagenes/Llamada.png'); // Cargamos la imagen de la llamada verde.
     this.load.image('llamada2', 'assets/juego/TruthOrDare/imagenes/Llamada2.png'); // Cargamos la imagen de la llamada de colgar.
     this.load.image('score', 'assets/juego/TruthOrDare/imagenes/score.jpg'); // Cargamos la imagen del score.
