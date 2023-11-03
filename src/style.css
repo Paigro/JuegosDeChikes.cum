@@ -23,7 +23,6 @@
   /* Clear floats after the columns */
   .row:after {
     content: "";
-    background-color: brown;
     display: table;
     clear: both;
   }
