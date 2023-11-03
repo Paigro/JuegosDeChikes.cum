@@ -6,7 +6,7 @@ export default class BumKlak extends Phaser.Scene{
     }
     
     preload(){        
-      this.load.image('atras', '/assets/juego/TruthOrDare//imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
+      this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
     }    
     create(){
       this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.

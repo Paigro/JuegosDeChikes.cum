@@ -10,7 +10,7 @@ export default class Metro extends Phaser.Scene {
     // Métodos init, preload, create, update
     preload(){        
 		this.load.image("beluga", "/assets/juego/TruthOrDare/imagenes/Beluga2.png");
-        this.load.image('atras', '/assets/juego/TruthOrDare//imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
     }    
     create(){               
         this.avion = this.physics.add.image(540, 360, "beluga").setScale(.25)
