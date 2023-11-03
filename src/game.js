@@ -9,7 +9,15 @@ const config = {
   height: 720,            
   parent: "game",
   type: Phaser.AUTO,      
-  scene: [Hub, TruthOrDare, Metro, Papas, BumBumClack]
+  scene: [Hub, TruthOrDare, Metro, Papas, BumBumClack],
+  physics:{
+    default:"arcade",
+    arcade:{
+      gravity:{
+        y:0
+      }
+    }
+  }
 }
 
 var game = new Phaser.Game(config);
