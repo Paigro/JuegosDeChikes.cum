@@ -1,13 +1,23 @@
 # JUEGOS DE CHIKES:
 ## Estructura del grupo:
-Miembros: Andrés García Navarro , Eri Solórzano Gómez, Mauro Martínez Montes y Pablo
-Iglesias Rodrigo.
-### Estructura 1 (seria): Andrés: secretario y jefe de arte, Eri: project manager, Mauro: recursos humanos y Pablo: becario.
-### Estructura 2 (no tan seria): Andrés: explotado oficial (va a hacer arte), Eri: capynew capybara de equipo (capybara de equipo (jefe de equipo)), Mauro: se encarga de los vagos y Pablo: becario.
-### Estudio: CapyPum Studios.
-## Nombre del juego: Juegos de Chikes.cum.
-## Género: minijuegos, test.
-### Público objetivo: todo el mundo.
+**Miembros y su cargo:**
+
+Andrés García Navarro: secretario y jefe de arte.
+
+Eri Solórzano Gómez: project manager.
+
+Mauro Martínez Montes recursos humanos.
+
+Pablo Iglesias Rodrigo: becario.
+
+**Estudio:** CapyPum Studios.
+
+**Nombre del juego:** Juegos de Chikes.cum.
+
+**Género:** minijuegos, test.
+
+**Público objetivo:** todo el mundo.
+
 ## Mecánicas:
 El juego consistirá en cuatro minijuegos. En cada uno, se le presentará la oportunidad de hacer dos acciones, y tendrá que elegir cual de ellas realizar. Irá ganando puntos de cada rasgo de personalidad, definiendo un tipo de personalidad.
 A ojos del jugador en cada minijuego recibe una puntuación ficticia del mismo, que no significa nada pero ayuda a encubrir el test.
