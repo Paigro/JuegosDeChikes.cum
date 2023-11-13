@@ -22,30 +22,57 @@ preload()
 create()
 {
     this.add.image(0, 0, 'calle').setOrigin(0, 0).setScale(0.3, 0.3); // Añadimos la imagen del fondo.
-    this.add.image(170, 170, 'telefono').setOrigin(0, 0).setScale(1.5, 1.5); // Añadimos la imagen del telefono.
+    this.add.image(370, 120, 'telefono').setOrigin(0, 0).setScale(0.35, 0.35); // Añadimos la imagen del telefono.
     this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
-    this.mensaje = this.add.image(395, 200, 'mensaje').setOrigin(0, 0).setScale(0.4, 0.2).setInteractive();; // Añadimos la imagen del mensaje y lo hacemos interactuable.
-    this.llamada1 = this.add.image(400, 560, 'llamada1').setOrigin(0, 0).setScale(0.2, 0.2).setInteractive(); // Añadimos la imagen de la llamada y lo hacemos interactuable.
-    this.llamada2 = this.add.image(500, 560, 'llamada2').setOrigin(0, 0).setScale(0.3, 0.3).setInteractive(); // Añadimos la imagen de la llamada y lo hacemos interactuable.
+    this.mensaje = this.add.image(395, 200, 'mensaje').setOrigin(0, 0).setScale(0.4, 0.2).setInteractive(); // Añadimos la imagen del mensaje y lo hacemos interactuable.
+    const llamada = this.add.sprite(400, 560, 'llamada1').setOrigin(0, 0).setScale(0.2, 0.2).setInteractive(); // Añadimos la imagen de la llamada y lo hacemos interactuable.
+    llamada.defaultX = 400;
+    llamada.destinationX = 530;
+    llamada.maximunX = 540;
     this.puntuacion = this.add.image(800, 0, 'score').setOrigin(0, 0).setScale(0.2, 0.2).setInteractive(); // Añadimos la imagen del fondo.
 
     //this.add.text(0, 200, this.ExtInt,{fill: '#FFA500'}).setOrigin(0, 0).setScale(3, 3);
     
-    this.mensaje.on('pointerdown', (pointer) => {
-        alert("AAMAMA: TIENES QUE COMPRAR HUEVOS, LECHE, HARINA, AZUCAR Y COMIDA PARA EL GATO.");
-        this.ExtInt++; // Ganas puntuacion de introvertido (positivo) cuando contestas a un mensaje.
-        if(this.ExtInt == 0){this.ExtInt++;}
+    //this.mensaje.on('pointerdown', (pointer) => {
+      //  alert("AAMAMA: TIENES QUE COMPRAR HUEVOS, LECHE, HARINA, AZUCAR Y COMIDA PARA EL GATO.");
+       // this.ExtInt++; // Ganas puntuacion de introvertido (positivo) cuando contestas a un mensaje.
+       // if(this.ExtInt == 0){this.ExtInt++;}
+   // });
+
+    this.input.setDraggable(llamada);
+    llamada.setScrollFactor(1);
+
+    llamada.on('dragstart', (pointer) => {
+        llamada.setTint(0xff0000);
+
     });
-    this.llamada1.on('pointerdown', (pointer) => {
-        alert("HAS COGIDO LA LLAMADA DEL TU TIO MANOLO");
-        this.ExtInt--; // Ganas puntuacion extrovertido (negativo) cuando contestas una llamada.
-        if(this.ExtInt == 0){this.ExtInt--}
+    llamada.on('drag', (pointer, dragX, dragY) =>
+    {
+        if (dragX > llamada.defaultX && dragX < llamada.maximunX)
+        {
+            llamada.x = dragX;
+        }
+
     });
-    this.llamada2.on('pointerdown', (pointer) => {
-        alert("HAS COLGAD0 A TU ABUELA :(");
-        this.ExtInt++ // Tecnicamente no puedes colgar en el juego final pero ahora si puedes. Ganas puntuacion introveritdo.
-        if(this.ExtInt == 0){this.ExtInt++;}
-    });
+
+    llamada.on('dragend', (pointer) =>
+        {
+            if (llamada.x <= 530)
+            {
+                llamada.x = llamada.defaultX;
+            }
+            else
+            {
+                llamada.clearTint();
+            }
+
+        });
+
+    //this.llamada2.on('pointerdown', (pointer) => {
+      //  alert("HAS COLGAD0 A TU ABUELA :(");
+       // this.ExtInt++ // Tecnicamente no puedes colgar en el juego final pero ahora si puedes. Ganas puntuacion introveritdo.
+        //if(this.ExtInt == 0){this.ExtInt++;}
+    //});
     this.atras.on('pointerdown', (pointer) => {
         this.finalDelJuego();
     });
