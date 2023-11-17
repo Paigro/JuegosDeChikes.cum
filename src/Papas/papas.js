@@ -15,7 +15,7 @@ export default class Papas extends Phaser.Scene{
         this.finalDelJuego();
       });
     }
-    finalDelJuego()
+    finalDelJuego(puntuacion)
 {    
     this.scene.start("Hub");
 }
