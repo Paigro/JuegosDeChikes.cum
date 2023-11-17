@@ -1,8 +1,9 @@
 import Hub from "./hub.js";
 
-export default class Metro extends Phaser.Scene {
-
-    constructor() {
+export default class Metro extends Phaser.Scene // Manager de la escena del Metro Skaters.
+{
+    constructor() 
+    {
         // Nombre de la escena para el SceneManager
         super({ key: 'Metro', active: false }); 
     }
