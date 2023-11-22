@@ -1,3 +1,6 @@
+import Manager from "../manager.js";
+import Bandeja from "./bandejas.js";
+
 export default class Papas extends Phaser.Scene{
 
     constructor() {
@@ -14,6 +17,13 @@ export default class Papas extends Phaser.Scene{
       this.atras.on('pointerdown', (pointer) => {
         this.finalDelJuego();
       });
+      let bandeja1 = new Bandeja();
+      let bandeja2 = new Bandeja();
+      this.papasManager = new Manager(bandeja1, bandeja2);
+    }
+
+    update(time, delta){
+      console.log(this.papasManager.UpdateTime(delta/1000));
     }
     finalDelJuego()
 {    
