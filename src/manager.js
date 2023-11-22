@@ -58,13 +58,11 @@ export default class Manager{
             {
                 // Manda la puntuacion al coordinator
                 coor.sa
-                
             }else
             {
 
             }
         }
-        return this.elapsedTime;
     }
 /*  Para returnear el elapsed time
     ReturnTime()

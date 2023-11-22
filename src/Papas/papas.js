@@ -25,7 +25,7 @@ export default class Papas extends Phaser.Scene{
     update(time, delta){
       console.log(this.papasManager.UpdateTime(delta/1000));
     }
-    finalDelJuego()
+    finalDelJuego(puntuacion)
 {    
     this.scene.start("Hub");
 }
