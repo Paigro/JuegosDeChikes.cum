@@ -12,7 +12,9 @@ export default class Manager{
         this.elapsedTime = maxTime;
         this.deltaTime;
         this.score=0;
-        let pausado = false;
+        this.pausado = false;
+        this.endRound = false;
+        this.endGame = false;
     };
     
     // Bloque la accion no elegida
@@ -25,48 +27,56 @@ export default class Manager{
         {
             this.action2.BlockAction();
         }
-
+        
     }
-    // Asigna puntuacion
+    // Asigna puntuacion y termina la ronda
     DoAction(puntuacion)
     {
         score += puntuacion;
+        this.endRound = true;
     }
-
+    
     // Pausa/Despausa el timer de la escena
     PausaDespausa()
     {
         pausado = !pausado;
     }
-
-    // Instancia las acciones (Llamada, mensajes...)
-    SendActions()
+    
+    // Resetea las acciones (Llamada, mensajes...)
+    ResetActions()
     {
-
+        this.endRound = false;
+        this.action1.Reset();
+        this.action2.Reset();
+        
     }
 
     // Update time
     UpdateTime(_deltaTime)
     {
-        //this._de
-        if(this.elapsedTime >= 0)
-        {
-            this.elapsedTime -= _deltaTime;
-        }else
-        {
-            if(score != 0)
+        if(!this.pausado){
+            //si el elapsed time es mayor a 0 se resta el tiempo
+            if(this.elapsedTime >= 0)
             {
-                // Manda la puntuacion al coordinator
-                coor.sa
+                this.elapsedTime -= _deltaTime;
             }else
             {
-
+                if(this.endRound && this.score != 0)
+                {
+                    // si ha terminado la ronda y la puntuacion es distinta de 0 se termina el juego
+                    this.endGame = true;
+                }else
+                {
+                    //el final de la ronda se vuelve false y se hace una ronda mas
+                    this.ResetActions();
+                }
             }
         }
     }
-/*  Para returnear el elapsed time
-    ReturnTime()
-    {
 
-    }*/
+    //Return endGame
+    ReturnEndGame()
+    {
+        return this.endGame;
+    }
 }

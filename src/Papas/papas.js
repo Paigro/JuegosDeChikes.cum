@@ -23,7 +23,10 @@ export default class Papas extends Phaser.Scene{
     }
 
     update(time, delta){
-      console.log(this.papasManager.UpdateTime(delta/1000));
+      this.papasManager.UpdateTime(delta/1000);
+      if(this.papasManager.ReturnEndGame == true){
+        this.finalDelJuego(this.papasManager.score);
+      }
     }
     finalDelJuego(puntuacion)
 {    
