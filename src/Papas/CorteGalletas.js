@@ -1,4 +1,4 @@
-import AccionBase from "../accionBase.JS";
+import AccionBase from "../accionBase.js";
 import Corte from "./Corte.js"
 
 export default class CorteGalletas extends AccionBase{
