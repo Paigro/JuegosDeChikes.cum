@@ -1,6 +1,4 @@
-
-class PhoneCall extends Phaser.GameObjects.Sprite
-{
+export default class PhoneCall extends Phaser.GameObjects.Sprite {
     /**
      * 
      * @param {*} scene 
@@ -10,39 +8,39 @@ class PhoneCall extends Phaser.GameObjects.Sprite
      * @param {*} maxX 
      * @param {*} finalX 
      */
-    constructor(scene, x, y, originX, maxX, finalX)
-    {
+    constructor(scene, x, y) {
         super(scene, x, y, 'llamada');
-        this.SetIteractive();
+        this.originX = x;
+        this.maxX = 635;
+        this.finalX= 620;
 
-        this.input.setDraggable();
-        this.setScrollFactor(1);
- 
+
+        this.setScale(0.5, 0.5);
+        this.setInteractive({draggable: true});
+
+       
+        scene.add.existing(this);
+
     }
-    
-    DoAction(pointer, dragX, dragY)
-    {
-        if (dragX > this.originX && dragX < this.maxX)
-        {
+
+    DoAction(dragX) {
+        console.log(dragX, this.originX, this.maxX)
+        if (dragX > this.originX && dragX < this.maxX) {
             this.x = dragX;
         }
     }
 
-    FinishAction()
-    {
-        if (this.x <= this.finalX)
-        {
+    FinishAction() {
+        if (this.x <= this.finalX) {
             this.x = this.originX;
         }
-        else
-        {
+        else {
             this.clearTint();
-            scene.ActionFinished(true);
+            //this.scene.ActionFinished(true);
         }
     }
-    preupdate()
-    {
-    
+    preupdate() {
+
     }
 
 }
