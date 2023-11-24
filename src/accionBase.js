@@ -1,8 +1,12 @@
-export default class AccionBase{
-    constructor()
-    {
-    };
+export default class AccionBase extends Phaser.GameObjects.Container {
 
+    //constructor con la posicion y la escena donde aparece el objeto
+    constructor(scene, x, y){
+		super(scene, x, y);
+    };
+    //Comportamientos
+    preUpdate(t, dt){}
+    
     //Bloquea esta accion
     BlockThisAction(){}
 
