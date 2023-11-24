@@ -1,8 +1,8 @@
 export default class Avion extends Phaser.GameObjects.Sprite
 {
-constructor(scene, x, y) // Constructora.
+constructor(scene, x, y, key) // Constructora.
 {
-super(scene, x, y); // Constructora padre.
+super(scene, x, y, 'avion'); // Constructora padre.
 
 this.direction = 0; // Direccion del avión:s 1 = arriba, 0 = quieto,-1 = abajo.
 
