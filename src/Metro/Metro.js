@@ -1,8 +1,10 @@
-import Hub from "./hub.js";
+import Avion from "./avion.js";
+import teclasArribaAbajo from "./teclasArribaAbajo.js";
 
-export default class Metro extends Phaser.Scene {
-
-    constructor() {
+export default class Metro extends Phaser.Scene // Manager de la escena del Metro Skaters.
+{
+    constructor() 
+    {
         // Nombre de la escena para el SceneManager
         super({ key: 'Metro', active: false }); 
     }
@@ -19,23 +21,20 @@ export default class Metro extends Phaser.Scene {
         this.load.image('atras', "assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
     }    
     create(){               
-        this.avion = this.physics.add.image(540, 360, "beluga").setScale(.25)
+        this.avionSpr = this.physics.add.image(540, 360, "beluga").setScale(.25)
         
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
         this.atras.on('pointerdown', (pointer) => {
             this.finalDelJuego()
         });
 
-        this.input.keyboard.on('keydown-W', event =>
-        {
-            this.MovementY = -this.speed;
+        let plane = new Avion(this, 10, 10, this.avionSpr);
+        //let sequence = new Secuencia(...);
+        let avionAcc = new teclasArribaAbajo(this, 0, 0, new Avion(this, 10, 10, this.avionSpr));
+        //let secuenciaAcc = new secuanciaTeclas();
+        //this.metroManager = new Manager(avion, secuancia);
 
-        });
-        this.input.keyboard.on('keydown-S', event =>
-        {
-            this.MovementY = this.speed;
-        });
-        this.input.keyboard.on('keydown-A', event =>
+        /*this.input.keyboard.on('keydown-A', event =>
         {
             this.MovementX = -this.speed;
 
@@ -43,11 +42,11 @@ export default class Metro extends Phaser.Scene {
         this.input.keyboard.on('keydown-D', event =>
         {
             this.MovementX = this.speed;
-        });
+        });*/
     }
 
     update(){
-        this.moverAvion()
+        /*this.moverAvion()
         
         if( this.MovementX > 1){
             this.MovementX -= this.rozamiento;
@@ -63,7 +62,7 @@ export default class Metro extends Phaser.Scene {
         else if(this.MovementY < -1){
             this.MovementY += this.rozamiento;
         }
-        else this.MovementY = 0;
+        else this.MovementY = 0;*/
     }
     finalDelJuego()
     {    
@@ -71,8 +70,6 @@ export default class Metro extends Phaser.Scene {
     }
 
     moverAvion(){
-        this.avion.setAcceleration(this.MovementX,this.MovementY)
+        //this.avion.setAcceleration(this.MovementX,this.MovementY)
     }
-
-    
    } 
