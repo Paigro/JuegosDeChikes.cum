@@ -3,34 +3,34 @@ import teclasArribaAbajo from "./teclasArribaAbajo.js";
 
 export default class Metro extends Phaser.Scene // Manager de la escena del Metro Skaters.
 {
-    constructor() 
-    {
+    constructor() {
         // Nombre de la escena para el SceneManager
-        super({ key: 'Metro', active: false }); 
+        super({ key: 'Metro', active: false });
     }
 
     // Métodos init, preload, create, update+
-    init(){
+    init() {
         /*this.MovementY = 0;
         this.MovementX = 0;
         this.speed = 100;
         this.rozamiento = 101;*/
     }
-    preload(){        
-		this.load.image('beluga', "/assets/juego/TruthOrDare/imagenes/Beluga2.png");
+    preload() {
+        this.load.image('beluga', "/assets/juego/MetroSkaters/imagenes/Beluga2.png");
+        this.load.image('cielo',"/assets/juego/MetroSkaters/imagenes/cielo.jpg")
         this.load.image('atras', "/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
-    }    
-    create(){               
+    }
+    create() {
         //this.avionSpr = this.physics.add.image(540, 360, "beluga").setScale(.25)
-        
+        this.add.image(0, 0, 'cielo').setOrigin(0, 0).setScale(10, 10); // Añadimos la imagen del fondo.
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
         this.atras.on('pointerdown', (pointer) => {
             this.finalDelJuego()
         });
 
-        new Avion(this, 50, 50);
+        let avion = new Avion(this, 500, 300);
         //let sequence = new Secuencia(...);
-        //let avionAcc = new teclasArribaAbajo(this, 0, 0, new Avion(this, 10, 10, this.avionSpr));
+        let avionAcc = new teclasArribaAbajo(this, 0, 0, avion);
         //let secuenciaAcc = new secuanciaTeclas();
         //this.metroManager = new Manager(avion, secuancia);
 
@@ -45,7 +45,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         });*/
     }
 
-    update(){
+    update() {
         /*this.moverAvion()
         
         if( this.MovementX > 1){
@@ -64,12 +64,11 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         }
         else this.MovementY = 0;*/
     }
-    finalDelJuego()
-    {    
+    finalDelJuego() {
         this.scene.start("Hub");
     }
 
-    moverAvion(){
+    moverAvion() {
         //this.avion.setAcceleration(this.MovementX,this.MovementY)
     }
-   } 
+} 

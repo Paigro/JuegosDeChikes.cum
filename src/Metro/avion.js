@@ -3,11 +3,12 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     {
         super(scene, x, y, 'beluga'); // Constructora padre.
 
-        this.scene.add.existing(this); // Añadir a la escena.
+        this.scene.add.existing(this).setScale(0.5, 0.5); // Añadir a la escena.
 
         this.direction = 0; // Direccion del avión:s 1 = arriba, 0 = quieto,-1 = abajo.
 
         console.log("Avion ha sido creado");
+
 
 
         // Creamos las animaciones del avion:
@@ -63,6 +64,15 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             }
         }*/
 
+
+    }
+    movimientoArriba()
+    {
+        this.setPosition(10, 10);
+
+    }
+    movimientoAbajo()
+    {
 
     }
 
