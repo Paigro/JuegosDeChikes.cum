@@ -34,6 +34,7 @@ export default class Manager{
     {
         score += puntuacion;
         this.endRound = true;
+        console.log("End Round");
     }
     
     // Pausa/Despausa el timer de la escena
@@ -46,6 +47,7 @@ export default class Manager{
     ResetActions()
     {
         this.endRound = false;
+        console.log("Start Round");
         this.action1.Reset();
         this.action2.Reset();
         
@@ -65,12 +67,14 @@ export default class Manager{
                 {
                     // si ha terminado la ronda y la puntuacion es distinta de 0 se termina el juego
                     this.endGame = true;
+                    console.log("End Game");
                 }else
                 {
                     //el final de la ronda se vuelve false y se hace una ronda mas
                     this.ResetActions();
                 }
             }
+            //console.log(this.elapsedTime);
         }
     }
 

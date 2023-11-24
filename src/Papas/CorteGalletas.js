@@ -1,21 +1,40 @@
 import AccionBase from "../accionBase.JS";
+import Corte from "./Corte.js"
 
 export default class CorteGalletas extends AccionBase{
-    constructor()
+    constructor(scene, x, y, bandejaSpr, corteSpr)
     {
-        super();
-        this.load.image('Bandeja1', '../assets/juego/PapasGalleteria/Bandeja_1.png');
-        this.Bandeja = this.add.image(0, 0, 'Bandeja1').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive();
+        super(scene, x, y);
+        
+        this.bandeja = new Phaser.GameObjects.Sprite(scene, 0, 0, bandejaSpr, 0); 
+        this.bandeja.setScale(.85,.85);
+        
+        this.corte = new Corte(scene, 0, 0, corteSpr, this);
     };
-
     
-    BlockThisAction()
+    PreUpdate()
     {
         
     }
     
+    BlockThisAction()
+    {
+        //this.scene.delete(this.bandeja);
+    }
+    
+    StartAccion()
+    {
+        //preguntar
+        //this.manager.BlockAction(2):
+    }
+    
     Reset()
     {
+        
+        this.add(this.bandeja);
+        this.add(this.corte);
+        
+        this.scene.add.existing(this);
 
     }
 }
