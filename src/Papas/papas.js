@@ -1,5 +1,5 @@
 import Manager from "../manager.js";
-import Bandeja from "./bandejas.js";
+import CorteGalletas from "./CorteGalletas.js";
 
 export default class Papas extends Phaser.Scene{
 
@@ -17,9 +17,10 @@ export default class Papas extends Phaser.Scene{
       this.atras.on('pointerdown', (pointer) => {
         this.finalDelJuego();
       });
-      let bandeja1 = new Bandeja();
-      let bandeja2 = new Bandeja();
+      let bandeja1 = new CorteGalletas();
+      let bandeja2 = new CorteGalletas();
       this.papasManager = new Manager(bandeja1, bandeja2);
+      this.papasManager.ResetActions();
     }
 
     update(time, delta){
@@ -28,6 +29,7 @@ export default class Papas extends Phaser.Scene{
         this.finalDelJuego(this.papasManager.score);
       }
     }
+
     finalDelJuego(puntuacion)
 {    
     this.scene.start("Hub");
