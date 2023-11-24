@@ -1,4 +1,3 @@
-import Hub from "./hub.js";
 import Avion from "./avion.js";
 import teclasArribaAbajo from "./teclasArribaAbajo.js";
 

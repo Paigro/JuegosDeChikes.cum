@@ -1,5 +1,5 @@
-import AccionBase from "./accionBase";
-import Avion from "./avion";
+import AccionBase from "../accionBase.js";
+import Avion from "./avion.js";
 
 export default class teclasArribaAbajo extends AccionBase
 {
