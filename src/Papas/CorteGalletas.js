@@ -6,10 +6,11 @@ export default class CorteGalletas extends AccionBase{
     {
         super(scene, x, y);
         
-        this.bandeja = new Phaser.GameObjects.Sprite(scene, 0, 0, bandejaSpr, 0); 
-        this.bandeja.setScale(.85,.85);
+        this.setScale(.85,.85);
         
-        this.corte = new Corte(scene, 0, 0, corteSpr, this);
+        this.add(this.bandeja);
+        
+        this.scene.add.existing(this);
     };
     
     PreUpdate()
@@ -19,22 +20,11 @@ export default class CorteGalletas extends AccionBase{
     
     BlockThisAction()
     {
-        //this.scene.delete(this.bandeja);
-    }
-    
-    StartAccion()
-    {
-        //preguntar
-        //this.manager.BlockAction(2):
+        this.bandeja.setvisi
     }
     
     Reset()
     {
-        
-        this.add(this.bandeja);
-        this.add(this.corte);
-        
-        this.scene.add.existing(this);
 
     }
 }

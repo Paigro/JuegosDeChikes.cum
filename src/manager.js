@@ -18,15 +18,15 @@ export default class Manager{
     };
     
     // Bloque la accion no elegida
-    BlockAction(actionBloked)
+    BlockAction()
     {
-        if(actionBloked){
-            this.action1.BlockAction();
-        }
-        else if (!actionBloked)
-        {
-            this.action2.BlockAction();
-        }
+        document.addEventListener('start', ()=>{
+            console.log("Start event triggered")
+        });
+
+            document.dispatchEvent(event);
+
+        //this.dispatchEvent()
         
     }
     // Asigna puntuacion y termina la ronda
@@ -71,7 +71,7 @@ export default class Manager{
                 }else
                 {
                     //el final de la ronda se vuelve false y se hace una ronda mas
-                    this.ResetActions();
+                    //this.ResetActions();
                 }
             }
             //console.log(this.elapsedTime);

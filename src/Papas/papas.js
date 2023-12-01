@@ -6,6 +6,8 @@ export default class Papas extends Phaser.Scene{
     constructor() {
       // Nombre de la escena para el SceneManager
       super({ key: 'Papas', active: false  }); 
+
+      this.time = 10;
     }
 
     preload(){        
@@ -29,19 +31,27 @@ export default class Papas extends Phaser.Scene{
       // Elementos del juego
       let bandeja1 = new CorteGalletas(this,330,540,'BandejaCorte', 'MarcaGallet');
       let bandeja2 = new CorteGalletas(this,750,540,'BandejaCorte', 'MarcaGallet');
-      this.papasManager = new Manager(this.bandeja1, this.bandeja2);
-      bandeja1.Manager = this.papasManager;
-      bandeja2.Manager = this.papasManager;
+      
+
+      //Bloquea la otra bandeja
+      bandeja1.on('pointerdown', (pointer) =>{
+        bandeja2.BlockThisAction();
+      })
+      bandeja2.on('pointerdown', (pointer) =>{
+        bandeja1.BlockThisAction();
+      })
+
+
+      
     }
 
     update(time, delta){
-      //console.log($('canvas').height());
-      //Control del reloj del juego
-      this.papasManager.UpdateTime(delta/1000);
-
-      //Control final del juego
-      if(this.papasManager.ReturnEndGame == true){
-        this.finalDelJuego(this.papasManager.score);
+      //cuenta atras para acabar el juego
+      if(this.time<=0){
+        this.finalDelJuego;
+      }
+      else{
+        this.time -= (delta/1000);
       }
     }
 
