@@ -42,11 +42,14 @@ export default class Avion extends Phaser.GameObjects.Sprite {
         // Seteamos las teclas para mover el avion:
         this.upKey = this.scene.input.keyboard.addKey('UP'); // Arriba.
         this.downKey = this.scene.input.keyboard.addKey('DOWN'); // Abajo.
+        this.rightKey = this.scene.input.keyboard.addKey('RIGHT'); // .
+        this.leftKey = this.scene.input.keyboard.addKey('LEFT'); // .
 
-        // Agregamos al avion las físicas para que Phaser lo tenga en cuenta:
+
+        // Agregamos al avion las fisicas para que Phaser lo tenga en cuenta:
         scene.physics.add.existing(this);
 
-        // Decimos que el avion colisiona con los límites del mundo (De momento choca con los limites).
+        // Decimos que el avion colisiona con los limites del mundo (de momento choca con los limites).
         this.body.setCollideWorldBounds();
 
     }
@@ -55,18 +58,31 @@ export default class Avion extends Phaser.GameObjects.Sprite {
 
         if(this.upKey.isDown)
         {
-            console.log("Arriba.");
+            //console.log("Arriba.");
 			this.body.setVelocityY(-this.speed);
 		}
         else if(this.downKey.isDown)
         {
-            console.log("Abajo.");
+            //console.log("Abajo.");
 			this.body.setVelocityY(this.speed);
 		}
-        else if(Phaser.Input.Keyboard.JustUp(this.upKey)||Phaser.Input.Keyboard.JustUp(this.downKey))
+        else if(Phaser.Input.Keyboard.JustUp(this.upKey) || Phaser.Input.Keyboard.JustUp(this.downKey) || Phaser.Input.Keyboard.JustUp(this.rightKey) || Phaser.Input.Keyboard.JustUp(this.leftKey))
         {
-this.body.setVelocityY(0);
-        }    
+            //console.log("Para.");
+            this.body.setVelocityY(0);
+            this.body.setVelocityX(0);
+
+        } 
+        else if(this.rightKey.isDown)
+        {
+            //console.log("Abajo.");
+			this.body.setVelocityX(this.speed);
+		}
+        else if(this.leftKey.isDown)
+        {
+            //console.log("Abajo.");
+			this.body.setVelocityX(-this.speed);
+		} 
         
         
         
