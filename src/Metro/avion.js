@@ -3,7 +3,9 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     {
         super(scene, x, y, 'beluga'); // Constructora padre.
 
-        this.scene.add.existing(this).setScale(0.5, 0.5); // Añadir a la escena.
+        this.speed = 140; // Nuestra velocidad de movimiento será 140
+        
+        this.scene.add.existing(this).setScale(0.25, 0.25); // Añadir a la escena.
 
         this.direction = 0; // Direccion del avión:s 1 = arriba, 0 = quieto,-1 = abajo.
 
@@ -51,6 +53,27 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
 
+        if(this.upKey.isDown)
+        {
+            console.log("Arriba.");
+			this.body.setVelocityY(-this.speed);
+		}
+        else if(this.downKey.isDown)
+        {
+            console.log("Abajo.");
+			this.body.setVelocityY(this.speed);
+		}
+        else if(Phaser.Input.Keyboard.JustUp(this.upKey)||Phaser.Input.Keyboard.JustUp(this.downKey))
+        {
+this.body.setVelocityY(0);
+        }    
+        
+        
+        
+        
+        
+        
+        
         /*if(this.upKey.isDown)
         {
             if(this.anims.currentAnim.key !== 'up'){

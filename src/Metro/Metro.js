@@ -22,7 +22,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
     create() 
     {
-        this.keys = this.input.keyboard.addKeys('LEFT,RIGHT,W,DOWN');
+        //this.keys = this.input.keyboard.addKeys('LEFT,RIGHT,W,DOWN');
         //this.avionSpr = this.physics.add.image(540, 360, "beluga").setScale(.25)
         this.add.image(0, 0, 'cielo').setOrigin(0, 0).setScale(10, 10); // Añadimos la imagen del fondo.
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
@@ -49,11 +49,11 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
     update() {
         //avion.update();
-            if(this.keys.W.isDown)
+            /*if(this.keys.W.isDown)
             {
                 this.avion.setVelocity(5,0);
 
-            }
+            }*/
 
         
         /*this.moverAvion()
