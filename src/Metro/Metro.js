@@ -1,5 +1,5 @@
 import Avion from "./avion.js";
-import teclasArribaAbajo from "./teclasArribaAbajo.js";
+//import teclasArribaAbajo from "./teclasArribaAbajo.js";
 
 export default class Metro extends Phaser.Scene // Manager de la escena del Metro Skaters.
 {
@@ -20,7 +20,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.load.image('cielo',"/assets/juego/MetroSkaters/imagenes/cielo.jpg")
         this.load.image('atras', "/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
     }
-    create() {
+    create() 
+    {
+        this.keys = this.input.keyboard.addKeys('LEFT,RIGHT,W,DOWN');
         //this.avionSpr = this.physics.add.image(540, 360, "beluga").setScale(.25)
         this.add.image(0, 0, 'cielo').setOrigin(0, 0).setScale(10, 10); // Añadimos la imagen del fondo.
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
@@ -30,7 +32,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
         let avion = new Avion(this, 500, 300);
         //let sequence = new Secuencia(...);
-        let avionAcc = new teclasArribaAbajo(this, 0, 0, avion);
+        //let avionAcc = new teclasArribaAbajo(this, 0, 0, avion);
         //let secuenciaAcc = new secuanciaTeclas();
         //this.metroManager = new Manager(avion, secuancia);
 
@@ -46,6 +48,14 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     update() {
+        //avion.update();
+            if(this.keys.W.isDown)
+            {
+                this.avion.setVelocity(5,0);
+
+            }
+
+        
         /*this.moverAvion()
         
         if( this.MovementX > 1){

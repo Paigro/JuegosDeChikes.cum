@@ -1,6 +1,6 @@
 import AccionBase from "../accionBase.js";
 import Avion from "./avion.js";
-
+/*
 export default class teclasArribaAbajo extends AccionBase
 {
     constructor(scene, x, y, avion){
@@ -32,6 +32,7 @@ else if (cursors.right.isDown)
     this.input.keyboard.on('keydown-S', event =>
     {
         console.log("Abajo.");
-    });*/
+    });
 }
 }
+*/

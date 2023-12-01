@@ -66,6 +66,18 @@ export default class Avion extends Phaser.GameObjects.Sprite {
 
 
     }
+    update()
+    {
+        if(this.keys.UP.isDown())
+        {
+            sprite.setVelocity(5, 0);
+        }
+        else if(this.keys.DOWN.isDown())
+        {
+            sprite.setVelocity(-5, 0);
+        }
+
+    }
     movimientoArriba()
     {
         this.setPosition(10, 10);
