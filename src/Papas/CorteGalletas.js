@@ -4,11 +4,10 @@ import Corte from "./Corte.js"
 export default class CorteGalletas extends AccionBase{
     constructor(scene, x, y, bandejaSpr, corteSpr)
     {
-        super(scene, x, y);
+        super(scene, x, y, bandejaSpr);
         
         this.setScale(.85,.85);
-        
-        this.add(this.bandeja);
+        this.setInteractive();
         
         this.scene.add.existing(this);
     };
@@ -16,11 +15,6 @@ export default class CorteGalletas extends AccionBase{
     PreUpdate()
     {
         
-    }
-    
-    BlockThisAction()
-    {
-        this.bandeja.setvisi
     }
     
     Reset()
