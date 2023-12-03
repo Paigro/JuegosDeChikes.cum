@@ -21,6 +21,8 @@ export default class AccionBase extends Phaser.GameObjects.Sprite {
   EndAction() { }
 
   //Resetea esta accion
-  Reset() { }
+  Reset() { 
+    this.visible = true;
+  }
 
 }

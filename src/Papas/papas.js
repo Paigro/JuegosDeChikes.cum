@@ -8,6 +8,7 @@ export default class Papas extends Phaser.Scene {
     super({ key: 'Papas', active: false });
 
     this.time = 10;
+    this.points = 0;
   }
 
   preload() {
@@ -19,6 +20,8 @@ export default class Papas extends Phaser.Scene {
     this.load.image('MarcaGallet', '/assets/juego/PapasGalleteria/Marca_Galleta.png'); // Cargamos la imagen de volver atras (provisional).
     this.load.image('Fondo', '/assets/juego/PapasGalleteria/Fondo.png'); // Cargamos la imagen de volver atras (provisional).
   }
+
+
   create() {
     //Fondo    
     this.add.image(0, 0, 'Fondo').setScale(2, 2).setOrigin(0, 0) // el fondo
@@ -28,37 +31,44 @@ export default class Papas extends Phaser.Scene {
       this.finalDelJuego();
     });
 
+    this.time = 10;
+
     // Elementos del juego
-    let bandeja1 = new CorteGalletas(this, 330, 540, 'BandejaCorte', 'MarcaGallet');
-    let bandeja2 = new CorteGalletas(this, 750, 540, 'BandejaCorte', 'MarcaGallet');
+    this.bandeja1 = new CorteGalletas(this, 330, 540, 'BandejaCorte', 'MarcaGallet');
+    this.bandeja2 = new CorteGalletas(this, 750, 540, 'BandejaCorte', 'MarcaGallet');
 
 
     //Bloquea la otra bandeja
-    bandeja1.on('pointerdown', (pointer) => {
-      bandeja2.BlockThisAction();
-      bandeja1.inputEnabled = false;
+    this.bandeja1.on('pointerdown', (pointer) => {
+      console.log("Start b1");
+      this.bandeja2.BlockThisAction();
+      this.bandeja1.StartAccion();
     })
-    bandeja2.on('pointerdown', (pointer) => {
-      bandeja1.BlockThisAction();
-      bandeja2.inputEnabled = false;
+    this.bandeja2.on('pointerdown', (pointer) => {
+      console.log("Start b2");
+      this.bandeja1.BlockThisAction();
+      this.bandeja2.StartAccion();
     })
   }
 
   update(time, delta) {
     //cuenta atras para acabar el juego
     if (this.time <= 0) {
-      this.finalDelJuego;
+      //this.finalDelJuego();
+      this.time = 10;
     }
     else {
+      //console.log(this.time);
       this.time -= (delta / 1000);
     }
   }
 
-  //Resetea las bandejas
-  bandejaReset() 
-  {
-    bandeja1.Reset();
-    bandeja2.Reset();
+  endAction(points) {
+    this.points += points;
+    this.bandeja1.Reset();
+    this.bandeja2.Reset();
+
+    console.log(this.points);
   }
 
   //Vuelve a la escena del Hub
