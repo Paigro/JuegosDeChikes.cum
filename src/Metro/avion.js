@@ -39,12 +39,11 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             repeat: -1
         });*/
 
-        // Seteamos las teclas para mover el avion:
-        this.upKey = this.scene.input.keyboard.addKey('UP'); // Arriba.
-        this.downKey = this.scene.input.keyboard.addKey('DOWN'); // Abajo.
-        this.rightKey = this.scene.input.keyboard.addKey('RIGHT'); // .
-        this.leftKey = this.scene.input.keyboard.addKey('LEFT'); // .
-
+        // Teclas para mover el avión.
+        this.upKey = this.scene.input.keyboard.addKey('UP'); // Flecha arriba.
+        this.downKey = this.scene.input.keyboard.addKey('DOWN'); // Flecha abajo.
+        this.rightKey = this.scene.input.keyboard.addKey('RIGHT'); // Flecha derecha.
+        this.leftKey = this.scene.input.keyboard.addKey('LEFT'); // Felcha izquierda.
 
         // Agregamos al avion las fisicas para que Phaser lo tenga en cuenta:
         scene.physics.add.existing(this);
@@ -66,6 +65,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             //console.log("Abajo.");
 			this.body.setVelocityY(this.speed);
 		}
+// De este if habra que quitar las cosas de los 4 ejes despues.
         else if(Phaser.Input.Keyboard.JustUp(this.upKey) || Phaser.Input.Keyboard.JustUp(this.downKey) || Phaser.Input.Keyboard.JustUp(this.rightKey) || Phaser.Input.Keyboard.JustUp(this.leftKey))
         {
             //console.log("Para.");
@@ -73,7 +73,8 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             this.body.setVelocityX(0);
 
         } 
-        else if(this.rightKey.isDown)
+        // Movimiento extra para probar cosas:
+        /*else if(this.rightKey.isDown)
         {
             //console.log("Abajo.");
 			this.body.setVelocityX(this.speed);
@@ -82,7 +83,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
         {
             //console.log("Abajo.");
 			this.body.setVelocityX(-this.speed);
-		} 
+		} */
         
         
         
