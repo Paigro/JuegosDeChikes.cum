@@ -1,5 +1,6 @@
 import Manager from "../manager.js";
 import CorteGalletas from "./CorteGalletas.js";
+import GlaseadoGalletas from "./GlaseadoGalletas.js";
 
 export default class Papas extends Phaser.Scene {
 
@@ -35,7 +36,7 @@ export default class Papas extends Phaser.Scene {
 
     // Elementos del juego
     this.bandeja1 = new CorteGalletas(this, 330, 540, 'BandejaCorte', 'MarcaGallet');
-    this.bandeja2 = new CorteGalletas(this, 750, 540, 'BandejaCorte', 'MarcaGallet');
+    this.bandeja2 = new GlaseadoGalletas(this, 750, 540, 'BandejaCorte', 'MarcaGallet');
 
 
     //Bloquea la otra bandeja
