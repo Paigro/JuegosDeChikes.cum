@@ -10,14 +10,18 @@ const config = {
   parent: "game",
   type: Phaser.AUTO,      
   scene: [Hub, TruthOrDare, Metro, Papas, BumBumClack],
-  physics:{
-    default:"arcade",
-    arcade:{
-      gravity:{
-        y:0
-      }
+  physics: { 
+    default: 'arcade', 
+    arcade: { 
+        debug: true 
+    },
+    checkCollision: {
+        up: true,
+        down: true,
+        left: true,
+        right: true
     }
-  }
+}
 }
 
 var game = new Phaser.Game(config);
