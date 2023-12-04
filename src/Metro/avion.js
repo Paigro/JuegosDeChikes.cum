@@ -50,7 +50,6 @@ export default class Avion extends Phaser.GameObjects.Sprite {
 
         // Decimos que el avion colisiona con los limites del mundo (de momento choca con los limites).
         this.body.setCollideWorldBounds();
-
     }
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
@@ -84,13 +83,9 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             //console.log("Abajo.");
 			this.body.setVelocityX(-this.speed);
 		} */
+
         
-        
-        
-        
-        
-        
-        
+        // ANIMACIONES DEL AVION (DEBERIAN DE SER TWINKS MAS QUE ANIMACIONES)
         /*if(this.upKey.isDown)
         {
             if(this.anims.currentAnim.key !== 'up'){
@@ -108,14 +103,6 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     }
     update()
     {
-        if(this.keys.UP.isDown())
-        {
-            sprite.setVelocity(5, 0);
-        }
-        else if(this.keys.DOWN.isDown())
-        {
-            sprite.setVelocity(-5, 0);
-        }
 
     }
     movimientoArriba()
