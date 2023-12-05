@@ -5,6 +5,7 @@ export default class AccionBase extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, spr) {
     super(scene, x, y, spr);
   };
+  
   //Comportamientos
   preUpdate(t, dt) { }
 
