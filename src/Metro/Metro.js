@@ -24,10 +24,11 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     create() {
-        this.accion1 = false;
-        this.accion2 = false;
-        this.decision = true;
+        this.avionAcc = false;
+        this.secuenciaAcc = false;
+        this.decision = false;
         this.actSec = "";
+
         // Nuevos bordes del mundo para el movimiento del avion:
         this.physics.world.setBounds(0, 0, 1080, 450);
         // Teclas para mover el avion:
@@ -40,8 +41,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.sKey = this.input.keyboard.addKey("S"); // Tecla S.
         this.dKey = this.input.keyboard.addKey("D"); // Tecla D.
         this.fKey = this.input.keyboard.addKey("F"); // Tecla F.
-
-
 
         this.add.image(0, 0, 'cielo').setOrigin(0, 0).setScale(10, 10); // Ponemos la imagen del fondo.
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Ponemos la imagen de volver atras.
@@ -57,65 +56,64 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
 
         //Creacion de las cosas que estaran en la escena:
-        this.generador = new Generador(this, 0, 0, secuencias, secuencias2); // Generador de cosas.
+        this.generador = new Generador(this, 0, 0, secuencias2, secuencias); // Generador de cosas.
         this.avion = new Avion(this, 400, 250); // El avion.
         this.secuenciaTeclas = new secuanciaTeclas(this, 0, 450); // La secuencia de teclas.
 
         // Detectar la eleccion de la accion del jugador.
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
-            if (this.decision == true) { // Solo si se permite una accion.
+            if (!this.decision) { // Solo si se permite una accion miramos cual puede ser.
                 if (event.key == "ArrowUp" || event.key == "ArrowDown") { // Accion 1: mover al avion.
                     console.log("Seleccion: avion.");
-                    this.accion1 = true;
-                    this.decision = false;
+                    this.avionAcc = true;
+                    this.decision = true;
                 }
                 else if (event.key == "a" || event.key == "s" || event.key == "d" || event.key == "f") { // Accion 2: secuancia de teclas.
                     console.log("Selecion: teclas.");
-                    this.accion2 = true;
-                    this.decision = false;
+                    this.secuenciaAcc = true;
+                    this.decision = true;
                 }
             }
         });
     }
 
     update() {
-        if (!this.decision && this.accion1 && !this.accion2) {
+        if (!this.decision) {
+            this.sec = this.generador.secuenciaGenerador();
+            console.log(this.sec);
+        }
+
+
+
+        if (this.decision && this.avionAcc && !this.secuenciaAcc) {
             this.movientoAvion()
         }
-        else if (!this.decision && this.accion2 && !this.accion1) {
+        else if (this.decision && this.secuenciaAcc && !this.avionAcc) {
             this.teclasSecuencia();
         }
     }
 
     movientoAvion() {
-        // Movimiento del avion:
         if (this.upKey.isDown) {
-            //console.log("Arriba.");
             this.avion.body.setVelocityY(-this.avion.speed);
         }
         else if (this.downKey.isDown) {
-            //console.log("Abajo.");
             this.avion.body.setVelocityY(this.avion.speed);
         }
         // De este if habra que quitar las cosas de los 4 ejes despues.
-        else if (Phaser.Input.Keyboard.JustUp(this.upKey) || Phaser.Input.Keyboard.JustUp(this.downKey) || Phaser.Input.Keyboard.JustUp(this.rightKey) || Phaser.Input.Keyboard.JustUp(this.leftKey)) {
-            //console.log("Para.");
+        else if (Phaser.Input.Keyboard.JustUp(this.upKey) || Phaser.Input.Keyboard.JustUp(this.downKey) /*|| Phaser.Input.Keyboard.JustUp(this.rightKey) || Phaser.Input.Keyboard.JustUp(this.leftKey)*/) {
             this.avion.body.setVelocityY(0);
             this.avion.body.setVelocityX(0);
         }
-        // Movimiento extra para probar cosas:
-        else if (this.rightKey.isDown) {
-            //console.log("Derecha.");
+        /*else if (this.rightKey.isDown) {
             this.avion.body.setVelocityX(this.avion.speed);
         }
         else if (this.leftKey.isDown) {
-            //console.log("Izquierda.");
             this.avion.body.setVelocityX(-this.avion.speed);
-        }
+        }*/
     }
 
     teclasSecuencia() {
-        // De este if habra que quitar las cosas de los 4 ejes despues.
         if (Phaser.Input.Keyboard.JustUp(this.aKey)) {
             this.actSec += "A";
             console.log(this.actSec);
@@ -134,6 +132,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         }
     }
     finalDelJuego() {
+        console.clear();
         this.scene.start("Hub");
     }
 } 
