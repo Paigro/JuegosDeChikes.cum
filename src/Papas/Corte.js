@@ -1,8 +1,8 @@
 
 import CorteGalletas from "./CorteGalletas.js";
 
-export default class Hat extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, corteSpr, bandejaRef) {
+export default class Corte extends Phaser.GameObjects.Sprite {
+    constructor(scene, x, y, corteSpr) {
         super(scene, x, y, corteSpr);
 
         this.scene.add.existing(this);
