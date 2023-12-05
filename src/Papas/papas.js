@@ -10,12 +10,12 @@ export default class Papas extends Phaser.Scene {
 
     this.time = 10;
     this.points = 0;
-
-    this.scene.events.on('enviarObjeto', function (coordinator) {
-      console.log('Objeto recibido:', coordinator);
-  });
   }
-
+  init(data) {
+    this.coor = data;
+    console.log(this.coor);
+    console.log(data);
+  }
   preload() {
     this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
 
@@ -52,12 +52,14 @@ export default class Papas extends Phaser.Scene {
       console.log("Start b1");
       this.bandeja2.BlockThisAction();
       this.bandeja1.StartAccion();
+      this.endRound = false;
     })
 
     this.bandeja2.on('pointerdown', (pointer) => {
       console.log("Start b2");
       this.bandeja1.BlockThisAction();
       this.bandeja2.StartAccion();
+      this.endRound = false;
     })
   }
 
@@ -65,12 +67,15 @@ export default class Papas extends Phaser.Scene {
     this.bandeja2.updateGlassed(delta);
     //cuenta atras para acabar el juego
     if (this.time <= 0) {
-      if(this.endRound){
+      if (this.endRound && this.points !=0) {
         this.time = 10;
         this.finalDelJuego();
+      }else
+      {
+        this.endRound = false;
       }
-      console.log(this.time);
-      console.log(this.endRound);
+      //console.log(this.time);
+      //console.log(this.endRound);
     }
     else {
       //console.log(this.time);
@@ -88,7 +93,10 @@ export default class Papas extends Phaser.Scene {
   }
 
   //Vuelve a la escena del Hub
-  finalDelJuego(puntuacion) {
+  finalDelJuego() {
+    console.clear();
+    this.points = 0;
+    this.coor.SaveScore("EspOrg", this.points);
     this.scene.start("Hub");
   }
 }

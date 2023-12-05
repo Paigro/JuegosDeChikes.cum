@@ -27,14 +27,14 @@ export default class CorteGalletas extends AccionBase {
         //Deteccion de inputs
         this.glaseado.on('pointerdown', (pointer) => {
             this.pulsado = true;
-            console.log("Pulsado" + this.pulsado);
+            //console.log("Pulsado" + this.pulsado);
         })
 
         this.glaseado.on('pointermove', (pointer) => {
             if (this.pulsado) {
 
                 this.move = true;
-                console.log("mueve: " + this.move);
+                //console.log("mueve: " + this.move);
             }
             else {
                 this.move = false;
@@ -57,7 +57,7 @@ export default class CorteGalletas extends AccionBase {
         //Temporizador para ver si se esta moviendo el cursor
         if (this.elapsedTime <= 0) {
             this.move = false;
-            console.log("Reinicio." + this.elapsedTime);
+            //console.log("Reinicio." + this.elapsedTime);
             this.reiniciarTemporizador();
         }
         else if (this.move) {
@@ -69,7 +69,7 @@ export default class CorteGalletas extends AccionBase {
         if (this.move && this.pulsado) {
             this.porcentaje += .01;
             this.glaseado.setAlpha(this.porcentaje);
-            console.log(this.porcentaje);
+            //console.log(this.porcentaje);
 
             if (this.porcentaje >= 1) {
                 this.glaseado.hide();
