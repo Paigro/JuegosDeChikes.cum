@@ -1,4 +1,4 @@
-import Manager from "../manager.js";
+import coordinator from "../coordinator.js";
 import CorteGalletas from "./CorteGalletas.js";
 import GlaseadoGalletas from "./GlaseadoGalletas.js";
 
@@ -10,6 +10,10 @@ export default class Papas extends Phaser.Scene {
 
     this.time = 10;
     this.points = 0;
+
+    this.scene.events.on('enviarObjeto', function (coordinator) {
+      console.log('Objeto recibido:', coordinator);
+  });
   }
 
   preload() {
