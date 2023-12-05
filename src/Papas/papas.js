@@ -34,7 +34,9 @@ export default class Papas extends Phaser.Scene {
       this.finalDelJuego();
     });
 
+    //Propiedades
     this.time = 10;
+    this.endRound = false;
 
     // Elementos del juego
     this.bandeja1 = new CorteGalletas(this, 300, 540, 'BandejaCorte', 'MarcaGallet');
@@ -56,11 +58,15 @@ export default class Papas extends Phaser.Scene {
   }
 
   update(time, delta) {
-    this.bandeja2.updateGlassed();
+    this.bandeja2.updateGlassed(delta);
     //cuenta atras para acabar el juego
     if (this.time <= 0) {
-      //this.finalDelJuego();
-      this.time = 10;
+      if(this.endRound){
+        this.time = 10;
+        this.finalDelJuego();
+      }
+      console.log(this.time);
+      console.log(this.endRound);
     }
     else {
       //console.log(this.time);
@@ -73,7 +79,8 @@ export default class Papas extends Phaser.Scene {
     this.bandeja1.Reset();
     this.bandeja2.Reset();
 
-    console.log(this.points);
+    //console.log(this.points);
+    this.endRound = true
   }
 
   //Vuelve a la escena del Hub

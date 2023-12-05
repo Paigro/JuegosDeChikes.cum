@@ -14,6 +14,18 @@ export default class Galletas extends Phaser.GameObjects.Sprite {
 
         scene.input.enableDebug(this);
     }
+    appear()
+    {        
+        this.setAlpha(0.01);
+        this.visible = true;
+        this.input.enabled = true;
+    }
+
+    hide()
+    {
+        this.visible = false;
+        this.input.enabled = false;
+    }
 
     
     
