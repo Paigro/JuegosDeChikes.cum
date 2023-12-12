@@ -24,10 +24,14 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     create() {
+        this.puntFict = 0;
+        this.genDet = 0;
         this.avionAcc = false;
         this.secuenciaAcc = false;
         this.decision = false;
-        this.actSec = "";
+        this.playerSec = ""; // Secuencia del jugador.
+        this.i = 0; // Para que se hagan 4 acciones: 4 obstaculos o 4 secuencias.
+        this.j = 0; // Para las secuencias: que solo se lean 4 letras antes de comrpobar.
 
         // Nuevos bordes del mundo para el movimiento del avion:
         this.physics.world.setBounds(0, 0, 1080, 450);
@@ -50,13 +54,13 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             this.finalDelJuego()
         });
 
-        //let obstaculos = [opcion1 = [0, 0, 1], opcion2 = [0, 1, 0], opcion3 = [0, 1, 1], opcion4 = [1, 0, 0], opcion5 = [1, 0, 1], opcion6 = [1, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
+        let obstaculos = [[0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
         let secuencias = ["ASDF", "ASFD", "ADSF", "ADFS", "AFSD", "AFDS", "SDFA", "SDAF", "SFDA", "SFAD", "SAFD", "SADF", "DSFA", "DSAF", "DFSA", "DFAS", "DAFS", "DASF", "FSDA", "FSAD", "FDSA", "FDAS", "FADS"];
-        let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.
+        //let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.
 
 
         //Creacion de las cosas que estaran en la escena:
-        this.generador = new Generador(this, 0, 0, secuencias2, secuencias); // Generador de cosas.
+        this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
         this.avion = new Avion(this, 400, 250); // El avion.
         this.secuenciaTeclas = new secuanciaTeclas(this, 0, 450); // La secuencia de teclas.
 
@@ -85,11 +89,56 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
 
 
-        if (this.decision && this.avionAcc && !this.secuenciaAcc) {
+        if (this.decision && this.avionAcc && !this.secuenciaAcc) // Accion avion.
+        {
             this.movientoAvion()
         }
-        else if (this.decision && this.secuenciaAcc && !this.avionAcc) {
-            this.teclasSecuencia();
+        else if (this.decision && this.secuenciaAcc && !this.avionAcc) // Accion secuencia.
+        {
+            if (this.i < 4) // Cuatro secuencias.
+            {
+                if (this.j < 4) // Cuatro letras de la secuencia.
+                {
+                    if (this.teclasSecuencia()) {
+                        this.j++;
+                        console.log("1: j: " + this.j + " i: " + this.i);
+                        console.log("2: sec: " + this.sec + " playerSec: " + this.playerSec);
+                    }
+
+                }
+                else // Cuando la secuencia del jugador tiene ya 4 letras.
+                {
+                    console.log("Comprobacion: " + this.comprobarSecuencias(this.sec, this.playerSec));
+                    if (this.comprobarSecuencias(this.sec, this.playerSec)) // Si es correcta suma puntuacion ficticia y lo correspondiente a la del test.
+                    {
+                        //puntuacionofiacial++;
+                        this.puntFict++;
+                    }
+                    else // Si no es correcta se resta puntuacion ficticia.
+                    {
+                        if (this.puntFict > 0) {
+                            this.puntFict--;
+                        }
+                    }
+                    this.j = 0; // Ponemos el contador de letras a 0 otra vez.
+                    this.i++; // Sumamos al contador de secuencias.
+                    this.playerSec = ""; // Reseteamos la secuencia.
+                    this.sec = this.generador.secuenciaGenerador(); // Generamos otra secuencia aleatoria.
+                    console.log("3: j: " + this.j + " i: " + this.i);
+                    console.log("4: sec: " + this.sec + " playerSec: " + this.playerSec);
+                    console.log("PUNTUACIONFICT: "+ this.puntFict);
+                }
+            }
+            else // Cuando haya hecho 4 secuencias.
+            {
+                console.log("Fin accion secuencias.");
+                this.playerSec = "";
+                this.secuenciaAcc = false;
+                this.decision = false;
+                this.i = 0;
+                console.log("5: j: " + this.j + " i: " + this.i);
+                console.log("6: sec: " + this.sec + " playerSec: " + this.playerSec);
+            }
         }
     }
 
@@ -115,22 +164,33 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
     teclasSecuencia() {
         if (Phaser.Input.Keyboard.JustUp(this.aKey)) {
-            this.actSec += "A";
-            console.log(this.actSec);
+            this.playerSec += "A";
+            //console.log(this.playerSec);
+            return true;
         }
         else if (Phaser.Input.Keyboard.JustUp(this.sKey)) {
-            this.actSec += "S";
-            console.log(this.actSec);
+            this.playerSec += "S";
+            //console.log(this.playerSec);
+            return true;
         }
         else if (Phaser.Input.Keyboard.JustUp(this.dKey)) {
-            this.actSec += "D";
-            console.log(this.actSec);
+            this.playerSec += "D";
+            //console.log(this.playerSec);
+            return true;
         }
         else if (Phaser.Input.Keyboard.JustUp(this.fKey)) {
-            this.actSec += "F";
-            console.log(this.actSec);
+            this.playerSec += "F";
+            //console.log(this.playerSec);
+            return true;
         }
+        else return false;
     }
+
+    comprobarSecuencias(sec1, sec2) {
+        return sec1 === sec2;
+
+    }
+
     finalDelJuego() {
         console.clear();
         this.scene.start("Hub");
