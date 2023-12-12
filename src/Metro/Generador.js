@@ -4,6 +4,7 @@ export default class Generador extends Phaser.GameObjects.Sprite {
 
         this.scene.add.existing(this);
         this.arraySec = secuencias;
+        this.arrayObs = obstaculos;
 
         console.log("Generador de cosas hecho.");
     }
@@ -18,6 +19,7 @@ export default class Generador extends Phaser.GameObjects.Sprite {
         return this.arraySec[i];
     }
     osbtaculoGenerador() {
-
+        let i = Math.floor(Math.random() * this.arrayObs.length);
+        return this.arrayObs[i];
     }
 }
