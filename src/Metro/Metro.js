@@ -57,10 +57,14 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Ponemos la imagen de volver atras.
 
         // Ponemos las letras.
-        this.A = this.add.sprite(0, 600, 'A').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
-        this.S = this.add.sprite(0, 600, 'S').setOrigin(0, 0).setScale(0.1, 0.08).setVisible(false).setDepth(1);
-        this.D = this.add.sprite(0, 600, 'D').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
-        this.F = this.add.sprite(0, 600, 'F').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+        this.A = this.add.sprite(0, 500, 'A').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+        this.S = this.add.sprite(0, 500, 'S').setOrigin(0, 0).setScale(0.1, 0.08).setVisible(false).setDepth(1);
+        this.D = this.add.sprite(0, 500, 'D').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+        this.F = this.add.sprite(0, 500, 'F').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+        this.A2 = this.add.sprite(0, 620, 'A').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+        this.S2 = this.add.sprite(0, 620, 'S').setOrigin(0, 0).setScale(0.1, 0.08).setVisible(false).setDepth(1);
+        this.D2 = this.add.sprite(0, 620, 'D').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+        this.F2 = this.add.sprite(0, 620, 'F').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
 
         // Boton de volver atras:
         this.atras.on('pointerdown', (pointer) => {
@@ -114,14 +118,24 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 if (this.j < 4) // Cuatro letras de la secuencia.
                 {
                     if (this.teclasSecuencia()) {
-                        this.j++;
-                        console.log("1: j: " + this.j + " i: " + this.i);
-                        console.log("2: sec: " + this.sec + " playerSec: " + this.playerSec);
+                        if (this.sec[this.j] != this.playerSec[this.j]) {
+                            this.j = 4;
+                            this.puntFict--;
+                        }
+                        else {
+                            this.j++;
+                            //console.log("1: j: " + this.j + " i: " + this.i);
+                            //console.log("2: sec: " + this.sec + " playerSec: " + this.playerSec);
+                        }
                     }
                 }
                 else // Cuando la secuencia del jugador tiene ya 4 letras.
                 {
-                    if (this.comprobarSecuencias(this.sec, this.playerSec)) // Si es correcta suma puntuacion ficticia y lo correspondiente a la del test.
+                    if (this.j === 4) {
+                        this.puntFict++;
+                        //puntuacionofiacial++;
+                    }
+                    /*if (this.comprobarSecuencias(this.sec, this.playerSec)) // Si es correcta suma puntuacion ficticia y lo correspondiente a la del test.
                     {
                         //puntuacionofiacial++;
                         this.puntFict++;
@@ -131,21 +145,25 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                         if (this.puntFict > 0) {
                             this.puntFict--;
                         }
-                    }
+                    }*/
                     this.j = 0; // Ponemos el contador de letras a 0 otra vez.
                     this.i++; // Sumamos al contador de secuencias.
                     this.playerSec = ""; // Reseteamos la secuencia.
                     this.sec = this.generador.secuenciaGenerador(); // Generamos otra secuencia aleatoria.
-                    console.log("3: j: " + this.j + " i: " + this.i);
-                    console.log("4: sec: " + this.sec + " playerSec: " + this.playerSec);
+                    //console.log("3: j: " + this.j + " i: " + this.i);
+                    //console.log("4: sec: " + this.sec + " playerSec: " + this.playerSec);
                     console.log("PUNTUACIONFICT: " + this.puntFict);
+                    this.A2.setVisible(false);
+                    this.S2.setVisible(false);
+                    this.D2.setVisible(false);
+                    this.F2.setVisible(false);
                 }
             }
             else // Cuando haya hecho 4 secuencias.
             {
                 this.reset();
-                console.log("5: i: " + this.i + " j: " + this.j);
-                console.log("6: sec: " + this.sec + " playerSec: " + this.playerSec);
+                //console.log("5: i: " + this.i + " j: " + this.j);
+                //console.log("6: sec: " + this.sec + " playerSec: " + this.playerSec);
             }
         }
     }
@@ -175,21 +193,29 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         if (Phaser.Input.Keyboard.JustUp(this.aKey)) {
             this.playerSec += "A";
             //console.log(this.playerSec);
+            this.A2.x = this.posiciones[this.j];
+            this.A2.setVisible(true);
             return true;
         }
         else if (Phaser.Input.Keyboard.JustUp(this.sKey)) {
             this.playerSec += "S";
             //console.log(this.playerSec);
+            this.S2.x = this.posiciones[this.j];
+            this.S2.setVisible(true);
             return true;
         }
         else if (Phaser.Input.Keyboard.JustUp(this.dKey)) {
             this.playerSec += "D";
             //console.log(this.playerSec);
+            this.D2.x = this.posiciones[this.j];
+            this.D2.setVisible(true);
             return true;
         }
         else if (Phaser.Input.Keyboard.JustUp(this.fKey)) {
             this.playerSec += "F";
             //console.log(this.playerSec);
+            this.F2.x = this.posiciones[this.j];
+            this.F2.setVisible(true);
             return true;
         }
         else return false;
@@ -205,22 +231,27 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 case 'A':
                     this.A.x = this.posiciones[i];
                     this.A.setVisible(true);
+
                     break;
                 case 'S':
                     this.S.x = this.posiciones[i];
                     this.S.setVisible(true);
+
                     break;
                 case 'D':
                     this.D.x = this.posiciones[i];
                     this.D.setVisible(true);
+
                     break;
                 case 'F':
                     this.F.x = this.posiciones[i];
                     this.F.setVisible(true);
+
                     break;
                 default:
                     break;
             }
+
         }
 
     }
@@ -233,6 +264,14 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             this.decision = false;
             this.i = 0;
             this.j = 0;
+            this.A.setVisible(false);
+            this.S.setVisible(false);
+            this.D.setVisible(false);
+            this.F.setVisible(false);
+            this.A2.setVisible(false);
+            this.S2.setVisible(false);
+            this.D2.setVisible(false);
+            this.F2.setVisible(false);
         } else if (this.avionAcc && this.decision) {
             console.log("Fin accion avion.");
             this.avionAcc = false;
