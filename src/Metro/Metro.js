@@ -67,12 +67,12 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Detectar la eleccion de la accion del jugador.
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
             if (!this.decision) { // Solo si se permite una accion miramos cual puede ser.
-                if (event.key == "ArrowUp" || event.key == "ArrowDown") { // Accion 1: mover al avion.
+                if (event.key === "ArrowUp" || event.key === "ArrowDown") { // Accion 1: mover al avion.
                     console.log("Seleccion: avion.");
                     this.avionAcc = true;
                     this.decision = true;
                 }
-                else if (event.key == "a" || event.key == "s" || event.key == "d" || event.key == "f") { // Accion 2: secuancia de teclas.
+                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f") { // Accion 2: secuancia de teclas.
                     console.log("Selecion: teclas.");
                     this.secuenciaAcc = true;
                     this.decision = true;
@@ -84,7 +84,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     update() {
         if (!this.decision) {
             this.sec = this.generador.secuenciaGenerador();
-            console.log(this.sec);
+            //console.log(this.sec);
         }
 
 
@@ -126,7 +126,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                     this.sec = this.generador.secuenciaGenerador(); // Generamos otra secuencia aleatoria.
                     console.log("3: j: " + this.j + " i: " + this.i);
                     console.log("4: sec: " + this.sec + " playerSec: " + this.playerSec);
-                    console.log("PUNTUACIONFICT: "+ this.puntFict);
+                    console.log("PUNTUACIONFICT: " + this.puntFict);
                 }
             }
             else // Cuando haya hecho 4 secuencias.
