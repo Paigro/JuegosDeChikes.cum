@@ -21,6 +21,13 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.load.image('cielo', "/assets/juego/MetroSkaters/imagenes/cielo.jpg") // Cargamos la imagen del fondo.
         this.load.image('atras', "/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
         this.load.image('panel', "/assets/juego/MetroSkaters/imagenes/Panel.PNG") // Cargamos la imagen del panel inferior.
+        // Letras:
+        this.load.image('A', "/assets/juego/MetroSkaters/imagenes/A.jpg")
+        this.load.image('S', "/assets/juego/MetroSkaters/imagenes/S.jpg")
+        this.load.image('D', "/assets/juego/MetroSkaters/imagenes/D.jpg")
+        this.load.image('F', "/assets/juego/MetroSkaters/imagenes/F.jpg")
+
+
     }
 
     create() {
@@ -49,6 +56,12 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.add.image(0, 0, 'cielo').setOrigin(0, 0).setScale(10, 10); // Ponemos la imagen del fondo.
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Ponemos la imagen de volver atras.
 
+        // Ponemos las letras.
+        this.A = this.add.sprite(0, 600, 'A').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+        this.S = this.add.sprite(0, 600, 'S').setOrigin(0, 0).setScale(0.1, 0.08).setVisible(false).setDepth(1);
+        this.D = this.add.sprite(0, 600, 'D').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+        this.F = this.add.sprite(0, 600, 'F').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+
         // Boton de volver atras:
         this.atras.on('pointerdown', (pointer) => {
             this.finalDelJuego()
@@ -57,9 +70,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         let obstaculos = [[0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
         let secuencias = ["ASDF", "ASFD", "ADSF", "ADFS", "AFSD", "AFDS", "SDFA", "SDAF", "SFDA", "SFAD", "SAFD", "SADF", "DSFA", "DSAF", "DFSA", "DFAS", "DAFS", "DASF", "FSDA", "FSAD", "FDSA", "FDAS", "FADS"];
         //let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.
+        this.posiciones = [200, 300, 400, 500];
 
-
-        //Creacion de las cosas que estaran en la escena:
+        // Creacion de las cosas que estaran en la escena:
         this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
         this.avion = new Avion(this, 400, 250); // El avion.
         this.secuenciaTeclas = new secuanciaTeclas(this, 0, 450); // La secuencia de teclas.
@@ -95,6 +108,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         }
         else if (this.decision && this.secuenciaAcc && !this.avionAcc) // Accion secuencia.
         {
+            this.mostrarSecuencia();
             if (this.i < 4) // Cuatro secuencias.
             {
                 if (this.j < 4) // Cuatro letras de la secuencia.
@@ -104,11 +118,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                         console.log("1: j: " + this.j + " i: " + this.i);
                         console.log("2: sec: " + this.sec + " playerSec: " + this.playerSec);
                     }
-
                 }
                 else // Cuando la secuencia del jugador tiene ya 4 letras.
                 {
-                    console.log("Comprobacion: " + this.comprobarSecuencias(this.sec, this.playerSec));
                     if (this.comprobarSecuencias(this.sec, this.playerSec)) // Si es correcta suma puntuacion ficticia y lo correspondiente a la del test.
                     {
                         //puntuacionofiacial++;
@@ -131,12 +143,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             }
             else // Cuando haya hecho 4 secuencias.
             {
-                console.log("Fin accion secuencias.");
-                this.playerSec = "";
-                this.secuenciaAcc = false;
-                this.decision = false;
-                this.i = 0;
-                console.log("5: j: " + this.j + " i: " + this.i);
+                this.reset();
+                console.log("5: i: " + this.i + " j: " + this.j);
                 console.log("6: sec: " + this.sec + " playerSec: " + this.playerSec);
             }
         }
@@ -163,6 +171,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     teclasSecuencia() {
+
         if (Phaser.Input.Keyboard.JustUp(this.aKey)) {
             this.playerSec += "A";
             //console.log(this.playerSec);
@@ -187,7 +196,49 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     comprobarSecuencias(sec1, sec2) {
+        console.log("Comprobacion: " + sec1 === sec2);
         return sec1 === sec2;
+    }
+    mostrarSecuencia() {
+        for (let i = 0; i < 4; i++) {
+            switch (this.sec[i]) {
+                case 'A':
+                    this.A.x = this.posiciones[i];
+                    this.A.setVisible(true);
+                    break;
+                case 'S':
+                    this.S.x = this.posiciones[i];
+                    this.S.setVisible(true);
+                    break;
+                case 'D':
+                    this.D.x = this.posiciones[i];
+                    this.D.setVisible(true);
+                    break;
+                case 'F':
+                    this.F.x = this.posiciones[i];
+                    this.F.setVisible(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    reset() {
+        if (this.secuenciaAcc && this.decision) {
+            console.log("Fin accion secuencias.");
+            this.playerSec = "";
+            this.secuenciaAcc = false;
+            this.decision = false;
+            this.i = 0;
+            this.j = 0;
+        } else if (this.avionAcc && this.decision) {
+            console.log("Fin accion avion.");
+            this.avionAcc = false;
+            this.decision = false;
+            this.i = 0;
+        }
 
     }
 
