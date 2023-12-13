@@ -1,10 +1,10 @@
 export default class Coordinator {
     constructor(scene) {
         this.scene = scene;
-        this.ExtInt = 1;
-        this.SenRac = -1;
-        this.EspOrg = -1;
-        this.DetGen = 80;
+        this.ExtInt = 0;
+        this.SenRac = 0;
+        this.EspOrg = 0;
+        this.DetGen = 0;
 
         this.personalidad = "";
 

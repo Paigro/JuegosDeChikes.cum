@@ -8,6 +8,9 @@ export default class Hub extends Phaser.Scene {
 
     //coordinator
     this.coordinator = new Coordinator(this);
+
+    //Desbloqueo de minijuegos
+    this.juegsDesbloq = 1;
   }
   init() {
     this.personalidad("");
@@ -23,25 +26,43 @@ export default class Hub extends Phaser.Scene {
     //calcula personalidad cuando vuelves al hub
     this.coordinator.CalcularPersonalidad();
 
+    //Botones a juegos
+    this.ToDImg = this.add.image(0, 0, 'ToDImage').setOrigin(0, 1).setScale(1, 0.71).setVisible(false);
+    this.BumClackImg = this.add.image(0, 0, 'BumClakImage').setOrigin(0, 1).setScale(.8).setVisible(false);
+    this.PapasImg = this.add.image(0, 0, 'PapasImage').setOrigin(0, 1).setScale(.8).setVisible(false);
+    this.MetroImg = this.add.image(0, 0, 'Metro').setOrigin(0, 1).setScale(.8).setVisible(false);
+
+    this.hola = [this.ToDImg, this.BumClackImg, this.PapasImg, this.MetroImg];
+
+    //muestra los juegos desbloqueados
+    let cols = 0;
+    for (let i = 1; i <= this.juegsDesbloq; i++) {
+      this.hola[i - 1].setVisible(true);
+      this.hola[i - 1].x = ((1080 / 2) * (cols))+10;
+      this.hola[i - 1].y = 300 * (Math.round((i / 2)));
+
+      //contadores
+      cols++;
+      if (cols > 1) cols = 0;
+    }
+
     //listers
-    this.ToDImg = this.add.image(0, 0, 'ToDImage').setOrigin(0, 0).setScale(1, 0.71)
     this.ToDImg.setInteractive().on('pointerdown', () =>
       this.scene.start("VerdadOReto", this.coordinator)
     )
-    this.BumClackImg = this.add.image(500, 0, 'BumClakImage').setOrigin(0, 0).setScale(.8)
     this.BumClackImg.setInteractive().on('pointerdown', () =>
       this.scene.start("BumKlak", this.coordinator)
     )
-    this.PapasImg = this.add.image(0, 300, 'PapasImage').setOrigin(0, 0).setScale(.8)
     this.PapasImg.setInteractive().on('pointerdown', () =>
       this.scene.start("Papas", this.coordinator)
     )
-    this.PapasImg = this.add.image(500, 300, 'Metro').setOrigin(0, 0).setScale(.8)
-    this.PapasImg.setInteractive().on('pointerdown', () =>
+    this.MetroImg.setInteractive().on('pointerdown', () =>
       this.scene.start("Metro", this.coordinator)
     )
 
   }
+
+  desbloqMinij(){ this.juegsDesbloq++;}
 
   personalidad(pers) {
     console.log(pers)
