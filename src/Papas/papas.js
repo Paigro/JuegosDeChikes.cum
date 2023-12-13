@@ -13,7 +13,7 @@ export default class Papas extends Phaser.Scene {
   }
   init(data) {
     this.coor = data;
-    console.log(this.coor);
+    //console.log(this.coor);
     console.log(data);
   }
   preload() {
@@ -88,15 +88,14 @@ export default class Papas extends Phaser.Scene {
     this.bandeja1.Reset();
     this.bandeja2.Reset();
 
-    //console.log(this.points);
     this.endRound = true
   }
-
+  
   //Vuelve a la escena del Hub
   finalDelJuego() {
     console.clear();
-    this.points = 0;
     this.coor.SaveScore("EspOrg", this.points);
+    this.points = 0;
     this.scene.start("Hub");
   }
 }

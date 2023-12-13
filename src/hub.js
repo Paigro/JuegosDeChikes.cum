@@ -10,7 +10,6 @@ export default class Hub extends Phaser.Scene {
     this.coordinator = new Coordinator(this);
   }
   init(){
-    this.coordinator.CalcularPersonalidad();
   }
   preload() {
     this.load.image('ToDImage', "assets/Bocetos/TruthOrDare.PNG")
@@ -18,8 +17,10 @@ export default class Hub extends Phaser.Scene {
     this.load.image('PapasImage', "assets/Bocetos/PappasGalleteria.PNG")
     this.load.image('Metro', "assets/Bocetos/MetroSkaters.PNG")
   }
-
+  
   create() {
+    this.coordinator.CalcularPersonalidad();
+    //console.log("otia rinicio");
     this.ToDImg = this.add.image(0, 0, 'ToDImage').setOrigin(0, 0).setScale(1, 0.71)
     this.ToDImg.setInteractive().on('pointerdown', () =>
       this.scene.start("VerdadOReto", this.coordinator)
