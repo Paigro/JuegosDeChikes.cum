@@ -11,11 +11,13 @@ export default class Papas extends Phaser.Scene {
     this.time = 10;
     this.points = 0;
   }
+
   init(data) {
     this.coor = data;
     //console.log(this.coor);
     console.log(data);
   }
+  
   preload() {
     this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
 

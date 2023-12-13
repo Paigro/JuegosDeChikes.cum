@@ -5,11 +5,12 @@ export default class Hub extends Phaser.Scene {
   constructor() {
     // Nombre de la escena para el SceneManager
     super({ key: 'Hub', active: true });
-    
+
     //coordinator
     this.coordinator = new Coordinator(this);
   }
-  init(){
+  init() {
+    this.personalidad("");
   }
   preload() {
     this.load.image('ToDImage', "assets/Bocetos/TruthOrDare.PNG")
@@ -17,10 +18,12 @@ export default class Hub extends Phaser.Scene {
     this.load.image('PapasImage', "assets/Bocetos/PappasGalleteria.PNG")
     this.load.image('Metro', "assets/Bocetos/MetroSkaters.PNG")
   }
-  
+
   create() {
+    //calcula personalidad cuando vuelves al hub
     this.coordinator.CalcularPersonalidad();
-    //console.log("otia rinicio");
+
+    //listers
     this.ToDImg = this.add.image(0, 0, 'ToDImage').setOrigin(0, 0).setScale(1, 0.71)
     this.ToDImg.setInteractive().on('pointerdown', () =>
       this.scene.start("VerdadOReto", this.coordinator)
@@ -40,8 +43,22 @@ export default class Hub extends Phaser.Scene {
 
   }
 
-  personalidad(pers){
+  personalidad(pers) {
     console.log(pers)
+    let color;
+    //Morado.
+    if (pers === "IROG" || pers === "IREG" || pers === "EROG" || pers === "EREG") { color = "#E16EDD"; }
+    //Verde.
+    else if (pers === "ISOG" || pers === "ISEG" || pers === "ESOG" || pers === "ESEG") { color = "#73E16E"; }
+    //Azul.
+    else if (pers === "IROD" || pers === "ISOD" || pers === "EROD" || pers === "EROD") { color = "#77EAF5"; }
+    //Amarillo.
+    else if (pers === "IRED" || pers === "ISED" || pers === "ERED" || pers === "ESED") { color = "#F5FA57"; }
+    //Naranja.
+    else { color = "#ff9933" }
+    document.body.style.backgroundColor = color;
+    console.log(color);
+    this.cameras.main.setBackgroundColor(color);
   }
 
 } 

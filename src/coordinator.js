@@ -2,16 +2,16 @@ export default class Coordinator {
     constructor(scene) {
         this.scene = scene;
         this.ExtInt = 1;
-        this.SenRac = 1;
-        this.EspOrg = 1;
-        this.DetGen = 2;
+        this.SenRac = -1;
+        this.EspOrg = -1;
+        this.DetGen = 80;
 
         this.personalidad = "";
 
     };
 
     SaveScore(rasgo, puntos) {
-        console.log("coordinator B)");
+        //console.log("coordinator B)");
         switch (rasgo) {
             case "ExtInt":
                 this.ExtInt = puntos;
@@ -21,7 +21,6 @@ export default class Coordinator {
                 break;
             case "EspOrg":
                 this.EspOrg = puntos;
-                console.log(puntos);
                 break;
             case "DetGen":
                 this.DetGen = puntos;
@@ -66,7 +65,7 @@ export default class Coordinator {
             this.scene.personalidad(this.personalidad);
             console.log(this.personalidad);
         }
-        console.log(this);
+        //console.log(this);
         
     }
 }
