@@ -117,24 +117,33 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             }
         });
     }
-
-    update() {
+    // Para pasarle keys a un objeto. this.akey=scene.input.keyboard.addkey(keysconfig.a); y el keys config se lo pasas desde la constructora del objeto.
+    update(time, delta) {
         //console.log("Sec: " + this.sec);
         //console.log("Obs: " + this.obs);
-
-        if (this.elapsedTime >= 5000 && !this.decision) {
+        if (this.time == 10 && !this.decision) {
             console.log("Buenos dias.")
-            this.elapsedTime = 0;
             this.sec = this.generador.secuenciaGenerador();
             this.obs = this.generador.osbtaculoGenerador();
             this.mostrarSecuencia();
             this.mostrarObstaculos();
-        } else if (this.elapsedTime >= 7000) {
+        }
+
+        else if (this.time <= 5 && !this.decision) {
             this.reset();
+            this.time = 10;
+        }
+        this.time -= (delta / 1000);
+        //console.log(this.time);
+
+
+        if (this.elapsedTime >= 5000 && !this.decision) {
+            //this.elapsedTime = 0;
+        } else if (this.elapsedTime >= 7000) {
         } else if (this.elapsedTime >= 10000) {
             this.elapsedTime = 0;
         }
-        console.log(this.elapsedTime);
+        //console.log(this.elapsedTime);
 
         if (this.decision && this.avionAcc && !this.secuenciaAcc) // Accion avion.
         {
