@@ -10,29 +10,42 @@ export default class Hub extends Phaser.Scene {
     this.coordinator = new Coordinator(this);
 
     //Desbloqueo de minijuegos
-    this.juegsDesbloq = 1;
+    this.juegsDesbloq = 5;
   }
   init() {
     this.personalidad("");
   }
   preload() {
+    console.log("0");
+    this.load.image('Scroll', "assets/juego/Hub/BarritaScroll.png")
     this.load.image('ToDImage', "assets/Bocetos/TruthOrDare.PNG")
     this.load.image('BumClakImage', "assets/Bocetos/BumBumKlak.PNG")
     this.load.image('PapasImage', "assets/Bocetos/PappasGalleteria.PNG")
-    this.load.image('Metro', "assets/Bocetos/MetroSkaters.PNG")
+    this.load.image('MetroImage', "assets/Bocetos/MetroSkaters.PNG")
+    this.load.image('AbogadoImage', "assets/Bocetos/MetroSkaters.PNG")
   }
 
   create() {
     //calcula personalidad cuando vuelves al hub
     this.coordinator.CalcularPersonalidad();
 
+    //Scroll minijuegos
+    this.scroll = this.add.image(0, 0, 'Scroll');
+    this.scroll.on('pointerdown', () =>
+    a
+  )
+    
+    this.cameras.main.setBounds(0, 0, 800, 2000); // Establecer los límites del mundo
+    this.cameras.main.startFollow(this.scroll); // Hacer que la cámara siga al fondo
+
     //Botones a juegos
     this.ToDImg = this.add.image(0, 0, 'ToDImage').setOrigin(0, 1).setScale(1, 0.71).setVisible(false);
     this.BumClackImg = this.add.image(0, 0, 'BumClakImage').setOrigin(0, 1).setScale(.8).setVisible(false);
     this.PapasImg = this.add.image(0, 0, 'PapasImage').setOrigin(0, 1).setScale(.8).setVisible(false);
-    this.MetroImg = this.add.image(0, 0, 'Metro').setOrigin(0, 1).setScale(.8).setVisible(false);
+    this.MetroImg = this.add.image(0, 0, 'MetroImage').setOrigin(0, 1).setScale(.8).setVisible(false);
+    this.AbogadoImg = this.add.image(0, 0, 'AbogadoImage').setOrigin(0, 1).setScale(.8).setVisible(false);
 
-    this.hola = [this.ToDImg, this.BumClackImg, this.PapasImg, this.MetroImg];
+    this.hola = [this.ToDImg, this.BumClackImg, this.PapasImg, this.MetroImg, this.AbogadoImg];
 
     //muestra los juegos desbloqueados
     let cols = 0;
@@ -59,6 +72,9 @@ export default class Hub extends Phaser.Scene {
     this.MetroImg.setInteractive().on('pointerdown', () =>
       this.scene.start("Metro", this.coordinator)
     )
+    this.AbogadoImg.setInteractive().on('pointerdown', () =>
+      this.scene.start("AbogadoClick")
+    )
 
   }
 
@@ -74,7 +90,7 @@ export default class Hub extends Phaser.Scene {
     //Azul.
     else if (pers === "IROD" || pers === "ISOD" || pers === "EROD" || pers === "EROD") { color = "#77EAF5"; }
     //Amarillo.
-    else if (pers === "IRED" || pers === "ISED" || pers === "ERED" || pers === "ESED") { color = "#F5FA57"; }
+    else if (pers === "IRED" || pers === "ISED" || pers === "ERED" || pers === "ESED") { color = "#FFC300"; }
     //Naranja.
     else { color = "#ff9933" }
     document.body.style.backgroundColor = color;
