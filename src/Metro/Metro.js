@@ -38,13 +38,14 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     create() {
+        this.state = 0; // Estados de juego: 0=nada, 1=esperando decision, 2=cuando hay decision.
         this.puntFict = 0; // Puntuacion ficticia.
         this.avionAcc = false; // Booleano para saber la accion del avion.
         this.secuenciaAcc = false; // Booleano para saber la accion de la secuencia.
         this.decision = false; // Booleano para saber si hay decision.
         this.playerSec = ""; // Secuencia del jugador.
         this.i = 0; // Para que se hagan 4 acciones: 4 obstaculos o 4 secuencias.
-        this.j = 0; // Para las secuencias: que solo se lean 4 letras antes de comrpobar.
+        this.j = 0; // Para las secuencias: que solo se lean 4 letras antes de comprobar.
         this.timer = 0;
         this.elapsedTime = 0;
 
@@ -128,13 +129,12 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             this.obs = this.generador.osbtaculoGenerador();
             this.mostrarSecuencia();
             this.mostrarObstaculos();
-        } /*else if (this.elapsedTime >= 7000) {
+        } else if (this.elapsedTime >= 7000) {
             this.reset();
         } else if (this.elapsedTime >= 10000) {
             this.elapsedTime = 0;
-        }*/
-        //console.log(this.elapsedTime);
-
+        }
+        console.log(this.elapsedTime);
 
         if (this.decision && this.avionAcc && !this.secuenciaAcc) // Accion avion.
         {
@@ -148,8 +148,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 this.ovni.body.setVelocityX(0);
 
             }*/
-            this.physics.world.collide(this.avion, this.ovni,  () =>{
-                console.log('Colisión entre sprite1 y sprite2');
+            this.physics.world.collide(this.avion, this.ovni, () => {
+                //console.log('Colisión entre sprite1 y sprite2');
                 this.reset();
                 // Aquí puedes realizar acciones adicionales cuando hay colisión
             });
@@ -197,7 +197,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 //console.log("6: sec: " + this.sec + " playerSec: " + this.playerSec);
             }
         }
-        this.elapsedTime += this.sys.game.loop.delta;
+        if (!this.decision) {
+            this.elapsedTime += this.sys.game.loop.delta;
+        }
     }
 
     movientoAvion() {
