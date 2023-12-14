@@ -84,8 +84,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.exclamacion1 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setScale(0.4, 0.4).setVisible(false).setDepth(1);
         this.exclamacion2 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setScale(0.4, 0.4).setVisible(false).setDepth(1);
         // Ponemos los obstaculos con su fisicas:
-        this.ovni = this.add.sprite(1000, 200, 'OVNI').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(false).setDepth(1);
-        this.nube1 = this.add.sprite(1000, 200, 'nube').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(true).setDepth(1);
+        this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(false).setDepth(1);
+        this.nube1 = this.add.sprite(1080, 200, 'nube').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(true).setDepth(1);
         //this.nube2 = this.add.sprite(1000, 100, 'nube').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(true).setDepth(1);
         this.physics.add.existing(this.ovni);
         this.physics.add.existing(this.nube1);
@@ -144,15 +144,13 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 this.elapsedTime = 0;
                 this.waitTime = false;
             } else this.elapsedTime += this.sys.game.loop.delta;
-
         }
 
         if (this.decision && this.avionAcc && !this.secuenciaAcc) // Accion avion.
         {
-
             this.mostrarObstaculos(); // Render de los obstaculos.
             this.movientoAvion() // Movimiento del avion.
-            if (this.timer2 >= 3000) {
+            if (this.timer2 >= 5000) {
                 this.puntFict += 100;
                 this.DetGen++;
                 if (this.DetGen === 0) { this.DetGen++; }
@@ -309,7 +307,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 case 0:
                     break;
                 case 1:
-                    if (this.timer >= 1000) {
+                    if (this.timer >= 2000) {
                         this.ovni.x = this.posicionesObs[i];
                         this.exclamacion1.setVisible(false);
                         this.ovni.setVisible(true);
@@ -321,7 +319,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                     }
                     break
                 case 2:
-                    if (this.timer >= 1000) {
+                    if (this.timer >= 2000) {
                         this.nube1.x = this.posicionesObs[i];
                         this.exclamacion2.setVisible(false);
                         this.nube1.setVisible(true);

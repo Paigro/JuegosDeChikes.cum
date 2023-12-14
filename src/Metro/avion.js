@@ -7,7 +7,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
 
         this.scene.add.existing(this).setScale(0.25, 0.25); // Añadir a la escena.
 
-        console.log("Avion ha sido creado");
+        console.log("Avion: Avion ha sido creado");
 
         // Creacion de las animaciones del avion:
         /*this.scene.anims.create({ // Anmimacion para cuando el avion esta volando y no pasa nada mas.

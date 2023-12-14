@@ -15,7 +15,7 @@ export default class Hub extends Phaser.Scene {
     this.load.image('ToDImage', "assets/Bocetos/TruthOrDare.PNG")
     this.load.image('BumClakImage', "assets/Bocetos/BumBumKlak.PNG")
     this.load.image('PapasImage', "assets/Bocetos/PappasGalleteria.PNG")
-    this.load.image('Metro', "assets/Bocetos/MetroSkaters.PNG")
+    this.load.image('Metro', "assets/Bocetos/Metro.jpg")
   }
   
   create() {
