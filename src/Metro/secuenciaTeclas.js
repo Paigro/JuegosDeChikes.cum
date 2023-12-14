@@ -10,7 +10,7 @@ export default class secuanciaTeclas extends Phaser.GameObjects.Sprite
 
         this.direction = 0; // Direccion del avión:s 1 = arriba, 0 = quieto,-1 = abajo.
 
-        console.log("Secuencia ha sido creada");
+        console.log("Secuencia: Secuencia ha sido creada");
 
         // Agregamos al avion las físicas para que Phaser lo tenga en cuenta:
        
