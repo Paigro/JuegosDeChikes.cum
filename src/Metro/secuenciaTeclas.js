@@ -11,11 +11,13 @@ export default class secuanciaTeclas extends Phaser.GameObjects.Sprite {
 
         console.log("Secuencia: Secuencia ha sido creada");
 
+        this.posicionesSec = [330, 450, 580, 690]; // Posiciones en x para la aparicion de las letras de las secuencias.
+
         this.i = 0;
         this.j = 0;
         this.secBien; // Secuencias bien hechas.
-        this.sec;
-        this.playerSec;
+        this.sec = "";
+        this.playerSec = "";
 
         //scene.physics.add.existing(this);
     }
@@ -25,64 +27,90 @@ export default class secuanciaTeclas extends Phaser.GameObjects.Sprite {
     }
 
     update() {
+
+        //console.log(this.sec);
         if (this.i < 4) // Cuatro secuencias.
         {
-            if (this.j < 4) // Cuatro letras de la secuencia.
+            console.log("1: i: " + this.i + " j: " + this.j);
+            console.log("2: sec: " + this.sec + " playerSec: " + this.playerSec);
+            if (this.j >= 4) // Cuatro letras de la secuencia.
             {
-                if (this.teclasSecuencia()) {
-                    if (this.sec[this.j] != this.playerSec[this.j]) {
-                        this.j = 5; // Si falla una ponemos un numero mayor al de secuencias.
-                        this.scene.changePuntFict(-10);
-                    }
-                    this.j++; // Sumamos una letra.
-                }
-            }
-            else // Cuando la secuencia del jugador tiene ya 4 letras.
-            {
+
                 if (this.j === 4) {
                     this.scene.changePuntFict(50);
-                    this.scene.changeTestPunt(1);
+                    this.secBien++;
                 }
                 this.j = 0; // Reseteamos el numero de letra.
-                this.i++; // Sumamos una secuencia.
                 this.playerSec = ""; // Reseteamos la secuencia.
                 this.sec = this.scene.generador.secuenciaGenerador(); // Generamos otra secuencia aleatoria.
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                this.i++; // Sumamos una secuencia.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 this.scene.A2.setVisible(false);
                 this.scene.S2.setVisible(false);
                 this.scene.D2.setVisible(false);
                 this.scene.F2.setVisible(false);
+                this.mostrarSecuencia(this.sec);
             }
         }
         else // Cuando haya hecho 4 secuencias.
         {
             if (this.secBien === 4) {
-                this.scene.changeTestPunt(-1); // Solo modifica la puntuacion del test si ha tenido las cuatro bien,
+                this.scene.changeTestPunt(-1); // Solo modifica la puntuacion del test si ha tenido las cuatro bien.
             }
             this.reset();
-            this.scene.reset();
-            //console.log("1: i: " + this.i + " j: " + this.j);
-            //console.log("2: sec: " + this.sec + " playerSec: " + this.playerSec);
+
         }
     }
 
     mostrarSecuencia(sec) {
+        console.log("Eyeyey");
         for (let i = 0; i < sec.length; i++) {
             // Hacemos visible la letra que toca en la posicion que toca:
             switch (sec[i]) {
-                case 'A':
-                    this.scene.A.x = this.scene.posicionesSec[i];
+                case 'a':
+                    this.scene.A.x = this.posicionesSec[i];
                     this.scene.A.setVisible(true);
                     break;
-                case 'S':
-                    this.scene.S.x = this.scene.posicionesSec[i];
+                case 's':
+                    this.scene.S.x = this.posicionesSec[i];
                     this.scene.S.setVisible(true);
                     break;
-                case 'D':
-                    this.scene.D.x = this.scene.posicionesSec[i];
+                case 'd':
+                    this.scene.D.x = this.posicionesSec[i];
                     this.scene.D.setVisible(true);
                     break;
-                case 'F':
-                    this.scene.F.x = this.scene.posicionesSec[i];
+                case 'f':
+                    this.scene.F.x = this.posicionesSec[i];
                     this.scene.F.setVisible(true);
                     break;
                 default:
@@ -91,40 +119,52 @@ export default class secuanciaTeclas extends Phaser.GameObjects.Sprite {
         }
     }
 
-    teclasSecuencia() {
+    teclasSecuencia(tecla) {
+        console.log(tecla);
+        console.log("buenos dias1");
 
-        if (Phaser.Input.Keyboard.JustUp(this.scene.aKey)) {
-            this.playerSec += "A";
-            this.scene.A2.x = this.scene.posicionesSec[this.j];
-            this.scene.A2.setVisible(true);
-            return true;
+        if (tecla == this.sec[this.j]) {
+            console.log("buenos dias2");
+
+            switch (tecla) {
+                case 'a':
+                    console.log("buenos dias3");
+
+                    this.playerSec += "a";
+                    this.scene.A2.x = this.posicionesSec[this.j];
+                    this.scene.A2.setVisible(true);
+                    break;
+                case 's':
+                    this.playerSec += "s";
+                    this.scene.S2.x = this.posicionesSec[this.j];
+                    this.scene.S2.setVisible(true);
+                    break;
+                case 'd':
+                    this.playerSec += "d";
+                    this.scene.D2.x = this.posicionesSec[this.j];
+                    this.scene.D2.setVisible(true);
+                    break;
+                case 'f':
+                    this.playerSec += "f";
+                    this.scene.F2.x = this.posicionesSec[this.j];
+                    this.scene.F2.setVisible(true);
+                    break;
+                default:
+                    break;
+            }
+            this.j++;
         }
-        else if (Phaser.Input.Keyboard.JustUp(this.scene.sKey)) {
-            this.playerSec += "S";
-            this.scene.S2.x = this.scene.posicionesSec[this.j];
-            this.scene.S2.setVisible(true);
-            return true;
+        else {
+            this.j = 5; // Si falla una ponemos un numero mayor al de secuencias.
+            this.scene.changePuntFict(-10);
         }
-        else if (Phaser.Input.Keyboard.JustUp(this.scene.dKey)) {
-            this.playerSec += "D";
-            this.scene.D2.x = this.scene.posicionesSec[this.j];
-            this.scene.D2.setVisible(true);
-            return true;
-        }
-        else if (Phaser.Input.Keyboard.JustUp(this.scene.fKey)) {
-            this.playerSec += "F";
-            this.scene.F2.x = this.scene.posicionesSec[this.j];
-            this.scene.F2.setVisible(true);
-            return true;
-        }
-        else return false;
+        this.update();
     }
 
     meToca(sec) {
         this.sec = sec;
-        this.mostrarSecuencia(sec);
-        this.teclasSecuencia();
-        this.update();
+        //this.mostrarSecuencia(sec);
+        //this.update();
     }
 
     noMeToca() {
@@ -132,6 +172,10 @@ export default class secuanciaTeclas extends Phaser.GameObjects.Sprite {
     }
 
     reset() {
-
+        this.i = 0;
+        this.j = 0;
+        this.secBien = 0;
+        this.playerSec = "";
+        this.scene.reset();
     }
 }

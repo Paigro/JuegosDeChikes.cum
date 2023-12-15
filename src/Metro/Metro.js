@@ -14,8 +14,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     init(data) {
         this.coor = data;
         this.cameras.main.setBackgroundColor("#84E2FE");
-
-
     }
 
     preload() {
@@ -41,22 +39,23 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     create() {
-
-        this.hayAlgo = false;
-        this.waitTime = true;
+        // Booleanos para controlar cosas:
+        this.hayAlgo = false; // Para saber si hay cosas generadas.
+        this.waitTime = true; // Para que hay un tiempo de espera entre acciones.
+        this.avionAcc = false; // Para saber si esta en la accion del avion.
+        this.secuenciaAcc = false; // Para saber si esta en la accion de la secuencia.
+        this.decision = false; // Para saber si hay decision del jugador.
+        // Puntuacion:
         this.puntFict = 0; // Puntuacion ficticia.
         this.DetGen = 0; // Puntuacion del test
-        this.avionAcc = false; // Booleano para saber la accion del avion.
-        this.secuenciaAcc = false; // Booleano para saber la accion de la secuencia.
-        this.decision = false; // Booleano para saber si hay decision.
-        this.colision = false;
-        this.playerSec = ""; // Secuencia del jugador.
-        this.i = 0; // Para que se hagan 4 acciones: 4 obstaculos o 4 secuencias.
-        this.j = 0; // Para las secuencias: que solo se lean 4 letras antes de comprobar.
-        this.timer = 0;
-        this.timer2 = 0;
+        //this.playerSec = ""; // Secuencia del jugador.
+        this.sec = "";
+        //this.i = 0; // Para que se hagan 4 acciones: 4 obstaculos o 4 secuencias.
+        //this.j = 0; // Para las secuencias: que solo se lean 4 letras antes de comprobar.
+        //this.timer = 0;
+        //this.timer2 = 0;
         this.elapsedTime = 0;
-        this.secBien = 0;
+        //this.secBien = 0;
 
         // Nuevos bordes del mundo para el movimiento del avion:
         this.physics.world.setBounds(0, 0, 1080, 450);
@@ -104,7 +103,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             this.finalDelJuego()
         });
 
-        this.posicionesSec = [330, 450, 580, 690]; // Posiciones en x para la aparicion de las letras de las secuencias.
 
 
         //RECUERDA ESTO PABLO:
@@ -147,13 +145,35 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
 
         let obstaculos = [[0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0], [2, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
-        let secuencias = ["ASDF", "ASFD", "ADSF", "ADFS", "AFSD", "AFDS", "SDFA", "SDAF", "SFDA", "SFAD", "SAFD", "SADF", "DSFA", "DSAF", "DFSA", "DFAS", "DAFS", "DASF", "FSDA", "FSAD", "FDSA", "FDAS", "FADS"];
-        //let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.
+        let secuencias = ["asdf", "asfd", "adsf", "adfs", "afsd", "afds", "sdfa", "sdaf", "sfda", "sfad", "safd", "sadf", "dsfa", "dsaf", "dfsa", "dfas", "dafs", "dasf", "fsda", "fsad", "fdsa", "fdas", "fads"];        //let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.
 
         // Creacion de las cosas que estaran en la escena:
         this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
         this.avion = new Avion(this, 400, 250); // El avion.
         this.secuenciaTeclas = new secuanciaTeclas(this, 0, 450); // La secuencia de teclas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // Detectar la seleccion de la accion del jugador.
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
@@ -165,8 +185,17 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 }
                 else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f") { // Accion 2: secuancia de teclas.
                     console.log("Selecion: teclas.");
+                    this.secuenciaTeclas.meToca(this.sec);
                     this.secuenciaAcc = true;
                     this.decision = true;
+                }
+            }
+        });
+
+        this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
+            if (this.decision && this.hayAlgo && this.secuenciaAcc) { // Solo si se permite una accion y hya una opcion que tomar miramos cual puede ser.
+                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f") { // Accion 2: secuancia de teclas.
+                    this.secuenciaTeclas.teclasSecuencia(event.key);
                 }
             }
         });
@@ -175,9 +204,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     update(time, delta) {
         if (!this.hayAlgo && !this.waitTime && !this.decision) {
             // Logs:
-            console.log("Generado de cosas, esperando decision del jugador.");
+            /*console.log("Generado de cosas, esperando decision del jugador.");
             console.log("PUNTUACION: " + this.puntFict);
-            console.log("TEST: " + this.DetGen);
+            console.log("TEST: " + this.DetGen);*/
             // Generacion aleatoria:
             this.sec = this.generador.secuenciaGenerador();
             this.obs = this.generador.osbtaculoGenerador();
@@ -196,6 +225,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             else this.elapsedTime += this.sys.game.loop.delta;
         }
 
+
         if (this.decision && this.avionAcc && !this.secuenciaAcc) // Accion avion.
         {
             this.avion.meToca(this.obs);
@@ -203,14 +233,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         }
         else if (this.decision && this.secuenciaAcc && !this.avionAcc) // Accion secuencia.
         {
-            this.secuenciaTeclas.meToca(this.sec);
+            //this.secuenciaTeclas.meToca(this.sec);
             this.avion.noMeToca(this.obs);
-
-
-
-
-
-
 
 
 
@@ -263,7 +287,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             }*/
         }
     }
-
     /*teclasSecuencia() {
 
         if (Phaser.Input.Keyboard.JustUp(this.aKey)) {
@@ -292,7 +315,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         }
         else return false;
     }*/
-
     /*mostrarSecuencia() {
         for (let i = 0; i < this.sec.length; i++) {
             // Hacemos visible la letra que toca en la posicion que toca:
@@ -320,9 +342,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }*/
 
     reset() {
-        this.playerSec = "";
-        this.i = 0;
-        this.j = 0;
+        //this.playerSec = "";
+        //this.i = 0;
+        //this.j = 0;
         this.A.setVisible(false);
         this.S.setVisible(false);
         this.D.setVisible(false);
@@ -331,12 +353,12 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.S2.setVisible(false);
         this.D2.setVisible(false);
         this.F2.setVisible(false);
-        this.secBien = 0;
+        //this.secBien = 0;
         this.secuenciaAcc = false;
         this.decision = false;
         this.obs = [0, 0, 0];
         this.avion.body.setVelocityX(0);
-        this.i = 0;
+        //this.i = 0;
         this.exclamacion1.setVisible(false);
         this.exclamacion2.setVisible(false);
         this.ovni.setVisible(false);
@@ -360,10 +382,13 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
     finalDelJuego() {
         this.avion.reset();
-        //this.secuenciaTeclas.reset();
+        this.secuenciaTeclas.reset();
         this.reset();
+
         this.coor.SaveScore("DetGen", this.DetGen);
+
         console.clear();
+
         this.scene.start("Hub");
     }
 } 

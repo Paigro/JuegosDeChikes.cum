@@ -37,14 +37,12 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             //this.scene.puntFict -= 50;
             this.scene.changePuntFict(-50);
             this.reset();
-            this.scene.reset();
         });
         this.scene.physics.world.collide(this, this.scene.nube1, () => {
             this.scene.colision = true;
             //this.scene.puntFict -= 50;
             this.scene.changePuntFict(-50);
             this.reset();
-            this.scene.reset();
         });
         if (this.timer2 >= 5000) {
             this.scene.changePuntFict(100);
@@ -52,7 +50,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             if (this.DetGen === 0) { this.DetGen++; }
 
             this.reset();
-            this.scene.reset();
+
         }
 
         this.timer2 += this.scene.sys.game.loop.delta;
@@ -124,5 +122,6 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     reset() {
         this.timer = 0;
         this.timer2 = 0;
+        this.scene.reset();
     }
 }
