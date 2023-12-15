@@ -43,38 +43,7 @@ export default class secuanciaTeclas extends Phaser.GameObjects.Sprite {
                 this.j = 0; // Reseteamos el numero de letra.
                 this.playerSec = ""; // Reseteamos la secuencia.
                 this.sec = this.scene.generador.secuenciaGenerador(); // Generamos otra secuencia aleatoria.
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
                 this.i++; // Sumamos una secuencia.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 this.scene.A2.setVisible(false);
                 this.scene.S2.setVisible(false);
                 this.scene.D2.setVisible(false);
@@ -82,13 +51,11 @@ export default class secuanciaTeclas extends Phaser.GameObjects.Sprite {
                 this.mostrarSecuencia(this.sec);
             }
         }
-        else // Cuando haya hecho 4 secuencias.
-        {
+        if (this.i >= 4) {
             if (this.secBien === 4) {
                 this.scene.changeTestPunt(-1); // Solo modifica la puntuacion del test si ha tenido las cuatro bien.
             }
             this.reset();
-
         }
     }
 

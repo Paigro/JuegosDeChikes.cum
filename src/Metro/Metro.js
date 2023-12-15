@@ -175,7 +175,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
 
 
-        // Detectar la seleccion de la accion del jugador.
+        // Input para detectar la seleccion de la accion del jugador:
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
             if (!this.decision && this.hayAlgo) { // Solo si se permite una accion y hya una opcion que tomar miramos cual puede ser.
                 if (event.key === "ArrowLeft" || event.key === "ArrowRight") { // Accion 1: mover al avion.
@@ -191,10 +191,10 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 }
             }
         });
-
-        this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
-            if (this.decision && this.hayAlgo && this.secuenciaAcc) { // Solo si se permite una accion y hya una opcion que tomar miramos cual puede ser.
-                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f") { // Accion 2: secuancia de teclas.
+        // Input para las secuencias:
+        this.input.keyboard.on('keydown', (event) => {
+            if (this.decision && this.hayAlgo && this.secuenciaAcc) {
+                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f") {
                     this.secuenciaTeclas.teclasSecuencia(event.key);
                 }
             }
@@ -375,6 +375,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     changePuntFict(pun) {
         this.puntFict += pun;
     }
+
     changeTestPunt(pun) {
         this.DetGen += pun;
         if (this.DetGen === 0) { this.DetGen += pun; }
@@ -384,11 +385,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.avion.reset();
         this.secuenciaTeclas.reset();
         this.reset();
-
         this.coor.SaveScore("DetGen", this.DetGen);
-
         console.clear();
-
         this.scene.start("Hub");
     }
 } 
