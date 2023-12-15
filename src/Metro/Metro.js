@@ -15,6 +15,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.coor = data;
         this.cameras.main.setBackgroundColor("#84E2FE");
 
+
     }
 
     preload() {
@@ -44,6 +45,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.hayAlgo = false;
         this.waitTime = true;
         this.puntFict = 0; // Puntuacion ficticia.
+        this.DetGen = 0; // Puntuacion del test
         this.avionAcc = false; // Booleano para saber la accion del avion.
         this.secuenciaAcc = false; // Booleano para saber la accion de la secuencia.
         this.decision = false; // Booleano para saber si hay decision.
@@ -54,7 +56,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.timer = 0;
         this.timer2 = 0;
         this.elapsedTime = 0;
-        this.DetGen = 0; // Puntuacion del test
         this.secBien = 0;
 
         // Nuevos bordes del mundo para el movimiento del avion:
@@ -72,7 +73,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
         //this.add.image(0, 0, 'cielo').setOrigin(0, 0).setScale(10, 10); // Ponemos la imagen del fondo.
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Ponemos la imagen de volver atras.
-        
+
         // Ponemos las letras.
         this.A = this.add.sprite(0, 500, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         this.S = this.add.sprite(0, 500, 'S').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
@@ -154,7 +155,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.avion = new Avion(this, 400, 250); // El avion.
         this.secuenciaTeclas = new secuanciaTeclas(this, 0, 450); // La secuencia de teclas.
 
-        // Detectar la eleccion de la accion del jugador.
+        // Detectar la seleccion de la accion del jugador.
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
             if (!this.decision && this.hayAlgo) { // Solo si se permite una accion y hya una opcion que tomar miramos cual puede ser.
                 if (event.key === "ArrowLeft" || event.key === "ArrowRight") { // Accion 1: mover al avion.
@@ -172,57 +173,51 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
     // Para pasarle keys a un objeto. this.akey=scene.input.keyboard.addkey(keysconfig.a); y el keys config se lo pasas desde la constructora del objeto.
     update(time, delta) {
-        //console.log("Sec: " + this.sec);
-        //console.log("Obs: " + this.obs);
         if (!this.hayAlgo && !this.waitTime && !this.decision) {
+            // Logs:
             console.log("Generado de cosas, esperando decision del jugador.");
+            console.log("PUNTUACION: " + this.puntFict);
+            console.log("TEST: " + this.DetGen);
+            // Generacion aleatoria:
             this.sec = this.generador.secuenciaGenerador();
             this.obs = this.generador.osbtaculoGenerador();
-            this.mostrarSecuencia();
-            this.mostrarObstaculos();
+            // Mostrarlo:
+            this.secuenciaTeclas.mostrarSecuencia(this.sec);
+            this.avion.mostrarObstaculos(this.obs);
+            // Poner que hay algo para que no se generen mascosas:
             this.hayAlgo = true;
-        } else if (this.waitTime && !this.hayAlgo && !this.decision) {
+        }
+        else if (this.waitTime && !this.hayAlgo && !this.decision) {
             console.log("Tiempo que no hay nada.")
             if (this.elapsedTime >= 3000) {
                 this.elapsedTime = 0;
                 this.waitTime = false;
-            } else this.elapsedTime += this.sys.game.loop.delta;
+            }
+            else this.elapsedTime += this.sys.game.loop.delta;
         }
 
         if (this.decision && this.avionAcc && !this.secuenciaAcc) // Accion avion.
         {
-            this.mostrarObstaculos(); // Render de los obstaculos.
-            this.movientoAvion() // Movimiento del avion.
-            if (this.timer2 >= 5000) {
-                this.puntFict += 100;
-                this.DetGen++;
-                if (this.DetGen === 0) { this.DetGen++; }
-                console.log("PUNTUACION: " + this.puntFict);
-                console.log("TEST: " + this.DetGen);
-                this.reset();
-            }
-            // Colisiones del avion con los obstaculos:
-            this.physics.world.collide(this.avion, this.ovni, () => {
-                //console.log("Colision con ovni.");
-                this.colision = true;
-                this.puntFict -= 50;
-                console.log("PUNTUACION: " + this.puntFict);
-                console.log("TEST: " + this.DetGen);
-                this.reset();
-            });
-            this.physics.world.collide(this.avion, this.nube1, () => {
-                //console.log("Colision con nube.");
-                this.colision = true;
-                this.puntFict -= 50;
-                console.log("PUNTUACION: " + this.puntFict);
-                console.log("TEST: " + this.DetGen);
-                this.reset();
-            });
-            this.timer2 += this.sys.game.loop.delta;
+            this.avion.meToca(this.obs);
+            this.secuenciaTeclas.noMeToca();
         }
         else if (this.decision && this.secuenciaAcc && !this.avionAcc) // Accion secuencia.
         {
-            this.mostrarSecuencia(); // Render de la secuencia.
+            this.secuenciaTeclas.meToca(this.sec);
+            this.avion.noMeToca(this.obs);
+
+
+
+
+
+
+
+
+
+
+
+
+            /*this.mostrarSecuencia(); // Render de la secuencia.
             if (this.i < 4) // Cuatro secuencias.
             {
                 if (this.j < 4) // Cuatro letras de la secuencia.
@@ -263,33 +258,13 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 console.log("PUNTUACION: " + this.puntFict);
                 console.log("TEST: " + this.DetGen);
                 this.reset();
-                //console.log("5: i: " + this.i + " j: " + this.j);
-                //console.log("6: sec: " + this.sec + " playerSec: " + this.playerSec);
-            }
-        }
-
-    }
-
-    movientoAvion() {
-        if (this.upKey.isDown) {
-            this.avion.body.setVelocityY(-this.avion.speed);
-        }
-        else if (this.downKey.isDown) {
-            this.avion.body.setVelocityY(this.avion.speed);
-        }
-        else if (this.rightKey.isDown) {
-            this.avion.body.setVelocityX(this.avion.speed);
-        }
-        else if (this.leftKey.isDown) {
-            this.avion.body.setVelocityX(-this.avion.speed);
-        }
-        else if (Phaser.Input.Keyboard.JustUp(this.upKey) || Phaser.Input.Keyboard.JustUp(this.downKey) || Phaser.Input.Keyboard.JustUp(this.rightKey) || Phaser.Input.Keyboard.JustUp(this.leftKey)) {
-            this.avion.body.setVelocityY(0);
-            this.avion.body.setVelocityX(0);
+                //console.log("1: i: " + this.i + " j: " + this.j);
+                //console.log("2: sec: " + this.sec + " playerSec: " + this.playerSec);
+            }*/
         }
     }
 
-    teclasSecuencia() {
+    /*teclasSecuencia() {
 
         if (Phaser.Input.Keyboard.JustUp(this.aKey)) {
             this.playerSec += "A";
@@ -316,9 +291,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             return true;
         }
         else return false;
-    }
+    }*/
 
-    mostrarSecuencia() {
+    /*mostrarSecuencia() {
         for (let i = 0; i < this.sec.length; i++) {
             // Hacemos visible la letra que toca en la posicion que toca:
             switch (this.sec[i]) {
@@ -342,46 +317,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                     break;
             }
         }
-    }
-
-    mostrarObstaculos() {
-        for (let i = 0; i < this.obs.length; i++) {
-            switch (this.obs[i]) {
-                case 0:
-                    break;
-                case 1:
-                    if (this.timer >= 2000) {
-                        this.ovni.x = this.posicionesObs[i];
-                        this.exclamacion1.setVisible(false);
-                        this.ovni.setVisible(true);
-                    }
-                    else {
-                        this.exclamacion1.x = this.posicionesObs[i];
-                        this.exclamacion1.setVisible(true);
-                        this.timer += this.sys.game.loop.delta;
-                    }
-                    break
-                case 2:
-                    if (this.timer >= 2000) {
-                        this.nube1.x = this.posicionesObs[i];
-                        this.exclamacion2.setVisible(false);
-                        this.nube1.setVisible(true);
-                    }
-                    else {
-                        this.exclamacion2.x = this.posicionesObs[i];
-                        this.exclamacion2.setVisible(true);
-                        this.timer += this.sys.game.loop.delta;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
-    }
+    }*/
 
     reset() {
-        //if (this.secuenciaAcc && this.decision) {
         this.playerSec = "";
         this.i = 0;
         this.j = 0;
@@ -396,9 +334,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.secBien = 0;
         this.secuenciaAcc = false;
         this.decision = false;
-        //console.log("Fin accion secuencias.");
-        //}
-        //else if (this.avionAcc && this.decision) {
         this.obs = [0, 0, 0];
         this.avion.body.setVelocityX(0);
         this.i = 0;
@@ -409,18 +344,23 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.ovni.x = 1080;
         this.nube1.x = 1080;
         this.colision = false;
-        this.timer = 0;
-        this.timer2 = 0;
         this.avionAcc = false;
         this.decision = false;
-        //console.log("Fin accion avion.");
         this.hayAlgo = false;
         this.waitTime = true;
-        //}
-        //this.elapsedTime = 0;
+    }
+
+    changePuntFict(pun) {
+        this.puntFict += pun;
+    }
+    changeTestPunt(pun) {
+        this.DetGen += pun;
+        if (this.DetGen === 0) { this.DetGen += pun; }
     }
 
     finalDelJuego() {
+        this.avion.reset();
+        //this.secuenciaTeclas.reset();
         this.reset();
         this.coor.SaveScore("DetGen", this.DetGen);
         console.clear();

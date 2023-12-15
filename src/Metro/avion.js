@@ -9,27 +9,12 @@ export default class Avion extends Phaser.GameObjects.Sprite {
 
         console.log("Avion: Avion ha sido creado");
 
+        this.timer = 0;
+        this.timer2 = 0;
+
         // Creacion de las animaciones del avion:
         /*this.scene.anims.create({ // Anmimacion para cuando el avion esta volando y no pasa nada mas.
             key: 'flying',
-            frames: scene.anims.generateFrameNumbers('knight', {start:0, end:3}),
-            frameRate: 5,
-            repeat: -1
-        });
-        this.scene.anims.create({ // Animacion para cuando el avion este ascendiendo.
-            key: 'up',
-            frames: scene.anims.generateFrameNumbers('knight', {start:0, end:3}),
-            frameRate: 5,
-            repeat: -1
-        });
-        this.scene.anims.create({ // Animacion para cuando el avion este descendiendo.
-            key: 'down',
-            frames: scene.anims.generateFrameNumbers('knight', {start:0, end:3}),
-            frameRate: 5,
-            repeat: -1
-        });
-        this.scene.anims.create({ // Animacion para cuando el avion choque contra algo.
-            key: 'crash',
             frames: scene.anims.generateFrameNumbers('knight', {start:0, end:3}),
             frameRate: 5,
             repeat: -1
@@ -43,22 +28,101 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     }
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
+    }
 
-        // ANIMACIONES DEL AVION (DEBERIAN DE SER TWINKS MAS QUE ANIMACIONES)
-        /*if(this.upKey.isDown)
-        {
-            if(this.anims.currentAnim.key !== 'up'){
-                this.play('up');
+    update() {
+        // Colisiones del avion con los obstaculos:
+        this.scene.physics.world.collide(this, this.scene.ovni, () => {
+            this.scene.colision = true;
+            //this.scene.puntFict -= 50;
+            this.scene.changePuntFict(-50);
+            this.reset();
+            this.scene.reset();
+        });
+        this.scene.physics.world.collide(this, this.scene.nube1, () => {
+            this.scene.colision = true;
+            //this.scene.puntFict -= 50;
+            this.scene.changePuntFict(-50);
+            this.reset();
+            this.scene.reset();
+        });
+        if (this.timer2 >= 5000) {
+            this.scene.changePuntFict(100);
+            this.scene.changeTestPunt(1);
+            if (this.DetGen === 0) { this.DetGen++; }
+
+            this.reset();
+            this.scene.reset();
+        }
+
+        this.timer2 += this.scene.sys.game.loop.delta;
+    }
+
+    movientoAvion() {
+        if (this.scene.upKey.isDown) {
+            this.body.setVelocityY(-this.speed);
+        }
+        else if (this.scene.downKey.isDown) {
+            this.body.setVelocityY(this.speed);
+        }
+        else if (this.scene.rightKey.isDown) {
+            this.body.setVelocityX(this.speed);
+        }
+        else if (this.scene.leftKey.isDown) {
+            this.body.setVelocityX(-this.speed);
+        }
+        else if (Phaser.Input.Keyboard.JustUp(this.scene.upKey) || Phaser.Input.Keyboard.JustUp(this.scene.downKey) || Phaser.Input.Keyboard.JustUp(this.scene.rightKey) || Phaser.Input.Keyboard.JustUp(this.scene.leftKey)) {
+            this.body.setVelocityY(0);
+            this.body.setVelocityX(0);
+        }
+    }
+
+    mostrarObstaculos(obs) {
+        for (let i = 0; i < obs.length; i++) {
+            switch (obs[i]) {
+                case 0:
+                    break;
+                case 1:
+                    if (this.timer >= 2000) {
+                        this.scene.ovni.x = this.scene.posicionesObs[i];
+                        this.scene.exclamacion1.setVisible(false);
+                        this.scene.ovni.setVisible(true);
+                    }
+                    else {
+                        this.scene.exclamacion1.x = this.scene.posicionesObs[i];
+                        this.scene.exclamacion1.setVisible(true);
+                        this.timer += this.scene.sys.game.loop.delta;
+                    }
+                    break
+                case 2:
+                    if (this.timer >= 2000) {
+                        this.scene.nube1.x = this.scene.posicionesObs[i];
+                        this.scene.exclamacion2.setVisible(false);
+                        this.scene.nube1.setVisible(true);
+                    }
+                    else {
+                        this.scene.exclamacion2.x = this.scene.posicionesObs[i];
+                        this.scene.exclamacion2.setVisible(true);
+                        this.timer += this.scene.sys.game.loop.delta;
+                    }
+                    break;
+                default:
+                    break;
             }
         }
-        if(this.downKey.isDown)
-        {
-            if(this.anims.currentAnim.key !== 'down'){
-                this.play('down');
-            }
-        }*/
     }
-    update() {
 
+    meToca(obs) {
+        this.mostrarObstaculos(obs);
+        this.movientoAvion();
+        this.update();
+    }
+    noMeToca(){
+        
+    }
+
+    reset() {
+        this.timer = 0;
+        this.timer2 = 0;
     }
 }
