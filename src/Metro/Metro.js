@@ -13,6 +13,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     // Metodos init, preload, create, update:
     init(data) {
         this.coor = data;
+        this.cameras.main.setBackgroundColor("#84E2FE");
+
     }
 
     preload() {
@@ -101,7 +103,47 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         });
 
         this.posicionesSec = [200, 300, 400, 500]; // Posiciones en x para la aparicion de las letras de las secuencias.
+
+
+        //RECUERDA ESTO PABLO:
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Pablo no te olvides de esto:
+
+
+        // Cambiar a 4 posiciones porque sino queda muy vacio.
         this.posicionesObs = [150, 400, 650];
+
+
+
+
+
+
+        // Mas arriba. :/
+
+
+
+        // Pablo mira arriba.
+
+
+
+
+
+
+
+
+
         let obstaculos = [[0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0], [2, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
         let secuencias = ["ASDF", "ASFD", "ADSF", "ADFS", "AFSD", "AFDS", "SDFA", "SDAF", "SFDA", "SFAD", "SAFD", "SADF", "DSFA", "DSAF", "DFSA", "DFAS", "DAFS", "DASF", "FSDA", "FSAD", "FDSA", "FDAS", "FADS"];
         //let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.

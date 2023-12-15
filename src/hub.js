@@ -101,5 +101,4 @@ export default class Hub extends Phaser.Scene {
     console.log(color);
     this.cameras.main.setBackgroundColor(color);
   }
-
 } 
