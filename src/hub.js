@@ -30,11 +30,12 @@ export default class Hub extends Phaser.Scene {
     this.coordinator.CalcularPersonalidad();
 
     //Scroll minijuegos
-    this.scroll = this.add.image(0, 0, 'Scroll').setInteractive({draggable: true});;
+    this.scroll = this.add.image(0, 0, 'Scroll').setInteractive({draggable: true}).setScale(1,1);
     this.scroll.on('drag', (evento) =>
     {
-      console.log("we"),
-      this.scroll.y +=10
+      //console.log(this.input.y);
+      //console.log("we"),
+      this.scroll.y = this.input.y;
       this.cameras.main.setScroll(0,this.scroll.y)
     }
   )
