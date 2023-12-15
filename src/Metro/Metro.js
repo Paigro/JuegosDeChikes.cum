@@ -20,23 +20,23 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     preload() {
         // IMAGENES:
         // Avion:
-        this.load.image('beluga', "/assets/juego/MetroSkaters/imagenes/Beluga2.png"); // Cargamos la imagen del avion.
+        this.load.image('avion', "/assets/juego/MetroSkaters/imagenes/Avion.png"); // Cargamos la imagen del avion.
         // Fondo:
         this.load.image('cielo', "/assets/juego/MetroSkaters/imagenes/cielo.jpg") // Cargamos la imagen del fondo.
         //Boton:
         this.load.image('atras', "/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
         // Panel:
-        this.load.image('panel', "/assets/juego/MetroSkaters/imagenes/Panel.PNG"); // Cargamos la imagen del panel inferior.
+        this.load.image('panel', "/assets/juego/MetroSkaters/imagenes/Panel.png"); // Cargamos la imagen del panel inferior.
         // Letras:
-        this.load.image('A', "/assets/juego/MetroSkaters/imagenes/A.jpg");
-        this.load.image('S', "/assets/juego/MetroSkaters/imagenes/S.jpg");
-        this.load.image('D', "/assets/juego/MetroSkaters/imagenes/D.jpg");
-        this.load.image('F', "/assets/juego/MetroSkaters/imagenes/F.jpg");
+        this.load.image('A', "/assets/juego/MetroSkaters/imagenes/A.png");
+        this.load.image('S', "/assets/juego/MetroSkaters/imagenes/S.png");
+        this.load.image('D', "/assets/juego/MetroSkaters/imagenes/D.png");
+        this.load.image('F', "/assets/juego/MetroSkaters/imagenes/F.png");
         // Obstaculos:
         this.load.image('OVNI', "/assets/juego/MetroSkaters/imagenes/ovni2.png");
         this.load.image('nube', "/assets/juego/MetroSkaters/imagenes/Nube.jpg");
         // Exclamacion:
-        this.load.image('exclamacion', "/assets/juego/MetroSkaters/imagenes/exclamacion.jpg");
+        this.load.image('exclamacion', "/assets/juego/MetroSkaters/imagenes/Exclamacion.png");
     }
 
     create() {
@@ -70,21 +70,22 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.dKey = this.input.keyboard.addKey("D"); // Tecla D.
         this.fKey = this.input.keyboard.addKey("F"); // Tecla F.
 
-        this.add.image(0, 0, 'cielo').setOrigin(0, 0).setScale(10, 10); // Ponemos la imagen del fondo.
+        //this.add.image(0, 0, 'cielo').setOrigin(0, 0).setScale(10, 10); // Ponemos la imagen del fondo.
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Ponemos la imagen de volver atras.
-
+        
         // Ponemos las letras.
-        this.A = this.add.sprite(0, 500, 'A').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
-        this.S = this.add.sprite(0, 500, 'S').setOrigin(0, 0).setScale(0.1, 0.08).setVisible(false).setDepth(1);
-        this.D = this.add.sprite(0, 500, 'D').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
-        this.F = this.add.sprite(0, 500, 'F').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
-        this.A2 = this.add.sprite(0, 620, 'A').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
-        this.S2 = this.add.sprite(0, 620, 'S').setOrigin(0, 0).setScale(0.1, 0.08).setVisible(false).setDepth(1);
-        this.D2 = this.add.sprite(0, 620, 'D').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
-        this.F2 = this.add.sprite(0, 620, 'F').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(false).setDepth(1);
+        this.A = this.add.sprite(0, 500, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.S = this.add.sprite(0, 500, 'S').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.D = this.add.sprite(0, 500, 'D').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.F = this.add.sprite(0, 500, 'F').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.A2 = this.add.sprite(0, 610, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.S2 = this.add.sprite(0, 610, 'S').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.D2 = this.add.sprite(0, 610, 'D').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.F2 = this.add.sprite(0, 610, 'F').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         // Exclamaciones:
-        this.exclamacion1 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setScale(0.4, 0.4).setVisible(false).setDepth(1);
-        this.exclamacion2 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setScale(0.4, 0.4).setVisible(false).setDepth(1);
+        this.exclamacion1 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
+        this.exclamacion2 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
+        //this.exclamacion3 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
         // Ponemos los obstaculos con su fisicas:
         this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(false).setDepth(1);
         this.nube1 = this.add.sprite(1080, 200, 'nube').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(true).setDepth(1);
@@ -102,7 +103,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             this.finalDelJuego()
         });
 
-        this.posicionesSec = [200, 300, 400, 500]; // Posiciones en x para la aparicion de las letras de las secuencias.
+        this.posicionesSec = [330, 450, 580, 690]; // Posiciones en x para la aparicion de las letras de las secuencias.
 
 
         //RECUERDA ESTO PABLO:

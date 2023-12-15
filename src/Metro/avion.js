@@ -1,11 +1,11 @@
 export default class Avion extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) // Constructora.
     {
-        super(scene, x, y, 'beluga'); // Llamada a la constructora padre.
+        super(scene, x, y, 'avion'); // Llamada a la constructora padre.
 
-        this.speed = 140; // Nuestra velocidad de movimiento será 140
+        this.speed = 140; // Velocidad del avion.
 
-        this.scene.add.existing(this).setScale(0.25, 0.25); // Añadir a la escena.
+        this.scene.add.existing(this).setScale(1.6, 1.6); // Añadir a la escena.
 
         console.log("Avion: Avion ha sido creado");
 
