@@ -27,5 +27,5 @@ function changeCommentLeft(n) {
   }
 
 function ad(){
-  alert("BUENOS DIAS POR LA MAÑANA CON ALEGRIA Y CON EMOCION GRUMETES!!")
+  alert("MALOS DIAS POR LA MAÑANA CON ANSIEDAD Y CON DEPRESION GRUMETES!!")
 }
