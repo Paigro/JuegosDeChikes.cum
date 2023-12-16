@@ -3,21 +3,17 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     {
         super(scene, x, y, 'avion'); // Llamada a la constructora padre.
 
-        this.speed = 250; // Velocidad del avion.
+        console.log("Avion: Avion ha sido creado");
+
+        scene.physics.add.existing(this); // Agregamos las fisicas.
 
         this.scene.add.existing(this).setScale(1.6, 1.6); // Añadir a la escena.
 
-        console.log("Avion: Avion ha sido creado");
+        this.body.setCollideWorldBounds(); // El avion colisiona con los limites del mundo.
 
+        this.speed = 250; // Velocidad del avion.
         this.timer = 0;
         this.timer2 = 0;
-
-        // Agregamos al avion las fisicas para que Phaser lo tenga en cuenta:
-        scene.physics.add.existing(this);
-
-        // Decimos que el avion colisiona con los limites del mundo.
-        this.body.setCollideWorldBounds();
-
         this.posicionesObs = [75, 325, 575, 825]; // Array de posiciones en las que pueden aparecer los obstaculos.
     }
 
@@ -29,42 +25,36 @@ export default class Avion extends Phaser.GameObjects.Sprite {
         // Colisiones del avion con los obstaculos:
         this.scene.physics.world.collide(this, this.scene.ovni, () => {
             this.scene.changePuntFict(-50);
+            this.anims.play('explosion', true);
             this.reset();
         });
         this.scene.physics.world.collide(this, this.scene.nube1, () => {
             this.scene.changePuntFict(-50);
+            this.anims.play('explosion', true);
             this.reset();
         });
         this.scene.physics.world.collide(this, this.scene.nube2, () => {
             this.scene.changePuntFict(-50);
+            this.anims.play('explosion', true);
             this.reset();
         });
+        // Si el jugador no colisiona con ningin obstaculo:
         if (this.timer2 >= 5000) {
             this.scene.changePuntFict(100);
             this.scene.changeTestPunt(1);
-            if (this.DetGen === 0) { this.DetGen++; }
-
             this.reset();
-
         }
         this.timer2 += this.scene.sys.game.loop.delta;
     }
 
     movientoAvion() {
-        /*if (this.scene.upKey.isDown) {
-            this.body.setVelocityY(-this.speed);
-        }
-        else if (this.scene.downKey.isDown) {
-            this.body.setVelocityY(this.speed);
-        }
-        else */if (this.scene.rightKey.isDown) {
+        if (this.scene.rightKey.isDown) {
             this.body.setVelocityX(this.speed);
         }
         else if (this.scene.leftKey.isDown) {
             this.body.setVelocityX(-this.speed);
         }
         else if (Phaser.Input.Keyboard.JustUp(this.scene.upKey) || Phaser.Input.Keyboard.JustUp(this.scene.downKey) || Phaser.Input.Keyboard.JustUp(this.scene.rightKey) || Phaser.Input.Keyboard.JustUp(this.scene.leftKey)) {
-            //this.body.setVelocityY(0);
             this.body.setVelocityX(0);
         }
     }

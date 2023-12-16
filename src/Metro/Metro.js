@@ -42,6 +42,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.load.image('obstaculo', "/assets/juego/MetroSkaters/imagenes/Avion2.png");
         // Exclamacion:
         this.load.image('exclamacion', "/assets/juego/MetroSkaters/imagenes/Exclamacion.png");
+        // Animaciones:
+        this.load.spritesheet("explosion", "/assets/juego/MetroSkaters/imagenes/Explosion.png", { frameWidth: 120, frameHeight: 120 });
     }
 
     create() {
@@ -73,22 +75,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.downKey = this.input.keyboard.addKey('DOWN'); // Flecha abajo.
         this.rightKey = this.input.keyboard.addKey('RIGHT'); // Flecha derecha.
         this.leftKey = this.input.keyboard.addKey('LEFT'); // Flecha izquierda.
-        // Teclas para la secuencia.
-        this.aKey = this.input.keyboard.addKey("A"); // Tecla A.
-        this.sKey = this.input.keyboard.addKey("S"); // Tecla S.
-        this.dKey = this.input.keyboard.addKey("D"); // Tecla D.
-        this.fKey = this.input.keyboard.addKey("F"); // Tecla F.
-
         // Letras (ocultas al principio):
-        /*this.A = this.add.sprite(0, 500, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.S = this.add.sprite(0, 500, 'S').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.D = this.add.sprite(0, 500, 'D').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.F = this.add.sprite(0, 500, 'F').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.A2 = this.add.sprite(0, 610, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.S2 = this.add.sprite(0, 610, 'S').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.D2 = this.add.sprite(0, 610, 'D').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.F2 = this.add.sprite(0, 610, 'F').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);*/
-        //this.posicionesSec = [330, 450, 580, 690]
         this.letra1 = this.add.sprite(330, 500, 'a').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         this.letra2 = this.add.sprite(450, 500, 's').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         this.letra3 = this.add.sprite(580, 500, 'd').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
@@ -101,17 +88,23 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.exclamacion1 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
         this.exclamacion2 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
         this.exclamacion3 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
-        // Obstaculos con sus fisicas (ocultos al principio):
+        // Obstaculos con sus fisicas (ocultos al principio) e inmovibles:
         this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setVisible(false).setDepth(1);
         this.nube1 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1);
         this.nube2 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1);
         this.physics.add.existing(this.ovni);
         this.physics.add.existing(this.nube1);
         this.physics.add.existing(this.nube2);
-
         this.ovni.body.setImmovable(true);
         this.nube1.body.setImmovable(true);
         this.nube2.body.setImmovable(true);
+        // Animaciones:
+        this.anims.create({
+            key: 'explosion',
+            frames: this.anims.generateFrameNumbers("explosion", { start: 0, end: 4 }),
+            frameRate: 6,
+            repeat: 0
+        });
 
         // Arrays de cosas:
         //let obstaculos = [[0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0], [2, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
@@ -133,7 +126,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                     this.avionAcc = true;
                     this.decision = true;
                 }
-                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q") { // Accion 2: secuancia de teclas.
+                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q") { // Accion 2: secuencia de teclas.
                     console.log("Selecion: teclas.");
                     this.secuencia.setSec(this.sec);
                     this.secuenciaAcc = true;
@@ -144,7 +137,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Input para las secuencias:
         this.input.keyboard.on('keydown', (event) => {
             if (this.decision && this.hayAlgo && this.secuenciaAcc) {
-                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f") {
+                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q") {
                     this.secuencia.teclasSecuencia(event.key);
                 }
             }
@@ -198,17 +191,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     reset() {
-        // Reseteo de las cosas de la accion de las secuencias:
-        /*this.A.setVisible(false);
-        this.S.setVisible(false);
-        this.D.setVisible(false);
-        this.F.setVisible(false);
-        this.A2.setVisible(false);
-        this.S2.setVisible(false);
-        this.D2.setVisible(false);
-        this.F2.setVisible(false);*/
         // Reseteo de las cosas de la accion del avion:
-        this.obs = [0, 0, 0];
+        this.obs = [0, 0, 0, 0];
         this.avion.body.setVelocityX(0);
         this.exclamacion1.setVisible(false);
         this.exclamacion2.setVisible(false);

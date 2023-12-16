@@ -16,7 +16,7 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
         this.playerSec = ""; // Secuencia que escribe el jugador.
         this.arrayLetras = [this.scene.letra1, this.scene.letra2, this.scene.letra3, this.scene.letra4];
         this.arrayLetrasP = [this.scene.letraP1, this.scene.letraP2, this.scene.letraP3, this.scene.letraP4];
-        console.log(this.arrayLetras);
+        //console.log(this.arrayLetras);
     }
 
     preUpdate(t, dt) {
@@ -41,12 +41,6 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
                 for (let i = 0; i < this.sec.length; i++) {
                     this.arrayLetrasP[i].setVisible(false);
                 }
-
-
-                /*this.scene.A2.setVisible(false);
-                this.scene.S2.setVisible(false);
-                this.scene.D2.setVisible(false);
-                this.scene.F2.setVisible(false);*/
                 this.mostrarSecuencia(this.sec);
             }
         }
@@ -62,67 +56,20 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
         for (let i = 0; i < sec.length; i++) {
             this.arrayLetras[i].setTexture(sec[i]).setVisible(true);
         }
-
-        /*for (let i = 0; i < sec.length; i++) {
-            // Hacemos visible la letra que toca en la posicion que toca:
-            switch (sec[i]) {
-                case 'a':
-                    this.scene.A.x = this.posicionesSec[i];
-                    this.scene.A.setVisible(true);
-                    break;
-                case 's':
-                    this.scene.S.x = this.posicionesSec[i];
-                    this.scene.S.setVisible(true);
-                    break;
-                case 'd':
-                    this.scene.D.x = this.posicionesSec[i];
-                    this.scene.D.setVisible(true);
-                    break;
-                case 'f':
-                    this.scene.F.x = this.posicionesSec[i];
-                    this.scene.F.setVisible(true);
-                    break;
-                default:
-                    break;
-            }
-        }*/
     }
 
     teclasSecuencia(tecla) {
         if (tecla == this.sec[this.j]) {
             this.arrayLetrasP[this.j].setTexture(tecla).setVisible(true);
-
-            /*switch (tecla) {
-                case 'a':
-                    this.playerSec += "a";
-                    this.scene.A2.x = this.posicionesSec[this.j];
-                    this.scene.A2.setVisible(true);
-                    break;
-                case 's':
-                    this.playerSec += "s";
-                    this.scene.S2.x = this.posicionesSec[this.j];
-                    this.scene.S2.setVisible(true);
-                    break;
-                case 'd':
-                    this.playerSec += "d";
-                    this.scene.D2.x = this.posicionesSec[this.j];
-                    this.scene.D2.setVisible(true);
-                    break;
-                case 'f':
-                    this.playerSec += "f";
-                    this.scene.F2.x = this.posicionesSec[this.j];
-                    this.scene.F2.setVisible(true);
-                    break;
-                default:
-                    break;
-            }*/
+            this.playerSec += tecla;
             this.j++;
         }
         else {
             this.j = 5; // Si falla una ponemos un numero mayor al de secuencias.
-            this.scene.changePuntFict(-10);
+            this.scene.changePuntFict(-10); // Y restamos puntuacion ficticia.
         }
-        this.comprobar(); // Actualizamos
+        this.comprobar(); // Comprobamos.
+
     }
 
     setSec(sec) {
