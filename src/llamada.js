@@ -1,13 +1,4 @@
 export default class PhoneCall extends Phaser.GameObjects.Sprite {
-    /**
-     * 
-     * @param {*} scene 
-     * @param {*} x 
-     * @param {*} y 
-     * @param {*} originX 
-     * @param {*} maxX 
-     * @param {*} finalX 
-     */
     constructor(scene, x, y) {
         super(scene, x, y, 'llamada');
         this.originX = x;
@@ -24,23 +15,24 @@ export default class PhoneCall extends Phaser.GameObjects.Sprite {
     }
 
     DoAction(dragX) {
-        console.log(dragX, this.originX, this.maxX)
         if (dragX > this.originX && dragX < this.maxX) {
             this.x = dragX;
         }
     }
 
     FinishAction() {
-        if (this.x <= this.finalX) {
+        if (this.x < this.finalX) {
             this.x = this.originX;
+            console.log(this.x)
         }
         else {
-            this.clearTint();
-            //this.scene.ActionFinished(true);
+            this.scene.AddScore(1);
+            this.scene.AddExtIntScore(-1);
+            this.scene.desaparece(this);
+            this.scene.time.removeEvent(this.scene.timer);
+            this.scene.waitForAction();
+            this.x = this.originX;
         }
-    }
-    preupdate() {
-
     }
 
 }
