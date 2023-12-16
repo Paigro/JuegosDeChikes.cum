@@ -3,7 +3,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     {
         super(scene, x, y, 'avion'); // Llamada a la constructora padre.
 
-        this.speed = 160; // Velocidad del avion.
+        this.speed = 250; // Velocidad del avion.
 
         this.scene.add.existing(this).setScale(1.6, 1.6); // Añadir a la escena.
 
@@ -51,20 +51,20 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     }
 
     movientoAvion() {
-        if (this.scene.upKey.isDown) {
+        /*if (this.scene.upKey.isDown) {
             this.body.setVelocityY(-this.speed);
         }
         else if (this.scene.downKey.isDown) {
             this.body.setVelocityY(this.speed);
         }
-        else if (this.scene.rightKey.isDown) {
+        else */if (this.scene.rightKey.isDown) {
             this.body.setVelocityX(this.speed);
         }
         else if (this.scene.leftKey.isDown) {
             this.body.setVelocityX(-this.speed);
         }
         else if (Phaser.Input.Keyboard.JustUp(this.scene.upKey) || Phaser.Input.Keyboard.JustUp(this.scene.downKey) || Phaser.Input.Keyboard.JustUp(this.scene.rightKey) || Phaser.Input.Keyboard.JustUp(this.scene.leftKey)) {
-            this.body.setVelocityY(0);
+            //this.body.setVelocityY(0);
             this.body.setVelocityX(0);
         }
     }
@@ -76,16 +76,16 @@ export default class Avion extends Phaser.GameObjects.Sprite {
                     break;
                 case 1:
                     if (this.timer >= 2000) {
-                        this.scene.ovni.x = this.posicionesObs[i];
-                        this.scene.exclamacion1.setVisible(false);
-                        this.scene.ovni.setVisible(true);
+                        this.scene.nube2.x = this.posicionesObs[i];
+                        this.scene.exclamacion3.setVisible(false);
+                        this.scene.nube2.setVisible(true);
                     }
                     else {
-                        this.scene.exclamacion1.x = this.posicionesObs[i];
-                        this.scene.exclamacion1.setVisible(true);
+                        this.scene.exclamacion3.x = this.posicionesObs[i];
+                        this.scene.exclamacion3.setVisible(true);
                         this.timer += this.scene.sys.game.loop.delta;
                     }
-                    break
+                    break;
                 case 2:
                     if (this.timer >= 2000) {
                         this.scene.nube1.x = this.posicionesObs[i];
@@ -100,13 +100,13 @@ export default class Avion extends Phaser.GameObjects.Sprite {
                     break;
                 case 3:
                     if (this.timer >= 2000) {
-                        this.scene.nube2.x = this.posicionesObs[i];
-                        this.scene.exclamacion3.setVisible(false);
-                        this.scene.nube2.setVisible(true);
+                        this.scene.ovni.x = this.posicionesObs[i];
+                        this.scene.exclamacion1.setVisible(false);
+                        this.scene.ovni.setVisible(true);
                     }
                     else {
-                        this.scene.exclamacion3.x = this.posicionesObs[i];
-                        this.scene.exclamacion3.setVisible(true);
+                        this.scene.exclamacion1.x = this.posicionesObs[i];
+                        this.scene.exclamacion1.setVisible(true);
                         this.timer += this.scene.sys.game.loop.delta;
                     }
                     break;

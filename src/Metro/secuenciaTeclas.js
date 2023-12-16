@@ -7,13 +7,16 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
 
         console.log("Secuencia: Secuencia ha sido creada");
 
-        this.posicionesSec = [330, 450, 580, 690]; // Posiciones en x para la aparicion de las letras de las secuencias.
+        //this.posicionesSec = [330, 450, 580, 690]; // Posiciones en x para la aparicion de las letras de las secuencias.
 
         this.i = 0; // Para controlar el numero de secuencias.
         this.j = 0; // Para controlar el numero de letras de cada secuencia.
         this.secBien; // Secuencias bien hechas.
         this.sec = ""; // Secuencia aleatoria que tiene que replicar el jugador.
         this.playerSec = ""; // Secuencia que escribe el jugador.
+        this.arrayLetras = [this.scene.letra1, this.scene.letra2, this.scene.letra3, this.scene.letra4];
+        this.arrayLetrasP = [this.scene.letraP1, this.scene.letraP2, this.scene.letraP3, this.scene.letraP4];
+        console.log(this.arrayLetras);
     }
 
     preUpdate(t, dt) {
@@ -28,17 +31,22 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
             if (this.j >= 4) // Cuatro letras de la secuencia.
             {
                 if (this.j === 4) {
-                    this.scene.changePuntFict(50);
+                    this.scene.changePuntFict(25);
                     this.secBien++;
                 }
                 this.j = 0; // Reseteamos el numero de letra.
                 this.playerSec = ""; // Reseteamos la secuencia del jugador.
                 this.sec = this.scene.generador.secuenciaGenerador(); // Generamos otra secuencia aleatoria.
                 this.i++; // Sumamos una secuencia.
-                this.scene.A2.setVisible(false);
+                for (let i = 0; i < this.sec.length; i++) {
+                    this.arrayLetrasP[i].setVisible(false);
+                }
+
+
+                /*this.scene.A2.setVisible(false);
                 this.scene.S2.setVisible(false);
                 this.scene.D2.setVisible(false);
-                this.scene.F2.setVisible(false);
+                this.scene.F2.setVisible(false);*/
                 this.mostrarSecuencia(this.sec);
             }
         }
@@ -52,6 +60,10 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
 
     mostrarSecuencia(sec) {
         for (let i = 0; i < sec.length; i++) {
+            this.arrayLetras[i].setTexture(sec[i]).setVisible(true);
+        }
+
+        /*for (let i = 0; i < sec.length; i++) {
             // Hacemos visible la letra que toca en la posicion que toca:
             switch (sec[i]) {
                 case 'a':
@@ -73,12 +85,14 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
                 default:
                     break;
             }
-        }
+        }*/
     }
 
     teclasSecuencia(tecla) {
         if (tecla == this.sec[this.j]) {
-            switch (tecla) {
+            this.arrayLetrasP[this.j].setTexture(tecla).setVisible(true);
+
+            /*switch (tecla) {
                 case 'a':
                     this.playerSec += "a";
                     this.scene.A2.x = this.posicionesSec[this.j];
@@ -101,7 +115,7 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
                     break;
                 default:
                     break;
-            }
+            }*/
             this.j++;
         }
         else {
@@ -124,7 +138,7 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
 
 
 
- // para oscurecer la parte de abajo
+        // para oscurecer la parte de abajo
 
 
 
@@ -147,6 +161,10 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
         this.j = 0;
         this.secBien = 0;
         this.playerSec = "";
+        for (let i = 0; i < this.sec.length; i++) {
+            this.arrayLetras[i].setVisible(false);
+            this.arrayLetrasP[i].setVisible(false);
+        }
         this.scene.reset();
     }
 }

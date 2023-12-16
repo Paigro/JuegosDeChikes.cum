@@ -23,13 +23,23 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Panel:
         this.load.image('panel', "/assets/juego/MetroSkaters/imagenes/Panel.png"); // Cargamos la imagen del panel inferior.
         // Letras:
-        this.load.image('A', "/assets/juego/MetroSkaters/imagenes/A.png");
-        this.load.image('S', "/assets/juego/MetroSkaters/imagenes/S.png");
-        this.load.image('D', "/assets/juego/MetroSkaters/imagenes/D.png");
-        this.load.image('F', "/assets/juego/MetroSkaters/imagenes/F.png");
+        this.load.image('a', "/assets/juego/MetroSkaters/imagenes/A.png");
+        this.load.image('s', "/assets/juego/MetroSkaters/imagenes/S.png");
+        this.load.image('d', "/assets/juego/MetroSkaters/imagenes/D.png");
+        this.load.image('f', "/assets/juego/MetroSkaters/imagenes/F.png");
+        this.load.image('g', "/assets/juego/MetroSkaters/imagenes/G.png");
+        this.load.image('h', "/assets/juego/MetroSkaters/imagenes/H.png");
+        this.load.image('i', "/assets/juego/MetroSkaters/imagenes/I.png");
+        this.load.image('j', "/assets/juego/MetroSkaters/imagenes/J.png");
+        this.load.image('k', "/assets/juego/MetroSkaters/imagenes/K.png");
+        this.load.image('l', "/assets/juego/MetroSkaters/imagenes/L.png");
+        this.load.image('m', "/assets/juego/MetroSkaters/imagenes/M.png");
+        this.load.image('p', "/assets/juego/MetroSkaters/imagenes/P.png");
+        this.load.image('q', "/assets/juego/MetroSkaters/imagenes/Q.png");
+        this.load.image('r', "/assets/juego/MetroSkaters/imagenes/R.png");
         // Obstaculos:
-        this.load.image('OVNI', "/assets/juego/MetroSkaters/imagenes/ovni2.png");
-        this.load.image('nube', "/assets/juego/MetroSkaters/imagenes/Nube.jpg");
+        this.load.image('OVNI', "/assets/juego/MetroSkaters/imagenes/Ovni.png");
+        this.load.image('obstaculo', "/assets/juego/MetroSkaters/imagenes/Avion2.png");
         // Exclamacion:
         this.load.image('exclamacion', "/assets/juego/MetroSkaters/imagenes/Exclamacion.png");
     }
@@ -70,22 +80,31 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.fKey = this.input.keyboard.addKey("F"); // Tecla F.
 
         // Letras (ocultas al principio):
-        this.A = this.add.sprite(0, 500, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        /*this.A = this.add.sprite(0, 500, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         this.S = this.add.sprite(0, 500, 'S').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         this.D = this.add.sprite(0, 500, 'D').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         this.F = this.add.sprite(0, 500, 'F').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         this.A2 = this.add.sprite(0, 610, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         this.S2 = this.add.sprite(0, 610, 'S').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         this.D2 = this.add.sprite(0, 610, 'D').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.F2 = this.add.sprite(0, 610, 'F').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.F2 = this.add.sprite(0, 610, 'F').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);*/
+        //this.posicionesSec = [330, 450, 580, 690]
+        this.letra1 = this.add.sprite(330, 500, 'a').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letra2 = this.add.sprite(450, 500, 's').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letra3 = this.add.sprite(580, 500, 'd').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letra4 = this.add.sprite(690, 500, 'f').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letraP1 = this.add.sprite(330, 610, 'a').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letraP2 = this.add.sprite(450, 610, 's').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letraP3 = this.add.sprite(580, 610, 'd').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letraP4 = this.add.sprite(690, 610, 'f').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
         // Exclamaciones (ocultas al principio):
         this.exclamacion1 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
         this.exclamacion2 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
         this.exclamacion3 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
         // Obstaculos con sus fisicas (ocultos al principio):
-        this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(false).setDepth(1);
-        this.nube1 = this.add.sprite(1080, 200, 'nube').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(true).setDepth(1);
-        this.nube2 = this.add.sprite(1080, 200, 'nube').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(true).setDepth(1);
+        this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setVisible(false).setDepth(1);
+        this.nube1 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1);
+        this.nube2 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1);
         this.physics.add.existing(this.ovni);
         this.physics.add.existing(this.nube1);
         this.physics.add.existing(this.nube2);
@@ -96,13 +115,13 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
         // Arrays de cosas:
         //let obstaculos = [[0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0], [2, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
-        let obstaculos = [[0, 1, 2, 0], [0, 1, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [0, 1, 0, 2]];
-        let secuencias = ["asdf", "asfd", "adsf", "adfs", "afsd", "afds", "sdfa", "sdaf", "sfda", "sfad", "safd", "sadf", "dsfa", "dsaf", "dfsa", "dfas", "dafs", "dasf", "fsda", "fsad", "fdsa", "fdas", "fads"];
+        let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1][0, 1, 0, 2]];
+        //let secuencias = ["asdf", "asfd", "adsf", "adfs", "afsd", "afds", "sdfa", "sdaf", "sfda", "sfad", "safd", "sadf", "dsfa", "dsaf", "dfsa", "dfas", "dafs", "dasf", "fsda", "fsad", "fdsa", "fdas", "fads"];
         //let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.
-
+        let secuencias = ["asdf", "hflk", "lgas", "gldk", "adfs", "kafd", "fdks", "dsfa", "lfhk", "sdaf", "adsf", "agmi", "fdka", "dfas", "lhkf", "fsda", "aldf", "klgj", "aqlf", "kahd", "spqr", "sjha", "dkfa", "ajgf", "akfj", "dalk", "glah", "sjga", "hafl", "alfs", "kjhl", "afkd", "ljah", "gafk", "aghd", "dagk", "hghj", "hagl", "dlsf", "afgh", "kalh", "glfs", "glhf", "lfga", "jdsa", "akfg"];
         // Creacion de las cosas que estaran en la escena:
         this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
-        this.avion = new Avion(this, 400, 250); // El avion.
+        this.avion = new Avion(this, 520, 250); // El avion.
         this.secuencia = new secuenciaTeclas(this, 0, 450); // La secuencia de teclas.
 
         // INPUT:
@@ -114,7 +133,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                     this.avionAcc = true;
                     this.decision = true;
                 }
-                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f") { // Accion 2: secuancia de teclas.
+                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q") { // Accion 2: secuancia de teclas.
                     console.log("Selecion: teclas.");
                     this.secuencia.setSec(this.sec);
                     this.secuenciaAcc = true;
@@ -180,14 +199,14 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
     reset() {
         // Reseteo de las cosas de la accion de las secuencias:
-        this.A.setVisible(false);
+        /*this.A.setVisible(false);
         this.S.setVisible(false);
         this.D.setVisible(false);
         this.F.setVisible(false);
         this.A2.setVisible(false);
         this.S2.setVisible(false);
         this.D2.setVisible(false);
-        this.F2.setVisible(false);
+        this.F2.setVisible(false);*/
         // Reseteo de las cosas de la accion del avion:
         this.obs = [0, 0, 0];
         this.avion.body.setVelocityX(0);

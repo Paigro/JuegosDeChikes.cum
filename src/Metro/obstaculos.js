@@ -5,8 +5,6 @@ export default class obstaculos extends Phaser.GameObjects.Sprite {
 
         this.scene.add.existing(this).setOrigin(0, 0); // Añadir a la escena.
 
-        this.direction = 0; // Direccion del avión:s 1 = arriba, 0 = quieto,-1 = abajo.
-
         console.log("Obstaculos: Secuencia ha sido creada");
     }
 }
