@@ -20,6 +20,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
 
         this.posicionesObs = [75, 325, 575, 825]; // Array de posiciones en las que pueden aparecer los obstaculos.
     }
+
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
     }
@@ -27,14 +28,14 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     update() {
         // Colisiones del avion con los obstaculos:
         this.scene.physics.world.collide(this, this.scene.ovni, () => {
-            this.scene.colision = true;
-            //this.scene.puntFict -= 50;
             this.scene.changePuntFict(-50);
             this.reset();
         });
         this.scene.physics.world.collide(this, this.scene.nube1, () => {
-            this.scene.colision = true;
-            //this.scene.puntFict -= 50;
+            this.scene.changePuntFict(-50);
+            this.reset();
+        });
+        this.scene.physics.world.collide(this, this.scene.nube2, () => {
             this.scene.changePuntFict(-50);
             this.reset();
         });

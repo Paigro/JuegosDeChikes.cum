@@ -44,6 +44,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Puntuacion:
         this.puntFict = 0; // Puntuacion ficticia.
         this.DetGen = 0; // Puntuacion del test
+        this.marcador = this.add.text(16, 16, "Score: 0", { fontSize: '40px', fill: '#fff' }); // Texto para mostrar la puntuacion.
+        this.marcador.setPosition(0, 10);//1080 - this.marcador.width
         // Otros:
         this.sec = ""; // Secuencia generada aleatoriamente.
         this.elapsedTime = 0; // Para calcular el tiempo de espera.
@@ -52,7 +54,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.physics.world.setBounds(0, 0, 1080, 450);
 
         // Boton de volver atras (provisional):
-        this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive();
+        this.atras = this.add.image(1000, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive();
         this.atras.on('pointerdown', (pointer) => {
             this.finalDelJuego()
         });
@@ -83,18 +85,18 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Obstaculos con sus fisicas (ocultos al principio):
         this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(false).setDepth(1);
         this.nube1 = this.add.sprite(1080, 200, 'nube').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(true).setDepth(1);
-        this.nube2 = this.add.sprite(1000, 200, 'nube').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(true).setDepth(1);
+        this.nube2 = this.add.sprite(1080, 200, 'nube').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(true).setDepth(1);
         this.physics.add.existing(this.ovni);
         this.physics.add.existing(this.nube1);
         this.physics.add.existing(this.nube2);
 
         this.ovni.body.setImmovable(true);
         this.nube1.body.setImmovable(true);
-        //this.nube2.body.setImmovable(true);
+        this.nube2.body.setImmovable(true);
 
         // Arrays de cosas:
         //let obstaculos = [[0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0], [2, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
-        let obstaculos = [[0, 1, 2, 3], [0, 1, 3, 2], [0, 2, 1, 3], [0, 2, 3, 1], [0, 3, 1, 2], [0, 3, 2, 1], [1, 0, 2, 3], [1, 0, 3, 2], [1, 2, 0, 3], [1, 2, 3, 0], [1, 3, 0, 2], [1, 3, 2, 0], [2, 0, 1, 3], [2, 0, 3, 1], [2, 1, 0, 3], [2, 1, 3, 0], [2, 3, 0, 1], [2, 3, 1, 0], [3, 0, 1, 2], [3, 0, 2, 1], [3, 1, 0, 2], [3, 1, 2, 0], [3, 2, 0, 1], [3, 2, 1, 0]];
+        let obstaculos = [[0, 1, 2, 0], [0, 1, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [0, 1, 0, 2]];
         let secuencias = ["asdf", "asfd", "adsf", "adfs", "afsd", "afds", "sdfa", "sdaf", "sfda", "sfad", "safd", "sadf", "dsfa", "dsaf", "dfsa", "dfas", "dafs", "dasf", "fsda", "fsad", "fdsa", "fdas", "fads"];
         //let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.
 
@@ -108,12 +110,12 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
             if (!this.decision && this.hayAlgo) { // Solo si se permite una accion y hya una opcion que tomar miramos cual puede ser.
                 if (event.key === "ArrowLeft" || event.key === "ArrowRight") { // Accion 1: mover al avion.
-                    //console.log("Seleccion: avion.");
+                    console.log("Seleccion: avion.");
                     this.avionAcc = true;
                     this.decision = true;
                 }
                 else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f") { // Accion 2: secuancia de teclas.
-                    //console.log("Selecion: teclas.");
+                    console.log("Selecion: teclas.");
                     this.secuencia.setSec(this.sec);
                     this.secuenciaAcc = true;
                     this.decision = true;
@@ -168,6 +170,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
     changePuntFict(pun) {
         this.puntFict += pun;
+        this.marcador.setText('Puntuación: ' + this.puntFict);
     }
 
     changeTestPunt(pun) {
