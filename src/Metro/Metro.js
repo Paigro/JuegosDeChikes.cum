@@ -58,8 +58,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Puntuacion:
         this.puntFict = 0; // Puntuacion ficticia.
         this.DetGen = 0; // Puntuacion del test
-        this.marcador = this.add.text(16, 16, "Score: 0", { fontSize: '40px', fill: '#fff' }); // Texto para mostrar la puntuacion.
-        this.marcador.setPosition(0, 10);//1080 - this.marcador.width
+        this.marcador = this.add.text(16, 16, "Score: 0", { fontSize: '40px', fill: '#fff' }).setPosition(0, 10); // Texto para mostrar la puntuacion.
         // Otros:
         this.sec = ""; // Secuencia generada aleatoriamente.
         this.elapsedTime = 0; // Para calcular el tiempo de espera.
@@ -93,12 +92,12 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.physics.add.existing(this.ovni);
         this.physics.add.existing(this.nube1);
         this.physics.add.existing(this.nube2);
-        this.ovni.body.setImmovable(true);
-        this.nube1.body.setImmovable(true);
-        this.nube2.body.setImmovable(true);
+        this.ovni.body.setImmovable(true).setSize(60, 60, true);
+        this.nube1.body.setImmovable(true).setSize(60, 60, true);
+        this.nube2.body.setImmovable(true).setSize(60, 60, true);
         // Arrays de cosas:
         let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1][0, 1, 0, 2]];
-        let secuencias = ["asdf", "hflk", "lgas", "gldk", "adfs", "kafd", "fdks", "dsfa", "lfhk", "sdaf", "adsf", "agmi", "fdka", "dfas", "lhkf", "fsda", "aldf", "klgj", "aqlf", "kahd", "spqr", "sjha", "dkfa", "ajgf", "akfj", "dalk", "glah", "sjga", "hafl", "alfs", "kjhl", "afkd", "ljah", "gafk", "aghd", "dagk", "hghj", "hagl", "dlsf", "afgh", "kalh", "java", "glhf", "lfga", "jdsa", "akfg", "jaja"];
+        let secuencias = ["asdf", "hflk", "lgas", "gldk", "adfs", "kafd", "fdks", "dsfa", "lfhk", "sdaf", "adsf", "agmi", "fdka", "dfas", "lhkf", "fsda", "aldf", "klgj", "sglf", "kahd", "spqr", "sjha", "dkfa", "ajgf", "akfj", "dalk", "glah", "sjga", "hafl", "alfs", "kjhl", "afkd", "ljah", "gafk", "aghd", "dagk", "hghj", "hagl", "dlsf", "afgh", "kalh", "java", "glhf", "lfga", "jdsa", "akfg", "jaja"];
         // Creacion de las cosas que estaran en la escena:
         this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
         this.avion = new Avion(this, 520, 270); // El avion.
@@ -112,18 +111,16 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         });
         // Twinks:
         this.avion.on('animationcomplete-explosion', () => {
-            console.log('La animacion explosion ha terminado');
-            this.avion.setY(750).setX(520).setScale(3, 3);
-            this.avion.setTexture('avionAparece');
+            this.avion.setY(750).setX(520).setScale(3, 3).setTexture('avionAparece');
             this.tweens.add({
                 targets: this.avion,
-                y: 270,          // Valor final de la posición en x
-                duration: 1500,  // Duración de la animación en milisegundos
-                ease: 'Out',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
-                yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
-                repeat: 0,    // Repetir infinitamente
+                y: 270,
+                duration: 1500, // Duracion.
+                ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+                yoyo: false, // No es yoyo.
+                repeat: 0, // Solo se hace una vez.
                 persist: true,
-                onComplete: () => {
+                onComplete: () => { // Cuando se acaba volvemos a poner el avion desde atras.
                     this.avion.setTexture('avion');
                 }
             })
@@ -131,10 +128,10 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 targets: this.avion,
                 scaleX: 1.6,
                 scaleY: 1.6,
-                duration: 2000,  // Duración de la animación en milisegundos
-                ease: 'out',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
-                yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
-                repeat: 0,    // Repetir infinitamente
+                duration: 2000, // Duracion.
+                ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+                yoyo: false, // No es yoyo.
+                repeat: 0, // Solo se hace una vez.
                 persist: true
 
             })
@@ -218,9 +215,14 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     reset() {
+        // Resetep de las cosas de la secuencia:
+        this.secuencia.reset();
+        this.letra1.setVisible(false);
+        this.letra2.setVisible(false);
+        this.letra3.setVisible(false);
+        this.letra4.setVisible(false);
         // Reseteo de las cosas de la accion del avion:
         this.obs = [0, 0, 0, 0];
-        this.avion.body.setVelocityX(0);
         this.exclamacion1.setVisible(false);
         this.exclamacion2.setVisible(false);
         this.exclamacion3.setVisible(false);
@@ -230,6 +232,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.ovni.x = 1080;
         this.nube1.x = 1080;
         this.nube2.x = 1080;
+        this.avion.reset();
         // Reseteo de los booleanos:
         this.secuenciaAcc = false;
         this.avionAcc = false;

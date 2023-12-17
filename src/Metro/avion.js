@@ -8,6 +8,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
         scene.physics.add.existing(this); // Agregamos las fisicas.
 
         this.scene.add.existing(this).setScale(1.6, 1.6); // Añadir a la escena.
+        this.body.setSize(60, 60, true);
 
         this.body.setCollideWorldBounds(); // El avion colisiona con los limites del mundo.
 
@@ -26,35 +27,68 @@ export default class Avion extends Phaser.GameObjects.Sprite {
         this.scene.physics.world.collide(this, this.scene.ovni, () => {
             this.scene.changePuntFict(-50);
             this.anims.play('explosion', true);
-            this.reset();
+            this.scene.reset();
         });
         this.scene.physics.world.collide(this, this.scene.nube1, () => {
             this.scene.changePuntFict(-50);
             this.anims.play('explosion', true);
-            this.reset();
+            this.scene.reset();
         });
         this.scene.physics.world.collide(this, this.scene.nube2, () => {
             this.scene.changePuntFict(-50);
             this.anims.play('explosion', true);
-            this.reset();
+            this.scene.reset();
         });
         // Si el jugador no colisiona con ningin obstaculo:
         if (this.timer2 >= 5000) {
             this.scene.changePuntFict(100);
             this.scene.changeTestPunt(1);
-            this.reset();
+            this.scene.reset();
         }
         this.timer2 += this.scene.sys.game.loop.delta;
     }
 
     movientoAvion() {
-        if (this.scene.rightKey.isDown) {
+        if (this.scene.rightKey.isDown) { // Movimiento a la derecha.
             this.body.setVelocityX(this.speed);
+            this.scene.tweens.add({ // Twink hacia la derecha.
+                targets: this,
+                angle: 20, // Angulo cuando se mueve a la derecha.
+                duration: 500, // Duración del tween en milisegundos
+                ease: 'Linear',
+                onComplete: () => {
+                    this.scene.tweens.add({ // Cuando acabe el avion vuelve a su angulo original.
+                        targets: this,
+                        angle: 0,  // Angulo del avion sin movimiento.
+                        duration: 500, // Duracion.
+                        ease: 'Linear',
+                        onCompleteScope: this
+                    });
+                },
+                onCompleteScope: this
+            });
         }
-        else if (this.scene.leftKey.isDown) {
+        else if (this.scene.leftKey.isDown) { // Movimiento a la izquierda.
             this.body.setVelocityX(-this.speed);
+            this.scene.tweens.add({ // Twink hacia la izquierda.
+                targets: this,
+                angle: -20, // Angulo cuando se mueve a la izquierda.
+                duration: 500, // Duración.
+                ease: 'Linear',
+                onComplete: () => { // Cuando acabe el avion vuelve a su angulo original.
+                    this.scene.tweens.add({
+                        targets: this,
+                        angle: 0,  // Angulo del avion sin movimiento.
+                        duration: 500, // Duracion.
+                        ease: 'Linear',
+                        onCompleteScope: this
+                    });
+                },
+                onCompleteScope: this
+            });
         }
-        else if (Phaser.Input.Keyboard.JustUp(this.scene.upKey) || Phaser.Input.Keyboard.JustUp(this.scene.downKey) || Phaser.Input.Keyboard.JustUp(this.scene.rightKey) || Phaser.Input.Keyboard.JustUp(this.scene.leftKey)) {
+        // Cuando se deje de pulsar una tecla.
+        else if (Phaser.Input.Keyboard.JustUp(this.scene.rightKey) || Phaser.Input.Keyboard.JustUp(this.scene.leftKey)) {
             this.body.setVelocityX(0);
         }
     }
@@ -131,6 +165,6 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     reset() {
         this.timer = 0;
         this.timer2 = 0;
-        this.scene.reset();
+        this.body.setVelocityX(0);
     }
 }

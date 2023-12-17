@@ -48,7 +48,7 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
             if (this.secBien === 4) {
                 this.scene.changeTestPunt(-1); // Solo modifica la puntuacion del test si ha tenido las cuatro bien.
             }
-            this.reset();
+            this.scene.reset();
         }
     }
 
@@ -104,14 +104,14 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
     }
 
     reset() {
+        console.log("reset secuencia");
         this.i = 0;
         this.j = 0;
         this.secBien = 0;
         this.playerSec = "";
+        console.log(this.arrayLetras);
         for (let i = 0; i < this.sec.length; i++) {
-            this.arrayLetras[i].setVisible(false);
             this.arrayLetrasP[i].setVisible(false);
         }
-        this.scene.reset();
     }
 }
