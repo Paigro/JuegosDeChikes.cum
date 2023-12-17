@@ -29,18 +29,18 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             this.anims.play('explosion', true);
             this.scene.reset();
         });
-        this.scene.physics.world.collide(this, this.scene.nube1, () => {
+        this.scene.physics.world.collide(this, this.scene.obstaculo1, () => {
             this.scene.changePuntFict(-50);
             this.anims.play('explosion', true);
             this.scene.reset();
         });
-        this.scene.physics.world.collide(this, this.scene.nube2, () => {
+        this.scene.physics.world.collide(this, this.scene.obstaculo2, () => {
             this.scene.changePuntFict(-50);
             this.anims.play('explosion', true);
             this.scene.reset();
         });
         // Si el jugador no colisiona con ningun obstaculo:
-        if (this.timer2 >= 5000) {
+        if (this.timer2 >= 4500) {
             this.scene.changePuntFict(100); // Sumamos puntuacion ficticia.
             this.scene.reset(); // Reseteamos todo. En vez de llamar al del avion llama al de la escena porque ese llama tanto al del avion como al de la secuencia.
         }
@@ -106,37 +106,31 @@ export default class Avion extends Phaser.GameObjects.Sprite {
                     break;
                 case 1:
                     if (this.timer >= 2000) {
-                        this.scene.nube2.x = this.posicionesObs[i];
-                        this.scene.exclamacion3.setVisible(false);
-                        this.scene.nube2.setVisible(true);
+                        this.scene.obstaculo1.setX(this.posicionesObs[i]).setVisible(true);
+                        this.scene.exclamacion1.setVisible(false);
                     }
                     else {
-                        this.scene.exclamacion3.x = this.posicionesObs[i];
-                        this.scene.exclamacion3.setVisible(true);
+                        this.scene.exclamacion1.setX(this.posicionesObs[i]).setVisible(true);
                         this.timer += this.scene.sys.game.loop.delta;
                     }
                     break;
                 case 2:
                     if (this.timer >= 2000) {
-                        this.scene.nube1.x = this.posicionesObs[i];
+                        this.scene.obstaculo2.setX(this.posicionesObs[i]).setVisible(true);                        
                         this.scene.exclamacion2.setVisible(false);
-                        this.scene.nube1.setVisible(true);
                     }
                     else {
-                        this.scene.exclamacion2.x = this.posicionesObs[i];
-                        this.scene.exclamacion2.setVisible(true);
+                        this.scene.exclamacion2.setX(this.posicionesObs[i]).setVisible(true);                        
                         this.timer += this.scene.sys.game.loop.delta;
                     }
                     break;
                 case 3:
                     if (this.timer >= 2000) {
-                        this.scene.ovni.x = this.posicionesObs[i];
-                        this.scene.exclamacion1.setVisible(false);
-                        this.scene.ovni.setVisible(true);
+                        this.scene.ovni.setX(this.posicionesObs[i]).setVisible(true);
+                        this.scene.exclamacion3.setVisible(false);
                     }
                     else {
-                        this.scene.exclamacion1.x = this.posicionesObs[i];
-                        this.scene.exclamacion1.setVisible(true);
+                        this.scene.exclamacion3.setX(this.posicionesObs[i]).setVisible(true);                        
                         this.timer += this.scene.sys.game.loop.delta;
                     }
                     break;
@@ -153,6 +147,25 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     }
 
     noMeToca() {
+
+
+
+
+
+
+
+
+        // alomejor mover el avion hasta una posicion en la que no aparezca ningun obstaculo.
+
+
+
+
+
+
+
+
+
+
     }
 
     reset() {
