@@ -171,7 +171,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     update(time, delta) {
-        // GENERACION DE COSAS Y TIEMPO DE ESPERA:
+        // GENERACION DE COSAS, TIEMPO DE ESPERA Y TIEMPO FINAL:
         if (!this.hayAlgo && !this.waitTime && !this.decision) {
             // Logs:
             console.log("Generado de cosas, esperando decision del jugador.");
@@ -185,7 +185,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             this.hayAlgo = true;
         }
         else if (this.waitTime && !this.hayAlgo && !this.decision && this.time >= 0) {
-            console.log("Tiempo que no hay nada.")
+            console.log("Tiempo que no hay nada.");
             if (this.elapsedTime >= 2500) {
                 this.elapsedTime = 0;
                 this.waitTime = false;
@@ -204,7 +204,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         {
             this.avion.noMeToca(this.obs);
         }
-        // TIEMPO
+        // TIEMPO:
         this.time -= (delta / 1000);
         if (this.time >= 0) {
             this.contador.setText('Time: ' + this.time.toFixed(2));
