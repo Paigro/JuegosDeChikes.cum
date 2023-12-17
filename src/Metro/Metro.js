@@ -67,6 +67,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.atras.on('pointerdown', (pointer) => {
             this.finalDelJuego()
         });
+        // Para cubrir la accion que no has elegido.
+        this.rectNegro = this.add.graphics();
+        this.rectNegro.fillStyle(0x000000, 0.5).fillRect(0, 0, 1080, 450).setDepth(2).setVisible(false);
         // Teclas para mover el avion:
         this.upKey = this.input.keyboard.addKey('UP'); // Flecha arriba.
         this.downKey = this.input.keyboard.addKey('DOWN'); // Flecha abajo.
@@ -96,9 +99,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.nube1.body.setImmovable(true).setSize(60, 60, true);
         this.nube2.body.setImmovable(true).setSize(60, 60, true);
         // Arrays de cosas:
-        let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1][0, 1, 0, 2]];
-        let secuencias = ["asdf", "hflk", "lgas", "gldk", "adfs", "kafd", "fdks", "dsfa", "lfhk", "sdaf", "adsf", "agmi", "fdka", "dfas", "lhkf", "fsda", "aldf", "klgj", "sglf", "kahd", "spqr", "sjha", "dkfa", "ajgf", "akfj", "dalk", "glah", "sjga", "hafl", "alfs", "kjhl", "afkd", "ljah", "gafk", "aghd", "dagk", "hghj", "hagl", "dlsf", "afgh", "kalh", "java", "glhf", "lfga", "jdsa", "akfg", "jaja"];
-        // Creacion de las cosas que estaran en la escena:
+        let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1], [0, 1, 0, 2]];
+        let secuencias = ["adfj", "adfs", "adsf", "afgh", "afkd", "aghd", "agmi", "ajgf", "akfj", "aldf", "alfs", "dagk", "dalk", "dfas", "dflk", "dsfa", "fdka", "fdks", "fsda", "gafk", "gldk", "glah", "glhf", "hflk", "hafl", "hghj", "jaja", "java", "jdsa", "jsjs", "kahd", "kafd", "kalh", "kjhl", "klgj", "lfga", "lgas", "lhkf", "ljah", "sgha", "sglf", "sjga", "sjha", "spqr"];        // Creacion de las cosas que estaran en la escena:
         this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
         this.avion = new Avion(this, 520, 270); // El avion.
         this.secuencia = new secuenciaTeclas(this, 0, 450); // La secuencia de teclas.
@@ -135,23 +137,22 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 persist: true
 
             })
-
-
         }, this);
-
-
-
         // INPUT:
         // Input para detectar la seleccion de la accion del jugador:
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
             if (!this.decision && this.hayAlgo) { // Solo si se permite una accion y hya una opcion que tomar miramos cual puede ser.
                 if (event.key === "ArrowLeft" || event.key === "ArrowRight") { // Accion 1: mover al avion.
                     console.log("Seleccion: avion.");
+                    this.rectNegro.setPosition(0, 450).setVisible(true);
+                    this.changeTestPunt(1);
                     this.avionAcc = true;
                     this.decision = true;
                 }
                 else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r" || event.key === "v") { // Accion 2: secuencia de teclas.
                     console.log("Selecion: teclas.");
+                    this.rectNegro.setPosition(0, 0).setVisible(true);
+                    this.changeTestPunt(-1);
                     this.secuencia.setSec(this.sec);
                     this.secuenciaAcc = true;
                     this.decision = true;
@@ -171,10 +172,9 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     update(time, delta) {
         // GENERACION DE COSAS Y TIEMPO DE ESPERA:
         if (!this.hayAlgo && !this.waitTime && !this.decision) {
+
             // Logs:
             console.log("Generado de cosas, esperando decision del jugador.");
-            console.log("PUNTUACION: " + this.puntFict);
-            console.log("TEST: " + this.DetGen);
             // Generacion aleatoria:
             this.sec = this.generador.secuenciaGenerador();
             this.obs = this.generador.osbtaculoGenerador();
@@ -196,10 +196,10 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         if (this.decision && this.avionAcc && !this.secuenciaAcc) // Accion avion.
         {
             this.avion.meToca(this.obs);
-            this.secuencia.noMeToca();
         }
         else if (this.decision && this.secuenciaAcc && !this.avionAcc) // Accion secuencia.
         {
+
             this.avion.noMeToca(this.obs);
         }
     }
@@ -207,22 +207,24 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     changePuntFict(pun) {
         this.puntFict += pun;
         this.marcador.setText('Puntuación: ' + this.puntFict);
+        console.log("PUNTUACION: " + this.puntFict);
     }
 
     changeTestPunt(pun) {
         this.DetGen += pun;
         if (this.DetGen == 0) { this.DetGen += pun; }
+        console.log("TEST: " + this.DetGen);
     }
 
     reset() {
-        // Resetep de las cosas de la secuencia:
-        this.secuencia.reset();
+        this.rectNegro.setVisible(false);
+        // Reseteo de las cosas de la secuencia:
         this.letra1.setVisible(false);
         this.letra2.setVisible(false);
         this.letra3.setVisible(false);
         this.letra4.setVisible(false);
+        this.secuencia.reset();
         // Reseteo de las cosas de la accion del avion:
-        this.obs = [0, 0, 0, 0];
         this.exclamacion1.setVisible(false);
         this.exclamacion2.setVisible(false);
         this.exclamacion3.setVisible(false);
@@ -239,11 +241,10 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.decision = false;
         this.hayAlgo = false;
         this.waitTime = true;
+        console.log("Reseteo de buenos dias.");
     }
 
     finalDelJuego() {
-        this.avion.reset();
-        this.secuencia.reset();
         this.reset();
         this.coor.SaveScore("DetGen", this.DetGen);
         console.clear();

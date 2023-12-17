@@ -39,11 +39,10 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             this.anims.play('explosion', true);
             this.scene.reset();
         });
-        // Si el jugador no colisiona con ningin obstaculo:
+        // Si el jugador no colisiona con ningun obstaculo:
         if (this.timer2 >= 5000) {
-            this.scene.changePuntFict(100);
-            this.scene.changeTestPunt(1);
-            this.scene.reset();
+            this.scene.changePuntFict(100); // Sumamos puntuacion ficticia.
+            this.scene.reset(); // Reseteamos todo. En vez de llamar al del avion llama al de la escena porque ese llama tanto al del avion como al de la secuencia.
         }
         this.timer2 += this.scene.sys.game.loop.delta;
     }
@@ -90,6 +89,13 @@ export default class Avion extends Phaser.GameObjects.Sprite {
         // Cuando se deje de pulsar una tecla.
         else if (Phaser.Input.Keyboard.JustUp(this.scene.rightKey) || Phaser.Input.Keyboard.JustUp(this.scene.leftKey)) {
             this.body.setVelocityX(0);
+            this.scene.tweens.add({
+                targets: this,
+                angle: 0,  // Angulo del avion sin movimiento.
+                duration: 500, // Duracion.
+                ease: 'Linear',
+                onCompleteScope: this
+            });
         }
     }
 
@@ -147,19 +153,6 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     }
 
     noMeToca() {
-
-
-
-
-
-        //oscurecer parte de arriba y hacer que el avion se mueva solo a un hueco sin obstaculo.
-
-
-
-
-
-
-
     }
 
     reset() {
