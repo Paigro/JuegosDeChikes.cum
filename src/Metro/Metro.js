@@ -49,6 +49,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     }
 
     create() {
+        //#region parametros.
         // Tiempo:
         this.time = 60;
         this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#fff' }).setPosition(0, 50).setDepth(3); // Texto para mostrar la puntuacion.
@@ -73,6 +74,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Para cubrir la accion que no has elegido.
         this.rectNegro = this.add.graphics();
         this.rectNegro.fillStyle(0x000000, 0.5).fillRect(0, 0, 1080, 450).setDepth(2).setVisible(false);
+        //#endregion
+        //#region sprites
         // Teclas para mover el avion:
         this.rightKey = this.input.keyboard.addKey('RIGHT'); // Flecha derecha.
         this.leftKey = this.input.keyboard.addKey('LEFT'); // Flecha izquierda.
@@ -90,15 +93,20 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.exclamacion2 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
         this.exclamacion3 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
         // Obstaculos con sus fisicas (ocultos al principio) e inmovibles:
-        this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setVisible(false).setDepth(1);
-        this.obstaculo1 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1);
-        this.obstaculo2 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1);
+        this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setVisible(false).setDepth(1).setInteractive();
+        this.obstaculo1 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1).setInteractive();
+        this.obstaculo2 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1).setInteractive();
         this.physics.add.existing(this.ovni);
         this.physics.add.existing(this.obstaculo1);
         this.physics.add.existing(this.obstaculo2);
         this.ovni.body.setImmovable(true).setSize(60, 60, true);
         this.obstaculo1.body.setImmovable(true).setSize(60, 60, true);
         this.obstaculo2.body.setImmovable(true).setSize(60, 60, true);
+        this.obstaculo1.yaEjecutado=false;
+        this.obstaculo2.yaEjecutado=false;
+        this.ovni.yaEjecutado=false;
+        //#endregion
+        //#region objetos del juego
         // Arrays de posibles combinaciones de obstaculos y secuencias:
         let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1], [0, 1, 0, 2]];
         let secuencias = ["adfj", "adfs", "adsf", "afgh", "afkd", "aghd", "agmi", "ajgf", "akfj", "aldf", "alfs", "dagk", "dalk", "dfas", "dflk", "dsfa", "fdka", "fdks", "fsda", "gafk", "gldk", "glah", "glhf", "hflk", "hafl", "hghj", "jaja", "java", "jdsa", "jsjs", "kahd", "kafd", "kalh", "kjhl", "klgj", "lgas", "lhkf", "ljah", "lpgr", "sgha", "sglf", "sjga", "sjha", "spqr"];        // Creacion de las cosas que estaran en la escena:
@@ -106,6 +114,8 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
         this.avion = new Avion(this, 520, 270); // El avion.
         this.secuencia = new secuenciaTeclas(this, 0, 450); // La secuencia de teclas.
+        //#endregion
+        //#region animacions y twinks
         // Animaciones:
         this.anims.create({
             key: 'explosion',
@@ -139,7 +149,39 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 persist: true
             })
         }, this);
-        // INPUT:
+         // Para cuando aparezcan los obstaculos:
+        this.obstaculo1.on('setvisible', () => {
+            this.obstaculo1.setScale(0.6, 0.6);
+            this.tweens.add({
+                targets: this.obstaculo1,
+                scaleX: 1.6,
+                scaleY: 1.6,
+                duration: 1500,
+                ease: 'Linear'
+            });
+        });
+        this.obstaculo2.on('setvisible', () => {
+            this.obstaculo2.setScale(0.6, 0.6);
+            this.tweens.add({
+                targets: this.obstaculo2,
+                scaleX: 1.6,
+                scaleY: 1.6,
+                duration: 1500,
+                ease: 'Linear'
+            });
+        });
+        this.ovni.on('setvisible', () => {
+            this.ovni.setScale(0.6, 0.6);
+            this.tweens.add({
+                targets: this.ovni,
+                scaleX: 1.6,
+                scaleY: 1.6,
+                duration: 1500,
+                ease: 'Linear'
+            });
+        });
+        //#endregion
+        //#region input
         // Input para detectar la seleccion de la accion del jugador:
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
             if (!this.decision && this.hayAlgo) { // Solo si se permite una accion y hya una opcion que tomar miramos cual puede ser.
@@ -168,6 +210,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 }
             }
         });
+        //#endregion
     }
 
     update(time, delta) {

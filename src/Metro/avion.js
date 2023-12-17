@@ -108,6 +108,10 @@ export default class Avion extends Phaser.GameObjects.Sprite {
                     if (this.timer >= 2000) {
                         this.scene.obstaculo1.setX(this.posicionesObs[i]).setVisible(true);
                         this.scene.exclamacion1.setVisible(false);
+                        if (!this.scene.obstaculo1.yaEjecutado) {
+                            this.scene.obstaculo1.yaEjecutado = true;
+                            this.scene.obstaculo1.emit('setvisible');
+                        }
                     }
                     else {
                         this.scene.exclamacion1.setX(this.posicionesObs[i]).setVisible(true);
@@ -116,11 +120,15 @@ export default class Avion extends Phaser.GameObjects.Sprite {
                     break;
                 case 2:
                     if (this.timer >= 2000) {
-                        this.scene.obstaculo2.setX(this.posicionesObs[i]).setVisible(true);                        
+                        this.scene.obstaculo2.setX(this.posicionesObs[i]).setVisible(true);
                         this.scene.exclamacion2.setVisible(false);
+                        if (!this.scene.obstaculo2.yaEjecutado) {
+                            this.scene.obstaculo2.yaEjecutado = true;
+                            this.scene.obstaculo2.emit('setvisible');
+                        }
                     }
                     else {
-                        this.scene.exclamacion2.setX(this.posicionesObs[i]).setVisible(true);                        
+                        this.scene.exclamacion2.setX(this.posicionesObs[i]).setVisible(true);
                         this.timer += this.scene.sys.game.loop.delta;
                     }
                     break;
@@ -128,9 +136,13 @@ export default class Avion extends Phaser.GameObjects.Sprite {
                     if (this.timer >= 2000) {
                         this.scene.ovni.setX(this.posicionesObs[i]).setVisible(true);
                         this.scene.exclamacion3.setVisible(false);
+                        if (!this.scene.ovni.yaEjecutado) {
+                            this.scene.ovni.yaEjecutado = true;
+                            this.scene.ovni.emit('setvisible');
+                        }
                     }
                     else {
-                        this.scene.exclamacion3.setX(this.posicionesObs[i]).setVisible(true);                        
+                        this.scene.exclamacion3.setX(this.posicionesObs[i]).setVisible(true);
                         this.timer += this.scene.sys.game.loop.delta;
                     }
                     break;
@@ -169,6 +181,9 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     }
 
     reset() {
+        this.scene.obstaculo1.yaEjecutado = false;
+        this.scene.obstaculo2.yaEjecutado = false;
+        this.scene.ovni.yaEjecutado = false;
         this.timer = 0;
         this.timer2 = 0;
         this.body.setVelocityX(0);
