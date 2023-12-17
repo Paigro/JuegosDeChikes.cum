@@ -20,6 +20,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.load.image('atras', "/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
         // Avion:
         this.load.image('avion', "/assets/juego/MetroSkaters/imagenes/Avion.png"); // Cargamos la imagen del avion.
+        this.load.image('avionAparece', "/assets/juego/MetroSkaters/imagenes/AvionAparece.png"); // Cargamos la imagen del avion.
         // Panel:
         this.load.image('panel', "/assets/juego/MetroSkaters/imagenes/Panel.png"); // Cargamos la imagen del panel inferior.
         // Letras:
@@ -61,10 +62,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Otros:
         this.sec = ""; // Secuencia generada aleatoriamente.
         this.elapsedTime = 0; // Para calcular el tiempo de espera.
-
-        // Nuevos bordes del mundo para el movimiento del avion:
-        this.physics.world.setBounds(0, 0, 1080, 450);
-
         // Boton de volver atras (provisional):
         this.atras = this.add.image(1000, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive();
         this.atras.on('pointerdown', (pointer) => {
@@ -98,6 +95,13 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.ovni.body.setImmovable(true);
         this.nube1.body.setImmovable(true);
         this.nube2.body.setImmovable(true);
+        // Arrays de cosas:
+        let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1][0, 1, 0, 2]];
+        let secuencias = ["asdf", "hflk", "lgas", "gldk", "adfs", "kafd", "fdks", "dsfa", "lfhk", "sdaf", "adsf", "agmi", "fdka", "dfas", "lhkf", "fsda", "aldf", "klgj", "aqlf", "kahd", "spqr", "sjha", "dkfa", "ajgf", "akfj", "dalk", "glah", "sjga", "hafl", "alfs", "kjhl", "afkd", "ljah", "gafk", "aghd", "dagk", "hghj", "hagl", "dlsf", "afgh", "kalh", "glfs", "glhf", "lfga", "jdsa", "akfg", "jaja"];
+        // Creacion de las cosas que estaran en la escena:
+        this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
+        this.avion = new Avion(this, 520, 250); // El avion.
+        this.secuencia = new secuenciaTeclas(this, 0, 450); // La secuencia de teclas.
         // Animaciones:
         this.anims.create({
             key: 'explosion',
@@ -105,17 +109,39 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             frameRate: 6,
             repeat: 0
         });
+        // Twinks:
+        this.avion.on('animationcomplete-explosion', () => {
+            console.log('La animacion explosion ha terminado');
+            this.avion.setY(750).setX(520).setScale(3, 3);
+            this.avion.setTexture('avionAparece');
+            this.tweens.add({
+                targets: this.avion,
+                y: 250,          // Valor final de la posición en x
+                duration: 1500,  // Duración de la animación en milisegundos
+                ease: 'Out',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+                yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
+                repeat: 0,    // Repetir infinitamente
+                persist: true,
+                onComplete: () => {
+                    this.avion.setTexture('avion');
+                }
+            })
+            this.tweens.add({
+                targets: this.avion,
+                scaleX: 1.6,
+                scaleY: 1.6,
+                duration: 2000,  // Duración de la animación en milisegundos
+                ease: 'out',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+                yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
+                repeat: 0,    // Repetir infinitamente
+                persist: true
 
-        // Arrays de cosas:
-        //let obstaculos = [[0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0], [2, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
-        let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1][0, 1, 0, 2]];
-        //let secuencias = ["asdf", "asfd", "adsf", "adfs", "afsd", "afds", "sdfa", "sdaf", "sfda", "sfad", "safd", "sadf", "dsfa", "dsaf", "dfsa", "dfas", "dafs", "dasf", "fsda", "fsad", "fdsa", "fdas", "fads"];
-        //let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.
-        let secuencias = ["asdf", "hflk", "lgas", "gldk", "adfs", "kafd", "fdks", "dsfa", "lfhk", "sdaf", "adsf", "agmi", "fdka", "dfas", "lhkf", "fsda", "aldf", "klgj", "aqlf", "kahd", "spqr", "sjha", "dkfa", "ajgf", "akfj", "dalk", "glah", "sjga", "hafl", "alfs", "kjhl", "afkd", "ljah", "gafk", "aghd", "dagk", "hghj", "hagl", "dlsf", "afgh", "kalh", "glfs", "glhf", "lfga", "jdsa", "akfg"];
-        // Creacion de las cosas que estaran en la escena:
-        this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
-        this.avion = new Avion(this, 520, 250); // El avion.
-        this.secuencia = new secuenciaTeclas(this, 0, 450); // La secuencia de teclas.
+            })
+
+
+        }, this);
+
+
 
         // INPUT:
         // Input para detectar la seleccion de la accion del jugador:
@@ -126,7 +152,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                     this.avionAcc = true;
                     this.decision = true;
                 }
-                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q") { // Accion 2: secuencia de teclas.
+                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r") { // Accion 2: secuencia de teclas.
                     console.log("Selecion: teclas.");
                     this.secuencia.setSec(this.sec);
                     this.secuenciaAcc = true;
@@ -137,7 +163,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Input para las secuencias:
         this.input.keyboard.on('keydown', (event) => {
             if (this.decision && this.hayAlgo && this.secuenciaAcc) {
-                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q") {
+                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r") {
                     this.secuencia.teclasSecuencia(event.key);
                 }
             }
@@ -219,4 +245,4 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         console.clear();
         this.scene.start("Hub");
     }
-} 
+}
