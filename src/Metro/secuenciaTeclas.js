@@ -5,9 +5,7 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
 
         this.scene.add.existing(this).setOrigin(0, 0); // Añadir a la escena.
 
-        console.log("Secuencia: Secuencia ha sido creada");
-
-        //this.posicionesSec = [330, 450, 580, 690]; // Posiciones en x para la aparicion de las letras de las secuencias.
+        console.log("Secuencia: secuencia ha sido creada");
 
         this.i = 0; // Para controlar el numero de secuencias.
         this.j = 0; // Para controlar el numero de letras de cada secuencia.
