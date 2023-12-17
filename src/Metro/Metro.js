@@ -38,6 +38,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.load.image('p', "/assets/juego/MetroSkaters/imagenes/P.png");
         this.load.image('q', "/assets/juego/MetroSkaters/imagenes/Q.png");
         this.load.image('r', "/assets/juego/MetroSkaters/imagenes/R.png");
+        this.load.image('v', "/assets/juego/MetroSkaters/imagenes/V.png");
         // Obstaculos:
         this.load.image('OVNI', "/assets/juego/MetroSkaters/imagenes/Ovni.png");
         this.load.image('obstaculo', "/assets/juego/MetroSkaters/imagenes/Avion2.png");
@@ -97,10 +98,10 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.nube2.body.setImmovable(true);
         // Arrays de cosas:
         let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1][0, 1, 0, 2]];
-        let secuencias = ["asdf", "hflk", "lgas", "gldk", "adfs", "kafd", "fdks", "dsfa", "lfhk", "sdaf", "adsf", "agmi", "fdka", "dfas", "lhkf", "fsda", "aldf", "klgj", "aqlf", "kahd", "spqr", "sjha", "dkfa", "ajgf", "akfj", "dalk", "glah", "sjga", "hafl", "alfs", "kjhl", "afkd", "ljah", "gafk", "aghd", "dagk", "hghj", "hagl", "dlsf", "afgh", "kalh", "glfs", "glhf", "lfga", "jdsa", "akfg", "jaja"];
+        let secuencias = ["asdf", "hflk", "lgas", "gldk", "adfs", "kafd", "fdks", "dsfa", "lfhk", "sdaf", "adsf", "agmi", "fdka", "dfas", "lhkf", "fsda", "aldf", "klgj", "aqlf", "kahd", "spqr", "sjha", "dkfa", "ajgf", "akfj", "dalk", "glah", "sjga", "hafl", "alfs", "kjhl", "afkd", "ljah", "gafk", "aghd", "dagk", "hghj", "hagl", "dlsf", "afgh", "kalh", "java", "glhf", "lfga", "jdsa", "akfg", "jaja"];
         // Creacion de las cosas que estaran en la escena:
         this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
-        this.avion = new Avion(this, 520, 250); // El avion.
+        this.avion = new Avion(this, 520, 270); // El avion.
         this.secuencia = new secuenciaTeclas(this, 0, 450); // La secuencia de teclas.
         // Animaciones:
         this.anims.create({
@@ -116,7 +117,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             this.avion.setTexture('avionAparece');
             this.tweens.add({
                 targets: this.avion,
-                y: 250,          // Valor final de la posición en x
+                y: 270,          // Valor final de la posición en x
                 duration: 1500,  // Duración de la animación en milisegundos
                 ease: 'Out',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
                 yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
@@ -152,7 +153,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                     this.avionAcc = true;
                     this.decision = true;
                 }
-                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r") { // Accion 2: secuencia de teclas.
+                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r" || event.key === "v") { // Accion 2: secuencia de teclas.
                     console.log("Selecion: teclas.");
                     this.secuencia.setSec(this.sec);
                     this.secuenciaAcc = true;
@@ -163,7 +164,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Input para las secuencias:
         this.input.keyboard.on('keydown', (event) => {
             if (this.decision && this.hayAlgo && this.secuenciaAcc) {
-                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r") {
+                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r" || event.key === "v") {
                     this.secuencia.teclasSecuencia(event.key);
                 }
             }
@@ -213,7 +214,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
 
     changeTestPunt(pun) {
         this.DetGen += pun;
-        if (this.DetGen === 0) { this.DetGen += pun; }
+        if (this.DetGen == 0) { this.DetGen += pun; }
     }
 
     reset() {

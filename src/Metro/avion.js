@@ -11,7 +11,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
 
         this.body.setCollideWorldBounds(); // El avion colisiona con los limites del mundo.
 
-        this.speed = 250; // Velocidad del avion.
+        this.speed = 300; // Velocidad del avion.
         this.timer = 0;
         this.timer2 = 0;
         this.posicionesObs = [75, 325, 575, 825]; // Array de posiciones en las que pueden aparecer los obstaculos.
