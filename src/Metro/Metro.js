@@ -102,14 +102,14 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.ovni.body.setImmovable(true).setSize(60, 60, true);
         this.obstaculo1.body.setImmovable(true).setSize(60, 60, true);
         this.obstaculo2.body.setImmovable(true).setSize(60, 60, true);
-        this.obstaculo1.yaEjecutado=false;
-        this.obstaculo2.yaEjecutado=false;
-        this.ovni.yaEjecutado=false;
+        this.obstaculo1.yaEjecutado = false;
+        this.obstaculo2.yaEjecutado = false;
+        this.ovni.yaEjecutado = false;
         //#endregion
         //#region objetos del juego
         // Arrays de posibles combinaciones de obstaculos y secuencias:
         let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1], [0, 1, 0, 2]];
-        let secuencias = ["adfj", "adfs", "adsf", "afgh", "afkd", "aghd", "agmi", "ajgf", "akfj", "aldf", "alfs", "dagk", "dalk", "dfas", "dflk", "dsfa", "fdka", "fdks", "fsda", "gafk", "gldk", "glah", "glhf", "hflk", "hafl", "hghj", "jaja", "java", "jdsa", "jsjs", "kahd", "kafd", "kalh", "kjhl", "klgj", "lgas", "lhkf", "ljah", "lpgr", "sgha", "sglf", "sjga", "sjha", "spqr"];        // Creacion de las cosas que estaran en la escena:
+        let secuencias = ["adfj", "adfs", "adsf", "afgh", "afkd", "aghd", "agmi", "ajgf", "akfj", "aldf", "alfs", "dagk", "dalk", "dfas", "dflk", "dsfa", "fdka", "fdks", "fsda", "gafk", "gldk", "glah", "glhf", "hflk", "hafl", "jaja", "java", "jdsa", "jsjs", "kahd", "kafd", "kalh", "kjhl", "klgj", "lgas", "lhkf", "ljah", "lpgr", "sgha", "sglf", "sjga", "sjha", "spqr"];        // Creacion de las cosas que estaran en la escena:
         // Cosas de la escena:
         this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
         this.avion = new Avion(this, 520, 270); // El avion.
@@ -149,7 +149,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 persist: true
             })
         }, this);
-         // Para cuando aparezcan los obstaculos:
+        // Para cuando aparezcan los obstaculos:
         this.obstaculo1.on('setvisible', () => {
             this.obstaculo1.setScale(0.6, 0.6);
             this.tweens.add({
