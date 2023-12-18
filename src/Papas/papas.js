@@ -27,13 +27,17 @@ export default class Papas extends Phaser.Scene {
     this.load.image('MarcaGallet', '/assets/juego/PapasGalleteria/Marca_Galleta.png'); // Cargamos la imagen de volver atras (provisional).
     this.load.image('BandejaGlased', '/assets/juego/PapasGalleteria/Bandeja_Base.png'); // Cargamos la imagen de volver atras (provisional).
     this.load.image('GlaseadoGallet', '/assets/juego/PapasGalleteria/Glaseado_Galleta.png'); // Cargamos la imagen de volver atras (provisional).
-    this.load.image('Fondo', '/assets/juego/PapasGalleteria/Fondo.png'); // Cargamos la imagen de volver atras (provisional).
+    this.load.image('FondoD', '/assets/juego/PapasGalleteria/FondoDer.png'); // Cargamos la imagen de volver atras (provisional).
+    this.load.image('FondoI', '/assets/juego/PapasGalleteria/FondoIzq.png'); // Cargamos la imagen de volver atras (provisional).
   }
 
 
   create() {
     //Fondo    
-    this.add.image(0, 0, 'Fondo').setScale(2, 2).setOrigin(0, 0) // el fondo
+    this.fondoD = this.add.image(0, 0, 'FondoD').setOrigin(0, 0.5) // el fondo
+    this.fondoI = this.add.image(1080, 720, 'FondoI').setOrigin(1, 0.5) // el fondo
+
+    this.ovenToTable this.add.tween
     //Boton de salir
     this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
     this.atras.on('pointerdown', (pointer) => {
