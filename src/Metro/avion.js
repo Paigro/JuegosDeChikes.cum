@@ -29,21 +29,20 @@ export default class Avion extends Phaser.GameObjects.Sprite {
             this.anims.play('explosion', true);
             this.scene.reset();
         });
-        this.scene.physics.world.collide(this, this.scene.nube1, () => {
+        this.scene.physics.world.collide(this, this.scene.obstaculo1, () => {
             this.scene.changePuntFict(-50);
             this.anims.play('explosion', true);
             this.scene.reset();
         });
-        this.scene.physics.world.collide(this, this.scene.nube2, () => {
+        this.scene.physics.world.collide(this, this.scene.obstaculo2, () => {
             this.scene.changePuntFict(-50);
             this.anims.play('explosion', true);
             this.scene.reset();
         });
-        // Si el jugador no colisiona con ningin obstaculo:
-        if (this.timer2 >= 5000) {
-            this.scene.changePuntFict(100);
-            this.scene.changeTestPunt(1);
-            this.scene.reset();
+        // Si el jugador no colisiona con ningun obstaculo:
+        if (this.timer2 >= 4500) {
+            this.scene.changePuntFict(100); // Sumamos puntuacion ficticia.
+            this.scene.reset(); // Reseteamos todo. En vez de llamar al del avion llama al de la escena porque ese llama tanto al del avion como al de la secuencia.
         }
         this.timer2 += this.scene.sys.game.loop.delta;
     }
@@ -90,6 +89,13 @@ export default class Avion extends Phaser.GameObjects.Sprite {
         // Cuando se deje de pulsar una tecla.
         else if (Phaser.Input.Keyboard.JustUp(this.scene.rightKey) || Phaser.Input.Keyboard.JustUp(this.scene.leftKey)) {
             this.body.setVelocityX(0);
+            this.scene.tweens.add({
+                targets: this,
+                angle: 0,  // Angulo del avion sin movimiento.
+                duration: 500, // Duracion.
+                ease: 'Linear',
+                onCompleteScope: this
+            });
         }
     }
 
@@ -100,37 +106,43 @@ export default class Avion extends Phaser.GameObjects.Sprite {
                     break;
                 case 1:
                     if (this.timer >= 2000) {
-                        this.scene.nube2.x = this.posicionesObs[i];
-                        this.scene.exclamacion3.setVisible(false);
-                        this.scene.nube2.setVisible(true);
+                        this.scene.obstaculo1.setX(this.posicionesObs[i]).setVisible(true);
+                        this.scene.exclamacion1.setVisible(false);
+                        if (!this.scene.obstaculo1.yaEjecutado) {
+                            this.scene.obstaculo1.yaEjecutado = true;
+                            this.scene.obstaculo1.emit('setvisible');
+                        }
                     }
                     else {
-                        this.scene.exclamacion3.x = this.posicionesObs[i];
-                        this.scene.exclamacion3.setVisible(true);
+                        this.scene.exclamacion1.setX(this.posicionesObs[i]).setVisible(true);
                         this.timer += this.scene.sys.game.loop.delta;
                     }
                     break;
                 case 2:
                     if (this.timer >= 2000) {
-                        this.scene.nube1.x = this.posicionesObs[i];
+                        this.scene.obstaculo2.setX(this.posicionesObs[i]).setVisible(true);
                         this.scene.exclamacion2.setVisible(false);
-                        this.scene.nube1.setVisible(true);
+                        if (!this.scene.obstaculo2.yaEjecutado) {
+                            this.scene.obstaculo2.yaEjecutado = true;
+                            this.scene.obstaculo2.emit('setvisible');
+                        }
                     }
                     else {
-                        this.scene.exclamacion2.x = this.posicionesObs[i];
-                        this.scene.exclamacion2.setVisible(true);
+                        this.scene.exclamacion2.setX(this.posicionesObs[i]).setVisible(true);
                         this.timer += this.scene.sys.game.loop.delta;
                     }
                     break;
                 case 3:
                     if (this.timer >= 2000) {
-                        this.scene.ovni.x = this.posicionesObs[i];
-                        this.scene.exclamacion1.setVisible(false);
-                        this.scene.ovni.setVisible(true);
+                        this.scene.ovni.setX(this.posicionesObs[i]).setVisible(true);
+                        this.scene.exclamacion3.setVisible(false);
+                        if (!this.scene.ovni.yaEjecutado) {
+                            this.scene.ovni.yaEjecutado = true;
+                            this.scene.ovni.emit('setvisible');
+                        }
                     }
                     else {
-                        this.scene.exclamacion1.x = this.posicionesObs[i];
-                        this.scene.exclamacion1.setVisible(true);
+                        this.scene.exclamacion3.setX(this.posicionesObs[i]).setVisible(true);
                         this.timer += this.scene.sys.game.loop.delta;
                     }
                     break;
@@ -152,7 +164,13 @@ export default class Avion extends Phaser.GameObjects.Sprite {
 
 
 
-        //oscurecer parte de arriba y hacer que el avion se mueva solo a un hueco sin obstaculo.
+
+
+
+        // alomejor mover el avion hasta una posicion en la que no aparezca ningun obstaculo.
+
+
+
 
 
 
@@ -163,6 +181,9 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     }
 
     reset() {
+        this.scene.obstaculo1.yaEjecutado = false;
+        this.scene.obstaculo2.yaEjecutado = false;
+        this.scene.ovni.yaEjecutado = false;
         this.timer = 0;
         this.timer2 = 0;
         this.body.setVelocityX(0);
