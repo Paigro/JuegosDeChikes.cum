@@ -66,11 +66,11 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Otros:
         this.sec = ""; // Secuencia generada aleatoriamente.
         this.elapsedTime = 0; // Para calcular el tiempo de espera.
-        // Boton de volver atras (provisional):
+        /*// Boton de volver atras (provisional):
         this.atras = this.add.image(1000, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive().setDepth(3);
         this.atras.on('pointerdown', (pointer) => {
             this.finalDelJuego()
-        });
+        });*/
         // Para cubrir la accion que no has elegido.
         this.rectNegro = this.add.graphics();
         this.rectNegro.fillStyle(0x000000, 0.5).fillRect(0, 0, 1080, 450).setDepth(2).setVisible(false);
