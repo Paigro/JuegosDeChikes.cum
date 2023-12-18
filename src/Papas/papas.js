@@ -17,7 +17,7 @@ export default class Papas extends Phaser.Scene {
     //console.log(this.coor);
     console.log(data);
   }
-  
+
   preload() {
     this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
 
@@ -34,10 +34,12 @@ export default class Papas extends Phaser.Scene {
 
   create() {
     //Fondo    
-    this.fondoD = this.add.image(0, 0, 'FondoD').setOrigin(0, 0.5) // el fondo
-    this.fondoI = this.add.image(1080, 720, 'FondoI').setOrigin(1, 0.5) // el fondo
+    this.fondoD = this.add.image(540, 720, 'FondoD').setOrigin(0, 1) // el fondo
+    this.fondoI = this.add.image(0, 0, 'FondoI').setOrigin(0, 0) // el fondo
 
-    this.ovenToTable this.add.tween
+    this.tweenFondD1();
+    this.tweenFondI1();
+
     //Boton de salir
     this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
     this.atras.on('pointerdown', (pointer) => {
@@ -59,6 +61,8 @@ export default class Papas extends Phaser.Scene {
       this.bandeja2.BlockThisAction();
       this.bandeja1.StartAccion();
       this.endRound = false;
+      this.tweenFondD2();
+      this.tweenFondI2();
     })
 
     this.bandeja2.on('pointerdown', (pointer) => {
@@ -66,6 +70,8 @@ export default class Papas extends Phaser.Scene {
       this.bandeja1.BlockThisAction();
       this.bandeja2.StartAccion();
       this.endRound = false;
+      this.tweenFondD2();
+      this.tweenFondI2();
     })
   }
 
@@ -73,11 +79,10 @@ export default class Papas extends Phaser.Scene {
     this.bandeja2.updateGlassed(delta);
     //cuenta atras para acabar el juego
     if (this.time <= 0) {
-      if (this.endRound && this.points !=0) {
+      if (this.endRound && this.points != 0) {
         this.time = 10;
         this.finalDelJuego();
-      }else
-      {
+      } else {
         this.endRound = false;
       }
       //console.log(this.time);
@@ -94,9 +99,104 @@ export default class Papas extends Phaser.Scene {
     this.bandeja1.Reset();
     this.bandeja2.Reset();
 
+    this.tweenFondD3();
+    this.tweenFondI3();
+
     this.endRound = true
   }
-  
+
+  tweenFondI1() {
+    this.tweens.add
+      ({
+        targets: this.fondoI,
+        y: 0,          // Valor final de la posición en x
+        duration: 500,  // Duración de la animación en milisegundos
+        ease: 'Linear',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+        yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
+        repeat: 0,    // Repetir infinitamente
+        persist: true
+
+      })
+  }
+  tweenFondI2() {
+    this.tweens.add
+      ({
+        targets: this.fondoI,
+        y: -720,          // Valor final de la posición en x
+        duration: 500,  // Duración de la animación en milisegundos
+        ease: 'Linear',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+        yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
+        repeat: 0,    // Repetir infinitamente
+        persist: true
+
+      })
+  } tweenFondI3() {
+    this.tweens.add
+      ({
+        targets: this.fondoI,
+        y: -1440,          // Valor final de la posición en x
+        duration: 50,  // Duración de la animación en milisegundos
+        ease: 'Linear',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+        yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
+        repeat: 0,    // Repetir infinitamente
+        persist: true
+
+      })
+      
+    this.tweens.add
+    ({
+      targets: this.fondoI,
+      y: -1440, 
+      delay:500,         // Valor final de la posición en x
+      duration: 500,  // Duración de la animación en milisegundos
+      ease: 'Linear',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+      yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
+      repeat: 0,    // Repetir infinitamente
+      persist: true
+
+    })
+  }
+  tweenFondD1() {
+    this.tweens.add
+      ({
+        targets: this.fondoD,
+        y: 720,          // Valor final de la posición en x
+        duration: 500,  // Duración de la animación en milisegundos
+        ease: 'Linear',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+        yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
+        repeat: 0,    // Repetir infinitamente
+        persist: true
+
+      })
+  }
+  tweenFondD2() {
+    this.tweens.add
+      ({
+        targets: this.fondoD,
+        y: 1440,          // Valor final de la posición en x
+        duration: 500,  // Duración de la animación en milisegundos
+        ease: 'Linear',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+        yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
+        repeat: 0,    // Repetir infinitamente
+        persist: true
+
+      })
+  }
+  tweenFondD3() {
+    this.tweens.add
+      ({
+        targets: this.fondoD,
+        y: 2160,          // Valor final de la posición en x
+        duration: 500,  // Duración de la animación en milisegundos
+        ease: 'Linear',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+        yoyo: false,      // Hacer que la animación vuelva hacia atrás al final
+        repeat: 0,    // Repetir infinitamente
+        persist: true
+
+      })
+      
+  }
+
   //Vuelve a la escena del Hub
   finalDelJuego() {
     console.clear();
