@@ -46,6 +46,10 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.load.image('exclamacion', "/assets/juego/MetroSkaters/imagenes/Exclamacion.png");
         // Animaciones:
         this.load.spritesheet("explosion", "/assets/juego/MetroSkaters/imagenes/Explosion.png", { frameWidth: 120, frameHeight: 120 });
+        // Cosas para mostrar como tutorial:
+        this.load.image('derecha', "/assets/juego/MetroSkaters/imagenes/tecladerecha.png")
+        this.load.image('izquierda', "/assets/juego/MetroSkaters/imagenes/teclaizquierda.png")
+        this.load.image('teclado', "/assets/juego/MetroSkaters/imagenes/teclado.png")
     }
 
     create() {
@@ -105,6 +109,10 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.obstaculo1.yaEjecutado = false;
         this.obstaculo2.yaEjecutado = false;
         this.ovni.yaEjecutado = false;
+        // Cosas para mostrar al jugador:
+        this.tecladerecha = this.add.image(650, 200, 'derecha').setOrigin(0, 0).setScale(0.5, 0.5).setDepth(4);
+        this.teclaizquierda = this.add.image(350, 270, 'izquierda').setOrigin(0, 0).setScale(0.5, 0.5).setDepth(4);
+        this.teclado = this.add.image(65, 500, 'teclado').setOrigin(0, 0).setScale(0.3, 0.25).setDepth(4);
         //#endregion
         //#region objetos del juego
         // Arrays de posibles combinaciones de obstaculos y secuencias:
