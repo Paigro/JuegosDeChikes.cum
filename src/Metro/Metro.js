@@ -65,7 +65,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.decision = false; // Para saber si hay decision del jugador.
         // Puntuacion:
         this.puntFict = 0; // Puntuacion ficticia.
-        this.DetGen = 0; // Puntuacion del test
+        this.DetGen = 0; // Puntuacion del test.
         this.marcador = this.add.text(16, 16, "Score: 0", { fontSize: '40px', fill: '#fff' }).setPosition(0, 10).setDepth(3); // Texto para mostrar la puntuacion.
         // Otros:
         this.sec = ""; // Secuencia generada aleatoriamente.
@@ -109,10 +109,10 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.obstaculo1.yaEjecutado = false;
         this.obstaculo2.yaEjecutado = false;
         this.ovni.yaEjecutado = false;
-        // Cosas para mostrar al jugador:
-        this.tecladerecha = this.add.image(650, 200, 'derecha').setOrigin(0, 0).setScale(0.5, 0.5).setDepth(4);
-        this.teclaizquierda = this.add.image(350, 270, 'izquierda').setOrigin(0, 0).setScale(0.5, 0.5).setDepth(4);
-        this.teclado = this.add.image(65, 500, 'teclado').setOrigin(0, 0).setScale(0.3, 0.25).setDepth(4);
+        // Cosas para mostrar al jugador al principio:
+        this.tecladerecha = this.add.image(740, 300, 'derecha').setScale(0.5, 0.5).setDepth(4);
+        this.teclaizquierda = this.add.image(300, 300, 'izquierda').setScale(0.5, 0.5).setDepth(4);
+        this.teclado = this.add.image(185, 597, 'teclado').setScale(0.9, 0.9).setDepth(4);
         //#endregion
         //#region objetos del juego
         // Arrays de posibles combinaciones de obstaculos y secuencias:
@@ -184,10 +184,47 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 targets: this.ovni,
                 scaleX: 1.6,
                 scaleY: 1.6,
-                duration: 1500,
+                duration: 500,
                 ease: 'Linear'
             });
         });
+        // Twinks de las cosas que se le muestran al jugador al inicio:
+        this.tweens.add({
+            targets: this.tecladerecha,
+            scale: 0.6,
+            duration: 700, // Duracion.
+            ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+            yoyo: true, // No es yoyo.
+            repeat: 1, // Solo se hace una vez.
+            persist: true,
+            onComplete: () => { // Cuando se acaba volvemos a poner el avion desde atras.
+                this.tecladerecha.setVisible(false);
+            }
+        })
+        this.tweens.add({
+            targets: this.teclaizquierda,
+            scale: 0.6,
+            duration: 700, // Duracion.
+            ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+            yoyo: true, // No es yoyo.
+            repeat: 1, // Solo se hace una vez.
+            persist: true,
+            onComplete: () => { // Cuando se acaba volvemos a poner el avion desde atras.
+                this.teclaizquierda.setVisible(false);
+            }
+        })
+        this.tweens.add({
+            targets: this.teclado,
+            scale: 1,
+            duration: 700, // Duracion.
+            ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+            yoyo: true, // No es yoyo.
+            repeat: 1, // Solo se hace una vez.
+            persist: true,
+            onComplete: () => { // Cuando se acaba volvemos a poner el avion desde atras.
+                this.teclado.setVisible(false);
+            }
+        })
         //#endregion
         //#region input
         // Input para detectar la seleccion de la accion del jugador:
