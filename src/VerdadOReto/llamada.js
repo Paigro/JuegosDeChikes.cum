@@ -15,6 +15,7 @@ export default class PhoneCall extends Phaser.GameObjects.Sprite {
     }
 
     DoAction(dragX) {
+        this.scene.tween.pause();
         if (dragX > this.originX && dragX < this.maxX) {
             this.x = dragX;
         }

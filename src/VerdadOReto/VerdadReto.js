@@ -25,7 +25,9 @@ export default class TruthOrDare extends Phaser.Scene {
 
 
         this.llamada = new PhoneCall(this, 420, 590);
+        this.llamada.angle = 10;    //para q vibre en el tween
         this.mensaje = new Message(this, 525, 160);
+        this.mensaje.angle = 10     //para q vibre en el tween
         this.secondMensaje;
         this.score;
 
@@ -53,6 +55,16 @@ export default class TruthOrDare extends Phaser.Scene {
             alert("Score: " + this.ExtInt);
         });
 
+        this.tween = this.tweens.add({
+            targets: [ this.llamada, this.mensaje ],
+            delay: 0,
+            angle: -10,          // Valor final de la posición en x
+            duration: 80,  // Duración de la animación en milisegundos
+            ease: 'Linear',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
+            yoyo: true,      // Hacer que la animación vuelva hacia atrás al final
+            repeat: -1,    // Repetir infinitamente
+            persist: true
+        });
     }
 
 
@@ -63,6 +75,8 @@ export default class TruthOrDare extends Phaser.Scene {
         this.coor = data; //coordinador
         this.ExtInt = 0; // Puntuacion de extroversion (negativo) e introversion (positivo).
         this.timer;
+
+        
 
         this.waitForAnswer();
     }
@@ -91,6 +105,7 @@ export default class TruthOrDare extends Phaser.Scene {
     throwAction(){
         this.apareceLLamada();
         this.apareceMensaje();
+        this.tween.resume();
 
         this.waitForAnswer();
     }
@@ -112,13 +127,14 @@ export default class TruthOrDare extends Phaser.Scene {
         }
         this.desapareceLLamada();
         this.desapareceMensaje();
+        this.tween.pause();
 
         this.secondMensaje?.destroy();
         this.waitForAction();
     }
 
     finalDelJuego() {
-        this.coor.SaveScore("EspOrg", this.ExtInt);
+        this.coor.SaveScore("ExtInt", this.ExtInt);
         this.points = 0;
         this.scene.start("Hub");
     }
