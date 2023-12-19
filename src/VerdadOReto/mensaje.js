@@ -16,10 +16,10 @@ export default class Message extends Phaser.GameObjects.Sprite
         this.scene.secondMensaje= this.scene.add.image(this.x, this.y + 80, 'mensaje2').setScale(0.5, 0.5).setInteractive();
 
         this.scene.secondMensaje.on('pointerdown', (pointer) => {
-            this.scene.desaparece(this);
+            this.scene.desapareceMensaje();
             this.scene.secondMensaje.destroy();
             this.scene.AddScore(1);
-            this.scene.AddExtIntScore(-1);
+            this.scene.AddExtIntScore(1);
             this.scene.time.removeEvent(this.scene.timer);
             this.scene.waitForAction();
         })

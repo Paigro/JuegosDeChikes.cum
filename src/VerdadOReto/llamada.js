@@ -3,7 +3,7 @@ export default class PhoneCall extends Phaser.GameObjects.Sprite {
         super(scene, x, y, 'llamada');
         this.originX = x;
         this.maxX = 635;
-        this.finalX= 620;
+        this.finalX= 600;
 
 
         this.setScale(0.5, 0.5);
@@ -22,13 +22,14 @@ export default class PhoneCall extends Phaser.GameObjects.Sprite {
 
     FinishAction() {
         if (this.x < this.finalX) {
-            this.x = this.originX;
+           
             console.log(this.x)
+            this.x = this.originX;
         }
         else {
             this.scene.AddScore(1);
             this.scene.AddExtIntScore(-1);
-            this.scene.desaparece(this);
+            this.scene.desapareceLLamada();
             this.scene.time.removeEvent(this.scene.timer);
             this.scene.waitForAction();
             this.x = this.originX;

@@ -1,6 +1,6 @@
 import Hub from "./hub.js";
 import Metro from "./Metro/Metro.js";
-import TruthOrDare from "./VerdadReto.js";
+import TruthOrDare from "./VerdadOReto/VerdadReto.js";
 import Papas from "./Papas/papas.js";
 import BumBumClack from "./Bum Bum Klak/bumKlak.js";
 import AbogadoClick from "./Clickers/AbogadoClick.js";
