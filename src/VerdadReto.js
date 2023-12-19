@@ -1,6 +1,6 @@
-import coordinator from "../coordinator.js";
-import PhoneCall from './llamada.js';
-import Hub from '../hub.js';
+//import Message from './../src/mensaje.js';
+import PhoneCall from './../src/llamada.js';
+import Hub from './hub.js';
 import Message from './mensaje.js';
 
 export default class TruthOrDare extends Phaser.Scene {
@@ -28,6 +28,8 @@ export default class TruthOrDare extends Phaser.Scene {
         this.mensaje = new Message(this, 525, 160);
         this.secondMensaje;
         this.score = 0;
+
+
 
         //this.add.text(0, 200, this.ExtInt,{fill: '#FFA500'}).setOrigin(0, 0).setScale(3, 3);
 
