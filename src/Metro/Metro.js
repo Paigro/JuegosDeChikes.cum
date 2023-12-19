@@ -1,423 +1,346 @@
 import Generador from "./Generador.js";
 import Avion from "./avion.js";
-import secuanciaTeclas from "./secuenciaTeclas.js";
-//import teclasArribaAbajo from "./teclasArribaAbajo.js";
+import secuenciaTeclas from "./secuenciaTeclas.js";
 
 export default class Metro extends Phaser.Scene // Manager de la escena del Metro Skaters.
 {
     constructor() {
-        // Nombre de la escena para el SceneManager
-        super({ key: 'Metro', active: false });
+        super({ key: 'Metro', active: false }); // Nombre de la escena para el SceneManager
     }
 
     // Metodos init, preload, create, update:
     init(data) {
         this.coor = data;
         this.cameras.main.setBackgroundColor("#84E2FE");
-
     }
 
     preload() {
         // IMAGENES:
+        // Boton:
+        this.load.image('atras', "/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
         // Avion:
         this.load.image('avion', "/assets/juego/MetroSkaters/imagenes/Avion.png"); // Cargamos la imagen del avion.
-        // Fondo:
-        this.load.image('cielo', "/assets/juego/MetroSkaters/imagenes/cielo.jpg") // Cargamos la imagen del fondo.
-        //Boton:
-        this.load.image('atras', "/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('avionAparece', "/assets/juego/MetroSkaters/imagenes/AvionAparece.png"); // Cargamos la imagen del avion.
         // Panel:
         this.load.image('panel', "/assets/juego/MetroSkaters/imagenes/Panel.png"); // Cargamos la imagen del panel inferior.
         // Letras:
-        this.load.image('A', "/assets/juego/MetroSkaters/imagenes/A.png");
-        this.load.image('S', "/assets/juego/MetroSkaters/imagenes/S.png");
-        this.load.image('D', "/assets/juego/MetroSkaters/imagenes/D.png");
-        this.load.image('F', "/assets/juego/MetroSkaters/imagenes/F.png");
+        this.load.image('a', "/assets/juego/MetroSkaters/imagenes/A.png");
+        this.load.image('s', "/assets/juego/MetroSkaters/imagenes/S.png");
+        this.load.image('d', "/assets/juego/MetroSkaters/imagenes/D.png");
+        this.load.image('f', "/assets/juego/MetroSkaters/imagenes/F.png");
+        this.load.image('g', "/assets/juego/MetroSkaters/imagenes/G.png");
+        this.load.image('h', "/assets/juego/MetroSkaters/imagenes/H.png");
+        this.load.image('i', "/assets/juego/MetroSkaters/imagenes/I.png");
+        this.load.image('j', "/assets/juego/MetroSkaters/imagenes/J.png");
+        this.load.image('k', "/assets/juego/MetroSkaters/imagenes/K.png");
+        this.load.image('l', "/assets/juego/MetroSkaters/imagenes/L.png");
+        this.load.image('m', "/assets/juego/MetroSkaters/imagenes/M.png");
+        this.load.image('p', "/assets/juego/MetroSkaters/imagenes/P.png");
+        this.load.image('q', "/assets/juego/MetroSkaters/imagenes/Q.png");
+        this.load.image('r', "/assets/juego/MetroSkaters/imagenes/R.png");
+        this.load.image('v', "/assets/juego/MetroSkaters/imagenes/V.png");
         // Obstaculos:
-        this.load.image('OVNI', "/assets/juego/MetroSkaters/imagenes/ovni2.png");
-        this.load.image('nube', "/assets/juego/MetroSkaters/imagenes/Nube.jpg");
+        this.load.image('OVNI', "/assets/juego/MetroSkaters/imagenes/Ovni.png");
+        this.load.image('obstaculo', "/assets/juego/MetroSkaters/imagenes/Avion2.png");
         // Exclamacion:
         this.load.image('exclamacion', "/assets/juego/MetroSkaters/imagenes/Exclamacion.png");
+        // Animaciones:
+        this.load.spritesheet("explosion", "/assets/juego/MetroSkaters/imagenes/Explosion.png", { frameWidth: 120, frameHeight: 120 });
+        // Cosas para mostrar como tutorial:
+        this.load.image('derecha', "/assets/juego/MetroSkaters/imagenes/tecladerecha.png")
+        this.load.image('izquierda', "/assets/juego/MetroSkaters/imagenes/teclaizquierda.png")
+        this.load.image('teclado', "/assets/juego/MetroSkaters/imagenes/teclado.png")
     }
 
     create() {
-
-        this.hayAlgo = false;
-        this.waitTime = true;
+        //#region parametros.
+        // Tiempo:
+        this.time = 60;
+        this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#fff' }).setPosition(0, 50).setDepth(3); // Texto para mostrar la puntuacion.
+        // Booleanos para controlar el juego:
+        this.hayAlgo = false; // Para saber si hay cosas generadas.
+        this.waitTime = true; // Para que hay un tiempo de espera entre acciones.
+        this.avionAcc = false; // Para saber si esta en la accion del avion.
+        this.secuenciaAcc = false; // Para saber si esta en la accion de la secuencia.
+        this.decision = false; // Para saber si hay decision del jugador.
+        // Puntuacion:
         this.puntFict = 0; // Puntuacion ficticia.
-        this.avionAcc = false; // Booleano para saber la accion del avion.
-        this.secuenciaAcc = false; // Booleano para saber la accion de la secuencia.
-        this.decision = false; // Booleano para saber si hay decision.
-        this.colision = false;
-        this.playerSec = ""; // Secuencia del jugador.
-        this.i = 0; // Para que se hagan 4 acciones: 4 obstaculos o 4 secuencias.
-        this.j = 0; // Para las secuencias: que solo se lean 4 letras antes de comprobar.
-        this.timer = 0;
-        this.timer2 = 0;
-        this.elapsedTime = 0;
-        this.DetGen = 0; // Puntuacion del test
-        this.secBien = 0;
-
-        // Nuevos bordes del mundo para el movimiento del avion:
-        this.physics.world.setBounds(0, 0, 1080, 450);
-        // Teclas para mover el avion:
-        this.upKey = this.input.keyboard.addKey('UP'); // Flecha arriba.
-        this.downKey = this.input.keyboard.addKey('DOWN'); // Flecha abajo.
-        this.rightKey = this.input.keyboard.addKey('RIGHT'); // Flecha derecha.
-        this.leftKey = this.input.keyboard.addKey('LEFT'); // Flecha izquierda.
-        // Teclas para la secuencia.
-        this.aKey = this.input.keyboard.addKey("A"); // Tecla A.
-        this.sKey = this.input.keyboard.addKey("S"); // Tecla S.
-        this.dKey = this.input.keyboard.addKey("D"); // Tecla D.
-        this.fKey = this.input.keyboard.addKey("F"); // Tecla F.
-
-        //this.add.image(0, 0, 'cielo').setOrigin(0, 0).setScale(10, 10); // Ponemos la imagen del fondo.
-        this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Ponemos la imagen de volver atras.
-        
-        // Ponemos las letras.
-        this.A = this.add.sprite(0, 500, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.S = this.add.sprite(0, 500, 'S').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.D = this.add.sprite(0, 500, 'D').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.F = this.add.sprite(0, 500, 'F').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.A2 = this.add.sprite(0, 610, 'A').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.S2 = this.add.sprite(0, 610, 'S').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.D2 = this.add.sprite(0, 610, 'D').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        this.F2 = this.add.sprite(0, 610, 'F').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
-        // Exclamaciones:
-        this.exclamacion1 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
-        this.exclamacion2 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
-        //this.exclamacion3 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
-        // Ponemos los obstaculos con su fisicas:
-        this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(false).setDepth(1);
-        this.nube1 = this.add.sprite(1080, 200, 'nube').setOrigin(0, 0).setScale(0.05, 0.05).setVisible(true).setDepth(1);
-        //this.nube2 = this.add.sprite(1000, 100, 'nube').setOrigin(0, 0).setScale(0.2, 0.2).setVisible(true).setDepth(1);
-        this.physics.add.existing(this.ovni);
-        this.physics.add.existing(this.nube1);
-        //this.physics.add.existing(this.nube2);
-
-        this.ovni.body.setImmovable(true);
-        this.nube1.body.setImmovable(true);
-        //this.nube2.body.setImmovable(true);
-
-        // Boton de volver atras:
+        this.DetGen = 0; // Puntuacion del test.
+        this.marcador = this.add.text(16, 16, "Score: 0", { fontSize: '40px', fill: '#fff' }).setPosition(0, 10).setDepth(3); // Texto para mostrar la puntuacion.
+        // Otros:
+        this.sec = ""; // Secuencia generada aleatoriamente.
+        this.elapsedTime = 0; // Para calcular el tiempo de espera.
+        /*// Boton de volver atras (provisional):
+        this.atras = this.add.image(1000, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive().setDepth(3);
         this.atras.on('pointerdown', (pointer) => {
             this.finalDelJuego()
-        });
-
-        this.posicionesSec = [330, 450, 580, 690]; // Posiciones en x para la aparicion de las letras de las secuencias.
-
-
-        //RECUERDA ESTO PABLO:
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // Pablo no te olvides de esto:
-
-
-        // Cambiar a 4 posiciones porque sino queda muy vacio.
-        this.posicionesObs = [150, 400, 650];
-
-
-
-
-
-
-        // Mas arriba. :/
-
-
-
-        // Pablo mira arriba.
-
-
-
-
-
-
-
-
-
-        let obstaculos = [[0, 0, 1], [0, 1, 0], [0, 1, 0], [0, 1, 2], [0, 2, 1], [1, 0, 2], [2, 0, 1], [1, 2, 0], [2, 1, 0]]; // Array de arrays de obstaculos: 0 no hay, 1 si hay.
-        let secuencias = ["ASDF", "ASFD", "ADSF", "ADFS", "AFSD", "AFDS", "SDFA", "SDAF", "SFDA", "SFAD", "SAFD", "SADF", "DSFA", "DSAF", "DFSA", "DFAS", "DAFS", "DASF", "FSDA", "FSAD", "FDSA", "FDAS", "FADS"];
-        //let secuencias2 = ["ALSK", "QPEB", "BNPM", "GHTY", "SVPM", "AZCR", "PHGT", "VGLK", "HTML", "SPQR", "VINO", "LSFR", "ERNT", "XRLQ", "POTE", "GOPZ", "AGMI", "FRIM", "COME", "FINA", "OKEY", "COKA", "ZULO"];  // Array de posibles combinaciones.
-
-        // Creacion de las cosas que estaran en la escena:
+        });*/
+        // Para cubrir la accion que no has elegido.
+        this.rectNegro = this.add.graphics();
+        this.rectNegro.fillStyle(0x000000, 0.5).fillRect(0, 0, 1080, 450).setDepth(2).setVisible(false);
+        //#endregion
+        //#region sprites
+        // Teclas para mover el avion:
+        this.rightKey = this.input.keyboard.addKey('RIGHT'); // Flecha derecha.
+        this.leftKey = this.input.keyboard.addKey('LEFT'); // Flecha izquierda.
+        // Letras (ocultas al principio):
+        this.letra1 = this.add.sprite(330, 500, 'a').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letra2 = this.add.sprite(450, 500, 's').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letra3 = this.add.sprite(580, 500, 'd').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letra4 = this.add.sprite(690, 500, 'f').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letraP1 = this.add.sprite(330, 610, 'a').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letraP2 = this.add.sprite(450, 610, 's').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letraP3 = this.add.sprite(580, 610, 'd').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        this.letraP4 = this.add.sprite(690, 610, 'f').setOrigin(0, 0).setScale(1.3, 1.4).setVisible(false).setDepth(1);
+        // Exclamaciones (ocultas al principio):
+        this.exclamacion1 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
+        this.exclamacion2 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
+        this.exclamacion3 = this.add.sprite(0, 200, 'exclamacion').setOrigin(0, 0).setVisible(false).setDepth(1);
+        // Obstaculos con sus fisicas (ocultos al principio) e inmovibles:
+        this.ovni = this.add.sprite(1080, 200, 'OVNI').setOrigin(0, 0).setVisible(false).setDepth(1).setInteractive();
+        this.obstaculo1 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1).setInteractive();
+        this.obstaculo2 = this.add.sprite(1080, 200, 'obstaculo').setScale(1.5, 1.5).setOrigin(0, 0).setVisible(true).setDepth(1).setInteractive();
+        this.physics.add.existing(this.ovni);
+        this.physics.add.existing(this.obstaculo1);
+        this.physics.add.existing(this.obstaculo2);
+        this.ovni.body.setImmovable(true).setSize(60, 60, true);
+        this.obstaculo1.body.setImmovable(true).setSize(60, 60, true);
+        this.obstaculo2.body.setImmovable(true).setSize(60, 60, true);
+        this.obstaculo1.yaEjecutado = false;
+        this.obstaculo2.yaEjecutado = false;
+        this.ovni.yaEjecutado = false;
+        // Cosas para mostrar al jugador al principio:
+        this.tecladerecha = this.add.image(740, 300, 'derecha').setScale(0.5, 0.5).setDepth(4);
+        this.teclaizquierda = this.add.image(300, 300, 'izquierda').setScale(0.5, 0.5).setDepth(4);
+        this.teclado = this.add.image(185, 597, 'teclado').setScale(0.9, 0.9).setDepth(4);
+        //#endregion
+        //#region objetos del juego
+        // Arrays de posibles combinaciones de obstaculos y secuencias:
+        let obstaculos = [[0, 1, 2, 0], [1, 0, 3, 2], [0, 2, 1, 0], [0, 2, 0, 1], [0, 0, 1, 2], [0, 0, 2, 1], [1, 0, 2, 0], [1, 0, 0, 2], [1, 2, 0, 0], [1, 0, 2, 0], [2, 0, 1, 0], [2, 0, 0, 1], [2, 1, 0, 0], [2, 3, 1, 0], [2, 3, 0, 1], [0, 1, 0, 2]];
+        let secuencias = ["adfj", "adfs", "adsf", "afgh", "afkd", "aghd", "agmi", "ajgf", "akfj", "aldf", "alfs", "dagk", "dalk", "dfas", "dflk", "dsfa", "fdka", "fdks", "fsda", "gafk", "gldk", "glah", "glhf", "hflk", "hafl", "jaja", "java", "jdsa", "jsjs", "kahd", "kafd", "kalh", "kjhl", "klgj", "lgas", "lhkf", "ljah", "lpgr", "sgha", "sglf", "sjga", "sjha", "spqr"];        // Creacion de las cosas que estaran en la escena:
+        // Cosas de la escena:
         this.generador = new Generador(this, 0, 0, obstaculos, secuencias); // Generador de cosas.
-        this.avion = new Avion(this, 400, 250); // El avion.
-        this.secuenciaTeclas = new secuanciaTeclas(this, 0, 450); // La secuencia de teclas.
-
-        // Detectar la eleccion de la accion del jugador.
+        this.avion = new Avion(this, 520, 270); // El avion.
+        this.secuencia = new secuenciaTeclas(this, 0, 450); // La secuencia de teclas.
+        //#endregion
+        //#region animacions y twinks
+        // Animaciones:
+        this.anims.create({
+            key: 'explosion',
+            frames: this.anims.generateFrameNumbers("explosion", { start: 0, end: 4 }),
+            frameRate: 6,
+            repeat: 0
+        });
+        // Twinks:
+        this.avion.on('animationcomplete-explosion', () => {
+            this.avion.setY(750).setX(520).setScale(3, 3).setTexture('avionAparece');
+            this.tweens.add({
+                targets: this.avion,
+                y: 270,
+                duration: 1500, // Duracion.
+                ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+                yoyo: false, // No es yoyo.
+                repeat: 0, // Solo se hace una vez.
+                persist: true,
+                onComplete: () => { // Cuando se acaba volvemos a poner el avion desde atras.
+                    this.avion.setTexture('avion');
+                }
+            })
+            this.tweens.add({
+                targets: this.avion,
+                scaleX: 1.6,
+                scaleY: 1.6,
+                duration: 2000, // Duracion.
+                ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+                yoyo: false, // No es yoyo.
+                repeat: 0, // Solo se hace una vez.
+                persist: true
+            })
+        }, this);
+        // Para cuando aparezcan los obstaculos:
+        this.obstaculo1.on('setvisible', () => {
+            this.obstaculo1.setScale(0.6, 0.6);
+            this.tweens.add({
+                targets: this.obstaculo1,
+                scaleX: 1.6,
+                scaleY: 1.6,
+                duration: 1500,
+                ease: 'Linear'
+            });
+        });
+        this.obstaculo2.on('setvisible', () => {
+            this.obstaculo2.setScale(0.6, 0.6);
+            this.tweens.add({
+                targets: this.obstaculo2,
+                scaleX: 1.6,
+                scaleY: 1.6,
+                duration: 1500,
+                ease: 'Linear'
+            });
+        });
+        this.ovni.on('setvisible', () => {
+            this.ovni.setScale(0.6, 0.6);
+            this.tweens.add({
+                targets: this.ovni,
+                scaleX: 1.6,
+                scaleY: 1.6,
+                duration: 500,
+                ease: 'Linear'
+            });
+        });
+        // Twinks de las cosas que se le muestran al jugador al inicio:
+        this.tweens.add({
+            targets: this.tecladerecha,
+            scale: 0.6,
+            duration: 700, // Duracion.
+            ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+            yoyo: true, // No es yoyo.
+            repeat: 1, // Solo se hace una vez.
+            persist: true,
+            onComplete: () => { // Cuando se acaba volvemos a poner el avion desde atras.
+                this.tecladerecha.setVisible(false);
+            }
+        })
+        this.tweens.add({
+            targets: this.teclaizquierda,
+            scale: 0.6,
+            duration: 700, // Duracion.
+            ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+            yoyo: true, // No es yoyo.
+            repeat: 1, // Solo se hace una vez.
+            persist: true,
+            onComplete: () => { // Cuando se acaba volvemos a poner el avion desde atras.
+                this.teclaizquierda.setVisible(false);
+            }
+        })
+        this.tweens.add({
+            targets: this.teclado,
+            scale: 1,
+            duration: 700, // Duracion.
+            ease: 'Out', // No veo diferencia entre las diferentes opciones asi que se queda esta.
+            yoyo: true, // No es yoyo.
+            repeat: 1, // Solo se hace una vez.
+            persist: true,
+            onComplete: () => { // Cuando se acaba volvemos a poner el avion desde atras.
+                this.teclado.setVisible(false);
+            }
+        })
+        //#endregion
+        //#region input
+        // Input para detectar la seleccion de la accion del jugador:
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
             if (!this.decision && this.hayAlgo) { // Solo si se permite una accion y hya una opcion que tomar miramos cual puede ser.
                 if (event.key === "ArrowLeft" || event.key === "ArrowRight") { // Accion 1: mover al avion.
                     console.log("Seleccion: avion.");
+                    this.rectNegro.setPosition(0, 450).setVisible(true);
+                    this.changeTestPunt(1);
                     this.avionAcc = true;
                     this.decision = true;
                 }
-                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f") { // Accion 2: secuancia de teclas.
+                else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r" || event.key === "v") { // Accion 2: secuencia de teclas.
                     console.log("Selecion: teclas.");
+                    this.rectNegro.setPosition(0, 0).setVisible(true);
+                    this.changeTestPunt(-1);
+                    this.secuencia.setSec(this.sec);
                     this.secuenciaAcc = true;
                     this.decision = true;
                 }
             }
         });
+        // Input para las secuencias:
+        this.input.keyboard.on('keydown', (event) => {
+            if (this.decision && this.hayAlgo && this.secuenciaAcc) {
+                if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r" || event.key === "v") {
+                    this.secuencia.teclasSecuencia(event.key);
+                }
+            }
+        });
+        //#endregion
     }
-    // Para pasarle keys a un objeto. this.akey=scene.input.keyboard.addkey(keysconfig.a); y el keys config se lo pasas desde la constructora del objeto.
+
     update(time, delta) {
-        //console.log("Sec: " + this.sec);
-        //console.log("Obs: " + this.obs);
+        // GENERACION DE COSAS, TIEMPO DE ESPERA Y TIEMPO FINAL:
         if (!this.hayAlgo && !this.waitTime && !this.decision) {
+            // Logs:
             console.log("Generado de cosas, esperando decision del jugador.");
+            // Generacion aleatoria:
             this.sec = this.generador.secuenciaGenerador();
             this.obs = this.generador.osbtaculoGenerador();
-            this.mostrarSecuencia();
-            this.mostrarObstaculos();
+            // Mostrarlo:
+            this.secuencia.mostrarSecuencia(this.sec);
+            this.avion.mostrarObstaculos(this.obs);
+            // Poner que hay algo para que no se generen mas cosas:
             this.hayAlgo = true;
-        } else if (this.waitTime && !this.hayAlgo && !this.decision) {
-            console.log("Tiempo que no hay nada.")
-            if (this.elapsedTime >= 3000) {
+        }
+        else if (this.waitTime && !this.hayAlgo && !this.decision && this.time >= 0) {
+            console.log("Tiempo que no hay nada.");
+            if (this.elapsedTime >= 2500) {
                 this.elapsedTime = 0;
                 this.waitTime = false;
-            } else this.elapsedTime += this.sys.game.loop.delta;
+            }
+            else this.elapsedTime += this.sys.game.loop.delta;
         }
-
+        else if (!this.decision && this.time <= 0) {
+            this.finalDelJuego();
+        }
+        // ACCIONES:
         if (this.decision && this.avionAcc && !this.secuenciaAcc) // Accion avion.
         {
-            this.mostrarObstaculos(); // Render de los obstaculos.
-            this.movientoAvion() // Movimiento del avion.
-            if (this.timer2 >= 5000) {
-                this.puntFict += 100;
-                this.DetGen++;
-                if (this.DetGen === 0) { this.DetGen++; }
-                console.log("PUNTUACION: " + this.puntFict);
-                console.log("TEST: " + this.DetGen);
-                this.reset();
-            }
-            // Colisiones del avion con los obstaculos:
-            this.physics.world.collide(this.avion, this.ovni, () => {
-                //console.log("Colision con ovni.");
-                this.colision = true;
-                this.puntFict -= 50;
-                console.log("PUNTUACION: " + this.puntFict);
-                console.log("TEST: " + this.DetGen);
-                this.reset();
-            });
-            this.physics.world.collide(this.avion, this.nube1, () => {
-                //console.log("Colision con nube.");
-                this.colision = true;
-                this.puntFict -= 50;
-                console.log("PUNTUACION: " + this.puntFict);
-                console.log("TEST: " + this.DetGen);
-                this.reset();
-            });
-            this.timer2 += this.sys.game.loop.delta;
+            this.avion.meToca(this.obs);
         }
         else if (this.decision && this.secuenciaAcc && !this.avionAcc) // Accion secuencia.
         {
-            this.mostrarSecuencia(); // Render de la secuencia.
-            if (this.i < 4) // Cuatro secuencias.
-            {
-                if (this.j < 4) // Cuatro letras de la secuencia.
-                {
-                    if (this.teclasSecuencia()) {
-                        if (this.sec[this.j] != this.playerSec[this.j]) {
-                            this.j = 5;
-                            if (this.puntFict > 0) {
-                                this.puntFict -= 10; // Solo resta puntuacion si hay puntuacion que restar.
-                            }
-                        }
-                        this.j++; // Sumamos una letra.
-                    }
-                }
-                else // Cuando la secuencia del jugador tiene ya 4 letras.
-                {
-                    if (this.j === 4) {
-                        this.secBien++;
-                        this.puntFict += 50;
-                    }
-                    this.j = 0; // Reseteamos el numero de letra.
-                    this.i++; // Sumamos una secuencia.
-                    this.playerSec = ""; // Reseteamos la secuencia.
-                    this.sec = this.generador.secuenciaGenerador(); // Generamos otra secuencia aleatoria.
-                    this.A2.setVisible(false);
-                    this.S2.setVisible(false);
-                    this.D2.setVisible(false);
-                    this.F2.setVisible(false);
-                }
-            }
-            else // Cuando haya hecho 4 secuencias.
-            {
-                //console.log("PUNTUACIONFICT: " + this.puntFict);
-                if (this.secBien === 4) {
-                    this.DetGen--;
-                    if (this.DetGen === 0) { this.DetGen--; }
-                }
-                console.log("PUNTUACION: " + this.puntFict);
-                console.log("TEST: " + this.DetGen);
-                this.reset();
-                //console.log("5: i: " + this.i + " j: " + this.j);
-                //console.log("6: sec: " + this.sec + " playerSec: " + this.playerSec);
-            }
+            this.avion.noMeToca(this.obs);
+        }
+        // TIEMPO:
+        this.time -= (delta / 1000);
+        if (this.time >= 0) {
+            this.contador.setText('Time: ' + this.time.toFixed(2));
+        }
+        else {
+            this.contador.setText('Time: ' + "acabe usted la accion.");
         }
 
     }
 
-    movientoAvion() {
-        if (this.upKey.isDown) {
-            this.avion.body.setVelocityY(-this.avion.speed);
-        }
-        else if (this.downKey.isDown) {
-            this.avion.body.setVelocityY(this.avion.speed);
-        }
-        else if (this.rightKey.isDown) {
-            this.avion.body.setVelocityX(this.avion.speed);
-        }
-        else if (this.leftKey.isDown) {
-            this.avion.body.setVelocityX(-this.avion.speed);
-        }
-        else if (Phaser.Input.Keyboard.JustUp(this.upKey) || Phaser.Input.Keyboard.JustUp(this.downKey) || Phaser.Input.Keyboard.JustUp(this.rightKey) || Phaser.Input.Keyboard.JustUp(this.leftKey)) {
-            this.avion.body.setVelocityY(0);
-            this.avion.body.setVelocityX(0);
-        }
+    changePuntFict(pun) {
+        this.puntFict += pun;
+        this.marcador.setText('Puntuación: ' + this.puntFict);
+        console.log("PUNTUACION: " + this.puntFict);
     }
 
-    teclasSecuencia() {
-
-        if (Phaser.Input.Keyboard.JustUp(this.aKey)) {
-            this.playerSec += "A";
-            this.A2.x = this.posicionesSec[this.j];
-            this.A2.setVisible(true);
-            return true;
-        }
-        else if (Phaser.Input.Keyboard.JustUp(this.sKey)) {
-            this.playerSec += "S";
-            this.S2.x = this.posicionesSec[this.j];
-            this.S2.setVisible(true);
-            return true;
-        }
-        else if (Phaser.Input.Keyboard.JustUp(this.dKey)) {
-            this.playerSec += "D";
-            this.D2.x = this.posicionesSec[this.j];
-            this.D2.setVisible(true);
-            return true;
-        }
-        else if (Phaser.Input.Keyboard.JustUp(this.fKey)) {
-            this.playerSec += "F";
-            this.F2.x = this.posicionesSec[this.j];
-            this.F2.setVisible(true);
-            return true;
-        }
-        else return false;
-    }
-
-    mostrarSecuencia() {
-        for (let i = 0; i < this.sec.length; i++) {
-            // Hacemos visible la letra que toca en la posicion que toca:
-            switch (this.sec[i]) {
-                case 'A':
-                    this.A.x = this.posicionesSec[i];
-                    this.A.setVisible(true);
-                    break;
-                case 'S':
-                    this.S.x = this.posicionesSec[i];
-                    this.S.setVisible(true);
-                    break;
-                case 'D':
-                    this.D.x = this.posicionesSec[i];
-                    this.D.setVisible(true);
-                    break;
-                case 'F':
-                    this.F.x = this.posicionesSec[i];
-                    this.F.setVisible(true);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    mostrarObstaculos() {
-        for (let i = 0; i < this.obs.length; i++) {
-            switch (this.obs[i]) {
-                case 0:
-                    break;
-                case 1:
-                    if (this.timer >= 2000) {
-                        this.ovni.x = this.posicionesObs[i];
-                        this.exclamacion1.setVisible(false);
-                        this.ovni.setVisible(true);
-                    }
-                    else {
-                        this.exclamacion1.x = this.posicionesObs[i];
-                        this.exclamacion1.setVisible(true);
-                        this.timer += this.sys.game.loop.delta;
-                    }
-                    break
-                case 2:
-                    if (this.timer >= 2000) {
-                        this.nube1.x = this.posicionesObs[i];
-                        this.exclamacion2.setVisible(false);
-                        this.nube1.setVisible(true);
-                    }
-                    else {
-                        this.exclamacion2.x = this.posicionesObs[i];
-                        this.exclamacion2.setVisible(true);
-                        this.timer += this.sys.game.loop.delta;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-
+    changeTestPunt(pun) {
+        this.DetGen += pun;
+        if (this.DetGen == 0) { this.DetGen += pun; }
+        console.log("TEST: " + this.DetGen);
     }
 
     reset() {
-        //if (this.secuenciaAcc && this.decision) {
-        this.playerSec = "";
-        this.i = 0;
-        this.j = 0;
-        this.A.setVisible(false);
-        this.S.setVisible(false);
-        this.D.setVisible(false);
-        this.F.setVisible(false);
-        this.A2.setVisible(false);
-        this.S2.setVisible(false);
-        this.D2.setVisible(false);
-        this.F2.setVisible(false);
-        this.secBien = 0;
-        this.secuenciaAcc = false;
-        this.decision = false;
-        //console.log("Fin accion secuencias.");
-        //}
-        //else if (this.avionAcc && this.decision) {
-        this.obs = [0, 0, 0];
-        this.avion.body.setVelocityX(0);
-        this.i = 0;
+        this.rectNegro.setVisible(false);
+        // Reseteo de las cosas de la secuencia:
+        this.letra1.setVisible(false);
+        this.letra2.setVisible(false);
+        this.letra3.setVisible(false);
+        this.letra4.setVisible(false);
+        this.secuencia.reset();
+        // Reseteo de las cosas de la accion del avion:
         this.exclamacion1.setVisible(false);
         this.exclamacion2.setVisible(false);
+        this.exclamacion3.setVisible(false);
         this.ovni.setVisible(false);
-        this.nube1.setVisible(false);
+        this.obstaculo1.setVisible(false);
+        this.obstaculo2.setVisible(false);
         this.ovni.x = 1080;
-        this.nube1.x = 1080;
-        this.colision = false;
-        this.timer = 0;
-        this.timer2 = 0;
+        this.obstaculo1.x = 1080;
+        this.obstaculo2.x = 1080;
+        this.avion.reset();
+        // Reseteo de los booleanos:
+        this.secuenciaAcc = false;
         this.avionAcc = false;
         this.decision = false;
-        //console.log("Fin accion avion.");
         this.hayAlgo = false;
         this.waitTime = true;
-        //}
-        //this.elapsedTime = 0;
+        console.log("Reseteo de buenos dias.");
     }
 
     finalDelJuego() {
@@ -426,4 +349,4 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         console.clear();
         this.scene.start("Hub");
     }
-} 
+}

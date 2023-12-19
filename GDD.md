@@ -49,15 +49,22 @@ Si al final del minijuego el jugador tiene el contador en positivo entonces es o
 
 ![PappasGalleteria](assets/Bocetos/PappasGalleteria.PNG)
 
-***METRO SKATERS: SPECIAL EDITION (FLIGHT RUSH):***  habrá dos secciones en la pantalla, en la superior habrá un avión y en la inferior un panel de control. Enonces simultáneamente en la parte inferior aparecerá un código y en la superior obstáculos y el jugador deberá decidir entre:
+***METRO SKATERS: SPECIAL EDITION (FLIGHT RUSH):***  habrá dos secciones en la pantalla, en la superior habrá un avión y en la inferior un panel de control. Enonces simultáneamente en la parte inferior aparecerá un código y en la superior unas exclamaciones y el jugador deberá decidir:
 
--Escribir la secuencia que le han dado con el teclado. Se restará al contador General/Detallista.
+-Escribir la secuencia que le han dado con el teclado. Al acabar una apararecera otra hasta que el jugador haga 4 en total. Cuando el jugador comente un error salta a la siguiente. Cada secuencia bien hecha suma 25 puntos ficticios que se muestras en pantalla. Cuando falla se restan 10. Cuando se elige la acción aunque falle o acierte las secuancias se restará al contador General/Detallista.
 
--Mover el avión con las flechas de teclado evitando que se choque. Se sumará al contador General/Detallista.
+-Mover el avión con las flechas de teclado evitando que se choque. Si al pasar un tiempo no se ha chocado se sumará al contador General/Detallista.
 
 Si al final del minijuego el jugador tiene el contador en positivo entonces es general y si está en negativo entonces será detallista.
 
-![MetroSkaters](assets/Bocetos/MetroSkaters.PNG)
+Situacion inicial al entrar al minijuego:
+![MetroSkaters](assets/Bocetos/MetroIni.PNG)
+
+Cuando se hace la accion del avion:
+![MetroSkaters](assets/Bocetos/MetroAvi.PNG)
+
+Cuando se hace la accion de la secuencia:
+![MetroSkaters](assets/Bocetos/MetroSec.PNG)
 
 **CLIKERS (*NICE TO HAVE*)**
 Cuando al jugador se le da el resultado del test cuando acaba los 4 minijuegos, se le muestra la personalidad que es. Algunas personalidades tendrán un desbloqueable que será un clicker con una temática distinta.
@@ -73,7 +80,7 @@ Cuando al jugador se le da el resultado del test cuando acaba los 4 minijuegos, 
 y muchos más… (probablemente)
 
 ## **Dinámica:**
-Al ser la primera vez que juegas tienes desbloqueados los cuatro minijuegos principales. Cada minijuego sigue una dinámica con un ritmo acelerado para conseguir mayor puntuación ficticia:
+Al ser la primera vez que juegas tienes desbloqueado el primer minijuego principale. A medida que completas minijuegos apareceran el resto. Cada minijuego sigue una dinámica con un ritmo acelerado para conseguir mayor puntuación ficticia:
 
 -"Verdad o reto": click y deslizar.
 
@@ -99,15 +106,15 @@ Referencia principal: Melatonin.
 
 PALETA DE COLORES: Cada minijuego tiene una paleta de colores concreta dependiendo del tipo de personalidad que represente:
 
-"Verdad o reto": Colores azulados.
+"Verdad o reto": Colores morados.
 
 "Bum Bum Klak": Colores verdosos.
 
-"Oven Madness: Papa's Galletería": Colores rojizos.
+"Oven Madness: Papa's Galletería": Colores rojizos y naranjas.
 
-"Metro Skaters: Special Edition (Flight Rush)": Colores morados.
+"Metro Skaters: Special Edition (Flight Rush)": Colores azulados.
 
-La página web tiene un fondo anaranjado pero cuando desbloqueas una personalidad, el fondo se torna al color de la personalidad que consigues.
+La página web tiene un fondo anaranjado pero cuando desbloqueas una personalidad, el fondo se torna del color de la personalidad que consigues.
 
 *Nice to have:* Los minijuegos extra que consigues al desbloquear una personalidad tienen un color que representa esa personalidad-
 ## **MockUps:**
