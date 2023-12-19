@@ -1,3 +1,7 @@
+import corazon from "./corazon.js";
+import cerebro from "./cerebro.js";
+import bocadillo from "./bocadillos.js";
+
 export default class BumKlak extends Phaser.Scene{
 
     constructor() {
@@ -23,11 +27,45 @@ export default class BumKlak extends Phaser.Scene{
       this.atras.on('pointerdown', (pointer) => {
         this.finalDelJuego();
       });
+      
+      //elementos
       this.escuchador = this.add.image(50, 350, 'escuchador').setOrigin(0,0).setScale(1, 1);
-      this.escuchador = this.add.image(750, 350, 'parlanchin').setOrigin(0,0).setScale(0.3, 0.3);
+      this.parlante = this.add.image(750, 350, 'parlanchin').setOrigin(0,0).setScale(0.3, 0.3);
+      this.corazon = new corazon(this, 165, 550);
+      this.cerebro = new cerebro(this, 135, 400);
+      this.bocadilloHablador = new bocadillo(this, 600, 170, 0.7, 0);     // bocata de respuesta
+      this.bocadilloRespondedor = new bocadillo(this, 450, 360, 0.7, 1);  // bocata parlanchin
+      //texto
+      this.textohablador = this.add.text(350, 100, "respuesta", {fontSize: '20px', fill: '#000000'});  // bocata parlanchin
+      this.textorespondedor = this.add.text(200, 300, "pregunta", {fontSize: '20px', fill: '#000000'}); // bocata de respuesta
+      // puntuaciones
+      this.punTest = 0;  // puntuación test
+      this.puntuacion = 0;  // puntuación del juego perse
+      //cosas del debug
+      this.debug = 0; // variable usada para debug
+      this.debugtext = this.add.text(200, 0, "0", { fontSize: '40px', fill: '#000000' }).setPosition(200, 0);
+      this.debugMov = 0;
+      // inputs
+      this.spaceKey = this.input.keyboard.addKey('W');
+      this.Gkey = this.input.keyboard.addKey('G');
+
+
     }
+    preupdate()
+    {
+
+    }
+
+    update()
+    {
+      this.debug++;
+      this.debugtext.setText(this.debug);
+    }
+
+
+
     finalDelJuego()
-{    
-    this.scene.start("Hub");
-}
+    {    
+      this.scene.start("Hub");
+    }
 }
