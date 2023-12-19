@@ -64,7 +64,7 @@ export default class TruthOrDare extends Phaser.Scene {
         this.ExtInt = 0; // Puntuacion de extroversion (negativo) e introversion (positivo).
         this.timer;
 
-        this.throwAction();
+        this.waitForAnswer();
     }
     update(time, delta){
 
@@ -91,7 +91,6 @@ export default class TruthOrDare extends Phaser.Scene {
     throwAction(){
         this.apareceLLamada();
         this.apareceMensaje();
-        console.log("tirada")
 
         this.waitForAnswer();
     }
@@ -138,12 +137,12 @@ export default class TruthOrDare extends Phaser.Scene {
         this.mensaje.setVisible(false);
     }
     apareceLLamada() {
-        ()=> this.llamada.setActive(true);
-        ()=> this.llamada.setVisible(true);
+        this.llamada.setActive(true);
+        this.llamada.setVisible(true);
     }
     apareceMensaje() {
-        ()=> this.mensaje.setActive(true);
-        ()=> this.mensaje.setVisible(true);
+        this.mensaje.setActive(true);
+        this.mensaje.setVisible(true);
     }
 }
 //this.scene.pause(this.scene.key);
