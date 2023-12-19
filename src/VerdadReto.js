@@ -62,7 +62,7 @@ export default class TruthOrDare extends Phaser.Scene {
         this.realTime = 0; // Tiempo real, ya se cambiara en un futuro que haya dos tiempos. Esto es para probar.
         this.finalTime = 100000; // Duracion del minijuego.
        // this.score = 0; // Puntuacion ficticia mostrada al jugador.
-        this.limitTime = 2000; // Timpo que tiene el jugador para responder a una llamada o a un mensaje.
+        this.limitTime = 500; // Timpo que tiene el jugador para responder a una llamada o a un mensaje.
         this.ExtInt = 0; // Puntuacion de extroversion (negativo) e introversion (positivo).
         this.timer;
         this.waitForAction();
@@ -72,7 +72,7 @@ export default class TruthOrDare extends Phaser.Scene {
 
     waitForAction(){
         this.timer = this.time.addEvent( {
-            delay: 2000, 
+            delay: 20000, 
             callback: () => this.throwAction(),
             callbackScope: this 
     });
