@@ -1,6 +1,4 @@
 
-import CorteGalletas from "./CorteGalletas.js";
-
 export default class Corte extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, corteSpr) {
         super(scene, x, y, corteSpr);
@@ -22,7 +20,7 @@ export default class Corte extends Phaser.GameObjects.Sprite {
 
         this.visible = true;
         this.input.enabled = true;
-        //console.log(this.cutted + "appear");
+        console.log(this.cutted + "appear");
     }
 
     hide() {

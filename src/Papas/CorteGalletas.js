@@ -1,14 +1,13 @@
-import AccionBase from "../accionBase.js";
 import Corte from "./Corte.js"
 
-export default class CorteGalletas extends AccionBase {
+export default class CorteGalletas extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, bandejaSpr, corteSpr) {
         super(scene, x, y, bandejaSpr);
 
         this.setScale(.85, .85);
         this.setInteractive();
 
-        this.cortador = new Corte(scene, x-100, y-50, corteSpr);
+        this.cortador = new Corte(scene, 200, 330, corteSpr);
         this.scene.add.existing(this);
         this.setDepth(1);
         this.cortador.hide();
@@ -28,10 +27,13 @@ export default class CorteGalletas extends AccionBase {
        //console.log("Start accion");
 
     }
+    BlockThisAction() {
+        this.scene.tweenBandejaIFuera();
+        //console.log("ha entrado");
+      }
 
     Reset() {
         //console.log("reset accion");
-        super.Reset();
         this.input.enabled = true;
         this.cortador.hide();
     }

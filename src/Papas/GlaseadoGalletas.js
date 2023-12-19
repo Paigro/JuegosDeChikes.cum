@@ -1,17 +1,15 @@
-import AccionBase from "../accionBase.js";
 import Galletas from "./Galletas.js"
 
-export default class CorteGalletas extends AccionBase {
+export default class CorteGalletas extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, bandejaSpr, glasSpr) {
         super(scene, x, y, bandejaSpr);
-
         this.setScale(.75, .75);
         this.setInteractive();
 
         this.scene.add.existing(this);
         this.setDepth(1);
 
-        this.glaseado = new Galletas(scene, x, y, glasSpr);
+        this.glaseado = new Galletas(scene, x, 430, glasSpr).setOrigin(.5,.5);
         this.glaseado.hide();
 
         //Variables y propiedades
@@ -46,9 +44,12 @@ export default class CorteGalletas extends AccionBase {
             this.pulsado = false;
         })
 
-        scene.input.enableDebug(this);
+        //scene.input.enableDebug(this);
     };
-
+    BlockThisAction() {
+        this.scene.tweenFondD2();
+        //console.log("ha entrado");
+      }
     reiniciarTemporizador() {
         this.elapsedTime = this.timer;
     }
@@ -81,7 +82,8 @@ export default class CorteGalletas extends AccionBase {
     }
 
     BlockThisAction() {
-        this.visible = false;
+        //this.visible = false;
+        this.scene.tweenBandejaDFuera();
         this.glaseado.hide();
         //console.log("ha entrado");
     }
@@ -96,10 +98,13 @@ export default class CorteGalletas extends AccionBase {
 
     }
 
+    SetGlaseadoPosition(){
+        this.glaseado.x = this.x;
+        this.glaseado.y = this.y;
+    }
 
     Reset() {
         //console.log("reset accion");
-        super.Reset();
         this.input.enabled = true;
         this.porcentaje = .001;
         this.contador = false;
