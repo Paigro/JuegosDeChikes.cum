@@ -4,10 +4,10 @@ export default class CorteGalletas extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, bandejaSpr, corteSpr) {
         super(scene, x, y, bandejaSpr);
 
-        this.setScale(.85, .85);
+        this.setScale(.75, .75);
         this.setInteractive();
 
-        this.cortador = new Corte(scene, 200, 330, corteSpr);
+        this.cortador = new Corte(scene, 140, 330, corteSpr);
         this.scene.add.existing(this);
         this.setDepth(1);
         this.cortador.hide();
@@ -16,7 +16,7 @@ export default class CorteGalletas extends Phaser.GameObjects.Sprite {
             this.cortador.move();
         })
 
-        scene.input.enableDebug(this);
+        //scene.input.enableDebug(this);
     };
 
 

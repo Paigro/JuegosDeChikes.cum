@@ -8,7 +8,7 @@ export default class Papas extends Phaser.Scene {
     // Nombre de la escena para el SceneManager
     super({ key: 'Papas', active: false });
 
-    this.time = 100;
+    this.time = 60;
     this.points = 0;
   }
 
@@ -22,20 +22,28 @@ export default class Papas extends Phaser.Scene {
     this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
 
     //Carga de imagenes del juego
-    this.load.image('BandejaCorte', '/assets/juego/PapasGalleteria/Bandeja_1.png'); // Cargamos la imagen de volver atras (provisional).
-    this.load.image('BordGallet', '/assets/juego/PapasGalleteria/Borde_Galleta.png'); // Cargamos la imagen de volver atras (provisional).
-    this.load.image('MarcaGallet', '/assets/juego/PapasGalleteria/Marca_Galleta.png'); // Cargamos la imagen de volver atras (provisional).
-    this.load.image('BandejaGlased', '/assets/juego/PapasGalleteria/Bandeja_Base.png'); // Cargamos la imagen de volver atras (provisional).
-    this.load.image('GlaseadoGallet', '/assets/juego/PapasGalleteria/Glaseado_Galleta.png'); // Cargamos la imagen de volver atras (provisional).
-    this.load.image('Fondo', '/assets/juego/PapasGalleteria/FondoDer.png'); // Cargamos la imagen de volver atras (provisional).
-    //this.load.image('FondoI', '/assets/juego/PapasGalleteria/FondoIzq.png'); // Cargamos la imagen de volver atras (provisional).
+    this.load.image('BandejaCorte', '/assets/juego/PapasGalleteria/Bandeja_Base.png');
+    this.load.image('BordGallet', '/assets/juego/PapasGalleteria/Borde_Galleta.png');
+    this.load.image('MarcaGallet', '/assets/juego/PapasGalleteria/Marca_Galleta.png');
+    this.load.image('BandejaGlased', '/assets/juego/PapasGalleteria/Bandeja_Base.png');
+    this.load.image('GlaseadoGallet', '/assets/juego/PapasGalleteria/Glaseado_Galleta.png');
+    this.load.image('Fondo', '/assets/juego/PapasGalleteria/FondoDer.png');
+    //this.load.image('FondoI', '/assets/juego/PapasGalleteria/FondoIzq.png');
+    this.load.image('Separador', '/assets/juego/PapasGalleteria/Separacion.png'); 
   }
 
 
   create() {
+
+    //Contador en pantalla:
+    this.contador = this.add.text(540, 20, "Time: 0", { fontSize: '40px', fill: '#fff', fontFamily:'Comic Sans MS'}).setOrigin(0.5, 0).setDepth(4); // Texto para mostrar la puntuacion.
+
     //Fondo    
     this.fondoD = this.add.image(540, 0, 'Fondo').setOrigin(0, 0) // el fondo
     this.fondoI = this.add.image(0, -1440, 'Fondo').setOrigin(0, 0) // el fondo
+
+    //Separador de Acciones    
+    this.separador = this.add.image(540, 360, 'Separador').setOrigin(0.5, 0.5).setDepth(3) // el fondo
 
     //Boton de salir
     this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
@@ -44,11 +52,11 @@ export default class Papas extends Phaser.Scene {
     });
 
     //Propiedades
-    this.time = 1000;
+    this.time = 60;
     this.endRound = false;
 
     // Elementos del juego
-    this.bandeja1 = new CorteGalletas(this, 300, 800, 'BandejaCorte', 'MarcaGallet');
+    this.bandeja1 = new CorteGalletas(this, 250, 800, 'BandejaCorte', 'MarcaGallet');
     this.bandeja2 = new GlaseadoGalletas(this, 800, 300, 'BandejaGlased', 'GlaseadoGallet').setScale(0.5, 0.1).setAlpha(0.01);
     this.tweenFondD1();
     this.tweenFondI1();
@@ -84,6 +92,7 @@ export default class Papas extends Phaser.Scene {
       //console.log(this.endRound);
     }
     else {
+      this.contador.setText('Time: ' + this.time.toFixed(2))
       //console.log(this.time);
       this.time -= (delta / 1000);
     }
@@ -99,10 +108,10 @@ export default class Papas extends Phaser.Scene {
     //Reseteo animaciones
     this.tweenFondD3();
     this.tweenFondI3();
-    
+
   }
-//#region tweens
-//#region Izquierdo
+  //#region tweens
+  //#region Izquierdo
   tweenFondI1() {
     this.tweens.add
       ({
@@ -174,7 +183,7 @@ export default class Papas extends Phaser.Scene {
         persist: true
 
       })
-      // bandeja sale
+    // bandeja sale
     this.tweens.add
       ({
         targets: this.bandeja1,
@@ -188,13 +197,13 @@ export default class Papas extends Phaser.Scene {
         persist: true
 
       })
-      //resetea posicion bandeja
+    //resetea posicion bandeja
     this.tweens.add
       ({
         targets: this.bandeja1,
         delay: 700,
         y: 800,
-        x: 275,
+        x: 225,
         duration: 700,  // Duración de la animación en milisegundos
         ease: 'cubic',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
         repeat: 0,    // Repetir infinitamente
@@ -206,8 +215,8 @@ export default class Papas extends Phaser.Scene {
       })
   }
   //#endregion
-  
-//#region Derecho
+
+  //#region Derecho
   tweenFondD1() {
     this.tweens.add
       ({
@@ -276,7 +285,7 @@ export default class Papas extends Phaser.Scene {
         persist: true
 
       })
-      // bandeja sale
+    // bandeja sale
     this.tweens.add
       ({
         targets: this.bandeja2,
@@ -288,7 +297,7 @@ export default class Papas extends Phaser.Scene {
         persist: true
 
       })
-      //resetea posicion bandeja
+    //resetea posicion bandeja
     this.tweens.add
       ({
         targets: this.bandeja2,
@@ -307,8 +316,8 @@ export default class Papas extends Phaser.Scene {
 
       })
   }
-//#endregion
-//#endregion
+  //#endregion
+  //#endregion
 
   //Vuelve a la escena del Hub
   finalDelJuego() {

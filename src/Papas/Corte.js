@@ -3,6 +3,8 @@ export default class Corte extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, corteSpr) {
         super(scene, x, y, corteSpr);
 
+        this.setScale(1.5, 1.5);
+        this.setOrigin(0.5,0.5);
         this.scene.add.existing(this);
         this.setInteractive();
 
@@ -13,7 +15,7 @@ export default class Corte extends Phaser.GameObjects.Sprite {
         
 
         this.setDepth(2);
-        scene.input.enableDebug(this);
+        //scene.input.enableDebug(this);
     }
 
     appear() {
