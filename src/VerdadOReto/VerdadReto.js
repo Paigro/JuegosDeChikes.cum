@@ -21,7 +21,7 @@ export default class TruthOrDare extends Phaser.Scene {
         this.add.image(0, 0, 'calle').setOrigin(0, 0).setScale(0.5, 0.5); // Añadimos la imagen del fondo.
         this.add.image(310, 10, 'telefono').setOrigin(0, 0).setScale(0.5, 0.4); // Añadimos la imagen del telefono.
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
-        this.puntuacion = this.add.image(800, 0, 'score').setOrigin(0, 0).setScale(0.2, 0.2).setInteractive(); // Añadimos la imagen del fondo.
+        this.marcador = this.add.text(16, 16, "Score: 0", { fontSize: '40px', fill: '#fff',  fontFamily:'Comic Sans MS' }).setPosition(0, 10).setDepth(3); // Texto para mostrar la puntuacion.
 
 
         this.llamada = new PhoneCall(this, 420, 590);
@@ -51,15 +51,12 @@ export default class TruthOrDare extends Phaser.Scene {
         this.atras.on('pointerdown', (pointer) => {
             this.finalDelJuego();
         });
-        this.puntuacion.on('pointerdown', (pointer) => {
-            alert("Score: " + this.ExtInt);
-        });
 
         this.tween = this.tweens.add({
             targets: [ this.llamada, this.mensaje ],
             delay: 0,
             angle: -10,          // Valor final de la posición en x
-            duration: 80,  // Duración de la animación en milisegundos
+            duration: 110,  // Duración de la animación en milisegundos
             ease: 'Linear',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
             yoyo: true,      // Hacer que la animación vuelva hacia atrás al final
             repeat: -1,    // Repetir infinitamente
@@ -75,7 +72,6 @@ export default class TruthOrDare extends Phaser.Scene {
         this.coor = data; //coordinador
         this.ExtInt = 0; // Puntuacion de extroversion (negativo) e introversion (positivo).
         this.timer;
-
         
 
         this.waitForAnswer();
@@ -140,6 +136,7 @@ export default class TruthOrDare extends Phaser.Scene {
     }
     AddScore(num) {
         this.score += num;
+        this.marcador.setText('Score: ' + this.score);
     }
     AddExtIntScore(num){
         this.ExtInt += num;
