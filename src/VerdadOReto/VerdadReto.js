@@ -22,10 +22,11 @@ export default class TruthOrDare extends Phaser.Scene {
         this.add.image(310, 10, 'telefono').setOrigin(0, 0).setScale(0.5, 0.4); // Añadimos la imagen del telefono.
         this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
         this.marcador = this.add.text(16, 16, "Score: 0", { fontSize: '40px', fill: '#fff',  fontFamily:'Comic Sans MS' }).setPosition(0, 10).setDepth(3); // Texto para mostrar la puntuacion.
+    
 
-
-        this.llamada = new PhoneCall(this, 420, 590);
+        this.llamada = new PhoneCall(this, 420, 540);
         this.llamada.angle = 10;    //para q vibre en el tween
+        this.llamada.texto =  this.add.text(13, 13, "Tu Abuela", { fontSize: '40px', fill: '#8D2AB4',  fontFamily:'Comic Sans MS', boundsAlignV: "center" }).setPosition(460, 600).setDepth(3).setOrigin(0 ,0.5); // Texto para mostrar la puntuacion.
         this.mensaje = new Message(this, 525, 160);
         this.mensaje.angle = 10     //para q vibre en el tween
         this.secondMensaje;
@@ -53,7 +54,7 @@ export default class TruthOrDare extends Phaser.Scene {
         });
 
         this.tween = this.tweens.add({
-            targets: [ this.llamada, this.mensaje ],
+            targets: [ this.llamada, this.mensaje],
             delay: 0,
             angle: -10,          // Valor final de la posición en x
             duration: 110,  // Duración de la animación en milisegundos
@@ -144,6 +145,7 @@ export default class TruthOrDare extends Phaser.Scene {
     desapareceLLamada() {
         this.llamada.setActive(false);
         this.llamada.setVisible(false);
+        this.llamada.texto.setVisible(false);
     }
     desapareceMensaje() {
         this.mensaje.setActive(false);
@@ -152,6 +154,9 @@ export default class TruthOrDare extends Phaser.Scene {
     apareceLLamada() {
         this.llamada.setActive(true);
         this.llamada.setVisible(true);
+
+        this.llamada.texto.setText(this.llamada.Personas[Math.floor(Math.random() * (5 - 0 + 1)) + 0]);
+        this.llamada.texto.setVisible(true);
     }
     apareceMensaje() {
         this.mensaje.setActive(true);

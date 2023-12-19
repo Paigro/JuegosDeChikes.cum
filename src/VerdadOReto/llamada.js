@@ -4,6 +4,7 @@ export default class PhoneCall extends Phaser.GameObjects.Sprite {
         this.originX = x;
         this.maxX = 635;
         this.finalX= 600;
+        this.Personas = ["Tia Paqui", "Tu Abuela", "Pizza Hut", "Levi", "Paigro", "P. Sanchez"]
 
 
         this.setScale(0.5, 0.5);
