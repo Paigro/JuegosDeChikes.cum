@@ -52,8 +52,7 @@ export default class BumKlak extends Phaser.Scene{
       //this.debugtext = this.add.text(0, 0, "0", {fontSize: '40px', fill: '#000000', fontFamily: 'Comic Sans MS'}).setPosition(200, 0);
       this.debugMov = 0;
       // inputs
-      this.spaceKey = this.input.keyboard.addKey('W');
-      this.Gkey = this.input.keyboard.addKey('G');
+      this.spaceKey = this.input.keyboard.addKey('SPACE');
       // constantes
       this._aavisoApparitionVel = 0.05; // velocidad de aparición del aviso
       this._numDialogos = 7;            // numero de dialogos disponibles
@@ -61,7 +60,8 @@ export default class BumKlak extends Phaser.Scene{
       this.dialognum;                             // indice del dialogo elegido
       this.avisoActivo = false;                   // indica si el aviso está activo
       this.avisoVel = Phaser.Math.Between(2,10);  // velocidad random del aviso
-      this.alreadyFailed = false;                 // indica si ya se ha sancionado el fallo
+      this.alreadySanctioned = false;                 // indica si ya se ha sancionado el fallo
+      this.alreadyGiven = false;
       // setup
       this.bocadilloRespondedor.alpha = 0;
       this.textorespondedor.alpha = 0;
@@ -76,11 +76,21 @@ export default class BumKlak extends Phaser.Scene{
         this.setHablador();
         this.textohablador.alpha = 1;
         this.aviso.setX(1000);
+        this.alreadyGiven = false;
       }
+      if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) 
+      {
+        if(this.avisoActivo)
+        {
+          this.executeAction();
+  
+        }
+      }
+
+
         this.failChecker();
         this.avisoUpdate();
         this.puntuadorUpdate();
-
 
 
 
@@ -94,7 +104,7 @@ export default class BumKlak extends Phaser.Scene{
       this.textohablador.setText(this.generadorDialogo.texto);
     }
 
-    setRespondedor(CoC) // cambia el texto de la respuesta
+    setRespondedor(CoC) // cambia el texto de la respuesta, si CoC = 0, se usa el corazón
     {
       this.generadorDialogo.GeneraTextoRes(this.dialognum, CoC);
       this.textorespondedor.setText(this.generadorDialogo.texto);
@@ -120,10 +130,10 @@ export default class BumKlak extends Phaser.Scene{
           this.aviso.setX(1000);  // lo coloca en su sitio
         }
       }
-      if(this.alreadyFailed && this.aviso.x > 600) this.alreadyFailed = false;
+      if(this.alreadySanctioned && this.aviso.x == 1000) this.alreadySanctioned = false;
     }
 
-    puntuacionManager(SoR, PoP, cantidad)   // suma o resta las puntuaciones
+    puntuacionManager(SoR, PoP, cantidad)   // suma o resta las puntuaciones, SoR = 0, se resta, else se suma, si PoP es 0, se suma a la puntuación del juego...
     {
       // si SoR = 0, se resta, else se suma
       let auxsig;
@@ -147,11 +157,45 @@ export default class BumKlak extends Phaser.Scene{
 
     failChecker() // checkea si el aviso se ha saltado
     {
-      if(this.aviso.x <= 0 && !this.alreadyFailed) 
+      if(this.aviso.x <= 0 && !this.alreadySanctioned) 
       {
-        this.alreadyFailed = true;
+        this.alreadySanctioned = true;
         this.puntuacionManager(1, 0, 20);
       }
+    }
+
+    executeAction()
+    {
+      if(!this.alreadyGiven)
+      {
+        if(this.aviso.x > this.corazon.x - 100 && this.aviso.x < this.corazon.x + 100)  // coloca la respuesta de corazon
+        {
+          this.setRespondedor(0);
+          this.isResActive = true;
+          this.bocadilloRespondedor.alpha = 1;
+          this.textorespondedor.alpha = 1;
+          this.alreadyGiven = true;
+          this.alreadySanctioned = true;
+          this.puntuacionManager(0, 0, 20);
+        }
+        else if(this.aviso.x > this.corazon.x + 100) // coloca la respuesta de cerebro
+        {
+          this.setRespondedor(1);
+          this.isResActive = true;
+          this.bocadilloRespondedor.alpha = 1;
+          this.textorespondedor.alpha = 1;
+          this.alreadyGiven = true;
+          this.alreadySanctioned = true;
+          this.puntuacionManager(0, 0, 20);
+        }
+      }
+    }
+
+    respuestaUpdate()
+    {
+
+
+
     }
 
     finalDelJuego()

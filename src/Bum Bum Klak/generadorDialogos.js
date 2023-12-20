@@ -40,40 +40,33 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
 
     GeneraTextoRes(numDiag, CoC)    // genera el texto de respuesta
     {
-        if(CoC = 0) // si CoC = 0, se usa el corazón
+        if(CoC == 0) // si CoC = 0, se usa el corazón
         {
             switch(numDiag) 
             {
                 case 0:
                     this.texto = "Lo siento mucho :c"
                 break;
-                
                 case 1:
                     this.texto = "No sé. ¿Qué quieres tú?"
                 break;
-                
                 case 2:
                     this.texto = "5"
                 break;
-                
                 case 3:
-                    this.texto = "Yo más."
+                    this.texto = "¡Yo más!"
                 break;
-                
                 case 4:
                     this.texto = "Yo también te odio, tranqui."
                 break;
-
                 case 5:
                     this.texto = "No, lol"
                 break;
-
                 case 6:
                     this.texto = "¡Yo también!"
                 break;
-                
                 case 7:
-                    this.texto = "¿Haz una mortal!"
+                    this.texto = "¡Haz una mortal!"
                 break;
             }
         }
@@ -84,23 +77,18 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
                 case 0:
                     this.texto = "Comprate otro."
                 break;
-                
                 case 1:
                     this.texto = "Arroz con pollo."
                 break;
-                
                 case 2:
                     this.texto = "4"
                 break;
-                
                 case 3:
                     this.texto = "Deberías, todos me quieren."
                 break;
-                
                 case 4:
                     this.texto = "Tranqui, seguro que podemos hablarlo."
                 break;
-
                 case 5:
                     this.texto = "Por supuesto que sí."
                 break;
