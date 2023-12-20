@@ -41,9 +41,9 @@ export default class BumKlak extends Phaser.Scene{
       this.bocadilloRespondedor = new bocadillo(this, 450, 360, 0.7, 1);  // bocata parlanchin
       this.generadorDialogo = new generadorDialogo(this);
       //texto
-      this.textohablador = this.add.text(350, 100, "blablablabla", {fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS'});  // bocata parlanchin
-      this.textorespondedor = this.add.text(200, 300, "blablablablababla", {fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS'}); // bocata de respuesta
-      this.puntuador = this.add.text(0, 0, "69420", {fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS'});  // indica la puntuacion
+      this.textohablador = this.add.text(350, 100, "", {fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS'});  // bocata parlanchin
+      this.textorespondedor = this.add.text(200, 300, "", {fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS'}); // bocata de respuesta
+      this.textopuntuador = this.add.text(0, 0, "69420", {fontSize: '30px', fill: '#1CAF56', fontFamily: 'Comic Sans MS'});  // indica la puntuacion
       // puntuaciones
       this.punTest = 0;  // puntuación test
       this.puntuacion = 0;  // puntuación del juego perse
@@ -55,13 +55,12 @@ export default class BumKlak extends Phaser.Scene{
       this.spaceKey = this.input.keyboard.addKey('W');
       this.Gkey = this.input.keyboard.addKey('G');
       // constantes
-      this._apparitionVel = 0.05;
-      this._numDialogos = 7;
+      this._aavisoApparitionVel = 0.05; // velocidad de aparición del aviso
+      this._numDialogos = 7;            // numero de dialogos disponibles
       // variables
-      this.dialognum;
-      this.habladortrans = 0;
-      this.avisoActivo = false;
-      this.avisoVel = Phaser.Math.Between(2,10);
+      this.dialognum;                             // indice del dialogo elegido
+      this.avisoActivo = false;                   // indica si el aviso está activo
+      this.avisoVel = Phaser.Math.Between(2,10);  // velocidad random del aviso
       // setup
       this.bocadilloRespondedor.alpha = 0;
       this.textorespondedor.alpha = 0;
@@ -77,16 +76,13 @@ export default class BumKlak extends Phaser.Scene{
         this.textohablador.alpha = 1;
         this.aviso.setX(1000);
       }
+
         this.avisoUpdate();
-      
+        this.puntuadorUpdate();
 
 
 
 
-
-      // tener en cuenta para hacer visibles luego
-      this.debug = this.debug - 0.03;
-      if(this.debug < 0) this.debug = 0;
     }
 
     setHablador() // cambia el texto del muñeco parlanchin
@@ -106,22 +102,46 @@ export default class BumKlak extends Phaser.Scene{
     {
       if(this.avisoActivo)  // mientras este activo
       {  
-        this.aviso.setX(this.aviso.x - this.avisoVel);  // lo hace avanzar 
-        this.aviso.alpha = this.aviso.alpha + this._apparitionVel;  // lo hace destransparentarse poco a poco
-        if(this.aviso.x < 0)
+        this.aviso.setX(this.aviso.x - this.avisoVel);              // lo hace avanzar 
+        this.aviso.alpha = this.aviso.alpha + this._aavisoApparitionVel;  // lo hace destransparentarse poco a poco
+        if(this.aviso.x + 50 < 0) // una vez queda fuera de pantalla...
         {
-          this.avisoActivo = false;
-          this.avisoVel = Phaser.Math.Between(3,10);
+          this.avisoActivo = false;                   // se desactiva
+          this.avisoVel = Phaser.Math.Between(3,10);  // se crea una velocidad aleatoria para el siguiente aviso
         }
       }
       else 
       {
-        this.aviso.alpha = this.aviso.alpha - this._apparitionVel;
+        this.aviso.alpha = this.aviso.alpha - this._aavisoApparitionVel;  // se le hace ir desapareciendo gradualmente
         if(this.aviso.alpha < 0)
         {
-          this.aviso.setX(1000);
+          this.aviso.setX(1000);  // lo coloca en su sitio
         }
       }
+    }
+
+    puntuacionManager(SoR, PoP, cantidad)   // suma o resta las puntuaciones
+    {
+      // si SoR = 0, se resta, else se suma
+      let auxsig;
+      if(SoR == 0) auxsig = 1;
+      else auxsig = -1;
+
+      if(PoP = 0) // si es 0, se suma a la puntuación del juego...
+      {
+        this.puntuacion = this.puntuacion + auxsig * cantidad
+      }
+      else  // de lo contrario se suma
+      {
+        this.punTest = this.punTest + auxsig * cantidad;
+      }
+    }
+
+    puntuadorUpdate()
+    {
+      this.textopuntuador.setText("Puntuación: " + this.puntuacion);
+
+
     }
 
     finalDelJuego()
