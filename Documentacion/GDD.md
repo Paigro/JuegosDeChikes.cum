@@ -17,7 +17,7 @@ El juego consistirá en cuatro minijuegos. En cada uno, se le presentará la opo
 A ojos del jugador en cada minijuego recibe una puntuación ficticia del mismo, que no significa nada pero ayuda a encubrir el test.
 Los minijuegos no tendrán diferentes dificultades pero durante cada minijuego el tiempo que se le da al jugador para elegir una de las dos opciones es menor por lo que tendrá que reaccionar más rápido.
 
-![PaginaWeb](assets/Bocetos/PaginaWeb.PNG)
+![PaginaWeb](/assets/Bocetos/PaginaWeb.PNG)
 ### Minijuegos:
 ***VERDAD O RETO (TRUTH OR DARE):*** aparecera un móvil al que simultaneamente le llegarán una notificación de mensaje y una llamada. El jugador deberá de decidir cual de ellos responder, una vez responda uno, no podrá responder el otro. Si al ir a reponder uno, no llega a completar la acción en un tiempo, se vuelve al telefono normal y perderá puntuación ficticia. Eñ tiempo que tiene el jugador para poder realizar la accion irá disminuyendo a lo largo de la duración del minijuego. 
 
@@ -28,13 +28,13 @@ Los minijuegos no tendrán diferentes dificultades pero durante cada minijuego e
 Si al final del minijuego el jugador tiene el contador en positivo entonces es introvertido y si está en negativo entonces será extrovertido.
 
 Esperando a que el jugador seleccione la accion:
-![TruthOrDare](assets/Bocetos/ToDEsp.PNG)
+![TruthOrDare](/assets/Bocetos/ToDEsp.PNG)
 
 Cuando el jugador selecciona la llamada:
-![TruthOrDare](assets/Bocetos/ToDLla.PNG)
+![TruthOrDare](/assets/Bocetos/ToDLla.PNG)
 
 Cuando el jugador selecciona el mensaje:
-![TruthOrDare](assets/Bocetos/ToDMMen.PNG)
+![TruthOrDare](/assets/Bocetos/ToDMMen.PNG)
 
 ***BUM BUM KLAK:*** habrá dos siluetas de personas en la pantalla. Una representará al jugador (su silueta esta cortada a la mitad pudiendose ver su corazón y cerebro) y la otra representa a otra persona. La segunda persona va lanzando diferentes frases en bocadillos que van dirigidor al jugador. La velocidad de estos bocadillos irá subiendo a medida que avance el minijuego. El jugador podrá interactuar con ellos:
 
@@ -44,7 +44,7 @@ Cuando el jugador selecciona el mensaje:
 
 Si al final del minijuego el jugador tiene el contador en positivo entonces es racional y si está en negativo entonces será sentimental.
 
-![BumBumKlak](assets/Bocetos/BumBumKlak.PNG)
+![BumBumKlak](/assets/Bocetos/BumBumKlak.PNG)
 
 ***OVEN MADNESS: PAPPA'S GALLETERIA:*** aparecerá un horno con dos puertas. Entonces aparecerán dos bandejas, una que va a entrar y otra que sale. El jugador interactuará con una de ellas. Al seleccionar una bandeja el jugador deberá:
 
@@ -55,13 +55,13 @@ Si al final del minijuego el jugador tiene el contador en positivo entonces es r
 Si al final del minijuego el jugador tiene el contador en positivo entonces es organizado y si está en negativo entonces será espontáneo.
 
 Esperando a que el jugador seleccione una bandeja:
-![PappasGalleteria](assets/Bocetos/PapasEsp.PNG)
+![PappasGalleteria](/assets/Bocetos/PapasEsp.PNG)
 
 Cuando el jugador selecciona la bandeja para glasear:
-![PappasGalleteria](assets/Bocetos/PapasGla.PNG)
+![PappasGalleteria](/assets/Bocetos/PapasGla.PNG)
 
 Cuando el jugador selecciona la bandeja para cortar galletas:
-![PappasGalleteria](assets/Bocetos/PapasCor.PNG)
+![PappasGalleteria](/assets/Bocetos/PapasCor.PNG)
 
 ***METRO SKATERS: SPECIAL EDITION (FLIGHT RUSH):***  habrá dos secciones en la pantalla, en la superior habrá un avión y en la inferior un panel de control. El jugador tiene un tienpo para interactuar, si pasa esse tiempo se reinicia y aparecen nuevas excalmaciones y secuencias. Al pasar 60 segundo el juego acaba y lleva al resultado final. Si el jugador esta en mitad de una accion no se cerrará el juego sino que se esperará a que el jugador acabe esa acción. Entonces simultáneamente en la parte inferior aparecerá un código y en la superior unas exclamaciones y el jugador deberá decidir:
 
@@ -72,13 +72,13 @@ Cuando el jugador selecciona la bandeja para cortar galletas:
 Si al final del minijuego el jugador tiene el contador en positivo entonces es general y si está en negativo entonces será detallista.
 
 Situacion inicial al entrar al minijuego:
-![MetroSkaters](assets/Bocetos/MetroIni.PNG)
+![MetroSkaters](/assets/Bocetos/MetroIni.PNG)
 
 Cuando se hace la accion del avion:
-![MetroSkaters](assets/Bocetos/MetroAvi.PNG)
+![MetroSkaters](/assets/Bocetos/MetroAvi.PNG)
 
 Cuando se hace la accion de la secuencia:
-![MetroSkaters](assets/Bocetos/MetroSec.PNG)
+![MetroSkaters](/assets/Bocetos/MetroSec.PNG)
 
 **CLIKERS (*NICE TO HAVE*)**
 Cuando al jugador se le da el resultado del test cuando acaba los 4 minijuegos, se le muestra la personalidad que es. Algunas personalidades tendrán un desbloqueable que será un clicker con una temática distinta.
@@ -133,15 +133,15 @@ La página web tiene un fondo anaranjado pero cuando desbloqueas una personalida
 *Nice to have:* Los minijuegos extra que consigues al desbloquear una personalidad tienen un color que representa esa personalidad-
 ## **MockUps:**
 #### Página web:
-![PaginaWeb](assets/Bocetos/PaginaWeb.PNG)
+![PaginaWeb](/assets/Bocetos/PaginaWeb.PNG)
 #### Verdad o reto: 
-![TruthOrDare](assets/Bocetos/TruthOrDare.PNG)
+![TruthOrDare](/assets/Bocetos/TruthOrDare.PNG)
 #### Bum Bum Klak:
-![BumBumKlak](assets/Bocetos/BumBumKlak.PNG)
+![BumBumKlak](/assets/Bocetos/BumBumKlak.PNG)
 #### Oven Madness: Papa's Galletería:
-![PappasGalleteria](assets/Bocetos/PappasGalleteria.PNG)
+![PappasGalleteria](/assets/Bocetos/PappasGalleteria.PNG)
 #### Metro Skaters: Special Edition (Flight Rush):
-![MetroSkaters](assets/Bocetos/MetroSkaters.PNG)
+![MetroSkaters](/assets/Bocetos/MetroSkaters.PNG)
 
 ## Recursos:
 
