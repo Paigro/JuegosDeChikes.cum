@@ -46,7 +46,7 @@ export default class BumKlak extends Phaser.Scene{
       this.textopuntuador = this.add.text(0, 0, "69420", {fontSize: '30px', fill: '#1CAF56', fontFamily: 'Comic Sans MS'});  // indica la puntuacion
       // puntuaciones
       this.punTest = 0;  // puntuación test
-      this.puntuacion = 7;  // puntuación del juego perse
+      this.puntuacion = 0;  // puntuación del juego perse
       //cosas del debug
       this.debug = 1; // variable usada para debug
       //this.debugtext = this.add.text(0, 0, "0", {fontSize: '40px', fill: '#000000', fontFamily: 'Comic Sans MS'}).setPosition(200, 0);
@@ -61,6 +61,7 @@ export default class BumKlak extends Phaser.Scene{
       this.dialognum;                             // indice del dialogo elegido
       this.avisoActivo = false;                   // indica si el aviso está activo
       this.avisoVel = Phaser.Math.Between(2,10);  // velocidad random del aviso
+      this.alreadyFailed = false;                 // indica si ya se ha sancionado el fallo
       // setup
       this.bocadilloRespondedor.alpha = 0;
       this.textorespondedor.alpha = 0;
@@ -76,10 +77,10 @@ export default class BumKlak extends Phaser.Scene{
         this.textohablador.alpha = 1;
         this.aviso.setX(1000);
       }
-
+        this.failChecker();
         this.avisoUpdate();
         this.puntuadorUpdate();
-        this.puntuacionManager(0, 0, 1);
+
 
 
 
@@ -119,6 +120,7 @@ export default class BumKlak extends Phaser.Scene{
           this.aviso.setX(1000);  // lo coloca en su sitio
         }
       }
+      if(this.alreadyFailed && this.aviso.x > 600) this.alreadyFailed = false;
     }
 
     puntuacionManager(SoR, PoP, cantidad)   // suma o resta las puntuaciones
@@ -132,7 +134,7 @@ export default class BumKlak extends Phaser.Scene{
       {
         this.puntuacion = this.puntuacion + auxsig * cantidad
       }
-      else  // de lo contrario se suma
+      else  // de lo contrario se suma al test
       {
         this.punTest = this.punTest + auxsig * cantidad;
       }
@@ -141,6 +143,15 @@ export default class BumKlak extends Phaser.Scene{
     puntuadorUpdate() // actualiza el puntuador
     {
       this.textopuntuador.setText("Puntuación: " + this.puntuacion);
+    }
+
+    failChecker() // checkea si el aviso se ha saltado
+    {
+      if(this.aviso.x <= 0 && !this.alreadyFailed) 
+      {
+        this.alreadyFailed = true;
+        this.puntuacionManager(1, 0, 20);
+      }
     }
 
     finalDelJuego()
