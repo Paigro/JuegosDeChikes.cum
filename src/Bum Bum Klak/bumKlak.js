@@ -13,6 +13,7 @@ export default class BumKlak extends Phaser.Scene {
 
   init(data) {
     this.coor = data;
+    //console.log(data);
     this.cameras.main.setBackgroundColor("#99FF99");
   }
 
@@ -158,6 +159,7 @@ export default class BumKlak extends Phaser.Scene {
     else  // de lo contrario se suma al test
     {
       this.punTest = this.punTest + auxsig * cantidad;
+      console.log(this.punTest);
     }
   }
 
@@ -208,8 +210,10 @@ export default class BumKlak extends Phaser.Scene {
   }
 
   finalDelJuego() {
-    this.coor.SaveScore("SenRac", this.punTest);
+    this.coor.SaveScore("SenRac", this.SenRac);
+    //console.log(this.SenRac);
     console.clear();
+    //console.log("Hecho");
     this.scene.start("Hub", this.coor);
   }
 }
