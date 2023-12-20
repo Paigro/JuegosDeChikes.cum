@@ -32,7 +32,6 @@ export default class Hub extends Phaser.Scene {
 
     //Desbloqueo de minijuego
     if (this.juegsDesbloq < 5) { this.juegsDesbloq++; }
-    console.log(this.coordinator.returnPersonalidad());
 
     //Scroll minijuegos
     this.scroll = this.add.image(0, 0, 'Scroll').setInteractive({ draggable: true }).setScale(1, 100).setDepth(2);
@@ -112,4 +111,4 @@ export default class Hub extends Phaser.Scene {
     document.body.style.backgroundColor = color;
     this.cameras.main.setBackgroundColor(color);
   }
-} 
+}
