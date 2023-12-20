@@ -36,15 +36,23 @@ Cuando el jugador selecciona la llamada:
 Cuando el jugador selecciona el mensaje:
 ![TruthOrDare](/assets/Bocetos/ToDMMen.PNG)
 
-***BUM BUM KLAK:*** habrá dos siluetas de personas en la pantalla. Una representará al jugador (su silueta esta cortada a la mitad pudiendose ver su corazón y cerebro) y la otra representa a otra persona. La segunda persona va lanzando diferentes frases en bocadillos que van dirigidor al jugador. La velocidad de estos bocadillos irá subiendo a medida que avance el minijuego. El jugador podrá interactuar con ellos:
+***BUM BUM KLAK:*** habrá dos siluetas de personas en la pantalla. Una representará al jugador (su silueta esta cortada a la mitad pudiendose ver su corazón y cerebro) y la otra representa a otra persona. La segunda persona va lanzando diferentes frases en bocadillos que van dirigidor al jugador. La velocidad de estos bocadillos será aleatoria durante el minijuego. El jugador podrá interactuar con ellos usando la barra espaciadora:
 
 -Puede esperar que llegue al corazón y dejar que el personaje suelte una frase sin pensar, restando al contador Racioanl/Sentimental.
 
--Pulsar en el cerebro antes de que el bocadillo llegue al corazón, soltando así una frase racional en respuesta a la otra persona y sumando al contador Racional/Sentimental.
+-Pulsar de que el bocadillo llegue al corazón, soltando así una frase racional en respuesta a la otra persona y sumando al contador Racional/Sentimental.
 
 Si al final del minijuego el jugador tiene el contador en positivo entonces es racional y si está en negativo entonces será sentimental.
 
-![BumBumKlak](/assets/Bocetos/BumBumKlak.PNG)
+Lanza bocadillos sin pulsar todavia:
+![BumBumKlak](/assets/Bocetos/BumBumEsp.PNG)
+
+Cuando pulsas cuando esta en el corazon:
+![BumBumKlak](/assets/Bocetos/BumBumCor.PNG)
+
+Cuando pulsas cuando no esta en el corazon:
+![BumBumKlak](/assets/Bocetos/BumBumCer.PNG)
+
 
 ***OVEN MADNESS: PAPPA'S GALLETERIA:*** aparecerá un horno con dos puertas. Entonces aparecerán dos bandejas, una que va a entrar y otra que sale. El jugador interactuará con una de ellas. Al seleccionar una bandeja el jugador deberá:
 
@@ -98,7 +106,7 @@ Al ser la primera vez que juegas tienes desbloqueado el primer minijuego princip
 
 -"Verdad o reto": click y deslizar.
 
--"Bum Bum Klak": click a tiempo.
+-"Bum Bum Klak": barra espaciadora a tiempo.
 
 -"Oven Madness: Papa's Galletería":  click en el lugar correcto o deslizar.
 
