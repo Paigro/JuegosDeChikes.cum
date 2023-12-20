@@ -156,7 +156,6 @@ export default class TruthOrDare extends Phaser.Scene {
     desapareceLLamada() {
         this.llamada.setActive(false);
         this.llamada.setVisible(false);
-        this.llamada.texto.setVisible(false);
     }
     desapareceMensaje() {
         this.mensaje.setActive(false);
@@ -166,7 +165,7 @@ export default class TruthOrDare extends Phaser.Scene {
         this.llamada.setActive(true);
         this.llamada.setVisible(true);
 
-        //this.llamada.texto.setVisible(true);
+        this.llamada.texto.setVisible(true);
     }
     apareceMensaje() {
         this.mensaje.setActive(true);

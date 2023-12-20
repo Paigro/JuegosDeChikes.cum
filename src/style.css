@@ -12,6 +12,12 @@
     width: 15%;
     background-color: purple;
   }
+
+  
+  ul {
+    padding: 0;
+    list-style-type: none;
+}
   
 .flechas{
   
