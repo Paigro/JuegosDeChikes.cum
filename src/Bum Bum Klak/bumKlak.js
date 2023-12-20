@@ -70,7 +70,7 @@ export default class BumKlak extends Phaser.Scene{
 
     update()
     {
-      if(Phaser.Math.Between(0,100) == 100 && this.avisoActivo == false)
+      if(Phaser.Math.Between(0,100) == 100 && this.avisoActivo == false)  // coloca el aviso en su sitio al comenzar
       {
         this.avisoActivo = true;
         this.setHablador();
@@ -104,11 +104,11 @@ export default class BumKlak extends Phaser.Scene{
 
     avisoUpdate()
     {
-      if(this.avisoActivo)
+      if(this.avisoActivo)  // mientras este activo
       {  
-        this.aviso.setX(this.aviso.x - this.avisoVel);
-        this.aviso.alpha = this.aviso.alpha + this._apparitionVel;
-        if(this.aviso.x + 50 < 0)
+        this.aviso.setX(this.aviso.x - this.avisoVel);  // lo hace avanzar 
+        this.aviso.alpha = this.aviso.alpha + this._apparitionVel;  // lo hace destransparentarse poco a poco
+        if(this.aviso.x < 0)
         {
           this.avisoActivo = false;
           this.avisoVel = Phaser.Math.Between(3,10);
