@@ -34,16 +34,17 @@ export default class Corte extends Phaser.GameObjects.Sprite {
 
     move() {
         if (this.cutted >= 5) {
+            this.scene.CambioSpriteCorte(6);
             this.scene.endAction(1);
             this.cutted = 0;
         } else {
             if (this.cutted == 2) {
-                this.x-=300
-                this.y += 100;
+                this.x-=360
+                this.y += 120;
             }
-            this.x += 100;
+            this.x += 120;
             this.cutted++;
-
+            this.scene.CambioSpriteCorte(this.cutted);
         }
     }
 }

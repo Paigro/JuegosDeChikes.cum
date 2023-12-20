@@ -22,28 +22,41 @@ export default class Papas extends Phaser.Scene {
     this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
 
     //Carga de imagenes del juego
-    this.load.image('BandejaCorte', '/assets/juego/PapasGalleteria/Bandeja_Base.png');
+    this.load.image('BandejaCorte', '/assets/juego/PapasGalleteria/SpritesCorte/1.png');
     this.load.image('BordGallet', '/assets/juego/PapasGalleteria/Borde_Galleta.png');
     this.load.image('MarcaGallet', '/assets/juego/PapasGalleteria/Marca_Galleta.png');
+    this.load.image('GlaseadoTut', '/assets/juego/PapasGalleteria/Tutorial_Glaseado.png');
     this.load.image('BandejaGlased', '/assets/juego/PapasGalleteria/Bandeja_Base.png');
     this.load.image('GlaseadoGallet', '/assets/juego/PapasGalleteria/Glaseado_Galleta.png');
     this.load.image('Fondo', '/assets/juego/PapasGalleteria/FondoDer.png');
     //this.load.image('FondoI', '/assets/juego/PapasGalleteria/FondoIzq.png');
-    this.load.image('Separador', '/assets/juego/PapasGalleteria/Separacion.png'); 
+    this.load.image('Separador', '/assets/juego/PapasGalleteria/Separacion.png');
+
+    //Animacion de corte
+    this.load.image('corte0', '/assets/juego/PapasGalleteria/SpritesCorte/1.png')
+    this.load.image('corte1', '/assets/juego/PapasGalleteria/SpritesCorte/2.png')
+    this.load.image('corte2', '/assets/juego/PapasGalleteria/SpritesCorte/3.png')
+    this.load.image('corte3', '/assets/juego/PapasGalleteria/SpritesCorte/4.png')
+    this.load.image('corte4', '/assets/juego/PapasGalleteria/SpritesCorte/5.png')
+    this.load.image('corte5', '/assets/juego/PapasGalleteria/SpritesCorte/6.png')
+    this.load.image('corte6', '/assets/juego/PapasGalleteria/SpritesCorte/7.png')
   }
 
 
   create() {
 
     //Contador en pantalla:
-    this.contador = this.add.text(540, 20, "Time: 0", { fontSize: '40px', fill: '#fff', fontFamily:'Comic Sans MS'}).setOrigin(0.5, 0).setDepth(4); // Texto para mostrar la puntuacion.
+    this.contador = this.add.text(540, 20, "Time: 0", { fontSize: '40px', fill: '#fff', fontFamily: 'Comic Sans MS' }).setOrigin(0.5, 0).setDepth(4); // Texto para mostrar la puntuacion.
 
     //Fondo    
     this.fondoD = this.add.image(540, 0, 'Fondo').setOrigin(0, 0) // el fondo
     this.fondoI = this.add.image(0, -1440, 'Fondo').setOrigin(0, 0) // el fondo
 
     //Separador de Acciones    
-    this.separador = this.add.image(540, 360, 'Separador').setOrigin(0.5, 0.5).setDepth(3) // el fondo
+    this.separador = this.add.image(540, 360, 'Separador').setOrigin(0.5, 0.5).setDepth(3); // el fondo
+
+    //Tutorial glaseado
+    this.tutGlaseado = this.add.sprite(800, 420,'GlaseadoTut').setScale(.7,.7).setDepth(3).setVisible(false);
 
     //Boton de salir
     this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
@@ -56,7 +69,7 @@ export default class Papas extends Phaser.Scene {
     this.endRound = false;
 
     // Elementos del juego
-    this.bandeja1 = new CorteGalletas(this, 250, 800, 'BandejaCorte', 'MarcaGallet');
+    this.bandeja1 = new CorteGalletas(this, 275, 800, 'BandejaCorte', 'MarcaGallet');
     this.bandeja2 = new GlaseadoGalletas(this, 800, 300, 'BandejaGlased', 'GlaseadoGallet').setScale(0.5, 0.1).setAlpha(0.01);
     this.tweenFondD1();
     this.tweenFondI1();
@@ -76,6 +89,7 @@ export default class Papas extends Phaser.Scene {
       this.bandeja2.StartAccion();
       this.endRound = false;
     })
+
   }
 
   update(time, delta) {
@@ -101,8 +115,6 @@ export default class Papas extends Phaser.Scene {
   endAction(points) {
     //Reseteo logica
     this.points += points;
-    this.bandeja1.Reset();
-    this.bandeja2.Reset();
     this.endRound = true
 
     //Reseteo animaciones
@@ -137,8 +149,6 @@ export default class Papas extends Phaser.Scene {
         delay: 900,
         y: 430,          // Valor final de la posición en x
         alpha: 1,
-        scaleX: 0.75,
-        scaleY: 0.75,
         duration: 400,  // Duración de la animación en milisegundos
         ease: 'cubic',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
         repeat: 0,    // Repetir infinitamente
@@ -188,8 +198,6 @@ export default class Papas extends Phaser.Scene {
       ({
         targets: this.bandeja1,
         y: 300,
-        scaleX: 0.5,
-        scaleY: 0.1,
         alpha: 0.01,
         duration: 300,  // Duración de la animación en milisegundos
         ease: 'cubic',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
@@ -210,6 +218,7 @@ export default class Papas extends Phaser.Scene {
         persist: true,
         onEnd: (() => {
           this.tweenFondI1();
+          this.bandeja1.Reset();
         })
 
       })
@@ -291,7 +300,7 @@ export default class Papas extends Phaser.Scene {
         targets: this.bandeja2,
         y: 900,          // Valor final de la posición en x
         alpha: 0.01,
-        duration: 300,  // Duración de la animación en milisegundos
+        duration: 500,  // Duración de la animación en milisegundos
         ease: 'cubic',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
         repeat: 0,    // Repetir infinitamente
         persist: true
@@ -301,7 +310,7 @@ export default class Papas extends Phaser.Scene {
     this.tweens.add
       ({
         targets: this.bandeja2,
-        delay: 700,
+        delay: 800,
         y: 300,
         x: 800,
         scaleX: 0.5,
@@ -312,12 +321,20 @@ export default class Papas extends Phaser.Scene {
         persist: true,
         onEnd: (() => {
           this.tweenFondD1();
+          this.bandeja2.Reset();
         })
 
       })
   }
   //#endregion
   //#endregion
+
+  //Cambio sprite corte
+  CambioSpriteCorte(cortes) {
+    let textura = 'corte' + cortes;
+    console.log(textura);
+    this.bandeja1.setTexture(textura);
+  }
 
   //Vuelve a la escena del Hub
   finalDelJuego() {

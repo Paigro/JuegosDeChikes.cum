@@ -68,6 +68,7 @@ export default class CorteGalletas extends Phaser.GameObjects.Sprite {
         //console.log("Move: " + this.move + ", Pulsado: " + this.pulsado)
         //Updatea el glaseado
         if (this.move && this.pulsado) {
+            this.scene.tutGlaseado.setVisible(false);
             this.porcentaje += .01;
             this.glaseado.setAlpha(this.porcentaje);
             //console.log(this.porcentaje);
@@ -85,6 +86,7 @@ export default class CorteGalletas extends Phaser.GameObjects.Sprite {
         //this.visible = false;
         this.scene.tweenBandejaDFuera();
         this.glaseado.hide();
+        this.scene.tutGlaseado.setVisible(false);
         //console.log("ha entrado");
     }
 
@@ -93,6 +95,7 @@ export default class CorteGalletas extends Phaser.GameObjects.Sprite {
     StartAccion() {
         this.input.enabled = false;
         this.glaseado.appear();
+        this.scene.tutGlaseado.setVisible(true);
         //this.cortador.appear();
         //console.log("Start accion");
 
