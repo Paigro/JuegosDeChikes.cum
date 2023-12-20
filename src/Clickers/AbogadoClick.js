@@ -10,7 +10,7 @@ export default class AbogadoClick extends Phaser.Scene {
   init() {
   }
   preload() {
-    this.load.image('atras', './assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
+    //this.load.image('atras', './assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
 
     //Carga de imagenes del juego
     this.load.image('Abogado1Img', './assets/juego/AbogadoClick/Abogado1.png');

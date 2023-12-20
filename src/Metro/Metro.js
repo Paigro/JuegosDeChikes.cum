@@ -17,7 +17,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     preload() {
         // IMAGENES:
         // Boton:
-        this.load.image('atras', "./assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
+       // this.load.image('atras', "./assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
         // Avion:
         this.load.image('avion', "./assets/juego/MetroSkaters/imagenes/Avion.png"); // Cargamos la imagen del avion.
         this.load.image('avionAparece', "./assets/juego/MetroSkaters/imagenes/AvionAparece.png"); // Cargamos la imagen del avion.
