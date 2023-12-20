@@ -35,6 +35,24 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
             case 7:
                 this.texto = "¿Quieres verme hacer una voltereta?"
             break;
+            case 8:
+                this.texto = "¿Sabías que en términos de repro-?"
+            break;
+            case 9:
+                this.texto = "Mi abuela se comió mi gato"
+            break;
+            case 10:
+                this.texto = "¿Quién gana, mil billones de leones o el sol?"
+            break;
+            case 11:
+                this.texto = "Me gustan los trenes"
+            break;
+            case 12:
+                this.texto = "¿Me amarías  si fuese un gusano?"
+            break;
+            case 13:
+                this.texto = "¿Te echas un lol?"
+            break;
         }
     }
 
@@ -68,6 +86,24 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
                 case 7:
                     this.texto = "¡Haz una mortal!"
                 break;
+                case 8:
+                    this.texto = "Por favor, no sigas"
+                break;
+                case 9:
+                    this.texto = "Eso es terrible"
+                break;
+                case 10:
+                    this.texto = "Los fieros leones obviamente"
+                break;
+                case 11:
+                    this.texto = "A mi también"
+                break;
+                case 12:
+                    this.texto = "Por supuesto que sí, mi amor"
+                break;
+                case 13:
+                    this.texto = "No"
+                break;
             }
         }
         else    // usamos el cerebro
@@ -97,6 +133,24 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
                 break;
                 case 7:
                     this.texto = "Ten cuidado."
+                break;
+                case 8:
+                    this.texto = "No tuvo gracia la primera vez"
+                break;
+                case 9:
+                    this.texto = "Los gatos no son nutritivos"
+                break;
+                case 10:
+                    this.texto = "Obviamente el sol"
+                break;
+                case 11:
+                    this.texto = "Son chulos ngl"
+                break;
+                case 12:
+                    this.texto = "No"
+                break;
+                case 13:
+                    this.texto = "No"
                 break;
             }
         }

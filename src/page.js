@@ -27,5 +27,5 @@ function changeCommentLeft(n) {
   }
 
 function ad(){
-  alert("MALOS DIAS POR LA MAÑANA CON ANSIEDAD Y CON DEPRESION GRUMETES!!")
+  alert("Gracias por descargar 'VirusRandom.mp4'")
 }

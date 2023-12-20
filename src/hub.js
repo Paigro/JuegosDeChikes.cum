@@ -18,7 +18,7 @@ export default class Hub extends Phaser.Scene {
   }
 
   preload() {
-    console.log("0");
+    //console.log("0");
     this.load.image('Scroll', "assets/juego/Hub/BarritaScroll.png")
     this.load.image('ToDImage', "assets/Bocetos/TruthOrDare.PNG")
     this.load.image('BumClakImage', "assets/Bocetos/BumBumKlak.PNG")
@@ -32,6 +32,7 @@ export default class Hub extends Phaser.Scene {
 
     //Desbloqueo de minijuego
     if (this.juegsDesbloq < 5) { this.juegsDesbloq++; }
+    console.log(this.coordinator.returnPersonalidad());
 
     //Scroll minijuegos
     this.scroll = this.add.image(0, 0, 'Scroll').setInteractive({ draggable: true }).setScale(1, 100).setDepth(2);

@@ -8,14 +8,13 @@ export default class Papas extends Phaser.Scene {
     // Nombre de la escena para el SceneManager
     super({ key: 'Papas', active: false });
 
-    this.time = 60;
     this.points = 0;
   }
 
   init(data) {
     this.coor = data;
     //console.log(this.coor);
-    console.log(data);
+    //console.log(data);
   }
 
   preload() {
@@ -56,7 +55,7 @@ export default class Papas extends Phaser.Scene {
     this.separador = this.add.image(540, 360, 'Separador').setOrigin(0.5, 0.5).setDepth(3); // el fondo
 
     //Tutorial glaseado
-    this.tutGlaseado = this.add.sprite(800, 420,'GlaseadoTut').setScale(.7,.7).setDepth(3).setVisible(false);
+    this.tutGlaseado = this.add.sprite(800, 420, 'GlaseadoTut').setScale(.7, .7).setDepth(3).setVisible(false);
 
     //Propiedades
     this.time = 60;
@@ -71,17 +70,24 @@ export default class Papas extends Phaser.Scene {
 
     //Bloquea la otra bandeja
     this.bandeja1.on('pointerdown', (pointer) => {
-      console.log("Start b1");
+      //console.log("Start b1");
       this.bandeja2.BlockThisAction();
       this.bandeja1.StartAccion();
       this.endRound = false;
     })
 
     this.bandeja2.on('pointerdown', (pointer) => {
-      console.log("Start b2");
+      //console.log("Start b2");
       this.bandeja1.BlockThisAction();
       this.bandeja2.StartAccion();
       this.endRound = false;
+    })
+
+
+    //Salir al hub
+    this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
+
+      if (event.key === "0") this.finalDelJuego()
     })
 
   }
@@ -109,7 +115,8 @@ export default class Papas extends Phaser.Scene {
   endAction(points) {
     //Reseteo logica
     this.points += points;
-    this.endRound = true
+    this.endRound = true;
+    console.log(this.points);
 
     //Reseteo animaciones
     this.tweenFondD3();
@@ -197,7 +204,7 @@ export default class Papas extends Phaser.Scene {
         ease: 'cubic',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
         repeat: 0,    // Repetir infinitamente
         persist: true,
-        onStart: (()=>{
+        onStart: (() => {
           this.bandeja1.cortador.hide();
         })
 
@@ -329,7 +336,7 @@ export default class Papas extends Phaser.Scene {
   //Cambio sprite corte
   CambioSpriteCorte(cortes) {
     let textura = 'corte' + cortes;
-    console.log(textura);
+    //console.log(textura);
     this.bandeja1.setTexture(textura);
   }
 

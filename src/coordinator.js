@@ -17,6 +17,7 @@ export default class Coordinator {
                 this.ExtInt = puntos;
                 break;
             case "SenRac":
+                console.log("me cago")
                 this.SenRac = puntos;
                 break;
             case "EspOrg":
@@ -35,6 +36,7 @@ export default class Coordinator {
         this.personalidad = "";
         this.calculable = true;
 
+        console.log(this.ExtInt + "/" + this.SenRac + "/" + this.EspOrg + "/" + this.DetGen);
         if (this.calculable) {
             if (this.ExtInt > 0) this.personalidad += "I";
             else if (this.ExtInt < 0) this.personalidad += "E";
@@ -59,8 +61,9 @@ export default class Coordinator {
             else this.calculable = false;
 
         }
+        console.log(this.personalidad);
     }
-    
+
     returnPersonalidad() {
         this.CalcularPersonalidad();
         return this.personalidad;

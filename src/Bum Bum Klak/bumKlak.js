@@ -13,6 +13,7 @@ export default class BumKlak extends Phaser.Scene {
 
   init(data) {
     this.coor = data;
+    //console.log(data);
     this.cameras.main.setBackgroundColor("#99FF99");
   }
 
@@ -27,7 +28,7 @@ export default class BumKlak extends Phaser.Scene {
   create() {
     // Tiempo:
     this.time = 60; // 60 segundos.
-    this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setPosition(0, 60).setDepth(3); // Texto para mostrar la puntuacion.
+    this.contador = this.add.text(16, 0, "Time: 0", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setPosition(0, 0).setDepth(3); // Texto para mostrar la puntuacion.
     // Para salir
     /*this.salir = this.add.text(1080, 0, "SALIR", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setOrigin(1, 0).setInteractive(); // Texto que actua como boton de salir.
     this.salir.on('pointerdown', (pointer) => {
@@ -35,18 +36,18 @@ export default class BumKlak extends Phaser.Scene {
     });*/
 
     //elementos
-    this.escuchador = this.add.image(50, 350, 'escuchador').setOrigin(0, 0).setScale(1, 1);
+    this.escuchador = this.add.image(50, 300, 'escuchador').setOrigin(0, 0).setScale(1.1, 1.1);
     this.parlante = this.add.image(850, 350, 'parlanchin').setOrigin(0, 0).setScale(0.3, 0.3);
     this.corazon = new corazon(this, 165, 550);
-    this.cerebro = new cerebro(this, 135, 400);
+    //this.cerebro = new cerebro(this, 135, 400);
     this.aviso = new aviso(this, 1000, 550); // indicador de aviso
-    this.bocadilloHablador = new bocadillo(this, 600, 170, 0.7, 0);     // bocata de respuesta
-    this.bocadilloRespondedor = new bocadillo(this, 450, 360, 0.7, 1);  // bocata parlanchin
+    this.bocadilloHablador = new bocadillo(this, 650, 170, 0.7, 0);     // bocata de respuesta
+    this.bocadilloRespondedor = new bocadillo(this, 420, 360, 0.5, 1);  // bocata parlanchin
     this.generadorDialogo = new generadorDialogo(this);
     //texto
-    this.textohablador = this.add.text(350, 100, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // bocata parlanchin
-    this.textorespondedor = this.add.text(200, 300, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }); // bocata de respuesta
-    this.textopuntuador = this.add.text(0, 0, "69420", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // indica la puntuacion
+    this.textohablador = this.add.text(400, 100, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // bocata parlanchin
+    this.textorespondedor = this.add.text(300, 300, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }); // bocata de respuesta
+    this.textopuntuador = this.add.text(0, 60, "69420", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // indica la puntuacion
     // puntuaciones
     this.punTest = 0;  // puntuación test
     this.puntuacion = 0;  // puntuación del juego perse (no)
@@ -59,7 +60,7 @@ export default class BumKlak extends Phaser.Scene {
     this.spaceKey = this.input.keyboard.addKey('SPACE');
     // constantes
     this._aavisoApparitionVel = 0.05; // velocidad de aparición del aviso
-    this._numDialogos = 7;            // numero de dialogos disponibles
+    this._numDialogos = 13;            // numero de dialogos disponibles
     // variables
     this.dialognum;                             // indice del dialogo elegido
     this.avisoActivo = false;                   // indica si el aviso está activo
@@ -70,6 +71,13 @@ export default class BumKlak extends Phaser.Scene {
     this.bocadilloRespondedor.alpha = 0;
     this.textorespondedor.alpha = 0;
     this.aviso.alpha = 0;
+
+
+    //Salir al hub
+    this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
+
+      if (event.key === "0") this.finalDelJuego()
+    })
   }
 
   update(time, delta) {
@@ -80,6 +88,9 @@ export default class BumKlak extends Phaser.Scene {
       this.textohablador.alpha = 1;
       this.aviso.setX(1000);
       this.alreadyGiven = false;
+      this.textorespondedor.alpha = 0;
+      this.bocadilloRespondedor.alpha = 0;
+      this.alreadySanctioned = false;
     }
     if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) {
       if (this.avisoActivo) {
@@ -89,9 +100,10 @@ export default class BumKlak extends Phaser.Scene {
     this.failChecker();
     this.avisoUpdate();
     this.puntuadorUpdate();
-    if (this.time <= 0) {
+    if (this.time <= 0 && this.SenRac != 0) {
       this.finalDelJuego();
     }
+    console.log(this.SenRac);
     this.time -= (delta / 1000);
     if (this.time >= 0) {
       this.contador.setText('Time: ' + this.time.toFixed(2));
@@ -99,6 +111,7 @@ export default class BumKlak extends Phaser.Scene {
     else {
       this.contador.setText('Time: ' + "acabe usted la accion.");
     }
+
   }
 
   setHablador() // cambia el texto del muñeco parlanchin
@@ -148,6 +161,7 @@ export default class BumKlak extends Phaser.Scene {
     else  // de lo contrario se suma al test
     {
       this.punTest = this.punTest + auxsig * cantidad;
+      console.log(this.punTest);
     }
   }
 
@@ -198,8 +212,10 @@ export default class BumKlak extends Phaser.Scene {
   }
 
   finalDelJuego() {
-    this.coor.SaveScore("SenRac", this.punTest);
+    this.coor.SaveScore("SenRac", this.SenRac);
+    //console.log(this.SenRac);
     console.clear();
+    //console.log("Hecho");
     this.scene.start("Hub", this.coor);
   }
 }

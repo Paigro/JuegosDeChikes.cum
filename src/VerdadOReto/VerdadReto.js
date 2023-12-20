@@ -69,6 +69,13 @@ export default class TruthOrDare extends Phaser.Scene {
             repeat: -1,    // Repetir infinitamente
             persist: true
         });
+
+
+        //Salir al hub
+        this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
+
+            if (event.key === "0") this.finalDelJuego()
+        })
     }
 
 
@@ -101,7 +108,6 @@ export default class TruthOrDare extends Phaser.Scene {
             callback: () => this.throwAction(),
             callbackScope: this
         });
-        console.log(this.timer.delay);
     }
 
     throwAction() {
@@ -135,6 +141,7 @@ export default class TruthOrDare extends Phaser.Scene {
     AddScore(num) {
         this.score += num;
         this.marcador.setText('Score: ' + this.score);
+        console.log(this.score);
     }
 
     AddExtIntScore(num) {

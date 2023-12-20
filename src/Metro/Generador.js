@@ -6,7 +6,7 @@ export default class Generador extends Phaser.GameObjects.Sprite {
         this.arraySec = secuencias;
         this.arrayObs = obstaculos;
 
-        console.log("Generador: generador de cosas hecho.");
+        //console.log("Generador: generador de cosas hecho.");
     }
     preUpdate(t, dt) {
         super.preUpdate(t, dt);
