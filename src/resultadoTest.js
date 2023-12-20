@@ -14,27 +14,27 @@ export default class resultadoTest extends Phaser.Scene // Manager de la escena 
     preload() {
         // IMAGENES:
         // Amarillo:
-        this.load.image('virtuoso', "/assets/juego/personalidades/AmarilloAnimador.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('aventurero', "/assets/juego/personalidades/AmarilloAventurero.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('emprendedor', "/assets/juego/personalidades/AmarilloEmprendedor.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('animador', "/assets/juego/personalidades/AmarilloAnimador.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('virtuoso', "./assets/juego/personalidades/AmarilloAnimador.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('aventurero', "./assets/juego/personalidades/AmarilloAventurero.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('emprendedor', "./assets/juego/personalidades/AmarilloEmprendedor.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('animador', "./assets/juego/personalidades/AmarilloAnimador.png"); // Cargamos la imagen de volver atras (provisional).
         // Morado:
-        this.load.image('arquitecto', "/assets/juego/personalidades/MoradoArquitecto.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('logico', "/assets/juego/personalidades/MoradoLogico.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('comandante', "/assets/juego/personalidades/MoradoComandante.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('innovador', "/assets/juego/personalidades/MoradoInnovador.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('arquitecto', "./assets/juego/personalidades/MoradoArquitecto.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('logico', "./assets/juego/personalidades/MoradoLogico.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('comandante', "./assets/juego/personalidades/MoradoComandante.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('innovador', "./assets/juego/personalidades/MoradoInnovador.png"); // Cargamos la imagen de volver atras (provisional).
         // Verde:
-        this.load.image('abogado', "/assets/juego/personalidades/VerdeAbogado.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('mediador', "/assets/juego/personalidades/VerdeMediador.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('protagonista', "/assets/juego/personalidades/VerdeProtagonista.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('activista', "/assets/juego/personalidades/VerdeActivista.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('abogado', "./assets/juego/personalidades/VerdeAbogado.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('mediador', "./assets/juego/personalidades/VerdeMediador.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('protagonista', "./assets/juego/personalidades/VerdeProtagonista.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('activista', "./assets/juego/personalidades/VerdeActivista.png"); // Cargamos la imagen de volver atras (provisional).
         // Azul:
-        this.load.image('logista', "/assets/juego/personalidades/AzulLogista.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('defensor', "/assets/juego/personalidades/AzulDefensor.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('ejecutivo', "/assets/juego/personalidades/AzulEjecutivo.png"); // Cargamos la imagen de volver atras (provisional).
-        this.load.image('consul', "/assets/juego/personalidades/AzulConsul.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('logista', "./assets/juego/personalidades/AzulLogista.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('defensor', "./assets/juego/personalidades/AzulDefensor.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('ejecutivo', "./assets/juego/personalidades/AzulEjecutivo.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('consul', "./assets/juego/personalidades/AzulConsul.png"); // Cargamos la imagen de volver atras (provisional).
         // Boton:
-        this.load.image('atras', "/assets/juego/MetroSkaters/imagenes/teclaizquierda.png"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('atras', "./assets/juego/MetroSkaters/imagenes/teclaizquierda.png"); // Cargamos la imagen de volver atras (provisional).
     }
 
     create() {
