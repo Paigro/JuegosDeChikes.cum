@@ -28,7 +28,7 @@ export default class BumKlak extends Phaser.Scene {
   create() {
     // Tiempo:
     this.time = 10; // 60 segundos.
-    this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setPosition(0, 60).setDepth(3); // Texto para mostrar la puntuacion.
+    this.contador = this.add.text(16, 0, "Time: 0", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setPosition(0, 0).setDepth(3); // Texto para mostrar la puntuacion.
     // Para salir
     /*this.salir = this.add.text(1080, 0, "SALIR", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setOrigin(1, 0).setInteractive(); // Texto que actua como boton de salir.
     this.salir.on('pointerdown', (pointer) => {
@@ -47,7 +47,7 @@ export default class BumKlak extends Phaser.Scene {
     //texto
     this.textohablador = this.add.text(400, 100, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // bocata parlanchin
     this.textorespondedor = this.add.text(300, 300, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }); // bocata de respuesta
-    this.textopuntuador = this.add.text(0, 0, "69420", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // indica la puntuacion
+    this.textopuntuador = this.add.text(0, 60, "69420", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // indica la puntuacion
     // puntuaciones
     this.punTest = 0;  // puntuación test
     this.puntuacion = 0;  // puntuación del juego perse (no)
@@ -100,9 +100,10 @@ export default class BumKlak extends Phaser.Scene {
     this.failChecker();
     this.avisoUpdate();
     this.puntuadorUpdate();
-    if (this.time <= 0) {
+    if (this.time <= 0 && this.SenRac != 0) {
       this.finalDelJuego();
     }
+    console.log(this.SenRac);
     this.time -= (delta / 1000);
     if (this.time >= 0) {
       this.contador.setText('Time: ' + this.time.toFixed(2));
@@ -110,6 +111,7 @@ export default class BumKlak extends Phaser.Scene {
     else {
       this.contador.setText('Time: ' + "acabe usted la accion.");
     }
+
   }
 
   setHablador() // cambia el texto del muñeco parlanchin
