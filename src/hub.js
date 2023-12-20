@@ -10,7 +10,53 @@ export default class Hub extends Phaser.Scene {
     this.coordinator = new Coordinator(this);
 
     //Desbloqueo de minijuegos
-    this.juegsDesbloq = 5;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // recordatorio depinerlpos com oesataba
+    this.juegsDesbloq = 6;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
   init() {
     this.personalidad("");
@@ -23,6 +69,7 @@ export default class Hub extends Phaser.Scene {
     this.load.image('PapasImage', "assets/Bocetos/PappasGalleteria.PNG")
     this.load.image('AbogadoImage', "assets/Bocetos/MetroSkaters.PNG")
     this.load.image('MetroImage', "assets/Bocetos/Metro.jpg")
+    this.load.image('resultado', "assets/Bocetos/Metro.jpg")
   }
 
   create() {
@@ -36,10 +83,10 @@ export default class Hub extends Phaser.Scene {
       //console.log(this.input.y);
       //console.log("we"),
       this.scroll.y = this.input.y;
-      this.cameras.main.setScroll(0,this.scroll.y)
+      this.cameras.main.setScroll(0, this.scroll.y)
     }
-  )
-    
+    )
+
     //this.cameras.main.setBounds(0, 0, 2, 2); // Establecer los límites del mundo
     //this.cameras.main.startFollow(this.scroll); // Hacer que la cámara siga al fondo
 
@@ -49,14 +96,15 @@ export default class Hub extends Phaser.Scene {
     this.PapasImg = this.add.image(0, 0, 'PapasImage').setOrigin(0, 1).setScale(.8).setVisible(false);
     this.MetroImg = this.add.image(0, 0, 'MetroImage').setOrigin(0, 1).setScale(.8).setVisible(false);
     this.AbogadoImg = this.add.image(0, 0, 'AbogadoImage').setOrigin(0, 1).setScale(.8).setVisible(false);
+    this.resultadoImagen = this.add.image(0, 0, 'resultado').setOrigin(0, 1).setScale(.8).setVisible(false);
 
-    this.hola = [this.ToDImg, this.BumClackImg, this.PapasImg, this.MetroImg, this.AbogadoImg];
+    this.hola = [this.ToDImg, this.BumClackImg, this.PapasImg, this.MetroImg, this.AbogadoImg, this.resultadoImagen];
 
     //muestra los juegos desbloqueados
     let cols = 0;
     for (let i = 1; i <= this.juegsDesbloq; i++) {
       this.hola[i - 1].setVisible(true);
-      this.hola[i - 1].x = ((1080 / 2) * (cols))+10;
+      this.hola[i - 1].x = ((1080 / 2) * (cols)) + 10;
       this.hola[i - 1].y = 300 * (Math.round((i / 2)));
 
       //contadores
@@ -80,10 +128,12 @@ export default class Hub extends Phaser.Scene {
     this.AbogadoImg.setInteractive().on('pointerdown', () =>
       this.scene.start("AbogadoClick")
     )
-
+    this.resultadoImagen.setInteractive().on('pointerdown', () =>
+      this.scene.start("resultadoTest", this.coordinator)
+    )
   }
 
-  desbloqMinij(){ this.juegsDesbloq++;}
+  desbloqMinij() { this.juegsDesbloq++; }
 
   personalidad(pers) {
     console.log(pers)
@@ -93,7 +143,7 @@ export default class Hub extends Phaser.Scene {
     //Verde.
     else if (pers === "ISOG" || pers === "ISEG" || pers === "ESOG" || pers === "ESEG") { color = "#73E16E"; }
     //Azul.
-    else if (pers === "IROD" || pers === "ISOD" || pers === "EROD" || pers === "EROD") { color = "#77EAF5"; }
+    else if (pers === "IROD" || pers === "ISOD" || pers === "EROD" || pers === "ESOD") { color = "#77EAF5"; }
     //Amarillo.
     else if (pers === "IRED" || pers === "ISED" || pers === "ERED" || pers === "ESED") { color = "#FFC300"; }
     //Naranja.

@@ -68,4 +68,8 @@ export default class Coordinator {
         //console.log(this);
         
     }
+    returnPersonalidad(){
+        this.CalcularPersonalidad();
+        return this.personalidad;
+    }
 }
