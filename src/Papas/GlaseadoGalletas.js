@@ -97,11 +97,6 @@ export default class CorteGalletas extends Phaser.GameObjects.Sprite {
 
     }
 
-    SetGlaseadoPosition(){
-        this.glaseado.x = this.x;
-        this.glaseado.y = this.y;
-    }
-
     Reset() {
         //console.log("reset accion");
         this.input.enabled = true;
