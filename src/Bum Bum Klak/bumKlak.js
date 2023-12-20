@@ -35,17 +35,17 @@ export default class BumKlak extends Phaser.Scene {
     });*/
 
     //elementos
-    this.escuchador = this.add.image(50, 350, 'escuchador').setOrigin(0, 0).setScale(1, 1);
+    this.escuchador = this.add.image(50, 300, 'escuchador').setOrigin(0, 0).setScale(1.1, 1.1);
     this.parlante = this.add.image(850, 350, 'parlanchin').setOrigin(0, 0).setScale(0.3, 0.3);
     this.corazon = new corazon(this, 165, 550);
-    this.cerebro = new cerebro(this, 135, 400);
+    //this.cerebro = new cerebro(this, 135, 400);
     this.aviso = new aviso(this, 1000, 550); // indicador de aviso
-    this.bocadilloHablador = new bocadillo(this, 600, 170, 0.7, 0);     // bocata de respuesta
-    this.bocadilloRespondedor = new bocadillo(this, 450, 360, 0.7, 1);  // bocata parlanchin
+    this.bocadilloHablador = new bocadillo(this, 650, 170, 0.7, 0);     // bocata de respuesta
+    this.bocadilloRespondedor = new bocadillo(this, 420, 360, 0.5, 1);  // bocata parlanchin
     this.generadorDialogo = new generadorDialogo(this);
     //texto
-    this.textohablador = this.add.text(350, 100, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // bocata parlanchin
-    this.textorespondedor = this.add.text(200, 300, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }); // bocata de respuesta
+    this.textohablador = this.add.text(400, 100, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // bocata parlanchin
+    this.textorespondedor = this.add.text(300, 300, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }); // bocata de respuesta
     this.textopuntuador = this.add.text(0, 0, "69420", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // indica la puntuacion
     // puntuaciones
     this.punTest = 0;  // puntuación test

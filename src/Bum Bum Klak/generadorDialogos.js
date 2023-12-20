@@ -87,7 +87,7 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
                     this.texto = "Deberías, todos me quieren."
                 break;
                 case 4:
-                    this.texto = "Tranqui, seguro que podemos hablarlo."
+                    this.texto = "Tranqui, seguro que podemos  \n hablarlo."
                 break;
                 case 5:
                     this.texto = "Por supuesto que sí."
