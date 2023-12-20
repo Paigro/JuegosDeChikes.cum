@@ -30,7 +30,7 @@ export default class Hub extends Phaser.Scene {
 
 
     // recordatorio depinerlpos com oesataba
-    this.juegsDesbloq = 6;
+    this.juegsDesbloq = 0;
 
 
 
@@ -75,6 +75,9 @@ export default class Hub extends Phaser.Scene {
   create() {
     //calcula personalidad cuando vuelves al hub
     this.coordinator.CalcularPersonalidad();
+
+    //Desbloqueo de minijuego
+    if(this.juegsDesbloq<5){ this.juegsDesbloq++; }
 
     //Scroll minijuegos
     this.scroll = this.add.image(0, 0, 'Scroll').setInteractive({draggable: true}).setScale(1,100).setDepth(2);
