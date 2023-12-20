@@ -26,6 +26,10 @@ export default class BumKlak extends Phaser.Scene {
     this.load.image('aviso', '/assets/juego/BumKlak/aviso.png'); // Cargamos la imagen del moñeco que habla
   }
   create() {
+    // Tiempo:
+    this.time = 60; // 60 segundos.
+    this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setPosition(0, 60).setDepth(3); // Texto para mostrar la puntuacion.
+
     this.atras = this.add.image(950, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
     this.atras.on('pointerdown', (pointer) => {
       this.finalDelJuego();
@@ -68,7 +72,7 @@ export default class BumKlak extends Phaser.Scene {
     this.aviso.alpha = 0;
   }
 
-  update() {
+  update(time, delta) {
     if (Phaser.Math.Between(0, 100) == 100 && this.avisoActivo == false)  // coloca el aviso en su sitio al comenzar
     {
       this.avisoActivo = true;
@@ -85,6 +89,16 @@ export default class BumKlak extends Phaser.Scene {
     this.failChecker();
     this.avisoUpdate();
     this.puntuadorUpdate();
+    if (this.time <= 0) {
+      this.finalDelJuego();
+    }
+    this.time -= (delta / 1000);
+    if (this.time >= 0) {
+      this.contador.setText('Time: ' + this.time.toFixed(2));
+    }
+    else {
+      this.contador.setText('Time: ' + "acabe usted la accion.");
+    }
   }
 
   setHablador() // cambia el texto del muñeco parlanchin
@@ -182,6 +196,7 @@ export default class BumKlak extends Phaser.Scene {
   }
 
   finalDelJuego() {
+    console.clear();
     this.scene.start("Hub");
   }
 }
