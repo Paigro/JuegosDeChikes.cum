@@ -17,39 +17,39 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     preload() {
         // IMAGENES:
         // Boton:
-        this.load.image('atras', "/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
+        this.load.image('atras', "./assets/juego/TruthOrDare/imagenes/VolverAtras.jpg"); // Cargamos la imagen de volver atras (provisional).
         // Avion:
-        this.load.image('avion', "/assets/juego/MetroSkaters/imagenes/Avion.png"); // Cargamos la imagen del avion.
-        this.load.image('avionAparece', "/assets/juego/MetroSkaters/imagenes/AvionAparece.png"); // Cargamos la imagen del avion.
+        this.load.image('avion', "./assets/juego/MetroSkaters/imagenes/Avion.png"); // Cargamos la imagen del avion.
+        this.load.image('avionAparece', "./assets/juego/MetroSkaters/imagenes/AvionAparece.png"); // Cargamos la imagen del avion.
         // Panel:
-        this.load.image('panel', "/assets/juego/MetroSkaters/imagenes/Panel.png"); // Cargamos la imagen del panel inferior.
+        this.load.image('panel', "./assets/juego/MetroSkaters/imagenes/Panel.png"); // Cargamos la imagen del panel inferior.
         // Letras:
-        this.load.image('a', "/assets/juego/MetroSkaters/imagenes/A.png");
-        this.load.image('s', "/assets/juego/MetroSkaters/imagenes/S.png");
-        this.load.image('d', "/assets/juego/MetroSkaters/imagenes/D.png");
-        this.load.image('f', "/assets/juego/MetroSkaters/imagenes/F.png");
-        this.load.image('g', "/assets/juego/MetroSkaters/imagenes/G.png");
-        this.load.image('h', "/assets/juego/MetroSkaters/imagenes/H.png");
-        this.load.image('i', "/assets/juego/MetroSkaters/imagenes/I.png");
-        this.load.image('j', "/assets/juego/MetroSkaters/imagenes/J.png");
-        this.load.image('k', "/assets/juego/MetroSkaters/imagenes/K.png");
-        this.load.image('l', "/assets/juego/MetroSkaters/imagenes/L.png");
-        this.load.image('m', "/assets/juego/MetroSkaters/imagenes/M.png");
-        this.load.image('p', "/assets/juego/MetroSkaters/imagenes/P.png");
-        this.load.image('q', "/assets/juego/MetroSkaters/imagenes/Q.png");
-        this.load.image('r', "/assets/juego/MetroSkaters/imagenes/R.png");
-        this.load.image('v', "/assets/juego/MetroSkaters/imagenes/V.png");
+        this.load.image('a', "./assets/juego/MetroSkaters/imagenes/A.png");
+        this.load.image('s', "./assets/juego/MetroSkaters/imagenes/S.png");
+        this.load.image('d', "./assets/juego/MetroSkaters/imagenes/D.png");
+        this.load.image('f', "./assets/juego/MetroSkaters/imagenes/F.png");
+        this.load.image('g', "./assets/juego/MetroSkaters/imagenes/G.png");
+        this.load.image('h', "./assets/juego/MetroSkaters/imagenes/H.png");
+        this.load.image('i', "./assets/juego/MetroSkaters/imagenes/I.png");
+        this.load.image('j', "./assets/juego/MetroSkaters/imagenes/J.png");
+        this.load.image('k', "./assets/juego/MetroSkaters/imagenes/K.png");
+        this.load.image('l', "./assets/juego/MetroSkaters/imagenes/L.png");
+        this.load.image('m', "./assets/juego/MetroSkaters/imagenes/M.png");
+        this.load.image('p', "./assets/juego/MetroSkaters/imagenes/P.png");
+        this.load.image('q', "./assets/juego/MetroSkaters/imagenes/Q.png");
+        this.load.image('r', "./assets/juego/MetroSkaters/imagenes/R.png");
+        this.load.image('v', "./assets/juego/MetroSkaters/imagenes/V.png");
         // Obstaculos:
-        this.load.image('OVNI', "/assets/juego/MetroSkaters/imagenes/Ovni.png");
-        this.load.image('obstaculo', "/assets/juego/MetroSkaters/imagenes/Avion2.png");
+        this.load.image('OVNI', "./assets/juego/MetroSkaters/imagenes/Ovni.png");
+        this.load.image('obstaculo', "./assets/juego/MetroSkaters/imagenes/Avion2.png");
         // Exclamacion:
-        this.load.image('exclamacion', "/assets/juego/MetroSkaters/imagenes/Exclamacion.png");
+        this.load.image('exclamacion', "./assets/juego/MetroSkaters/imagenes/Exclamacion.png");
         // Animaciones:
-        this.load.spritesheet("explosion", "/assets/juego/MetroSkaters/imagenes/Explosion.png", { frameWidth: 120, frameHeight: 120 });
+        this.load.spritesheet("explosion", "./assets/juego/MetroSkaters/imagenes/Explosion.png", { frameWidth: 120, frameHeight: 120 });
         // Cosas para mostrar como tutorial:
-        this.load.image('derecha', "/assets/juego/MetroSkaters/imagenes/tecladerecha.png")
-        this.load.image('izquierda', "/assets/juego/MetroSkaters/imagenes/teclaizquierda.png")
-        this.load.image('teclado', "/assets/juego/MetroSkaters/imagenes/teclado.png")
+        this.load.image('derecha', "./assets/juego/MetroSkaters/imagenes/tecladerecha.png")
+        this.load.image('izquierda', "./assets/juego/MetroSkaters/imagenes/teclaizquierda.png")
+        this.load.image('teclado', "./assets/juego/MetroSkaters/imagenes/teclado.png")
     }
 
     create() {
