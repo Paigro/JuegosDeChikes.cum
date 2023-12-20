@@ -58,7 +58,7 @@ export default class Papas extends Phaser.Scene {
     this.tutGlaseado = this.add.sprite(800, 420, 'GlaseadoTut').setScale(.7, .7).setDepth(3).setVisible(false);
 
     //Propiedades
-    this.time = 10;
+    this.time = 60;
     this.endRound = false;
 
     // Elementos del juego

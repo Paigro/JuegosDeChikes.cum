@@ -27,7 +27,7 @@ export default class BumKlak extends Phaser.Scene {
   }
   create() {
     // Tiempo:
-    this.time = 10; // 60 segundos.
+    this.time = 60; // 60 segundos.
     this.contador = this.add.text(16, 0, "Time: 0", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setPosition(0, 0).setDepth(3); // Texto para mostrar la puntuacion.
     // Para salir
     /*this.salir = this.add.text(1080, 0, "SALIR", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setOrigin(1, 0).setInteractive(); // Texto que actua como boton de salir.

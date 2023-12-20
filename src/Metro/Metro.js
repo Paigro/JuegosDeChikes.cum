@@ -55,7 +55,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     create() {
         //#region parametros.
         // Tiempo:
-        this.time = 10;
+        this.time = 60;
         this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#fff', fontFamily: 'Comic Sans MS' }).setPosition(0, 60).setDepth(3); // Texto para mostrar la puntuacion.
         // Booleanos para controlar el juego:
         this.hayAlgo = false; // Para saber si hay cosas generadas.

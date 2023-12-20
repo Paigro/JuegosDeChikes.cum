@@ -80,7 +80,7 @@ export default class TruthOrDare extends Phaser.Scene {
 
 
     init(data) {
-        this.Time = 10;
+        this.Time = 60;
         this.score = 0;
         this.coor = data; //coordinador
         this.ExtInt = 0; // Puntuacion de extroversion (negativo) e introversion (positivo).
