@@ -22,7 +22,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.load.image('avion', "./assets/juego/MetroSkaters/imagenes/Avion.png"); // Cargamos la imagen del avion.
         this.load.image('avionAparece', "./assets/juego/MetroSkaters/imagenes/AvionAparece.png"); // Cargamos la imagen del avion.
         // Panel:
-        this.load.image('panel', "./assets/juego/MetroSkaters/Panel.png"); // Cargamos la imagen del panel inferior.
+        this.load.image('panel', "./assets/juego/MetroSkaters/imagenes/Panel.png"); // Cargamos la imagen del panel inferior.
         // Letras:
         this.load.image('a', "./assets/juego/MetroSkaters/imagenes/A.png");
         this.load.image('s', "./assets/juego/MetroSkaters/imagenes/S.png");
