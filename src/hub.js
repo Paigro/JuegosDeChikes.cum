@@ -91,7 +91,7 @@ export default class Hub extends Phaser.Scene {
     //this.cameras.main.startFollow(this.scroll); // Hacer que la cámara siga al fondo
 
     //Botones a juegos
-    this.ToDImg = this.add.image(0, 0, 'ToDImage').setOrigin(0, 1).setScale(1, 0.71).setVisible(false);
+    this.ToDImg = this.add.image(0, 0, 'ToDImage').setOrigin(0, 1).setScale(.8).setVisible(false);
     this.BumClackImg = this.add.image(0, 0, 'BumClakImage').setOrigin(0, 1).setScale(.8).setVisible(false);
     this.PapasImg = this.add.image(0, 0, 'PapasImage').setOrigin(0, 1).setScale(.8).setVisible(false);
     this.MetroImg = this.add.image(0, 0, 'MetroImage').setOrigin(0, 1).setScale(.8).setVisible(false);

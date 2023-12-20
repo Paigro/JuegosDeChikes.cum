@@ -129,9 +129,9 @@ export default class TruthOrDare extends Phaser.Scene {
 
     cancelAction()
     {
-        if ( () =>this.score > 0)
+        if ( this.score > 0)
         {
-            ()=> this.score--;
+            this.AddScore(-1);
         }
         this.desapareceLLamada();
         this.desapareceMensaje();
@@ -156,6 +156,7 @@ export default class TruthOrDare extends Phaser.Scene {
     desapareceLLamada() {
         this.llamada.setActive(false);
         this.llamada.setVisible(false);
+        this.llamada.texto.setVisible(false);
     }
     desapareceMensaje() {
         this.mensaje.setActive(false);
