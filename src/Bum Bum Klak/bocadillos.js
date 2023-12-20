@@ -7,5 +7,4 @@ export default class bocadillo extends Phaser.GameObjects.Sprite
         if(tipo == 0) this.scene.add.existing(this).setScale(scale, scale); // añadimos a escena
         else this.scene.add.existing(this).setScale(-scale, scale);
     }
-
 }

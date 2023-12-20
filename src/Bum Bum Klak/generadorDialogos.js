@@ -32,7 +32,7 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
             case 6:
                 this.texto = "He suspendido motores."
             break;
-            default:
+            case 7:
                 this.texto = "¿Quieres verme hacer una voltereta?"
             break;
         }
@@ -72,7 +72,7 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
                     this.texto = "¡Yo también!"
                 break;
                 
-                default:
+                case 7:
                     this.texto = "¿Haz una mortal!"
                 break;
             }
@@ -107,7 +107,7 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
                 case 6:
                     this.texto = "¡Tendrás más oportunidades!"
                 break;
-                default:
+                case 7:
                     this.texto = "Ten cuidado."
                 break;
             }

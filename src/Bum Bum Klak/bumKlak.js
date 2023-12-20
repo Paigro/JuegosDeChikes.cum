@@ -56,19 +56,30 @@ export default class BumKlak extends Phaser.Scene{
       this.Gkey = this.input.keyboard.addKey('G');
       // constantes
       this._apparitionVel = 0.05;
+      this._numDialogos = 7;
       // variables
       this.dialognum;
       this.habladortrans = 0;
-      this.avisoExiste = true;
-      this._avisoVel = Phaser.Math.Between(2,10);
+      this.avisoActivo = false;
+      this.avisoVel = Phaser.Math.Between(2,10);
       // setup
       this.bocadilloRespondedor.alpha = 0;
       this.textorespondedor.alpha = 0;
+      this.aviso.alpha = 0;
     }
 
     update()
     {
+      if(Phaser.Math.Between(0,100) == 100 && this.avisoActivo == false)
+      {
+        this.avisoActivo = true;
+        this.setHablador();
+        this.textohablador.alpha = 1;
+        this.aviso.setX(1000);
+      }
         this.avisoUpdate();
+      
+
 
 
 
@@ -80,7 +91,7 @@ export default class BumKlak extends Phaser.Scene{
 
     setHablador() // cambia el texto del muñeco parlanchin
     {
-      this.dialognum = Phaser.Math.Between(0,6);
+      this.dialognum = Phaser.Math.Between(0,this._numDialogos);
       this.generadorDialogo.GeneraTextoIni(this.dialognum);
       this.textohablador.setText(this.generadorDialogo.texto);
     }
@@ -93,14 +104,21 @@ export default class BumKlak extends Phaser.Scene{
 
     avisoUpdate()
     {
-      if(this.avisoExiste)
-      {
-        this.aviso.setX(this.aviso.x - this._avisoVel);
+      if(this.avisoActivo)
+      {  
+        this.aviso.setX(this.aviso.x - this.avisoVel);
+        this.aviso.alpha = this.aviso.alpha + this._apparitionVel;
         if(this.aviso.x + 50 < 0)
         {
-          //this.aviso.alpha = 0;
-          //this.avisoExiste = false;
-          this._avisoVel = Phaser.Math.Between(3,10);
+          this.avisoActivo = false;
+          this.avisoVel = Phaser.Math.Between(3,10);
+        }
+      }
+      else 
+      {
+        this.aviso.alpha = this.aviso.alpha - this._apparitionVel;
+        if(this.aviso.alpha < 0)
+        {
           this.aviso.setX(1000);
         }
       }

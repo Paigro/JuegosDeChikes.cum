@@ -6,8 +6,4 @@ export default class corazon extends Phaser.GameObjects.Sprite
         
         this.scene.add.existing(this).setScale(0.1, 0.1); // añadir a escena.
     }
-
-
-
-
 }

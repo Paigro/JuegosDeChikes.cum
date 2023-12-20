@@ -6,7 +6,4 @@ export default class cerebro extends Phaser.GameObjects.Sprite
 
         this.scene.add.existing(this).setScale(0.07, 0.07); // añadir a escena.
     }
-
-
-
 }
