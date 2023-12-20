@@ -56,7 +56,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         //#region parametros.
         // Tiempo:
         this.time = 60;
-        this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#fff' }).setPosition(0, 50).setDepth(3); // Texto para mostrar la puntuacion.
+        this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#fff', fontFamily: 'Comic Sans MS' }).setPosition(0, 60).setDepth(3); // Texto para mostrar la puntuacion.
         // Booleanos para controlar el juego:
         this.hayAlgo = false; // Para saber si hay cosas generadas.
         this.waitTime = true; // Para que hay un tiempo de espera entre acciones.
@@ -66,7 +66,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // Puntuacion:
         this.puntFict = 0; // Puntuacion ficticia.
         this.DetGen = 0; // Puntuacion del test.
-        this.marcador = this.add.text(16, 16, "Score: 0", { fontSize: '40px', fill: '#fff' }).setPosition(0, 10).setDepth(3); // Texto para mostrar la puntuacion.
+        this.marcador = this.add.text(16, 16, "Score: 0", { fontSize: '40px', fill: '#fff', fontFamily: 'Comic Sans MS' }).setPosition(0, 10).setDepth(3); // Texto para mostrar la puntuacion.
         // Otros:
         this.sec = ""; // Secuencia generada aleatoriamente.
         this.elapsedTime = 0; // Para calcular el tiempo de espera.
@@ -347,6 +347,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.reset();
         this.coor.SaveScore("DetGen", this.DetGen);
         console.clear();
-        this.scene.start("Hub");
+        this.scene.start("resultadoTest");
     }
 }

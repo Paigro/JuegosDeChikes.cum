@@ -36,6 +36,7 @@ export default class AbogadoClick extends Phaser.Scene {
   }
 
   accion() {
+    this.Abogado.setInteractive(false);
     // Anticipacion
     this.tweens.add({
       targets: this.Abogado,
@@ -114,17 +115,19 @@ export default class AbogadoClick extends Phaser.Scene {
       ease: 'Elastic',
       angle: 0,
       duration: 10,
-      persist: true
+      persist: true,
+      onStart: (() => {
+      })
     })
     this.puntuacion++
-    this.puntText.text='Puntuacion: ' + this.puntuacion;
+    this.puntText.text = 'Puntuacion: ' + this.puntuacion;
   }
 
   //Vuelve a la escena del Hub
   finalDelJuego() {
     console.clear();
     if (this.record < this.puntuacion) this.record = this.puntuacion;
-    this.puntuacion=0;
+    this.puntuacion = 0;
     this.scene.start("Hub");
   }
 }
