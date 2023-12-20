@@ -80,6 +80,9 @@ export default class BumKlak extends Phaser.Scene {
       this.textohablador.alpha = 1;
       this.aviso.setX(1000);
       this.alreadyGiven = false;
+      this.textorespondedor.alpha = 0;
+      this.bocadilloRespondedor.alpha = 0;
+      this.alreadySanctioned = false;
     }
     if (Phaser.Input.Keyboard.JustDown(this.spaceKey)) {
       if (this.avisoActivo) {
