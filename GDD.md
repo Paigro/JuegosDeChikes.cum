@@ -23,7 +23,7 @@ Los minijuegos no tendrán diferentes dificultades pero durante cada minijuego e
 
 -Si responde al mensaje (haciendo click en él) aparecerán unas respuestas al mensaje y una puntuación ficticia. Internamente al responder al mensaje se sumará al contador de Introvertido/Extrovertido.
 
--Si decide responder a la llamada (clickando en el símbolo y deslizandolo hacia un lado), aparecerá una especie de conversación y se sumará a la puntuacíon ficticia. Internamente se restará al contador Introvertido/Extrovertido.
+-Si decide responder a la llamada (clickando en el símbolo y deslizandolo hacia un lado), no aparecerá nada (simplemente el movil normal) y se sumará a la puntuacíon ficticia. Internamente se restará al contador Introvertido/Extrovertido.
 
 Si al final del minijuego el jugador tiene el contador en positivo entonces es introvertido y si está en negativo entonces será extrovertido.
 
@@ -39,9 +39,9 @@ Si al final del minijuego el jugador tiene el contador en positivo entonces es r
 
 ![BumBumKlak](assets/Bocetos/BumBumKlak.PNG)
 
-***OVEN MADNESS: PAPPA'S GALLETERIA:*** aparecerá un horno con dos puertas. Entonces aparecerán dos bandejas, una que va a entrar y otra que sale. El jugador interactuará con una de ellas. Si en un tiempo determinado y que ira disminuyendo durante la partida no ha interactuado con ninguna, se pasará. Al seleccionar una bandeja el jugador deberá:
+***OVEN MADNESS: PAPPA'S GALLETERIA:*** aparecerá un horno con dos puertas. Entonces aparecerán dos bandejas, una que va a entrar y otra que sale. El jugador interactuará con una de ellas. Al seleccionar una bandeja el jugador deberá:
 
--Si selecciona la que entra deberá de poner las galletas en la bandeja. Se suma al contador Organizado/Espontáneo.
+-Si selecciona la que entra deberá de cortar las galletas que estan en la bandeja. Se suma al contador Organizado/Espontáneo.
 
 -Si selecciona la que sale del horno, deberá de glasear las galletas manteniendo pulsado y moviendo el ratón. Se resta al contador Organizado/Espontáneo.
 
@@ -49,7 +49,7 @@ Si al final del minijuego el jugador tiene el contador en positivo entonces es o
 
 ![PappasGalleteria](assets/Bocetos/PappasGalleteria.PNG)
 
-***METRO SKATERS: SPECIAL EDITION (FLIGHT RUSH):***  habrá dos secciones en la pantalla, en la superior habrá un avión y en la inferior un panel de control. Enonces simultáneamente en la parte inferior aparecerá un código y en la superior unas exclamaciones y el jugador deberá decidir:
+***METRO SKATERS: SPECIAL EDITION (FLIGHT RUSH):***  habrá dos secciones en la pantalla, en la superior habrá un avión y en la inferior un panel de control. El jugador tiene un tienpo para interactuar, si pasa esse tiempo se reinicia y aparecen nuevas excalmaciones y secuencias. Al pasar 60 segundo el juego acaba y lleva al resultado final. Si el jugador esta en mitad de una accion no se cerrará el juego sino que se esperará a que el jugador acabe esa acción. Entonces simultáneamente en la parte inferior aparecerá un código y en la superior unas exclamaciones y el jugador deberá decidir:
 
 -Escribir la secuencia que le han dado con el teclado. Al acabar una apararecera otra hasta que el jugador haga 4 en total. Cuando el jugador comente un error salta a la siguiente. Cada secuencia bien hecha suma 25 puntos ficticios que se muestras en pantalla. Cuando falla se restan 10. Cuando se elige la acción aunque falle o acierte las secuancias se restará al contador General/Detallista.
 
