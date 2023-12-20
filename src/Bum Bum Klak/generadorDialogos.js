@@ -9,32 +9,31 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
     }
     GeneraTextoIni(numDiag)    // genera el texto inicial
     {
-
         switch(numDiag) // generamos el texto aleatorio
         {
             case 0:
-                texto = "Mi perro se ha muerto."
+                this.texto = "Mi perro se ha muerto."
             break;
             case 1:
-                texto = "¿Que quieres comer hoy?"
+                this.texto = "¿Que quieres comer hoy?"
             break;
             case 2:
-                texto = "¿Cuanto es 2+2?"
+                this.texto = "¿Cuanto es 2+2?"
             break;
             case 3:
-                texto = "Te quiero mucho."
+                this.texto = "Te quiero mucho."
             break;
             case 4:
-                texto = "Te odio con toda mi alma."
+                this.texto = "Te odio con toda mi alma."
             break;
             case 5:
-                texto = "¿Si te contase un secreto lo guardarías?"
+                this.texto = "¿Si te contase un secreto lo guardarías?"
             break;
             case 6:
-                texto = "He suspendido motores."
+                this.texto = "He suspendido motores."
             break;
             default:
-                texto = "¿Quieres verme hacer una voltereta?"
+                this.texto = "¿Quieres verme hacer una voltereta?"
             break;
         }
     }
@@ -46,35 +45,35 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
             switch(numDiag) 
             {
                 case 0:
-                    texto = "Lo siento mucho :c"
+                    this.texto = "Lo siento mucho :c"
                 break;
                 
                 case 1:
-                    texto = "No sé. ¿Qué quieres tú?"
+                    this.texto = "No sé. ¿Qué quieres tú?"
                 break;
                 
                 case 2:
-                    texto = "5"
+                    this.texto = "5"
                 break;
                 
                 case 3:
-                    texto = "Yo más."
+                    this.texto = "Yo más."
                 break;
                 
                 case 4:
-                    texto = "Yo también te odio, tranqui."
+                    this.texto = "Yo también te odio, tranqui."
                 break;
 
                 case 5:
-                    texto = "No, lol"
+                    this.texto = "No, lol"
                 break;
 
                 case 6:
-                    texto = "¡Yo también!"
+                    this.texto = "¡Yo también!"
                 break;
                 
                 default:
-                    texto = "¿Haz una mortal!"
+                    this.texto = "¿Haz una mortal!"
                 break;
             }
         }
@@ -83,33 +82,33 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
             switch(numDiag) // generamos el texto aleatorio
             {
                 case 0:
-                    texto = "Comprate otro."
+                    this.texto = "Comprate otro."
                 break;
                 
                 case 1:
-                    texto = "Arroz con pollo."
+                    this.texto = "Arroz con pollo."
                 break;
                 
                 case 2:
-                    texto = "4"
+                    this.texto = "4"
                 break;
                 
                 case 3:
-                    texto = "Deberías, todos me quieren."
+                    this.texto = "Deberías, todos me quieren."
                 break;
                 
                 case 4:
-                    texto = "Tranqui, seguro que podemos hablarlo."
+                    this.texto = "Tranqui, seguro que podemos hablarlo."
                 break;
 
                 case 5:
-                    texto = "Por supuesto que sí."
+                    this.texto = "Por supuesto que sí."
                 break;
                 case 6:
-                    texto = "¡Tendrás más oportunidades!"
+                    this.texto = "¡Tendrás más oportunidades!"
                 break;
                 default:
-                    texto = "Ten cuidado."
+                    this.texto = "Ten cuidado."
                 break;
             }
         }
