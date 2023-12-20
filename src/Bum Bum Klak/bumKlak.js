@@ -17,7 +17,6 @@ export default class BumKlak extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
     this.load.image('bocadillo', '/assets/juego/BumKlak/bocadillo.png'); // Cargamos la imagen del bocadillo
     this.load.image('cerebro', '/assets/juego/BumKlak/cerebro.png'); // Cargamos la imagen del cerebro
     this.load.image('corazon', '/assets/juego/BumKlak/corazon.png'); // Cargamos la imagen del corazón
@@ -29,11 +28,11 @@ export default class BumKlak extends Phaser.Scene {
     // Tiempo:
     this.time = 60; // 60 segundos.
     this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setPosition(0, 60).setDepth(3); // Texto para mostrar la puntuacion.
-
-    this.atras = this.add.image(950, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
-    this.atras.on('pointerdown', (pointer) => {
-      this.finalDelJuego();
-    });
+    // Para salir
+    /*this.salir = this.add.text(1080, 0, "SALIR", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }).setOrigin(1, 0).setInteractive(); // Texto que actua como boton de salir.
+    this.salir.on('pointerdown', (pointer) => {
+      this.finalDelJuego()
+    });*/
 
     //elementos
     this.escuchador = this.add.image(50, 350, 'escuchador').setOrigin(0, 0).setScale(1, 1);
@@ -47,10 +46,11 @@ export default class BumKlak extends Phaser.Scene {
     //texto
     this.textohablador = this.add.text(350, 100, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // bocata parlanchin
     this.textorespondedor = this.add.text(200, 300, "", { fontSize: '20px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' }); // bocata de respuesta
-    this.textopuntuador = this.add.text(0, 0, "69420", { fontSize: '30px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // indica la puntuacion
+    this.textopuntuador = this.add.text(0, 0, "69420", { fontSize: '40px', fill: '#1CAF56', fontFamily: 'Comic Sans MS' });  // indica la puntuacion
     // puntuaciones
     this.punTest = 0;  // puntuación test
-    this.puntuacion = 0;  // puntuación del juego perse
+    this.puntuacion = 0;  // puntuación del juego perse (no)
+    this.SenRac = 0; // Puntuacion del test.
     //cosas del debug
     this.debug = 1; // variable usada para debug
     //this.debugtext = this.add.text(0, 0, "0", {fontSize: '40px', fill: '#000000', fontFamily: 'Comic Sans MS'}).setPosition(200, 0);
@@ -175,6 +175,7 @@ export default class BumKlak extends Phaser.Scene {
         this.alreadyGiven = true;
         this.alreadySanctioned = true;
         this.puntuacionManager(0, 0, 20);
+        this.changeTestPunt(-1);
       }
       else if (this.aviso.x > this.corazon.x + 100) // coloca la respuesta de cerebro
       {
@@ -184,19 +185,21 @@ export default class BumKlak extends Phaser.Scene {
         this.textorespondedor.alpha = 1;
         this.alreadyGiven = true;
         this.alreadySanctioned = true;
-        this.puntuacionManager(0, 0, 20);
+        this.puntuacionManager(0, 0, 20); // (No)
+        this.changeTestPunt(1);
       }
     }
   }
 
-  respuestaUpdate() {
-
-
-
+  changeTestPunt(pun) {
+    this.SenRac += pun;
+    if (this.SenRac == 0) { this.SenRac += pun; }
+    console.log("TEST: " + this.SenRac);
   }
 
   finalDelJuego() {
+    this.coor.SaveScore("SenRac", this.punTest);
     console.clear();
-    this.scene.start("Hub");
+    this.scene.start("Hub", this.coor);
   }
 }
