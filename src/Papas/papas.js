@@ -196,7 +196,10 @@ export default class Papas extends Phaser.Scene {
         duration: 300,  // Duración de la animación en milisegundos
         ease: 'cubic',  // Función de interpolación (puedes probar 'Cubic', 'Elastic', 'Bounce', etc.)
         repeat: 0,    // Repetir infinitamente
-        persist: true
+        persist: true,
+        onStart: (()=>{
+          this.bandeja1.cortador.hide();
+        })
 
       })
     //resetea posicion bandeja

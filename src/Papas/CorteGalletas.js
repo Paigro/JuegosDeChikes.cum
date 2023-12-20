@@ -35,6 +35,5 @@ export default class CorteGalletas extends Phaser.GameObjects.Sprite {
         //console.log("reset accion");
         this.scene.CambioSpriteCorte(0);
         this.input.enabled = true;
-        this.cortador.hide();
     }
 }
