@@ -42,7 +42,7 @@ export default class resultadoTest extends Phaser.Scene // Manager de la escena 
         this.coorRes = this.coor.returnPersonalidad(); // Resultado que le da el coordinador a esta escena.
         //#endregion
         //#region texto
-        this.resultado = this.add.text(16, 16, "Eres: " + this.coorRes, { fontSize: '70px', fill: '#fff', fontFamily: 'Comic Sans MS' }).setPosition(540, 375); // Texto para mostrar el resultado.
+        this.resultado = this.add.text(16, 16, "Eres: ", { fontSize: '70px', fill: '#fff', fontFamily: 'Comic Sans MS' }).setPosition(20, 375); // Texto para mostrar el resultado.
         //#endregion
         //#region boton
         // Boton de volver atras:
@@ -74,9 +74,11 @@ export default class resultadoTest extends Phaser.Scene // Manager de la escena 
         this.consul = this.add.sprite(0, 0, 'consul').setOrigin(0, 0).setScale(0.3, 0.3); // Añadimos la imagen del fondo.
         //#endregion
         //#region mostrar cositas
-        this.changeBackGroundColor(this.resultado);
-        this.showPersonality();
+        this.changeBackGroundColor(this.coorRes);
+        this.showPersonality(this.coorRes);
         //#endregion
+        //this.resultado.setText('Eres: arquitecto (ESFP)');
+
     }
 
     showPersonality(pers) {
@@ -84,69 +86,85 @@ export default class resultadoTest extends Phaser.Scene // Manager de la escena 
             // Amarillo:
             case "IRED":
                 this.virtuoso.setVisible(true);
+                this.resultado.setText('Eres: virtuoso (ISTP)');
                 console.log("virtuoso");
                 break;
             case "ISED":
                 this.aventurero.setVisible(true);
+                this.resultado.setText('Eres: aventurero (ISFP)');
                 console.log("aventurero");
                 break;
             case "ERED":
                 this.emprendedor.setVisible(true);
+                this.resultado.setText('Eres: emprendedor (ESTP)');
                 console.log("emprendedor");
                 break;
             case "ESED":
                 this.animador.setVisible(true);
+                this.resultado.setText('Eres: animador (ESFP)');
                 console.log("animador");
                 break;
             // Morado:
             case "IROG":
                 this.arquitecto.setVisible(true);
+                this.resultado.setText('Eres: arquitecto (INTJ)');
                 console.log("arquitecto");
                 break;
             case "IREG":
                 this.logico.setVisible(true);
+                this.resultado.setText('Eres: lógico (INTP)');
                 console.log("logico");
                 break;
             case "EROG":
                 this.comandante.setVisible(true);
+                this.resultado.setText('Eres: comandante (ENTJ)');
                 console.log("comandante");
                 break;
             case "EREG":
                 this.innovador.setVisible(true);
+                this.resultado.setText('Eres: innovador (ENTP)');
                 console.log("innovador");
                 break;
             // Verde:
             case "ISOG":
                 this.abogado.setVisible(true);
+                this.resultado.setText('Eres: abogado (INFJ)');
                 console.log("abogado");
                 break;
             case "ISEG":
                 this.mediador.setVisible(true);
+                this.resultado.setText('Eres: mediador (INFP)');
                 console.log("mediador");
                 break;
-            case "EDOG":
+            case "ESOG":
                 this.protagonista.setVisible(true);
+                this.resultado.setText('Eres: protagonista (ENFJ)');
                 console.log("protagonista");
                 break;
             case "ESEG":
                 this.activista.setVisible(true);
+                this.resultado.setText('Eres: activista (ENFP)');
                 console.log("activista");
                 break;
             // Azul:
             case "IROD":
                 this.logista.setVisible(true);
+                this.resultado.setText('Eres: logista (ISTJ)');
                 console.log("logista");
                 break;
             case "ISOD":
                 this.defensor.setVisible(true);
+                this.resultado.setText('Eres: defensor (ISFJ)');
                 console.log("defensor");
                 break;
             case "EROD":
                 this.ejecutivo.setVisible(true);
+                this.resultado.setText('Eres: ejecutivo (ESTJ)');
                 console.log("defensor");
                 break;
             case "ESOD":
                 this.consul.setVisible(true);
+                this.resultado.setText('Eres: cónsul (ESfJ)');
                 console.log("consul");
                 break;
             default:
@@ -169,6 +187,7 @@ export default class resultadoTest extends Phaser.Scene // Manager de la escena 
         //Naranja.
         else { color = "#ff9933" }
         this.cameras.main.setBackgroundColor(color);
+        document.body.style.backgroundColor = color;
     }
 
     finalDelJuego() {
