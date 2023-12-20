@@ -1,0 +1,9 @@
+Morado:     IROG, IREG, EROG, EREG.
+Verde:      ISOG, ISEG, ESOG, ESEG.
+Azul:       IROD, ISOD, EROD, ESOD.
+Amarillo:   IRED, ISED, ERED, ESED.
+
+I-Introvertido      E-Extrovertido
+T-Racioanl          F-Sensitivo
+J-Organizado        P-Espontaneo
+S-Detallista        N-General
