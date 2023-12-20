@@ -288,10 +288,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         {
             this.avion.meToca(this.obs);
         }
-        else if (this.decision && this.secuenciaAcc && !this.avionAcc) // Accion secuencia.
-        {
-            this.avion.noMeToca(this.obs);
-        }
         // TIEMPO:
         this.time -= (delta / 1000);
         if (this.time >= 0) {
@@ -347,6 +343,6 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.reset();
         this.coor.SaveScore("DetGen", this.DetGen);
         console.clear();
-        this.scene.start("resultadoTest");
+        this.scene.start("resultadoTest", this.coor);
     }
 }

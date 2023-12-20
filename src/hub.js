@@ -29,8 +29,6 @@ export default class Hub extends Phaser.Scene {
   }
 
   create() {
-    //calcula personalidad cuando vuelves al hub
-    this.coordinator.CalcularPersonalidad();
 
     //Desbloqueo de minijuego
     if(this.juegsDesbloq<5){ this.juegsDesbloq++; }
@@ -94,8 +92,9 @@ export default class Hub extends Phaser.Scene {
 
   desbloqMinij() { this.juegsDesbloq++; }
 
-  personalidad(pers) {
-    console.log(pers)
+  personalidad() {
+    let pers =this.coordinator.returnPersonalidad();
+    //console.log(pers)
     let color;
     // Este color se lo pasara el coordinator dependiendo de la personalidad.
         //Morado.

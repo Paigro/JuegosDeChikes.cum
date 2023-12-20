@@ -59,17 +59,10 @@ export default class Coordinator {
             else this.calculable = false;
 
         }
-
-        if (this.calculable) {
-            this.scene.personalidad(this.personalidad);
-            console.log(this.personalidad);
-        }
-        //console.log(this);
-
     }
+    
     returnPersonalidad() {
-        //this.CalcularPersonalidad();
-        this.personalidad = "EREG";
+        this.CalcularPersonalidad();
         return this.personalidad;
     }
 }
