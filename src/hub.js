@@ -10,13 +10,13 @@ export default class Hub extends Phaser.Scene {
     this.coordinator = new Coordinator(this);
 
     //Desbloqueo de minijuegos
-    this.juegsDesbloq = 5;
+    this.juegsDesbloq = 0;
   }
 
   init() {
     this.personalidad("");
   }
-  
+
   preload() {
     console.log("0");
     this.load.image('Scroll', "assets/juego/Hub/BarritaScroll.png")
@@ -31,12 +31,11 @@ export default class Hub extends Phaser.Scene {
   create() {
 
     //Desbloqueo de minijuego
-    if(this.juegsDesbloq<5){ this.juegsDesbloq++; }
+    if (this.juegsDesbloq < 5) { this.juegsDesbloq++; }
 
     //Scroll minijuegos
-    this.scroll = this.add.image(0, 0, 'Scroll').setInteractive({draggable: true}).setScale(1,100).setDepth(2);
-    this.scroll.on('drag', (evento) =>
-    {
+    this.scroll = this.add.image(0, 0, 'Scroll').setInteractive({ draggable: true }).setScale(1, 100).setDepth(2);
+    this.scroll.on('drag', (evento) => {
       //console.log(this.input.y);
       //console.log("we"),
       this.scroll.y = this.input.y;
@@ -88,27 +87,28 @@ export default class Hub extends Phaser.Scene {
     this.resultadoImagen.setInteractive().on('pointerdown', () =>
       this.scene.start("resultadoTest", this.coordinator)
     )
+
   }
 
   desbloqMinij() { this.juegsDesbloq++; }
 
   personalidad() {
-    let pers =this.coordinator.returnPersonalidad();
+    let pers = this.coordinator.returnPersonalidad();
+    console.log(pers);
     //console.log(pers)
     let color;
     // Este color se lo pasara el coordinator dependiendo de la personalidad.
-        //Morado.
-        if (pers === "IROG" || pers === "IREG" || pers === "EROG" || pers === "EREG") { color = "#E16EDD"; }
-        //Verde.
-        else if (pers === "ISOG" || pers === "ISEG" || pers === "ESOG" || pers === "ESEG") { color = "#73E16E"; }
-        //Azul.
-        else if (pers === "IROD" || pers === "ISOD" || pers === "EROD" || pers === "ESOD") { color = "#77EAF5"; }
-        //Amarillo.
-        else if (pers === "IRED" || pers === "ISED" || pers === "ERED" || pers === "ESED") { color = "#FFC300"; }
-        //Naranja.
-        else { color = "#ff9933" }
+    //Morado.
+    if (pers === "IROG" || pers === "IREG" || pers === "EROG" || pers === "EREG") { color = "#E16EDD"; }
+    //Verde.
+    else if (pers === "ISOG" || pers === "ISEG" || pers === "ESOG" || pers === "ESEG") { color = "#73E16E"; }
+    //Azul.
+    else if (pers === "IROD" || pers === "ISOD" || pers === "EROD" || pers === "ESOD") { color = "#77EAF5"; }
+    //Amarillo.
+    else if (pers === "IRED" || pers === "ISED" || pers === "ERED" || pers === "ESED") { color = "#FFC300"; }
+    //Naranja.
+    else { color = "#ff9933" }
     document.body.style.backgroundColor = color;
-    console.log(color);
     this.cameras.main.setBackgroundColor(color);
   }
 } 

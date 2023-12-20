@@ -58,12 +58,6 @@ export default class Papas extends Phaser.Scene {
     //Tutorial glaseado
     this.tutGlaseado = this.add.sprite(800, 420,'GlaseadoTut').setScale(.7,.7).setDepth(3).setVisible(false);
 
-    //Boton de salir
-    this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
-    this.atras.on('pointerdown', (pointer) => {
-      this.finalDelJuego();
-    });
-
     //Propiedades
     this.time = 60;
     this.endRound = false;
