@@ -73,7 +73,7 @@ export default class TruthOrDare extends Phaser.Scene {
 
 
     init(data) {
-        this.Time = 60;
+        this.Time = 10;
         this.score = 0;
         this.coor = data; //coordinador
         this.ExtInt = 0; // Puntuacion de extroversion (negativo) e introversion (positivo).
@@ -101,7 +101,6 @@ export default class TruthOrDare extends Phaser.Scene {
             callback: () => this.throwAction(),
             callbackScope: this
         });
-        console.log(this.timer.delay);
     }
 
     throwAction() {
@@ -135,6 +134,7 @@ export default class TruthOrDare extends Phaser.Scene {
     AddScore(num) {
         this.score += num;
         this.marcador.setText('Score: ' + this.score);
+        console.log(this.score);
     }
 
     AddExtIntScore(num) {

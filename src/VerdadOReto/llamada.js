@@ -25,7 +25,7 @@ export default class PhoneCall extends Phaser.GameObjects.Sprite {
     FinishAction() {
         if (this.x < this.finalX) {
            
-            console.log(this.x)
+            //console.log(this.x)
             this.x = this.originX;
         }
         else {

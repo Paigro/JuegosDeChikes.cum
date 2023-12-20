@@ -8,14 +8,13 @@ export default class Papas extends Phaser.Scene {
     // Nombre de la escena para el SceneManager
     super({ key: 'Papas', active: false });
 
-    this.time = 60;
     this.points = 0;
   }
 
   init(data) {
     this.coor = data;
     //console.log(this.coor);
-    console.log(data);
+    //console.log(data);
   }
 
   preload() {
@@ -59,7 +58,7 @@ export default class Papas extends Phaser.Scene {
     this.tutGlaseado = this.add.sprite(800, 420,'GlaseadoTut').setScale(.7,.7).setDepth(3).setVisible(false);
 
     //Propiedades
-    this.time = 60;
+    this.time = 10;
     this.endRound = false;
 
     // Elementos del juego
@@ -71,14 +70,14 @@ export default class Papas extends Phaser.Scene {
 
     //Bloquea la otra bandeja
     this.bandeja1.on('pointerdown', (pointer) => {
-      console.log("Start b1");
+      //console.log("Start b1");
       this.bandeja2.BlockThisAction();
       this.bandeja1.StartAccion();
       this.endRound = false;
     })
 
     this.bandeja2.on('pointerdown', (pointer) => {
-      console.log("Start b2");
+      //console.log("Start b2");
       this.bandeja1.BlockThisAction();
       this.bandeja2.StartAccion();
       this.endRound = false;
@@ -109,7 +108,8 @@ export default class Papas extends Phaser.Scene {
   endAction(points) {
     //Reseteo logica
     this.points += points;
-    this.endRound = true
+    this.endRound = true;
+    console.log(this.points);
 
     //Reseteo animaciones
     this.tweenFondD3();
@@ -329,7 +329,7 @@ export default class Papas extends Phaser.Scene {
   //Cambio sprite corte
   CambioSpriteCorte(cortes) {
     let textura = 'corte' + cortes;
-    console.log(textura);
+    //console.log(textura);
     this.bandeja1.setTexture(textura);
   }
 

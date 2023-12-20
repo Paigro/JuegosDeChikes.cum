@@ -10,7 +10,7 @@ export default class Hub extends Phaser.Scene {
     this.coordinator = new Coordinator(this);
 
     //Desbloqueo de minijuegos
-    this.juegsDesbloq = 1;
+    this.juegsDesbloq = 0;
   }
 
   init() {
@@ -18,7 +18,7 @@ export default class Hub extends Phaser.Scene {
   }
 
   preload() {
-    console.log("0");
+    //console.log("0");
     this.load.image('Scroll', "assets/juego/Hub/BarritaScroll.png")
     this.load.image('ToDImage', "assets/Bocetos/TruthOrDare.PNG")
     this.load.image('BumClakImage', "assets/Bocetos/BumBumKlak.PNG")

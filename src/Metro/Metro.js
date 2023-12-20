@@ -55,7 +55,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     create() {
         //#region parametros.
         // Tiempo:
-        this.time = 60;
+        this.time = 10;
         this.contador = this.add.text(16, 16, "Time: 0", { fontSize: '40px', fill: '#fff', fontFamily: 'Comic Sans MS' }).setPosition(0, 60).setDepth(3); // Texto para mostrar la puntuacion.
         // Booleanos para controlar el juego:
         this.hayAlgo = false; // Para saber si hay cosas generadas.
@@ -231,14 +231,14 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
             if (!this.decision && this.hayAlgo) { // Solo si se permite una accion y hya una opcion que tomar miramos cual puede ser.
                 if (event.key === "ArrowLeft" || event.key === "ArrowRight") { // Accion 1: mover al avion.
-                    console.log("Seleccion: avion.");
+                    //log("Seleccion: avion.");
                     this.rectNegro.setPosition(0, 450).setVisible(true);
                     this.changeTestPunt(1);
                     this.avionAcc = true;
                     this.decision = true;
                 }
                 else if (event.key === "a" || event.key === "s" || event.key === "d" || event.key === "f" || event.key === "g" || event.key === "h" || event.key === "i" || event.key === "j" || event.key === "k" || event.key === "l" || event.key === "m" || event.key === "p" || event.key === "q" || event.key === "r" || event.key === "v") { // Accion 2: secuencia de teclas.
-                    console.log("Selecion: teclas.");
+                    //console.log("Selecion: teclas.");
                     this.rectNegro.setPosition(0, 0).setVisible(true);
                     this.changeTestPunt(-1);
                     this.secuencia.setSec(this.sec);
@@ -262,7 +262,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         // GENERACION DE COSAS, TIEMPO DE ESPERA Y TIEMPO FINAL:
         if (!this.hayAlgo && !this.waitTime && !this.decision) {
             // Logs:
-            console.log("Generado de cosas, esperando decision del jugador.");
+            //console.log("Generado de cosas, esperando decision del jugador.");
             // Generacion aleatoria:
             this.sec = this.generador.secuenciaGenerador();
             this.obs = this.generador.osbtaculoGenerador();
@@ -273,7 +273,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
             this.hayAlgo = true;
         }
         else if (this.waitTime && !this.hayAlgo && !this.decision && this.time >= 0) {
-            console.log("Tiempo que no hay nada.");
+            //console.log("Tiempo que no hay nada.");
             if (this.elapsedTime >= 2500) {
                 this.elapsedTime = 0;
                 this.waitTime = false;
@@ -302,7 +302,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
     changePuntFict(pun) {
         this.puntFict += pun;
         this.marcador.setText('Puntuación: ' + this.puntFict);
-        console.log("PUNTUACION: " + this.puntFict);
+        //console.log("PUNTUACION: " + this.puntFict);
     }
 
     changeTestPunt(pun) {
@@ -336,7 +336,7 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
         this.decision = false;
         this.hayAlgo = false;
         this.waitTime = true;
-        console.log("Reseteo de buenos dias.");
+        //console.log("Reseteo de buenos dias.");
     }
 
     finalDelJuego() {

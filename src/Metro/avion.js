@@ -3,7 +3,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
     {
         super(scene, x, y, 'avion'); // Llamada a la constructora padre.
 
-        console.log("Avion: avion ha sido creado");
+        //console.log("Avion: avion ha sido creado");
 
         scene.physics.add.existing(this); // Agregamos las fisicas.
 
