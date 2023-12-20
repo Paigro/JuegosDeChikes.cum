@@ -27,7 +27,14 @@ Los minijuegos no tendrán diferentes dificultades pero durante cada minijuego e
 
 Si al final del minijuego el jugador tiene el contador en positivo entonces es introvertido y si está en negativo entonces será extrovertido.
 
-![TruthOrDare](assets/Bocetos/TruthOrDare.PNG)
+Esperando a que el jugador seleccione la accion:
+![TruthOrDare](assets/Bocetos/ToDEsp.PNG)
+
+Cuando el jugador selecciona la llamada:
+![TruthOrDare](assets/Bocetos/ToDLla.PNG)
+
+Cuando el jugador selecciona el mensaje:
+![TruthOrDare](assets/Bocetos/ToDMMen.PNG)
 
 ***BUM BUM KLAK:*** habrá dos siluetas de personas en la pantalla. Una representará al jugador (su silueta esta cortada a la mitad pudiendose ver su corazón y cerebro) y la otra representa a otra persona. La segunda persona va lanzando diferentes frases en bocadillos que van dirigidor al jugador. La velocidad de estos bocadillos irá subiendo a medida que avance el minijuego. El jugador podrá interactuar con ellos:
 
@@ -47,7 +54,14 @@ Si al final del minijuego el jugador tiene el contador en positivo entonces es r
 
 Si al final del minijuego el jugador tiene el contador en positivo entonces es organizado y si está en negativo entonces será espontáneo.
 
-![PappasGalleteria](assets/Bocetos/PappasGalleteria.PNG)
+Esperando a que el jugador seleccione una bandeja:
+![PappasGalleteria](assets/Bocetos/PapasEsp.PNG)
+
+Cuando el jugador selecciona la bandeja para glasear:
+![PappasGalleteria](assets/Bocetos/PapasGla.PNG)
+
+Cuando el jugador selecciona la bandeja para cortar galletas:
+![PappasGalleteria](assets/Bocetos/PapasCor.PNG)
 
 ***METRO SKATERS: SPECIAL EDITION (FLIGHT RUSH):***  habrá dos secciones en la pantalla, en la superior habrá un avión y en la inferior un panel de control. El jugador tiene un tienpo para interactuar, si pasa esse tiempo se reinicia y aparecen nuevas excalmaciones y secuencias. Al pasar 60 segundo el juego acaba y lleva al resultado final. Si el jugador esta en mitad de una accion no se cerrará el juego sino que se esperará a que el jugador acabe esa acción. Entonces simultáneamente en la parte inferior aparecerá un código y en la superior unas exclamaciones y el jugador deberá decidir:
 
@@ -69,13 +83,13 @@ Cuando se hace la accion de la secuencia:
 **CLIKERS (*NICE TO HAVE*)**
 Cuando al jugador se le da el resultado del test cuando acaba los 4 minijuegos, se le muestra la personalidad que es. Algunas personalidades tendrán un desbloqueable que será un clicker con una temática distinta.
 
--Simulador de lesbiana (personalidad lógico): Cynthia con un hacha. Haces click y corta un árbol.
+-(No hecho) Simulador de lesbiana (personalidad lógico): Cynthia con un hacha. Haces click y corta un árbol.
 
 -El ke tengo aki kolgado (abogado) (personalidad abogado): Ves unas piernas en la parte superior de la pantalla. Haces click y se cae un avatar de alguien con personalidad de abogado.
 
--Hack It! (personalidad virtuosa): un teclado con unos y ceros. Haces click en el uno o en el cero.
+-(No hecho) Hack It! (personalidad virtuosa): un teclado con unos y ceros. Haces click en el uno o en el cero.
 
--The Game (personalidad activista): Avatares de Luis (cabello) y Eri. Haces click en Luis, dice “has perdido” y Eri llora.
+-(No hecho) The Game (personalidad activista): Avatares de Luis (cabello) y Eri. Haces click en Luis, dice “has perdido” y Eri llora.
 
 y muchos más… (probablemente)
 
