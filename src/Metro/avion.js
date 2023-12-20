@@ -157,29 +157,7 @@ export default class Avion extends Phaser.GameObjects.Sprite {
         this.movientoAvion();
         this.update();
     }
-
-    noMeToca() {
-
-
-
-
-
-
-
-
-        // alomejor mover el avion hasta una posicion en la que no aparezca ningun obstaculo.
-
-
-
-
-
-
-
-
-
-
-    }
-
+    
     reset() {
         this.scene.obstaculo1.yaEjecutado = false;
         this.scene.obstaculo2.yaEjecutado = false;

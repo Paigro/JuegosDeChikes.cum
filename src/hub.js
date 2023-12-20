@@ -10,57 +10,13 @@ export default class Hub extends Phaser.Scene {
     this.coordinator = new Coordinator(this);
 
     //Desbloqueo de minijuegos
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // recordatorio depinerlpos com oesataba
     this.juegsDesbloq = 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
+
   init() {
     this.personalidad("");
   }
+  
   preload() {
     console.log("0");
     this.load.image('Scroll', "assets/juego/Hub/BarritaScroll.png")
