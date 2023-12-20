@@ -18,12 +18,12 @@ export default class BumKlak extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('bocadillo', '/assets/juego/BumKlak/bocadillo.png'); // Cargamos la imagen del bocadillo
-    this.load.image('cerebro', '/assets/juego/BumKlak/cerebro.png'); // Cargamos la imagen del cerebro
-    this.load.image('corazon', '/assets/juego/BumKlak/corazon.png'); // Cargamos la imagen del corazón
-    this.load.image('escuchador', '/assets/juego/BumKlak/persona escuchadora.png'); // Cargamos la imagen del moñeco que escucha
-    this.load.image('parlanchin', '/assets/juego/BumKlak/persona parlanchina.png'); // Cargamos la imagen del moñeco que habla
-    this.load.image('aviso', '/assets/juego/BumKlak/aviso.png'); // Cargamos la imagen del moñeco que habla
+    this.load.image('bocadillo', 'assets/juego/BumKlak/bocadillo.png'); // Cargamos la imagen del bocadillo
+    this.load.image('cerebro', 'assets/juego/BumKlak/cerebro.png'); // Cargamos la imagen del cerebro
+    this.load.image('corazon', 'assets/juego/BumKlak/corazon.png'); // Cargamos la imagen del corazón
+    this.load.image('escuchador', 'assets/juego/BumKlak/persona escuchadora.png'); // Cargamos la imagen del moñeco que escucha
+    this.load.image('parlanchin', 'assets/juego/BumKlak/persona parlanchina.png'); // Cargamos la imagen del moñeco que habla
+    this.load.image('aviso', 'assets/juego/BumKlak/aviso.png'); // Cargamos la imagen del moñeco que habla
   }
   create() {
     // Tiempo:

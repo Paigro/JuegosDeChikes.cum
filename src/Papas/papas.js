@@ -18,27 +18,27 @@ export default class Papas extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('atras', '/assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
+    this.load.image('atras', 'assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
 
     //Carga de imagenes del juego
-    this.load.image('BandejaCorte', '/assets/juego/PapasGalleteria/SpritesCorte/1.png');
-    this.load.image('BordGallet', '/assets/juego/PapasGalleteria/Borde_Galleta.png');
-    this.load.image('MarcaGallet', '/assets/juego/PapasGalleteria/Marca_Galleta.png');
-    this.load.image('GlaseadoTut', '/assets/juego/PapasGalleteria/Tutorial_Glaseado.png');
-    this.load.image('BandejaGlased', '/assets/juego/PapasGalleteria/Bandeja_Base.png');
-    this.load.image('GlaseadoGallet', '/assets/juego/PapasGalleteria/Glaseado_Galleta.png');
-    this.load.image('Fondo', '/assets/juego/PapasGalleteria/FondoDer.png');
+    this.load.image('BandejaCorte', 'assets/juego/PapasGalleteria/SpritesCorte/1.png');
+    this.load.image('BordGallet', 'assets/juego/PapasGalleteria/Borde_Galleta.png');
+    this.load.image('MarcaGallet', 'assets/juego/PapasGalleteria/Marca_Galleta.png');
+    this.load.image('GlaseadoTut', 'assets/juego/PapasGalleteria/Tutorial_Glaseado.png');
+    this.load.image('BandejaGlased', 'assets/juego/PapasGalleteria/Bandeja_Base.png');
+    this.load.image('GlaseadoGallet', 'assets/juego/PapasGalleteria/Glaseado_Galleta.png');
+    this.load.image('Fondo', 'assets/juego/PapasGalleteria/FondoDer.png');
     //this.load.image('FondoI', '/assets/juego/PapasGalleteria/FondoIzq.png');
-    this.load.image('Separador', '/assets/juego/PapasGalleteria/Separacion.png');
+    this.load.image('Separador', 'assets/juego/PapasGalleteria/Separacion.png');
 
     //Animacion de corte
-    this.load.image('corte0', '/assets/juego/PapasGalleteria/SpritesCorte/1.png')
-    this.load.image('corte1', '/assets/juego/PapasGalleteria/SpritesCorte/2.png')
-    this.load.image('corte2', '/assets/juego/PapasGalleteria/SpritesCorte/3.png')
-    this.load.image('corte3', '/assets/juego/PapasGalleteria/SpritesCorte/4.png')
-    this.load.image('corte4', '/assets/juego/PapasGalleteria/SpritesCorte/5.png')
-    this.load.image('corte5', '/assets/juego/PapasGalleteria/SpritesCorte/6.png')
-    this.load.image('corte6', '/assets/juego/PapasGalleteria/SpritesCorte/7.png')
+    this.load.image('corte0', 'assets/juego/PapasGalleteria/SpritesCorte/1.png')
+    this.load.image('corte1', 'assets/juego/PapasGalleteria/SpritesCorte/2.png')
+    this.load.image('corte2', 'assets/juego/PapasGalleteria/SpritesCorte/3.png')
+    this.load.image('corte3', 'assets/juego/PapasGalleteria/SpritesCorte/4.png')
+    this.load.image('corte4', 'assets/juego/PapasGalleteria/SpritesCorte/5.png')
+    this.load.image('corte5', 'assets/juego/PapasGalleteria/SpritesCorte/6.png')
+    this.load.image('corte6', 'assets/juego/PapasGalleteria/SpritesCorte/7.png')
   }
 
 
