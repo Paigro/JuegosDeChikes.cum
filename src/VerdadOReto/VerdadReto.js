@@ -69,6 +69,13 @@ export default class TruthOrDare extends Phaser.Scene {
             repeat: -1,    // Repetir infinitamente
             persist: true
         });
+
+
+        //Salir al hub
+        this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
+
+            if (event.key === "0") this.finalDelJuego()
+        })
     }
 
 

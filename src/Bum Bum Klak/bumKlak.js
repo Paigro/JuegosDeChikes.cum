@@ -70,6 +70,13 @@ export default class BumKlak extends Phaser.Scene {
     this.bocadilloRespondedor.alpha = 0;
     this.textorespondedor.alpha = 0;
     this.aviso.alpha = 0;
+
+
+    //Salir al hub
+    this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
+
+      if (event.key === "0") this.finalDelJuego()
+    })
   }
 
   update(time, delta) {

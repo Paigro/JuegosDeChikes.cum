@@ -255,6 +255,12 @@ export default class Metro extends Phaser.Scene // Manager de la escena del Metr
                 }
             }
         });
+
+        //Salir al hub
+        this.input.keyboard.on('keydown', (event) => { // Miramos cualquier tecla.
+
+                if (event.key === "0" ) this.finalDelJuego()
+            })
         //#endregion
     }
 
