@@ -32,6 +32,8 @@ export default class PhoneCall extends Phaser.GameObjects.Sprite {
             this.scene.AddScore(1);
             this.scene.AddExtIntScore(-1);
             this.scene.desapareceLLamada();
+            this.texto.setText(this.Personas[Math.floor(Math.random() * (5 - 0 + 1)) + 0]);
+            this.texto.setVisible(false);
             this.scene.time.removeEvent(this.scene.timer);
             this.scene.waitForAction();
             this.x = this.originX;

@@ -9,11 +9,22 @@ export default class TruthOrDare extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('atras', 'assets/juego/TruthOrDare/imagenes/VolverAtras.jpg'); // Cargamos la imagen de volver atras (provisional).
         this.load.image('telefono', 'assets/juego/TruthOrDare/imagenes/Telefono.png'); // Cargamos la imagen de un movil (provisional).
         this.load.image('calle', 'assets/juego/TruthOrDare/imagenes/fondo.png'); // Cargamos la imagen de una calle para el fondo (provisional).
-        this.load.image('mensaje', 'assets/juego/TruthOrDare/imagenes/mensaje.png'); // Cargamos la imagen del mensaje, de momento un Beluga.
-        this.load.image('mensaje2', 'assets/juego/TruthOrDare/imagenes/mensaje2.png');
+        
+        //cargar Mensajes
+        this.load.image('mensajeMadre', 'assets/juego/TruthOrDare/imagenes/mensajeMadre.png'); 
+        this.load.image('mensaje2Madre', 'assets/juego/TruthOrDare/imagenes/mensaje2Madre.png');
+        this.load.image('mensajeMatias', 'assets/juego/TruthOrDare/imagenes/mensajeMatias.png'); 
+        this.load.image('mensaje2Matias', 'assets/juego/TruthOrDare/imagenes/mensaje2Matias.png');
+        this.load.image('mensajeMatias2', 'assets/juego/TruthOrDare/imagenes/mensajeMatias2.png'); 
+        this.load.image('mensaje2Matias2', 'assets/juego/TruthOrDare/imagenes/mensaje2Matias2.png');
+        this.load.image('mensajeLeo', 'assets/juego/TruthOrDare/imagenes/mensajeLeo.png'); 
+        this.load.image('mensaje2Leo', 'assets/juego/TruthOrDare/imagenes/mensaje2Leo.png');
+        this.load.image('mensajeEx', 'assets/juego/TruthOrDare/imagenes/mensajeEx.png'); 
+        this.load.image('mensaje2Ex', 'assets/juego/TruthOrDare/imagenes/mensaje2Ex.png');
+
+
         this.load.image('llamada', 'assets/juego/TruthOrDare/imagenes/Llamada.png');
         this.load.image('score', 'assets/juego/TruthOrDare/imagenes/score.jpg'); // Cargamos la imagen del score.
     }
@@ -155,8 +166,7 @@ export default class TruthOrDare extends Phaser.Scene {
         this.llamada.setActive(true);
         this.llamada.setVisible(true);
 
-        this.llamada.texto.setText(this.llamada.Personas[Math.floor(Math.random() * (5 - 0 + 1)) + 0]);
-        this.llamada.texto.setVisible(true);
+        //this.llamada.texto.setVisible(true);
     }
     apareceMensaje() {
         this.mensaje.setActive(true);
