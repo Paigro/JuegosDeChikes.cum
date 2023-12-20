@@ -59,7 +59,7 @@ export default class BumKlak extends Phaser.Scene {
     this.spaceKey = this.input.keyboard.addKey('SPACE');
     // constantes
     this._aavisoApparitionVel = 0.05; // velocidad de aparición del aviso
-    this._numDialogos = 7;            // numero de dialogos disponibles
+    this._numDialogos = 13;            // numero de dialogos disponibles
     // variables
     this.dialognum;                             // indice del dialogo elegido
     this.avisoActivo = false;                   // indica si el aviso está activo

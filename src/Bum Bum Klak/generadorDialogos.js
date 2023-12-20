@@ -42,7 +42,7 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
                 this.texto = "Mi abuela se comió mi gato"
             break;
             case 10:
-                this.texto = "¿Quién gana? Mil billones de leones o el sol"
+                this.texto = "¿Quién gana, mil billones de leones o el sol?"
             break;
             case 11:
                 this.texto = "Me gustan los trenes"
@@ -135,13 +135,13 @@ export default class generadorDialogo extends Phaser.GameObjects.Sprite
                     this.texto = "Ten cuidado."
                 break;
                 case 8:
-                    this.texto = "No tuvo gracia la primera vez, no la tiene ahora"
+                    this.texto = "No tuvo gracia la primera vez"
                 break;
                 case 9:
-                    this.texto = "Eso suena malo, los gatos no son nutritivos"
+                    this.texto = "Los gatos no son nutritivos"
                 break;
                 case 10:
-                    this.texto = "Obviamente el sol ¿Qué pregunta es esa?"
+                    this.texto = "Obviamente el sol"
                 break;
                 case 11:
                     this.texto = "Son chulos ngl"
