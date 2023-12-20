@@ -20,9 +20,9 @@ export default class Hub extends Phaser.Scene {
   preload() {
     //console.log("0");
     this.load.image('Scroll', "./assets/juego/Hub/BarritaScroll.png")
-    this.load.image('ToDImage', "./assets/Bocetos/TruthOrDare.png")
-    this.load.image('BumClakImage', "./assets/Bocetos/BumBumKlak.png")
-    this.load.image('PapasImage', "./assets/Bocetos/PappasGalleteria.png")
+    this.load.image('ToDImage', "./assets/Bocetos/TruthOrDare.PNG")
+    this.load.image('BumClakImage', "./assets/Bocetos/BumBumKlak.PNG")
+    this.load.image('PapasImage', "./assets/Bocetos/PappasGalleteria.PNG")
     this.load.image('AbogadoImage', "./assets/Bocetos/ElqueTengoAquiColgado.png")
     this.load.image('MetroImage', "./assets/Bocetos/Metro.jpg")
     this.load.image('resultado', "./assets/Bocetos/Metro.jpg")
