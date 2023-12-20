@@ -69,7 +69,7 @@ export default class Coordinator {
     }
     returnPersonalidad() {
         //this.CalcularPersonalidad();
-        this.personalidad = "ESOD";
+        this.personalidad = "EREG";
         return this.personalidad;
     }
 }
