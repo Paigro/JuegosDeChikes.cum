@@ -14,7 +14,6 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
         this.playerSec = ""; // Secuencia que escribe el jugador.
         this.arrayLetras = [this.scene.letra1, this.scene.letra2, this.scene.letra3, this.scene.letra4];
         this.arrayLetrasP = [this.scene.letraP1, this.scene.letraP2, this.scene.letraP3, this.scene.letraP4];
-        //console.log(this.arrayLetras);
     }
 
     preUpdate(t, dt) {
@@ -43,9 +42,9 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
             }
         }
         if (this.i >= 4) {
-            if (this.secBien === 4) {
+            /*if (this.secBien === 4) {
                 this.scene.changeTestPunt(-1); // Solo modifica la puntuacion del test si ha tenido las cuatro bien.
-            }
+            }*/
             this.scene.reset();
         }
     }
@@ -74,40 +73,11 @@ export default class secuenciaTeclas extends Phaser.GameObjects.Sprite {
         this.sec = sec;
     }
 
-    noMeToca() {
-
-
-
-
-
-
-
-
-        // para oscurecer la parte de abajo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
     reset() {
-        console.log("reset secuencia");
         this.i = 0;
         this.j = 0;
         this.secBien = 0;
         this.playerSec = "";
-        console.log(this.arrayLetras);
         for (let i = 0; i < this.sec.length; i++) {
             this.arrayLetrasP[i].setVisible(false);
         }

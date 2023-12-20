@@ -16,26 +16,33 @@ export default class AbogadoClick extends Phaser.Scene {
     this.load.image('Abogado1Img', '/assets/juego/AbogadoClick/Abogado1.png');
     this.load.image('Abogado2Img', '/assets/juego/AbogadoClick/Abogado2.png');
     this.load.image('Abogado3Img', '/assets/juego/AbogadoClick/Abogado3.png');
+
+    //fondo
+    this.load.image('FondoAbogado', '/assets/juego/AbogadoClick/fondo.png');
   }
 
   create() {
+    //fondo
+    this.add.image(0, 0, 'FondoAbogado').setOrigin(0, 0) // Añadimos la imagen de volver atras.
 
-    this.atras = this.add.image(0, 0, 'atras').setOrigin(0, 0).setScale(0.1, 0.1).setInteractive(); // Añadimos la imagen de volver atras.
-    this.atras.on('pointerdown', (pointer) => {
-      this.finalDelJuego();
-    });
+    //Botones
+    this.salir = this.add.text(0, 0, "SALIR", { fontSize: '40px', fill: '#fff', fontFamily: 'Comic Sans MS' }).setOrigin(0, 0).setInteractive(); // Texto que actua como boton de salir.
+        this.salir.on('pointerdown', (pointer) => {
+            this.finalDelJuego()
+        });
 
     this.imgsAbogados = ['Abogado1Img', 'Abogado2Img', 'Abogado3Img'];
-    this.Abogado = this.add.sprite(1080 / 2, 0, this.imgsAbogados[0]).setOrigin(.5, 0).setInteractive().on('pointerdown', () =>
+    this.Abogado = this.add.sprite(1080 / 2, -10, this.imgsAbogados[0]).setOrigin(.5, 0).setInteractive().on('pointerdown', () =>
       this.accion()
 
     )
-    this.add.text(100, 300, 'Record: ' + this.record, { fill: '#0f0' });
-    this.puntText = this.add.text(100, 200, 'Puntuacion: ' + this.puntuacion, { fill: '#0f0' });
+    this.add.text(640, 150, 'Record: ' + this.record, { fill: '#FF0000' });
+    this.puntText = this.add.text(640, 100, 'Abogados descolgados: ' + this.puntuacion, { fill: '#FF0000' });
 
   }
 
   accion() {
+    this.Abogado.setInteractive(false);
     // Anticipacion
     this.tweens.add({
       targets: this.Abogado,
@@ -84,7 +91,7 @@ export default class AbogadoClick extends Phaser.Scene {
       targets: this.Abogado,
       delay: 500,
       x: 1100,
-      y: 0,
+      y: -10,
       angle: -50,
       duration: 0,
       persist: true,
@@ -114,17 +121,19 @@ export default class AbogadoClick extends Phaser.Scene {
       ease: 'Elastic',
       angle: 0,
       duration: 10,
-      persist: true
+      persist: true,
+      onStart: (() => {
+      })
     })
     this.puntuacion++
-    this.puntText.text='Puntuacion: ' + this.puntuacion;
+    this.puntText.text = 'Abogados descolgados: ' + this.puntuacion;
   }
 
   //Vuelve a la escena del Hub
   finalDelJuego() {
     console.clear();
     if (this.record < this.puntuacion) this.record = this.puntuacion;
-    this.puntuacion=0;
+    this.puntuacion = 0;
     this.scene.start("Hub");
   }
 }
