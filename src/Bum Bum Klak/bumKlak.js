@@ -46,7 +46,7 @@ export default class BumKlak extends Phaser.Scene{
       this.textopuntuador = this.add.text(0, 0, "69420", {fontSize: '30px', fill: '#1CAF56', fontFamily: 'Comic Sans MS'});  // indica la puntuacion
       // puntuaciones
       this.punTest = 0;  // puntuación test
-      this.puntuacion = 0;  // puntuación del juego perse
+      this.puntuacion = 7;  // puntuación del juego perse
       //cosas del debug
       this.debug = 1; // variable usada para debug
       //this.debugtext = this.add.text(0, 0, "0", {fontSize: '40px', fill: '#000000', fontFamily: 'Comic Sans MS'}).setPosition(200, 0);
@@ -79,6 +79,7 @@ export default class BumKlak extends Phaser.Scene{
 
         this.avisoUpdate();
         this.puntuadorUpdate();
+        this.puntuacionManager(0, 0, 1);
 
 
 
@@ -127,7 +128,7 @@ export default class BumKlak extends Phaser.Scene{
       if(SoR == 0) auxsig = 1;
       else auxsig = -1;
 
-      if(PoP = 0) // si es 0, se suma a la puntuación del juego...
+      if(PoP == 0) // si es 0, se suma a la puntuación del juego...
       {
         this.puntuacion = this.puntuacion + auxsig * cantidad
       }
@@ -137,11 +138,9 @@ export default class BumKlak extends Phaser.Scene{
       }
     }
 
-    puntuadorUpdate()
+    puntuadorUpdate() // actualiza el puntuador
     {
       this.textopuntuador.setText("Puntuación: " + this.puntuacion);
-
-
     }
 
     finalDelJuego()
