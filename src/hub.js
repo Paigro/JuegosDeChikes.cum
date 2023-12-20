@@ -10,7 +10,7 @@ export default class Hub extends Phaser.Scene {
     this.coordinator = new Coordinator(this);
 
     //Desbloqueo de minijuegos
-    this.juegsDesbloq = 5;
+    this.juegsDesbloq = 0;
   }
 
   init() {
