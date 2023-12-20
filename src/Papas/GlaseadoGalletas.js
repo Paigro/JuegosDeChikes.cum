@@ -46,10 +46,6 @@ export default class CorteGalletas extends Phaser.GameObjects.Sprite {
 
         //scene.input.enableDebug(this);
     };
-    BlockThisAction() {
-        this.scene.tweenFondD2();
-        //console.log("ha entrado");
-      }
     reiniciarTemporizador() {
         this.elapsedTime = this.timer;
     }
