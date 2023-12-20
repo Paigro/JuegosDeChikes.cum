@@ -1,6 +1,6 @@
 Morado:     IROG, IREG, EROG, EREG.
 Verde:      ISOG, ISEG, ESOG, ESEG.
-Azul:       IROD, ISOD, EROD, EROD.
+Azul:       IROD, ISOD, EROD, ESOD.
 Amarillo:   IRED, ISED, ERED, ESED.
 
 I-Introvertido      E-Extrovertido
