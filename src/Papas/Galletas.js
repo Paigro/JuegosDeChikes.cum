@@ -12,7 +12,7 @@ export default class Galletas extends Phaser.GameObjects.Sprite {
         this.setDepth(2);
         this.setScale(.75, .75);
 
-        scene.input.enableDebug(this);
+        //scene.input.enableDebug(this);
     }
     appear()
     {        
