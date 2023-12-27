@@ -197,7 +197,7 @@ export default class resultadoTest extends Phaser.Scene // Manager de la escena 
         //Amarillo.
         else if (pers === "IRED" || pers === "ISED" || pers === "ERED" || pers === "ESED") { color = "#FFC300"; }
         //Naranja.
-        else { color = "#ff9933" }
+        else { color = "#CDCDCD" }
         this.cameras.main.setBackgroundColor(color);
         document.body.style.backgroundColor = color;
     }
