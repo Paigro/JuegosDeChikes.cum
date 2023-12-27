@@ -33,6 +33,9 @@ export default class resultadoTest extends Phaser.Scene // Manager de la escena 
         this.load.image('defensor', "/assets/juego/personalidades/AzulDefensor.png"); // Cargamos la imagen de volver atras (provisional).
         this.load.image('ejecutivo', "/assets/juego/personalidades/AzulEjecutivo.png"); // Cargamos la imagen de volver atras (provisional).
         this.load.image('consul', "/assets/juego/personalidades/AzulConsul.png"); // Cargamos la imagen de volver atras (provisional).
+        // NPC:
+        this.load.image('npc', "/assets/juego/personalidades/NPC.png");
+
         // Boton:
         this.load.image('atras', "/assets/juego/MetroSkaters/imagenes/teclaizquierda.png"); // Cargamos la imagen de volver atras (provisional).
     }
@@ -78,6 +81,8 @@ export default class resultadoTest extends Phaser.Scene // Manager de la escena 
         this.defensor = this.add.sprite(540, 600, 'defensor').setOrigin(0.5, 0.5).setScale(2, 2).setVisible(false); // Añadimos la imagen del fondo.
         this.ejecutivo = this.add.sprite(540, 600, 'ejecutivo').setOrigin(0.5, 0.5).setScale(2, 2).setVisible(false); // Añadimos la imagen del fondo.
         this.consul = this.add.sprite(540, 600, 'consul').setOrigin(0.5, 0.5).setScale(2, 2).setVisible(false); // Añadimos la imagen del fondo.
+        // NPC:
+        this.npc = this.add.sprite(560, 580, 'npc').setOrigin(0.5, 0.5).setScale(2.5, 2.5).setVisible(false); // Añadimos la imagen del fondo.
         //#endregion
         //#region mostrar cositas
         this.changeBackGroundColor(this.coorRes);
@@ -172,6 +177,9 @@ export default class resultadoTest extends Phaser.Scene // Manager de la escena 
                 console.log("consul");
                 break;
             default:
+                this.npc.setVisible(true);
+                this.resultado.setText('un NPC.');
+                console.log("NPC");
                 break;
         }
 
